@@ -1,0 +1,20 @@
+<div class="col maxHeight">
+  <div class="col">
+    {{navs/main-nav
+      logout=(action 'logout')
+      login=(action 'login')
+      name=userName
+      authenticated=session.isAuthenticated}}
+    {{navs/nav-bar}}
+  </div>
+
+  <div class='row stretch outerContainer'>
+    <div class='col stretch appContainer'>
+        {{outlet}}
+    </div>
+  </div>
+
+  <div class="col">
+    {{navs/main-footer}}
+  </div>
+</div>

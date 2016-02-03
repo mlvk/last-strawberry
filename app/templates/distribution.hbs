@@ -1,0 +1,21 @@
+<div class='row stretch'>
+  {{distribution/route-plan-canvas
+    date=date
+    orders=validOrders
+    visitWindows=visitWindows
+    routePlans=activeRoutePlans
+    routeTemplates=routeTemplates
+    saveAsTemplate=(action 'saveAsTemplate')
+    saveRoutePlans=(action 'saveRoutePlans')
+    destroyRoutePlan=(action 'destroyRoutePlan')
+    applyTemplate=(action 'applyTemplate')
+    newRoutePlan=(action 'newRoutePlan')
+    onDateSelected=(action 'onDateSelected')
+    routePlanChanged=(action 'routePlanChanged')
+    users=users}}
+
+  {{distribution/visit-map
+    orders=validOrders
+    visitWindows=visitWindows
+    routePlans=activeRoutePlans}}
+</div>

@@ -1,0 +1,23 @@
+& {
+  cursor: pointer;
+  align-items: center;
+  padding: 1.5em;
+}
+
+&:active {
+  opacity: 0.5;
+}
+
+&.disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.label {
+  margin-right: 1em;
+  font-size: 1.4em;
+}
+
+.material-icons {
+  font-size: 2em;
+}

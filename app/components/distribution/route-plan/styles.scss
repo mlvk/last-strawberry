@@ -1,0 +1,46 @@
+& {
+  // padding: 1em;
+  .uiContainer {
+    margin-bottom: 0.6em;
+  }
+}
+
+&:nth-child(even) {
+  background-color: #EBEDEC;
+}
+
+.headerContainer {
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 1em;
+
+  .selectize-input {
+    padding: 0;
+    min-width: 12em;
+    background: none;
+    border: none;
+    box-shadow: none;
+    // margin-bottom: -0.8em;
+
+    &.input-active {
+      background: none;
+    }
+
+    &:after, &.dropdown-active:after, {
+      content: none;
+    }
+
+    input, .item {
+      font-size: 1.2rem;
+      padding: 0 0 0.5em 0.2em;
+    }
+  }
+
+
+
+}
+
+.scrollContainer {
+  margin: 0.5em;
+  min-width: 12em;
+}

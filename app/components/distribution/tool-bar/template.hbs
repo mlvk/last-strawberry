@@ -1,0 +1,29 @@
+{{ui/date-picker
+  value=formattedDate
+  onSelect=this.attrs.onDateSelected
+  format='dddd - MM/DD/YY'}}
+
+<div class="row uiContainer">
+  {{ember-selectize
+    content=routeTemplates
+    optionValuePath="content"
+    optionLabelPath="content.name"
+    select-item=this.attrs.applyTemplate
+    placeholder="Apply a template" }}
+
+  {{ui/icon-button
+    icon='save'
+    size=1.5
+    flat=true
+    backgroundColor=colors.LIGHT_GREEN
+    color=colors.DARK_GREY
+    onClick=this.attrs.saveRoutePlans}}
+
+  {{ui/icon-button
+    icon='add'
+    size=1.5
+    flat=true
+    backgroundColor=colors.LIGHT_GREEN
+    color=colors.DARK_GREY
+    onClick=this.attrs.newRoutePlan}}
+</div>

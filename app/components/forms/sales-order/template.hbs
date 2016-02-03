@@ -1,0 +1,15 @@
+<div class="header col">
+  <span class="clientCodeLabel">{{model.client.code}}</span>
+  <span class="clientCommonNameLabel">{{model.client.commonName}}</span>
+</div>
+
+{{#layout/scroll-container}}
+  <div class="col">
+    {{#each model.salesOrderItems as |soi|}}
+      {{rows/sales-order-item-row
+        model=soi
+        onFocusIn=attrs.onSalesOrderItemSelected
+        onFocusOut=attrs.onSalesOrderItemDeselected}}
+    {{/each}}
+  </div>
+{{/layout/scroll-container}}

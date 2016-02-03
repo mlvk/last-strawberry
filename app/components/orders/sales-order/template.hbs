@@ -1,0 +1,14 @@
+<p {{action 'toggle'}}>
+  {{model.client.code}}
+</p>
+
+{{#if expanded}}
+  <ul>
+    {{#each model.salesOrderItems as |soi|}}
+      {{orders/sales-order-item
+        model=soi
+        saveSalesOrderItem=this.attrs.saveSalesOrderItem
+      }}
+    {{/each}}
+  </ul>
+{{/if}}

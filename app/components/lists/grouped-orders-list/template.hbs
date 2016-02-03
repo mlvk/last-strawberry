@@ -1,0 +1,11 @@
+<span class="companyLabel">
+  {{company}}
+</span>
+
+<div class="rowContainer">
+  {{#each sortedOrders as |so|}}
+    {{rows/grouped-orders-list-row
+      model=so
+      onSelect=attrs.onSalesOrderSelected}}
+  {{/each}}
+</div>

@@ -1,0 +1,14 @@
+<span class="row openOrdersHeader">
+  <span class="title">
+    Open Orders
+  </span>
+</span>
+{{#layout/scroll-container}}
+  {{#layout/dd-container registerContainer=this.attrs.registerDropContainer}}
+    {{#each-in orderGroups as |key og|}}
+      {{distribution/order-group
+        data-location-hash=key
+        model=og}}
+    {{/each-in}}
+  {{/layout/dd-container}}
+{{/layout/scroll-container}}

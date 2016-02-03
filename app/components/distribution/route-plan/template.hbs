@@ -1,0 +1,36 @@
+<div class="row headerContainer">
+  {{ember-selectize
+    content=users
+    optionValuePath="content"
+    optionLabelPath="content.name"
+    selection=model.user
+    placeholder="Select a driver" }}
+
+  <div class="col uiContainer">
+    {{ui/icon-button
+      icon='clear'
+      flat=true
+      color=colors.DARK_GREY
+      padding=0.5
+      onClick=(action 'delete')}}
+
+    {{ui/icon-button
+      icon='save'
+      flat=true
+      color=colors.DARK_GREY
+      padding=0.5
+      onClick=(action 'saveTemplate')}}
+
+  </div>
+</div>
+
+{{#layout/scroll-container}}
+  {{#layout/dd-container registerContainer=this.attrs.registerDropContainer registerId=(action this.attrs.registerRoutePlan model)}}
+    {{#each model.sortedRouteVisits as |rv|}}
+      {{distribution/route-plan-visit
+        colorScheme=colorScheme
+        model=rv
+        data-location-hash=rv.locationHash}}
+    {{/each}}
+  {{/layout/dd-container}}
+{{/layout/scroll-container}}

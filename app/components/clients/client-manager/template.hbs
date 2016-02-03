@@ -1,0 +1,12 @@
+<div class='relative stretch'>
+  {{input value=query}}
+  <div class='absFill scrollContainerY uBorderG'>
+      <ul class='scrollContentY'>
+        {{#each model as |client|}}
+          <li>
+            {{#link-to 'clients.show' client.id}}{{client.code}}{{/link-to}}
+          </li>
+        {{/each}}
+      </ul>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+& {
+  justify-content: space-between;
+  align-items: center;
+  background: $sky-blue;
+  color: white;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.buttonContent {
+  align-items: center;
+}
+
+.name {
+  font-size: 0.8em;
+}
+
+.pipe {
+  margin: 0 1em;
+  font-size: 0.5em;
+}
+
+.label {
+  // font-size: 0.8em;
+}
+
+.homeLink {
+  font-size: 1.4em;
+}
+
+.navLinksContainer {
+  align-items: center;
+  margin-left: 2em;
+  color: $off-white;
+  a {
+    margin-right: 1em;
+  }
+}

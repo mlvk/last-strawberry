@@ -1,0 +1,7 @@
+<ul>
+  {{#each desiredVisitDays as | data index |}}
+    <li>
+      {{index}} - {{ui/toggle-checkbox checked=data.cvd.enabled model=data selected=(action 'toggled')}}
+    </li>
+  {{/each}}
+</ul>

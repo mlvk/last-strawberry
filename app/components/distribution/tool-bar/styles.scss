@@ -1,0 +1,27 @@
+& {
+  justify-content: space-between;
+  background-color: $dark-grey;
+  padding-left: 1em;
+  align-items: center;
+}
+
+input.datePicker {
+  background-color: $dark-grey;
+  color: $off-white;
+  border: none;
+  font-size: 1.6em;
+  font-family: 'Open Sans', serif;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+input:focus.datePicker {
+   outline: 0;
+}
+
+.uiContainer {
+  align-items: center;
+  .iconButton {
+    margin-left: 2em;
+  }
+}

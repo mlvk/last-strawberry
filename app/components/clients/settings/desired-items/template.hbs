@@ -1,0 +1,7 @@
+<ul>
+  {{#each itemDesireData as | data |}}
+    <li>
+      {{data.item.code}} - {{ui/toggle-checkbox checked=data.cid.desired model=data selected=(action 'toggled')}}
+    </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,27 @@
+<div class="row">
+  {{link-to 'Grand Central Station' 'index' class='homeLink'}}
+  <div class="row navLinksContainer">
+    {{link-to 'Orders' 'orders'}}
+    {{link-to 'Clients' 'clients'}}
+    {{link-to 'Distribution' 'distribution'}}
+  </div>
+</div>
+
+<div class="row">
+  {{#if authenticated}}
+
+    <span class="buttonContent row">
+      <span class="name">{{name}}</span>
+      <span class="pipe">|</span>
+      <a href="#" {{action (action this.attrs.logout)}}>
+        <span class="buttonContent row">
+          <span class="label">Logout</span>
+        </span>
+      </a>
+    </span>
+
+  {{else}}
+    <a href="#" {{action (action this.attrs.login)}}>Login</a>
+  {{/if}}
+
+</div>

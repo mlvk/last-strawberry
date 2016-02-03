@@ -1,0 +1,14 @@
+const colors = {
+  OFF_WHITE: "#F9F9F9",
+  SLATE:"#232323",
+  LIGHT_GREY:"#C9C9C9",
+  DARK_GREY:"#4C4C4C",
+  SKY_BLUE:"#00B3DD",
+  LIGHT_BLUE:"#F3FDFF",
+  LIGHT_GREEN: "#DEFFEE",
+  DARK_ORANGE: "#FFD400",
+  DARK_PINK: "#FF646C",
+  DOPE_BLUE: "#4DA6FF"
+}
+
+export default colors;
