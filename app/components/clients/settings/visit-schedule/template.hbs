@@ -1,7 +1,7 @@
-<ul>
-  {{#each desiredVisitDays as | data index |}}
-    <li>
-      {{index}} - {{ui/toggle-checkbox checked=data.cvd.enabled model=data selected=(action 'toggled')}}
-    </li>
-  {{/each}}
-</ul>
+<div class="row dayPickerContainer">
+  <span class="">Delivery Schedule</span>
+  {{ui/check-box-group
+    labels=daysOfWeek
+    selectedIndexes=selectedDays
+    onUpdate=updateVisitSchedule}}
+</div>

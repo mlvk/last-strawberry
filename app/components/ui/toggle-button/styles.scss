@@ -1,0 +1,11 @@
+& {
+  cursor: pointer;
+  width: 2em;
+  height: 2em;
+  margin: 0.25em;
+  color: $dark-grey;
+}
+
+&.selected {
+  background: rgba(255, 255, 255, 0.5);
+}

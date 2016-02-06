@@ -15,5 +15,41 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
       }
     });
+  },
+
+  actions: {
+    updateVisitSchedule(newDays) {
+      const client = this.currentModel;
+
+      // Create missing records
+      newDays.forEach(day => {
+        let cvd = client.cvdForDay(day);
+        if(!cvd)cvd = this.store.createRecord('client-visit-day', {client, day, enabled:true});
+      });
+
+      //Update records
+      client.get('clientVisitDays')
+        .forEach(cvd => {
+          let enabled = newDays.contains(cvd.get('day'));
+          if(cvd.get('enabled') !== enabled) {
+            cvd.set('enabled', enabled);
+          }
+
+          cvd.set('enabled', enabled);
+        })
+        .filter(cvd => cvd.get('hasDirtyAttributes'))
+        .forEach(cvd => cvd.save());
+    }
   }
 });
+//
+// updateClientVisitDate ({day, cvd}, enabled) {
+//   const client = this.get('model');
+//   if (cvd) {
+//     cvd.set('enabled', enabled);
+//     cvd.save();
+//   } else {
+//     const record = this.store.createRecord('client-visit-day', {client, day, enabled});
+//     record.save();
+//   }
+// },

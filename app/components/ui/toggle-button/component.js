@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['row', 'stretch'],
-  actions: {
-      
-  }
+  classNames: ['row', 'center'],
+  classNameBindings: ['selected']
 });

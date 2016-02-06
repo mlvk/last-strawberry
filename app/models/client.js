@@ -21,9 +21,22 @@ export default DS.Model.extend({
 
   defaultVisitWindow: alias('visitWindows.firstObject'),
 
+  cvdForDay (dayOfWeek) {
+    return this.get('clientVisitDays').find(cvd => cvd.get('day') === dayOfWeek);
+  },
+
   scheduledForDeliveryOn (dayOfWeek) {
-    const match = this.get('clientVisitDays').find(cvd => cvd.get('day') === dayOfWeek);
-    return (!!match);
+    return (!!this.cvdForDay(dayOfWeek));
+  },
+
+  @computed('clientVisitDays.@each.{enabled}')
+  enabledVisitDays(clientVisitDays) {
+    return clientVisitDays.filter(cvd => cvd.get('enabled'));
+  },
+
+  @computed('enabledVisitDays')
+  enabledVisitDayIndexes(clientVisitDays) {
+    return clientVisitDays.map(cvd => cvd.get('day'));
   },
 
   @computed('code', 'company', 'nickname')

@@ -25,16 +25,16 @@ export default Ember.Controller.extend({
       }
     },
 
-    updateClientVisitDate ({day, cvd}, enabled) {
-      const client = this.get('model');
-      if (cvd) {
-        cvd.set('enabled', enabled);
-        cvd.save();
-      } else {
-        const record = this.store.createRecord('client-visit-day', {client, day, enabled});
-        record.save();
-      }
-    },
+    // updateClientVisitDate ({day, cvd}, enabled) {
+    //   const client = this.get('model');
+    //   if (cvd) {
+    //     cvd.set('enabled', enabled);
+    //     cvd.save();
+    //   } else {
+    //     const record = this.store.createRecord('client-visit-day', {client, day, enabled});
+    //     record.save();
+    //   }
+    // },
 
     toggleActive (client, active) {
       client.set('active', active);
