@@ -39,17 +39,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         })
         .filter(cvd => cvd.get('hasDirtyAttributes'))
         .forEach(cvd => cvd.save());
+    },
+
+    createVisitWindow() {
+      const client = this.currentModel;
+
+      const vw = this.store.createRecord('visit-window', {client});
+      vw.save();
     }
   }
+
+
 });
-//
-// updateClientVisitDate ({day, cvd}, enabled) {
-//   const client = this.get('model');
-//   if (cvd) {
-//     cvd.set('enabled', enabled);
-//     cvd.save();
-//   } else {
-//     const record = this.store.createRecord('client-visit-day', {client, day, enabled});
-//     record.save();
-//   }
-// },

@@ -19,8 +19,6 @@ export default DS.Model.extend({
   clientVisitDays: DS.hasMany('client-visit-day'),
   active: DS.attr('boolean'),
 
-  defaultVisitWindow: alias('visitWindows.firstObject'),
-
   cvdForDay (dayOfWeek) {
     return this.get('clientVisitDays').find(cvd => cvd.get('day') === dayOfWeek);
   },
