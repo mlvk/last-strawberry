@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+      "document": true,
+      "window": true,
+      "moment": true,
+      "_": true,
+      "-Promise": true,
+      "Immutable": true,
+      "Rx": true,
+      "S": true,
+      "dragula": true,
+      "$": true,
+      "google": true,
+      "Hammer": true,
+      "console": true,
+      "visit": true,
+      "exists": true,
+      "fillIn": true,
+      "click": true,
+      "keyEvent": true,
+      "triggerEvent": true,
+      "find": true,
+      "findWithAssert": true,
+      "wait": true,
+      "DS": true,
+      "andThen": true,
+      "currentURL": true,
+      "currentPath": true,
+      "currentRouteName": true
+    }
+}

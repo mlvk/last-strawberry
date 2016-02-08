@@ -1,12 +1,14 @@
 import Ember from 'ember';
-import LocationHashableMixin from '../../../mixins/location-hashable';
+import LocationHashableMixin from 'last-strawberry/mixins/location-hashable';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | location hashable');
 
 // Replace this with your real tests.
-test('it works', function(assert) {
+test('it hashes correctly', function(assert) {
   var LocationHashableObject = Ember.Object.extend(LocationHashableMixin);
   var subject = LocationHashableObject.create();
-  assert.ok(subject);
+  subject.set('visitWindow', Ember.Object.create({lat:'lat', lon:'lon'}));
+
+  assert.equal(subject.get('locationHash'), '~lat_lon');
 });

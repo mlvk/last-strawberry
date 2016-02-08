@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ToggleSwitchMixin from '../../../mixins/toggle-switch';
+import ToggleSwitchMixin from 'last-strawberry/mixins/toggle-switch';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | toggle switch');

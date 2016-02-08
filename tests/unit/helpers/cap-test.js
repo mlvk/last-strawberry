@@ -3,8 +3,8 @@ import { module, test } from 'qunit';
 
 module('Unit | Helper | cap');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  let result = cap([42]);
-  assert.ok(result);
+test('cap helper capitilizes', function(assert) {
+  let result = cap(['hello', 'ho']);
+  assert.equal(result[0], 'Hello');
+  assert.equal(result[1], 'Ho');
 });

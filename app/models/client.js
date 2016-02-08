@@ -2,7 +2,7 @@ import Em from 'ember';
 import DS from 'ember-data';
 import computed from 'ember-computed-decorators';
 
-const { computed: { alias, gt }} = Em;
+const { computed: { gt }} = Em;
 
 export default DS.Model.extend({
 

@@ -1,12 +1,12 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('route-plan', 'Unit | Model | route plan', {
+moduleForModel('company', 'Unit | Model | company', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:price-tier']
 });
 
 test('it exists', function(assert) {
-  var model = this.subject();
-  // var store = this.store();
+  let model = this.subject();
+  // let store = this.store();
   assert.ok(!!model);
 });
