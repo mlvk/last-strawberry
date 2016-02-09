@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('show', {path:':id'});
   });
   this.route('distribution');
+  this.route('companies');
 });
 
 export default Router;

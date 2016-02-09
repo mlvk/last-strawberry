@@ -32,6 +32,8 @@
       "andThen": true,
       "currentURL": true,
       "currentPath": true,
-      "currentRouteName": true
+      "currentRouteName": true,
+      "pauseTest": true,
+      "server": true
     }
 }
