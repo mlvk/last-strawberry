@@ -1,0 +1,18 @@
+<div class="col stretch">
+  {{section/company/settings-form
+      name=model.name
+      code=model.code
+      creditRate=model.creditRate
+      terms=model.terms}}
+
+  <div class="row">
+    {{#each model.locations as |location|}}
+      {{section/location/summary-card
+          name=location.name
+          code=location.code
+          click=(route-action 'showLocation' location.id)}}
+    {{/each}}
+  </div>
+
+  {{outlet}}
+</div>

@@ -27,6 +27,8 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.apiHost = ''
+
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
     'script-src': "'self' 'unsafe-eval' http://admin.dev:* https://cdn.mxpnl.com  *.googleapis.com *.cloudflare.com", // Allow scripts from https://cdn.mxpnl.com
@@ -46,7 +48,6 @@ module.exports = function(environment) {
 
 
   if (environment === 'development') {
-    ENV.apiHost = 'http://localhost:3000'
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -55,7 +56,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
-    ENV.apiHost = ''
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';

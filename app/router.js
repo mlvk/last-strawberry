@@ -12,7 +12,11 @@ Router.map(function() {
     this.route('show', {path:':id'});
   });
   this.route('distribution');
-  this.route('companies');
+  this.route('companies', function() {
+    this.route('show', {path:':company_id'}, function() {
+      this.route('location', {path:'/locations/:location_id'});
+    });
+  });
 });
 
 export default Router;

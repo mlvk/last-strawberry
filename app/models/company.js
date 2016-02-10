@@ -6,5 +6,6 @@ export default DS.Model.extend({
   terms: DS.attr('number'),
   creditRate: DS.attr('number'),
   tag: DS.attr('string'),
-  priceTier: DS.belongsTo('price-tier')
+  priceTier: DS.belongsTo('price-tier'),
+  locations: DS.hasMany('location')
 });

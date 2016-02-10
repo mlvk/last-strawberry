@@ -1,8 +1,8 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('company', 'Unit | Model | company', {
+moduleForModel('address', 'Unit | Model | address', {
   // Specify the other units that are required for this test.
-  needs: ['model:price-tier', 'model:location']
+  needs: ['model:location']
 });
 
 test('it exists', function(assert) {

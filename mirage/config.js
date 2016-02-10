@@ -21,9 +21,9 @@ export default function() {
     this.put('/posts/:id'); // or this.patch
     this.del('/posts/:id');
   */
-  // this.get('/companies');
-  this.get('/companies', (schema, request) => {
-    return schema.company.all();
-  });
+  this.get('/companies');
+  this.get('/companies/:id');
 
+  this.get('/locations');
+  this.get('/locations/:id');
 }
