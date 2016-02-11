@@ -1,0 +1,7 @@
+{{#each model as |item|}}
+  <div class="row">
+    <div class="item" {{action 'itemClicked' item}}>
+      <span class="label">{{item.text}}</span>
+    </div>
+  </div>
+{{/each}}

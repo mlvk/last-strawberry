@@ -9,5 +9,11 @@ const INCLUDES = [
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	model(){
     return this.store.query('company', {include:INCLUDES.join(',')});
-	}
+	},
+
+  actions: {
+    showCompany(id) {
+      this.transitionTo('companies.show', id);
+    }
+  }
 });

@@ -1,15 +1,10 @@
 <div class="row stretch">
-  <div class='relative stretch uBorP'>
-    {{input value=query}}
-    <div class='absFill scrollContainerY uBorderG'>
-        <ul class='scrollContentY'>
-          {{#each model as |company|}}
-            <li>
-              {{#link-to 'companies.show' company.id class="company"}}{{company.code}}{{/link-to}}
-            </li>
-          {{/each}}
-        </ul>
-    </div>
+
+  {{list/filterable-label-list
+      model=model
+      itemClicked=(route-action 'showCompany')}}
+
+  <div class="col-5">
+    {{outlet}}
   </div>
-  {{outlet}}
 </div>

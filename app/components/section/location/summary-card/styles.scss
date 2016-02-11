@@ -1,6 +1,7 @@
 & {
   background: $dark-orange;
   max-width: 10em;
+  min-width: 5em;
   padding: 1em;
   margin: 0.5em;
   cursor: pointer;
@@ -8,4 +9,8 @@
 
 .code {
   font-size: 0.8em;
+}
+
+.name {
+  font-size: 0.6em;
 }

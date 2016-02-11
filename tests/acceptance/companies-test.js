@@ -20,7 +20,6 @@ test('admin can view companies', function(assert) {
 test('pending users can not view companies', function(assert) {
   page.visit();
 
-
   andThen(function() {
     assert.equal(currentURL(), '/login', 'Was not redirected to login');
   });

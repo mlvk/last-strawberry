@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -7,5 +8,6 @@ export default DS.Model.extend({
   creditRate: DS.attr('number'),
   tag: DS.attr('string'),
   priceTier: DS.belongsTo('price-tier'),
-  locations: DS.hasMany('location')
+  locations: DS.hasMany('location'),
+  text: Ember.computed.alias('name')
 });
