@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
-export function initialize(/* application */) {
-  // application.inject('route', 'foo', 'service:foo');
+export default function decorateComponentClass() {
   Ember.Component.reopen({
     init() {
       this._super(arguments);
@@ -11,8 +10,3 @@ export function initialize(/* application */) {
     }
   });
 }
-
-export default {
-  name: 'enable-component-testing',
-  initialize
-};

@@ -16,5 +16,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         query: {include:INCLUDES.join(',')}
       }
     });
+  },
+
+  actions: {
+    updateItemDesires(/* newItemDesires */) {
+      // console.log(newItemDesires);
+    }
   }
 });

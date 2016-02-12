@@ -7,5 +7,9 @@ export default DS.Model.extend({
   name: DS.attr('string'),
 
   address: DS.belongsTo('address'),
-  company: DS.belongsTo('company')
+  company: DS.belongsTo('company'),
+
+  itemDesires: [
+    {id:1, text:'Pesto', enabled:true}
+  ]
 });
