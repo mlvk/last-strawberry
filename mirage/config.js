@@ -39,6 +39,8 @@ export default function() {
   this.get('/item-desires');
   this.get('/item-desires/:id');
 
+  this.patch('/item-desires/:id');
+
   this.post('users/sign_in', ({db: {users}}, request) => {
     const formData = decodeURIComponent(request.requestBody);
     const emailStr = formData.split('&')[1].split('=')[1];

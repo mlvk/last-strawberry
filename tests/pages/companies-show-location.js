@@ -1,9 +1,20 @@
 import PO from 'last-strawberry/tests/page-object';
 
-const { visitable, count } = PO;
+const { visitable, text, hasClass, collection } = PO;
 
-export default PO.create({
-  visit: visitable('/companies/:company_id/locations/:location_id'),
-
-  itemDesireCount: count('.item-desires .ui-label-checkbox')
+const page = PO.create({
+  visit: visitable('/companies/:company_id/locations/:location_id')
 });
+
+const itemDesiresPO = PO.create({
+  items: collection({
+    itemScope: '.item-desires .ui-label-checkbox',
+
+    item: {
+      label: text('.label'),
+      enabled: hasClass('enabled')
+    }
+  })
+});
+
+export { page, itemDesiresPO };

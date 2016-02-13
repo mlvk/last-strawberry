@@ -1,7 +1,16 @@
 & {
   cursor: pointer;
+  padding: 0.5em;
+  margin: 0.5em;
+  width: 40%;
 }
 
 &.enabled {
-  border: 1px solid blue;
+  background: $light-blue;
 }
+
+@media (min-width: 700px) { & { width: 50%; } }
+@media (min-width: 800px) { & { width: 40%; } }
+@media (min-width: 900px) { & { width: 30%; } }
+@media (min-width: 1000px) { & { width: 20%; } }
+@media (min-width: 1500px) { & { width: 10%; } }
