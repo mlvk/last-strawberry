@@ -1,5 +1,6 @@
 {{model.name}}
 
-{{ui/label-checkbox-group
-  model=model.itemDesires
-  change=(route-action 'updateItemDesires')}}
+{{section/location/item-desires
+    itemDesires=model.itemDesires
+    items=items
+    change=(route-action 'updateItemDesires')}}

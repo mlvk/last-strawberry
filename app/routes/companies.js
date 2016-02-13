@@ -1,14 +1,17 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
 
-const INCLUDES = [
-  'locations',
-	'locations.address'
-];
-
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  setupController(controller) {
+    controller.set('companies', this.store.peekAll('company'));
+  },
+
 	model(){
-    return this.store.query('company', {include:INCLUDES.join(',')});
+    return Ember.RSVP.all([
+      this.store.findAll('item'),
+      this.store.findAll('price-tier'),
+      this.store.findAll('company')
+    ]);
 	},
 
   actions: {

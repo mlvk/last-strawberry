@@ -7,9 +7,6 @@ const INCLUDES = [
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  setupController(controller, model) {
-    this._super(controller, model);
-  },
 
   model(params){
     return this.store.findRecord('company', params.company_id, {

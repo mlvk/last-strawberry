@@ -2,12 +2,16 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 const INCLUDES = [
-  'address'
+  'address',
+  'item-desires',
+  'item-desires.item'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController(controller, model) {
     this._super(controller, model);
+
+    controller.set('items', this.store.peekAll('item'));
   },
 
   model(params){
