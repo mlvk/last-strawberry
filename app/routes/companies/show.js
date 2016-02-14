@@ -18,7 +18,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     showLocation(id) {
-      this.transitionTo('companies.show.location', this.currentModel, id);
+      this.transitionTo('companies.show.location', id);
     }
   }
 });

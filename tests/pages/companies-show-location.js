@@ -17,4 +17,15 @@ const itemDesiresPO = PO.create({
   })
 });
 
-export { page, itemDesiresPO };
+const visitDaysPO = PO.create({
+  items: collection({
+    itemScope: '.visit-days .ui-label-checkbox',
+
+    item: {
+      label: text('.label'),
+      enabled: hasClass('enabled')
+    }
+  })
+});
+
+export { page, itemDesiresPO, visitDaysPO };
