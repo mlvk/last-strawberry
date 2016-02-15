@@ -21,7 +21,7 @@ moduleForComponent('ui/label-checkbox-group', 'Integration | Component | ui/labe
 test('it renders the correct number of items', function(assert) {
   assert.expect(1);
 
-  assert.equal(this.$('.ui-label-checkbox').length, collection.size);
+  assert.equal(this.$('.ui_label-checkbox').length, collection.size);
 });
 
 test('it dispatches the updated data when an item is toggled', function(assert) {
@@ -35,12 +35,12 @@ test('it dispatches the updated data when an item is toggled', function(assert) 
   this.set('change', (updatedCollection) => {
     assert.ok(expectedResult.equals(Immutable.fromJS(updatedCollection)));
   });
-  this.$('.ui-label-checkbox')[0].click();
+  this.$('.ui_label-checkbox')[0].click();
 });
 
 test('it correctly sets enabled status class on items', function(assert) {
   assert.expect(collection.size);
-  const domElms = this.$('.ui-label-checkbox');
+  const domElms = this.$('.ui_label-checkbox');
 
   collection.forEach((data, i) => {
     const elm = domElms[i];

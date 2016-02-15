@@ -26,15 +26,5 @@ export default Em.Component.extend({
       'color': color,
       'background-color': backgroundColor
     };
-  },
-
-  didInsertElement() {
-    this.mc = new Hammer.Manager(this.element);
-    this.mc.add( new Hammer.Tap({ event: 'singleTap', taps: 1, time: 1000 }) );
-    this.mc.on('singleTap', () => this.attrs.onClick());
-  },
-
-  willDestroyElement() {
-    this.mc.destroy();
   }
 });

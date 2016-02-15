@@ -2,7 +2,7 @@ import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
 export default Ember.Component.extend({
-  classNames: ['item-desires'],
+  classNames: ['item-desires', 'uBorP'],
 
   @computed('itemDesires.@each.{enabled}', 'items.[]')
   collection(itemDesires = [], items = []) {

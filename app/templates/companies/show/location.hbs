@@ -5,6 +5,17 @@
     items=items
     change=(route-action 'updateItemDesires')}}
 
-{{section/location/visit-days
+{{section/location/visit-schedule
     visitDays=model.visitDays
-    change=(route-action 'updateVisitDays')}}
+    visitWindows=model.visitWindows
+    visitDaysChanged=(route-action 'updateVisitDays')
+    visitWindowDaysChanged=(route-action 'visitWindowDaysChanged')
+    visitWindowChanged=(route-action 'visitWindowChanged')
+    createVisitWindow=(route-action 'createVisitWindow')
+    saveVisitWindow=(route-action 'saveVisitWindow')}}
+
+{{section/location/address-picker
+  addresses=addresses
+  currentAddress=model.address
+  addressChanged=(route-action 'addressChanged')
+  addressAttributesChanged=(route-action 'addressAttributesChanged')}}

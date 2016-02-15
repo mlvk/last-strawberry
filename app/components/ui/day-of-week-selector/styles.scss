@@ -1,0 +1,18 @@
+.ui_label-checkbox {
+  padding: 0.5em;
+  margin: 0.5em;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $light-blue;
+
+  &.enabled {
+    background: $dark-orange;
+  }
+
+  .label {
+    text-transform: uppercase;
+  }
+}

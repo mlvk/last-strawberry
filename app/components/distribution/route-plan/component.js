@@ -26,10 +26,6 @@ export default Ember.Component.extend({
 
     saveTemplate() {
       this.attrs.saveAsTemplate(this.get('model'));
-    },
-
-    testAction() {
-      // debugger;
     }
   }
 });

@@ -24,7 +24,11 @@ module.exports = function(environment) {
 
     routificApi: {
       accessToken: process.env.ROUTIFIC_API_KEY,
-    }
+    },
+
+    browserify: {
+       tests: true
+     },
   };
 
   ENV.apiHost = ''

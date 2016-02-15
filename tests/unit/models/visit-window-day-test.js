@@ -1,15 +1,8 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('location', 'Unit | Model | location', {
+moduleForModel('visit-window-day', 'Unit | Model | visit window day', {
   // Specify the other units that are required for this test.
-  needs: [
-    'model:address',
-    'model:company',
-    'model:item-desire',
-    'model:visit-day',
-    'model:visit-window', 
-    'model:price-tier'
-  ]
+  needs: ['model:visit-window']
 });
 
 test('it exists', function(assert) {

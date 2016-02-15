@@ -23,11 +23,23 @@ export default function() {
   this.patch('/item-desires/:id');
   this.post('/item-desires');
 
+  this.get('/visit-windows');
+  this.get('/visit-window/:id');
+
+  this.patch('/visit-windows/:id');
+  this.post('/visit-windows');
+
   this.get('/visit-days');
   this.get('/visit-days/:id');
 
   this.patch('/visit-days/:id');
   this.post('/visit-days');
+
+  this.get('/visit-window-days');
+  this.get('/visit-window-days/:id');
+
+  this.patch('/visit-window-days/:id');
+  this.post('/visit-window-days');
 
   this.post('users/sign_in', ({db: {users}}, request) => {
     const formData = decodeURIComponent(request.requestBody);

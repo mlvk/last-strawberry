@@ -5,7 +5,9 @@ const INCLUDES = [
   'address',
   'item-desires',
   'item-desires.item',
-  'visit-days'
+  'visit-days',
+  'visit-windows',
+  'visit-windows.visit-window-days'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -71,6 +73,51 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .forEach(visitDay => visitDay.save());
 
       return this.modelFor('companies.show.location').get('visitDays');
+    },
+
+    async visitWindowDaysChanged(visitWindow, newSelections) {
+      await visitWindow.save();
+
+      newSelections
+        .map(({id, enabled}) => {
+          const visitWindowDayPredicate = resource => resource.get('day') === id;
+          const day = id;
+
+          let match = visitWindow.get('visitWindowDays').find(visitWindowDayPredicate);
+
+          if(!match) {
+            match = this.store.createRecord('visit-window-day', {visitWindow, day});
+          }
+
+          match.set('enabled', enabled);
+          return match;
+        })
+        .filter(visitWindowDay => visitWindowDay.get('hasDirtyAttributes'))
+        .map(visitWindowDay => visitWindowDay.save());
+
+      return this.modelFor('companies.show.location').get('visitWindows');
+    },
+
+    visitWindowChanged(model, attr, e) {
+      model.set(attr, e.target.value);
+    },
+
+    saveVisitWindow(model) {
+      model.save();
+    },
+
+    createVisitWindow() {
+      const location = this.modelFor('companies.show.location');
+      this.store.createRecord('visit-window', {location});
+    },
+
+    addressChanged() {
+
+    },
+
+    addressAttributesChanged() {
+
     }
+
   }
 });

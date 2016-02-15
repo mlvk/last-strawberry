@@ -1,0 +1,25 @@
+{{ui/day-of-week-selector
+    class="visit-window-days"
+    model=model.visitWindowDays
+    change=(action visitWindowDaysChanged model)}}
+
+<input
+  type="text"
+  name="min"
+  value="{{model.min}}"
+  oninput={{action visitWindowChanged model 'min'}}
+  onblur={{action saveVisitWindow model}}>
+
+<input
+  type="text"
+  name="max"
+  value="{{model.max}}"
+  oninput={{action visitWindowChanged model 'max'}}
+  onblur={{action saveVisitWindow model}}>
+
+<input
+  type="text"
+  name="service"
+  value="{{model.service}}"
+  oninput={{action visitWindowChanged model 'service'}}
+  onblur={{action saveVisitWindow model}}>
