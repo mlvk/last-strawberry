@@ -1,1 +1,47 @@
-Hi
+<input
+  type="text"
+  name="street"
+  class="street"
+  value="{{model.street}}"
+  oninput={{action addressChanged model 'street'}}
+  onblur={{action saveAddress}}>
+
+<input
+  type="text"
+  name="city"
+  class="city"
+  value="{{model.city}}"
+  oninput={{action addressChanged model 'city'}}
+  onblur={{action saveAddress}}>
+
+<input
+  type="text"
+  name="state"
+  class="state"
+  value="{{model.state}}"
+  oninput={{action addressChanged model 'state'}}
+  onblur={{action saveAddress}}>
+
+<input
+  type="text"
+  name="zip"
+  class="zip"
+  value="{{model.zip}}"
+  oninput={{action addressChanged model 'zip'}}
+  onblur={{action saveAddress}}>
+
+<input
+  type="text"
+  name="lat"
+  class="lat"
+  value="{{model.lat}}"
+  oninput={{action addressChanged model 'lat'}}
+  onblur={{action saveAddress}}>
+
+<input
+  type="text"
+  name="lon"
+  class="lon"
+  value="{{model.lon}}"
+  oninput={{action addressChanged model 'lon'}}
+  onblur={{action saveAddress}}>

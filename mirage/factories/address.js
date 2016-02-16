@@ -1,7 +1,7 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  streetAddress: () => faker.address.streetAddress(),
+  street: () => faker.address.streetAddress(),
   city: () => faker.address.city(),
   state: () => faker.address.state(),
   zip: () => faker.address.zipCode(),

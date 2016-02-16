@@ -4,7 +4,7 @@ import style from 'last-strawberry/utils/styles';
 const { computed: { notEmpty }} = Em;
 
 export default Em.Component.extend({
-  classNames: ['row', 'iconButton'],
+  classNames: ['row', 'ui_icon-button', 'btn'],
   classNameBindings: ['disabled:disabled', 'flat:flat:card-1'],
   attributeBindings:['componentStyles:style'],
 

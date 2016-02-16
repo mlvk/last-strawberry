@@ -1,11 +1,24 @@
 import PO from 'last-strawberry/tests/page-object';
 
-const { visitable, count } = PO;
+const {
+  clickable,
+  collection,
+  fillable,
+  text,
+  visitable
+} = PO;
 
 export default PO.create({
   visit: visitable('/companies'),
 
-  // Not sure why this doesn't work. According to jquery docs
-  // this is how you select ancestor descendant
-  companyCount: count('.list-filterable-label-list .name')
+  fillNewCompany: fillable('.create-new-company.ui_input-action-bar input'),
+  createNewCompany: clickable('.create-new-company.ui_input-action-bar .btn'),
+
+  companies: collection({
+    itemScope: '.list-filterable-label-list .name',
+
+    item: {
+      label: text('.name')
+    }
+  })
 });

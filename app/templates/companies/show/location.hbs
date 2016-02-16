@@ -14,8 +14,7 @@
     createVisitWindow=(route-action 'createVisitWindow')
     saveVisitWindow=(route-action 'saveVisitWindow')}}
 
-{{section/location/address-picker
-  addresses=addresses
-  currentAddress=model.address
+{{section/location/address-creator
+  model=model.address
   addressChanged=(route-action 'addressChanged')
-  addressAttributesChanged=(route-action 'addressAttributesChanged')}}
+  saveAddress=(route-action 'saveAddress')}}

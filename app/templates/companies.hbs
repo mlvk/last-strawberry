@@ -1,8 +1,16 @@
 <div class="row stretch">
 
-  {{list/filterable-label-list
-      model=companies
-      itemClicked=(route-action 'showCompany')}}
+  <div class="col">
+    {{list/filterable-label-list
+        model=companies
+        itemClicked=(route-action 'showCompany')}}
+
+    {{ui/input-action-bar
+      class='create-new-company'
+      icon='add'
+      placeholder='Create new company...'
+      submit=(route-action 'createNewCompany')}}
+  </div>
 
   <div class="col-5">
     {{outlet}}

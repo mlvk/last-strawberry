@@ -41,21 +41,21 @@ const visitWindowPO = PO.create({
 });
 
 const addressPO = PO.create({
-  createNewAddress: clickable('.location .createNewAddress'),
+  visit: visitable('/companies/:company_id/locations/:location_id'),
 
-  fillStreet: fillable('.location .address .street'),
-  fillCity: fillable('.location.address  .city'),
-  fillState: fillable('.location.address  .state'),
-  fillZip: fillable('.location.address  .zip'),
-  fillLat: fillable('.location.address  .lat'),
-  fillLon: fillable('.location.address  .lon'),
+  fillStreet: fillable('.section_location_address-creator .street'),
+  fillCity: fillable('.section_location_address-creator .city'),
+  fillState: fillable('.section_location_address-creator .state'),
+  fillZip: fillable('.section_location_address-creator .zip'),
+  fillLat: fillable('.section_location_address-creator .lat'),
+  fillLon: fillable('.section_location_address-creator .lon'),
 
-  street: value('.location .address .street'),
-  city: value('.location .address .city'),
-  state: value('.location .address .state'),
-  zip: value('.location .address .zip'),
-  lat: value('.location .address .lat'),
-  lon: value('.location .address .lon')
+  street: value('.section_location_address-creator .street'),
+  city: value('.section_location_address-creator .city'),
+  state: value('.section_location_address-creator .state'),
+  zip: value('.section_location_address-creator .zip'),
+  lat: value('.section_location_address-creator .lat'),
+  lon: value('.section_location_address-creator .lon')
 });
 
 export { page, itemDesiresPO, visitSchedulePO, visitDaysPO, visitWindowPO, addressPO };

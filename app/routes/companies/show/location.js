@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 const INCLUDES = [
   'address',
+  'address.location',
   'item-desires',
   'item-desires.item',
   'visit-days',
@@ -111,12 +112,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.store.createRecord('visit-window', {location});
     },
 
-    addressChanged() {
-
+    addressChanged(model, attr, e) {
+      model.set(attr, e.target.value);
     },
 
-    addressAttributesChanged() {
-
+    async saveAddress() {
+      const location = this.modelFor('companies.show.location');
+      const address = await location.get('address');
+      return address.save();
     }
 
   }

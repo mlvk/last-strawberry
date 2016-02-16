@@ -2,8 +2,17 @@ export default function() {
 
   this.timing = 0;
 
+  this.get('/addresses');
+  this.get('/addresses/:id');
+
+  this.patch('/addresses/:id');
+  this.post('/addresses');
+
   this.get('/companies');
   this.get('/companies/:id');
+
+  this.patch('/companies/:id');
+  this.post('/companies');
 
   this.get('/locations');
   this.get('/locations/:id');
