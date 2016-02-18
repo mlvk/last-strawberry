@@ -5,7 +5,6 @@ import {
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
-import Ember from 'ember';
 
 moduleForAcceptance('Acceptance | companies/show/location/location address');
 
@@ -16,16 +15,14 @@ test('user should be able to add address info to location', function(assert) {
   const address = server.create('address');
   const location = server.create('location', {companyId:company.id, addressId:address.id});
 
-  Ember.run(function() {
-    addressPO
-      .visit({company_id:company.id, location_id:location.id})
-      .fillStreet('1 Center St')
-      .fillCity('New York')
-      .fillState('NY')
-      .fillZip('10021')
-      .fillLat('74')
-      .fillLon('75');
-  });
+  addressPO
+    .visit({company_id:company.id, location_id:location.id})
+    .fillStreet('1 Center St')
+    .fillCity('New York')
+    .fillState('NY')
+    .fillZip('10021')
+    .fillLat('74')
+    .fillLon('75');
 
   andThen(() => {
     assert.equal(addressPO.street, '1 Center St', 'Street address did not match');

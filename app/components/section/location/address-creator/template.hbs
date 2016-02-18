@@ -3,7 +3,8 @@
   name="street"
   class="street"
   value="{{model.street}}"
-  oninput={{action addressChanged model 'street'}}
+  oninput={{action 'fieldChanged' 'street'}}
+  onchange={{action 'fieldChanged' 'street'}}
   onblur={{action saveAddress}}>
 
 <input
@@ -11,7 +12,8 @@
   name="city"
   class="city"
   value="{{model.city}}"
-  oninput={{action addressChanged model 'city'}}
+  oninput={{action 'fieldChanged' 'city'}}
+  onchange={{action 'fieldChanged' 'city'}}
   onblur={{action saveAddress}}>
 
 <input
@@ -19,7 +21,8 @@
   name="state"
   class="state"
   value="{{model.state}}"
-  oninput={{action addressChanged model 'state'}}
+  oninput={{action 'fieldChanged' 'state'}}
+  onchange={{action 'fieldChanged' 'state'}}
   onblur={{action saveAddress}}>
 
 <input
@@ -27,7 +30,8 @@
   name="zip"
   class="zip"
   value="{{model.zip}}"
-  oninput={{action addressChanged model 'zip'}}
+  oninput={{action 'fieldChanged' 'zip'}}
+  onchange={{action 'fieldChanged' 'zip'}}
   onblur={{action saveAddress}}>
 
 <input
@@ -35,7 +39,8 @@
   name="lat"
   class="lat"
   value="{{model.lat}}"
-  oninput={{action addressChanged model 'lat'}}
+  oninput={{action 'fieldChanged' 'lat'}}
+  onchange={{action 'fieldChanged' 'lat'}}
   onblur={{action saveAddress}}>
 
 <input
@@ -43,5 +48,6 @@
   name="lon"
   class="lon"
   value="{{model.lon}}"
-  oninput={{action addressChanged model 'lon'}}
+  oninput={{action 'fieldChanged' 'lon'}}
+  onchange={{action 'fieldChanged' 'lon'}}
   onblur={{action saveAddress}}>
