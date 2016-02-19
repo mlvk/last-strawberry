@@ -6,6 +6,6 @@ export default Ember.Component.extend({
 
   @computed('date')
   formattedDate(date) {
-    return moment(date).format('MM-DD-YYYY');
+    return moment(date).format('YYYY-MM-DD');
   }
 });

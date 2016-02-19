@@ -5,5 +5,6 @@ export default Model.extend({
   address: belongsTo(),
   itemDesires: hasMany(),
   visitDays: hasMany(),
-  visitWindows: hasMany()
+  visitWindows: hasMany(),
+  orders: hasMany()
 });

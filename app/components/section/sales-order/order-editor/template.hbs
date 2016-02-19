@@ -1,0 +1,7 @@
+<span class="locationName">
+  {{model.location.name}}
+</span>
+
+{{#each model.orderItems as |orderItem|}}
+  {{section/sales-order/order-item-editor model=orderItem}}
+{{/each}}

@@ -33,7 +33,7 @@ export default Em.Controller.extend({
     return rps.filter(rp => rp.get('date') === date);
   },
 
-  @computed('routePlans.@each{template}')
+  @computed('routePlans.@each.{template}')
   routeTemplates(rps) {
     return rps.filter(rp => rp.get('template'));
   },

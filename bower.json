@@ -7,7 +7,7 @@
     "ember-qunit-notifications": "0.1.0",
     "jquery": "1.11.3",
     "selectize": "~0.12.1",
-    "pikaday": "~1.4.0",
+    "pikaday": "^1.4.0",
     "moment": ">= 2.8.0",
     "moment-timezone": ">= 0.1.0",
     "lodash": "~3.10.1",

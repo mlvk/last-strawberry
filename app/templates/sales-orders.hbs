@@ -1,0 +1,8 @@
+<div class="row stretch">
+  {{section/sales-order/left-nav
+      deliveryDate=deliveryDate
+      dateSelected=(route-action 'changeDeliveryDate')
+      stubOrders=(route-action 'stubOrders')
+      salesOrders=filteredSalesOrders}}
+  {{outlet}}
+</div>

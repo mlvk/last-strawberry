@@ -4,7 +4,6 @@ const { run } = Ember;
 
 const INCLUDES = [
   'address',
-  'address.location',
   'item-desires',
   'item-desires.item',
   'visit-days',

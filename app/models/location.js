@@ -12,5 +12,6 @@ export default DS.Model.extend({
   priceTier: DS.belongsTo('price-tier'),
   itemDesires: DS.hasMany('item-desire'),
   visitDays: DS.hasMany('visit-day'),
-  visitWindows: DS.hasMany('visit-window')
+  visitWindows: DS.hasMany('visit-window'),
+  orders: DS.hasMany('order')
 });

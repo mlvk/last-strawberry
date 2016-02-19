@@ -7,8 +7,9 @@ moduleForModel('location', 'Unit | Model | location', {
     'model:company',
     'model:item-desire',
     'model:visit-day',
-    'model:visit-window', 
-    'model:price-tier'
+    'model:visit-window',
+    'model:price-tier',
+    'model:order'
   ]
 });
 

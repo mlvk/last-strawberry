@@ -1,0 +1,23 @@
+& {
+  min-width: 15em;
+  padding: 1em;
+  font-size: 1.1em;
+  background: $light-grey;
+}
+
+.group {
+  margin-bottom: 0.4em;
+}
+
+.parent {
+  font-size: 1em;
+}
+
+.child {
+  padding-left: 1em;
+  font-size: 0.9em;
+}
+
+a {
+  cursor: pointer;
+}

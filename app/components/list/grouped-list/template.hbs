@@ -1,0 +1,14 @@
+{{#layout/scroll-container}}
+  <div class="col mainContainer">
+    {{#each-in model as |key group|}}
+      <div class="group">
+        <span class="parent">{{key}}</span>
+        <div class="col">
+          {{#each group as |item|}}
+            <a class="child" {{action attrs.itemClicked item}}>{{item.location.name}}</a>
+          {{/each}}
+        </div>
+      </div>
+    {{/each-in}}
+  </div>
+{{/layout/scroll-container}}

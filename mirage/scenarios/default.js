@@ -4,6 +4,7 @@ export default function(server) {
   createPriceTiers(server);
   createCompanies(server);
   createItemDesires(server);
+  createSalesOrders(server);
 }
 
 function createUsers(server) {
@@ -57,4 +58,13 @@ function createItemDesires(server) {
           server.create('item-desire', {itemId:item.id, locationId:location.id, enabled:true});
         })
     })
+}
+
+function createSalesOrders(server) {
+  const deliveryDate = moment().add(1, 'days').format('YYYY-MM-DD');
+  
+  server.db.locations
+    .forEach(location => {
+      server.create('order', {locationId:location.id, deliveryDate});
+    });
 }
