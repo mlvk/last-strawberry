@@ -20,6 +20,13 @@ export default function() {
   this.get('/orders/:id');
   this.patch('/orders/:id');
   this.post('/orders');
+  this.delete('/orders/:id');
+
+  this.get('/order-items');
+  this.get('/order-items/:id');
+  this.patch('/order-items/:id');
+  this.post('/order-items');
+  this.delete('/order-items/:id');
 
   this.get('/items');
   this.get('/items/:id');

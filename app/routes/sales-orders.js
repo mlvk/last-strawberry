@@ -62,7 +62,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     changeDeliveryDate(date) {
-      this.controllerFor('sales-orders').set('deliveryDate', moment(date).format('YYYY-MM-DD'));
+      const deliveryDate = this.paramsFor('sales-orders').deliveryDate;
+
+      if(deliveryDate !== moment(date).format('YYYY-MM-DD')) {
+        this.controllerFor('sales-orders').set('deliveryDate', moment(date).format('YYYY-MM-DD'));
+        this.transitionTo('sales-orders');
+      }
     }
   }
 });

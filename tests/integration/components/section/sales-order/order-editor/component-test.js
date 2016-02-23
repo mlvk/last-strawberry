@@ -9,9 +9,9 @@ const dataModel = {
     name : 'foo'
   },
   orderItems: [
-    { name: 'cheese' },
-    { name: 'milk' },
-    { name: 'eggs' }
+    { name: 'cheese', quantity: 1 },
+    { name: 'milk', quantity: 2 },
+    { name: 'eggs', quantity: 3 }
   ]
 };
 
@@ -21,8 +21,15 @@ moduleForComponent('section/sales-order/order-editor', 'Integration | Component 
   beforeEach: function () {
     this.set('data', dataModel);
 
+    this.set('updateOrderItem', () => {});
+    this.set('saveOrderItem', () => {});
+    this.set('deleteOrderItem', () => {});
+
     this.render(hbs
       `{{section/sales-order/order-editor
+          updateOrderItem=(action updateOrderItem)
+          saveOrderItem=(action saveOrderItem)
+          deleteOrderItem=(action deleteOrderItem)
           model=data}}`);
   }
 });

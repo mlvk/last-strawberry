@@ -25,5 +25,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         query: {include:INCLUDES.join(',')}
       }
     });
+	},
+
+	actions: {
+		updateOrderItem(model, quantity) {
+			model.set('quantity', quantity);
+		},
+
+		saveOrderItem(model) {
+			return model.save();
+		},
+
+		deleteOrderItem(model) {
+			model.destroyRecord();
+		},
+
+		deleteOrder(model) {
+			model.destroyRecord();
+			this.transitionTo('sales-orders');
+		}
 	}
 });

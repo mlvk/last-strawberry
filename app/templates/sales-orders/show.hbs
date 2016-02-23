@@ -1,3 +1,6 @@
 {{section/sales-order/order-editor
-    model=model}}
-  
+    model=model
+    updateOrderItem=(route-action 'updateOrderItem')
+    saveOrderItem=(route-action 'saveOrderItem')
+    deleteOrderItem=(route-action 'deleteOrderItem')
+    deleteOrder=(route-action 'deleteOrder' model)}}

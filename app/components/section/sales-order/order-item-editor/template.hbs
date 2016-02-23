@@ -4,5 +4,17 @@
 
 <input
   type="text"
+  class="quantity"
   name="{{model.item.name}}-qty"
-  value={{model.quantity}}>
+  value={{model.quantity}}
+  oninput={{action 'update'}}
+  onchange={{action 'update'}}
+  onblur={{action save model}}>
+
+{{ui/icon-button
+  class='delete'
+  icon='close'
+  flat=true
+  color=colors.DARK_GREY
+  padding=0.5
+  click=(action delete model)}}

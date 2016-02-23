@@ -1,7 +1,7 @@
 import PO from 'last-strawberry/tests/page-object';
 
 const {
-  // clickable,
+  clickable,
   collection,
   // fillable,
   text,
@@ -12,7 +12,7 @@ const page = PO.create({
   visit: visitable('/sales-orders/:id')
 });
 
-const salesOrderPO = PO.create({
+const orderEditorPO = PO.create({
   locationName: text('.locationName'),
   salesOrderItems: collection({
     itemScope: '.salesOrderItem',
@@ -21,7 +21,9 @@ const salesOrderPO = PO.create({
       name: text('.name'),
       quantity: text('.quantity')
     }
-  })
+  }),
+  
+  deleteOrder: clickable('.section_sales-order_order-editor .delete')
 });
 
-export { page, salesOrderPO };
+export { page, orderEditorPO };
