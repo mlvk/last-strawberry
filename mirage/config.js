@@ -57,6 +57,16 @@ export default function() {
   this.patch('/visit-window-days/:id');
   this.post('/visit-window-days');
 
+  this.get('/route-plans');
+  this.get('/route-plans/:id');
+  this.patch('/route-plans/:id');
+  this.post('/route-plans');
+
+  this.get('/users');
+  this.get('/users/:id');
+  this.patch('/users/:id');
+  this.post('/users');
+
   this.post('users/sign_in', ({db: {users}}, request) => {
     const formData = decodeURIComponent(request.requestBody);
     const emailStr = formData.split('&')[1].split('=')[1];

@@ -3,7 +3,7 @@ import DS from 'ember-data';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import computed from 'ember-computed-decorators';
 
-const { computed: { equal }} = Em;
+const { computed: { equal, alias }} = Em;
 
 const SALES_ORDER = 'sales-order';
 const PURCHASE_ORDER = 'purchase-order';
@@ -21,6 +21,8 @@ export default DS.Model.extend(LocationHashable, {
   // name: alias('location.name'),
   // company: alias('location.company.name'),
 
+  lat: alias('location.address.lat'),
+  lng: alias('location.address.lng'),
 
   @computed('orderItems.@each.{quantity}')
   empty(orderItems) {

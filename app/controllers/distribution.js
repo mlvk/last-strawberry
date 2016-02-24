@@ -2,15 +2,13 @@ import Em from 'ember';
 import computed from 'ember-computed-decorators';
 import co from "npm:co";
 
-const { computed: { union }} = Em;
+// const { computed: { union }} = Em;
 
 export default Em.Controller.extend({
   store: Em.inject.service(),
   queryParams: ['date'],
-
-  // @union('salesOrders', 'purchaseOrders') orders,
-  orders: union('salesOrders', 'purchaseOrders'),
-
+  date: moment().add(1, 'days').format('YYYY-MM-DD'),
+  
   @computed('orders.@each.{deliveryDate}', 'date')
   selectedDateOrders(orders, date) {
     return orders.filter(o => o.get('deliveryDate') === date);

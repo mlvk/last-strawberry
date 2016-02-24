@@ -8,7 +8,8 @@ module('Unit | Mixin | location hashable');
 test('it hashes correctly', function(assert) {
   var LocationHashableObject = Ember.Object.extend(LocationHashableMixin);
   var subject = LocationHashableObject.create();
-  subject.set('visitWindow', Ember.Object.create({lat:'lat', lon:'lon'}));
+  subject.set('lat', 'lat');
+  subject.set('lng', 'lng');
 
-  assert.equal(subject.get('locationHash'), '~lat_lon');
+  assert.equal(subject.get('locationHash'), '~lat_lng');
 });

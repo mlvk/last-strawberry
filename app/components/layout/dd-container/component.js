@@ -5,10 +5,12 @@ export default Ember.Component.extend({
   attributeBindings: ['containerId:data-drop-zone-id'],
   classNames: ['col', 'stretch'],
 
-  didInsertElement () {
-    this._super();
+  init() {
+    this._super(...arguments)
     this.set('containerId', guid());
+  },
 
+  didInsertElement () {
     if(this.attrs.registerContainer) {
       this.attrs.registerContainer(this.element);
     }

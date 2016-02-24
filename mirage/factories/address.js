@@ -6,5 +6,5 @@ export default Factory.extend({
   state: () => faker.address.state(),
   zip: () => faker.address.zipCode(),
   lat: () => faker.address.latitude(),
-  lon: () => faker.address.longitude()
+  lng: () => faker.address.longitude()
 });

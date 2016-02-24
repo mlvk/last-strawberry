@@ -9,7 +9,7 @@ export function optimizeRoutePlan(routePlan) {
     .reduce((acc, rv) => {
       const id = rv.get('position'),
             lat = rv.get('visitWindow.lat'),
-            lng = rv.get('visitWindow.lon'),
+            lng = rv.get('visitWindow.lng'),
             start = rv.get('visitWindow.arriveAtFormatted'),
             end = rv.get('visitWindow.departAtFormatted'),
             duration = rv.get('visitWindow.service');

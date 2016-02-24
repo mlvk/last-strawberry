@@ -1,7 +1,7 @@
-{{ui/date-picker
-  value=formattedDate
-  onSelect=this.attrs.onDateSelected
-  format='dddd - MM/DD/YY'}}
+{{pikaday-input
+    value=formattedDate
+    onSelected=onDateSelected
+    format='dddd - MM/DD/YY'}}
 
 <div class="row uiContainer">
   {{ember-selectize

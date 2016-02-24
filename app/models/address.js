@@ -6,6 +6,6 @@ export default DS.Model.extend({
   state: DS.attr('string'),
   zip: DS.attr('string'),
   lat: DS.attr('number'),
-  lon: DS.attr('number'),
+  lng: DS.attr('number'),
   location: DS.belongsTo('location')
 });
