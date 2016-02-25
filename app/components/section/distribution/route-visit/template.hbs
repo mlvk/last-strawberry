@@ -1,15 +1,15 @@
 {{#ui/dd-card
-  title=code
+  title=location.code
   index=index
   action=(action 'resetDrop')
   actionIcon='clear'
   backgroundColor=colorScheme.backgroundColor}}
 
   <span style={{textStyles}} class="company">
-    {{company}}
+    {{company.name}} - {{whatya}}
   </span>
 
   <span style={{textStyles}} class="nickname">
-    {{nickname}}
+    {{location.name}}
   </span>
 {{/ui/dd-card}}

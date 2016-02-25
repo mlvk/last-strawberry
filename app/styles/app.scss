@@ -4,6 +4,9 @@
 @import 'layout';
 @import 'utils';
 @import 'material';
-@import "pod-styles";
+@import 'pod-styles';
+@import 'modal';
+
+@import "ember-modal-dialog/ember-modal-structure";
 
 @import "components/application";

@@ -14,7 +14,8 @@
     "ceibo": "1.0.0",
     "pretender": "~0.10.1",
     "Faker": "~3.0.0",
-    "leaflet": "~0.7.7"
+    "leaflet": "~0.7.7",
+    "tether": "^1.0.3"
   },
   "resolutions": {
     "ember": "2.4.0-beta.2",

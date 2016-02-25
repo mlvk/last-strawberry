@@ -8,7 +8,7 @@ export default Em.Controller.extend({
   store: Em.inject.service(),
   queryParams: ['date'],
   date: moment().add(1, 'days').format('YYYY-MM-DD'),
-  
+
   @computed('orders.@each.{deliveryDate}', 'date')
   selectedDateOrders(orders, date) {
     return orders.filter(o => o.get('deliveryDate') === date);
@@ -36,16 +36,16 @@ export default Em.Controller.extend({
     return rps.filter(rp => rp.get('template'));
   },
 
-  saveRoutePlan(routePlan) {
-    co(function *(){
-      yield routePlan.save();
+  async saveRoutePlan(routePlan) {
+    await routePlan.save();
 
-      const rvs = yield routePlan.get('routeVisits');
-      yield rvs.save();
+    const rvs = await routePlan.get('routeVisits');
 
-      const orders = _.flatten(rvs.map(rv => rv.get('orders')));
+    await rvs.save();
 
-      orders.forEach(o => o.save());
+    rvs.forEach(async function(rv) {
+      const orders = await rv.get('orders');
+      orders.save();
     });
   },
 
@@ -72,28 +72,6 @@ export default Em.Controller.extend({
         rvs.forEach(rv => rv.unloadRecord());
         yield routePlan.destroyRecord();
       });
-    },
-
-    saveAsTemplate (routePlan) {
-      const store = this.get('store');
-
-      co(function *(){
-        const rp = store.createRecord('route-plan', {name:String('template' + Math.random()), template:true});
-        yield rp.save();
-
-        const rvs = yield routePlan.get('routeVisits');
-        const newRVS = rvs.map(rv => {
-          const cloneData = {
-            visitWindow: rv.get('visitWindow'),
-            position: rv.get('position'),
-            routePlan: rp
-          };
-
-          return store.createRecord('route-visit', cloneData);
-        });
-
-        yield newRVS.map(p => p.save());
-      }).catch(() => {});
     },
 
     applyTemplate (routeTemplate) {

@@ -7,5 +7,5 @@ export default DS.Model.extend({
   zip: DS.attr('string'),
   lat: DS.attr('number'),
   lng: DS.attr('number'),
-  location: DS.belongsTo('location')
+  locations: DS.hasMany('location')
 });

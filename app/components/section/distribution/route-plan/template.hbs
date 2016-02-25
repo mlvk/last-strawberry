@@ -16,6 +16,7 @@
 
     {{ui/icon-button
       icon='save'
+      class='saveTemplate'
       flat=true
       color=colors.DARK_GREY
       padding=0.5
@@ -27,7 +28,7 @@
 {{#layout/scroll-container}}
   {{#layout/dd-container registerContainer=this.attrs.registerDropContainer registerId=(action this.attrs.registerRoutePlan model)}}
     {{#each model.sortedRouteVisits as |rv|}}
-      {{distribution/route-plan-visit
+      {{section/distribution/route-visit
         colorScheme=colorScheme
         model=rv
         data-location-hash=rv.locationHash}}

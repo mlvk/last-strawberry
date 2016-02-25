@@ -1,5 +1,6 @@
 import Em from 'ember';
 import style from 'last-strawberry/utils/styles';
+import computed from 'ember-computed-decorators';
 
 const { computed: { alias } } = Em;
 
@@ -7,11 +8,14 @@ export default Em.Component.extend({
   classNames: ['card-1'],
   attributeBindings: ['data-location-hash'],
 
-  client: alias('model.visitWindow.client'),
-  code: alias('client.code'),
-  company: alias('client.company'),
-  nickname: alias('client.nickname'),
+  location: alias('model.visitWindow.location'),
+  company: alias('location.company'),
   index: alias('model.position'),
+
+  @computed('model.orders.[]')
+  whatya(orders) {
+    return orders.get('length');
+  },
 
   @style('colorScheme')
   textStyles(colorScheme = {color:'white'}) {
@@ -22,7 +26,7 @@ export default Em.Component.extend({
 
   actions: {
     resetDrop() {
-      
+
     }
   }
 });

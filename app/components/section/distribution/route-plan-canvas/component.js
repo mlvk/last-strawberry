@@ -5,7 +5,6 @@ const SCROLL_SPEED = 20;
 
 export default Ember.Component.extend({
   classNames: ['col', 'stretch'],
-  store: Ember.inject.service(),
 
   openOrders: Ember.computed('orders.[]', 'routePlans.@each.routeVisits', function(){
     return this.get('routePlans')
@@ -99,7 +98,6 @@ export default Ember.Component.extend({
       this.dropSubject.onNext();
       const ot = this._createRouteTransform(dragNode, dropNode, fromNode, sibNode);
       // Ember.run.schedule('afterRender', this, () => dragNode.parentElement.removeChild(dragNode));
-
       const routePlans = this.get('routePlans');
       routePlans.forEach(rp => rp.applyTranform(ot));
     });
@@ -118,6 +116,11 @@ export default Ember.Component.extend({
     return {locationHash, visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
   },
 
+  _clearSaveTemplate() {
+    this.set('showSaveTemplateModal', false);
+    this.set('saveTemplateOptions', undefined);
+  },
+
   actions: {
     registerDropContainer(...args) {
       let container;
@@ -132,6 +135,20 @@ export default Ember.Component.extend({
 
     registerRoutePlan(routePlan, containerId) {
       this.ddMapping = this.ddMapping.set(containerId, routePlan);
+    },
+
+    submitTemplateName(name) {
+      this.attrs.saveTemplate(this.get('saveTemplateOptions.routePlan'), name);
+      this._clearSaveTemplate();
+    },
+
+    startSaveTemplate(routePlan, trigger) {
+      this.set('saveTemplateOptions', {trigger, routePlan});
+      this.set('showSaveTemplateModal', true);
+    },
+
+    cancelSaveTemplate() {
+      this._clearSaveTemplate();
     }
   }
 

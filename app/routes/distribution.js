@@ -30,6 +30,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('routePlans', this.store.peekAll('route-plan'));
     controller.set('users', this.store.peekAll('user'));
     controller.set('locations', this.store.peekAll('location'));
+    controller.set('visitWindows', this.store.peekAll('visit-window'));
   },
 
   model (params) {
@@ -39,5 +40,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.store.query('route-plan', {'filter[template]':true, include:ROUTE_PLAN_INCLUDES.join(',')}),
       this.store.findAll('user')
     ]);
+  },
+
+  actions: {
+    async saveTemplate (sourceRoutePlan, name) {
+      const store = this.store;
+
+      const routePlan = store.createRecord('route-plan', {name, template:true});
+      await routePlan.save();
+
+      const rvs = await sourceRoutePlan.get('routeVisits');
+      rvs.forEach(async function(rv) {
+        const visitWindow = rv.get('visitWindow');
+        const position = rv.get('position');
+
+        await store
+          .createRecord('route-visit', {routePlan, visitWindow, position})
+          .save();
+      });
+    }
   }
 });

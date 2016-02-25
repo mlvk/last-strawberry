@@ -6,7 +6,7 @@
 {{#layout/scroll-container}}
   {{#layout/dd-container registerContainer=this.attrs.registerDropContainer}}
     {{#each-in orderGroups as |key og|}}
-      {{distribution/order-group
+      {{section/distribution/order-group
         data-location-hash=key
         model=og}}
     {{/each-in}}

@@ -1,0 +1,21 @@
+{{#leaflet-map
+    onMoveend=(action 'what')
+    lat=lat
+    lng=lng
+    zoom=zoom as |layers|}}
+
+  {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
+
+  {{#each openVisitWindows as |vw|}}
+    {{#layers.marker lat=vw.lat lng=vw.lng icon=openIcon}}
+      {{vw.location.name}}
+    {{/layers.marker}}
+  {{/each}}
+
+  {{#each handledVisitWindows as |vw|}}
+    {{#layers.marker lat=vw.lat lng=vw.lng icon=takenLocations}}
+      {{vw.location.name}}
+    {{/layers.marker}}
+  {{/each}}
+
+{{/leaflet-map}}
