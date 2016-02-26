@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import colors from 'last-strawberry/constants/colors';
 
 function buildStyles(data) {
   const str = Object.keys(data).reduce((acc, cur) => `${acc}${cur}:${data[cur]};`, '');
@@ -7,10 +6,12 @@ function buildStyles(data) {
 }
 
 export function rpIcon(params) {
-  const routeVisit = params[0];
-  const index = params[1];
-  const colorScheme = routeVisit ? routeVisit.get('routePlan.colorScheme') : {backgroundColor:colors.LIGHT_GREY, color:'white'};
+  // const routeVisit = params[0];
 
+  // const colorScheme = routeVisit ? routeVisit.get('routePlan.colorScheme') : {backgroundColor:colors.LIGHT_GREY, color:'white'};
+  const label = params[0] || '';
+  const backgroundColor = params[1] || '#e3e3e3';
+  const color = params[2] || '#fff';
   const labelStyles = {
     'text-align': 'center',
     'width': '2em',
@@ -18,17 +19,17 @@ export function rpIcon(params) {
     'position': 'absolute',
     'top': '-5px',
     'left': '2px',
-    'color': colorScheme.color,
+    'color': color,
     'font-size': '0.9em'
   }
 
   const iconFillStyles = {
-    'fill':colorScheme.backgroundColor
+    'fill':backgroundColor
   }
 
   const html =
     `<div class='marker'>
-      <p style=${buildStyles(labelStyles)}>${routeVisit.get('position') + 1}</p>
+      <p style=${buildStyles(labelStyles)}>${label}</p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 40">
         <path style=${buildStyles(iconFillStyles)} d="M12.5,0C5.7,0,0,5.9,0,12.3c0,2.9,1.6,6.6,2.8,9.1L12.5,40l9.6-18.6c1.2-2.5,2.9-6,2.9-9.1
       		C25,5.9,19.4,0,12.5,0L12.5,0z"/>

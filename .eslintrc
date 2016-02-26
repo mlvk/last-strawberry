@@ -17,6 +17,7 @@
       "dragula": true,
       "$": true,
       "google": true,
-      "Hammer": true
+      "Hammer": true,
+      "L": true
     }
 }

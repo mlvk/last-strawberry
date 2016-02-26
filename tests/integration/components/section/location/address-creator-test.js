@@ -10,26 +10,26 @@ test('field and update and triggers a save', function(assert) {
 
   this.set('address', {street:'1 Center St', city:'New York'});
 
-  this.set('addressChanged', (model, key, val) => {
+  this.set('fieldChanged', (model, key, val) => {
     assert.ok(model, 'model undefined');
     assert.ok(key, 'key undefined');
     assert.ok(val, 'val undefined');
   });
 
-  this.set('saveAddress', () => {
+  this.set('save', () => {
     assert.ok(true);
   });
 
   this.render(hbs`{{section/location/address-creator
                       model=address
-                      addressChanged=(action addressChanged)
-                      saveAddress=saveAddress}}`);
+                      fieldChanged=(action fieldChanged)
+                      save=save}}`);
 
   assert.equal(this.$('.street').val(), '1 Center St');
 
   // Should trigger addressChanged
   this.$('.street').change();
 
-  // Should trigger saveAddress
+  // Should trigger save
   this.$('.street').trigger('onblur');
 });

@@ -25,14 +25,6 @@ export default Em.Component.extend({
 
   @computed('visitWindows', 'handledVisitWindowHashes')
   openVisitWindows (visitWindows, handled) {
-    console.log(visitWindows, handled);
     return visitWindows.filter(vw => !handled.contains(vw.get('locationHash')));
-  },
-
-  actions: {
-    what(e) {
-      //
-    }
   }
-
 });

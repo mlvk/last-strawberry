@@ -34,6 +34,7 @@
       "currentPath": true,
       "currentRouteName": true,
       "pauseTest": true,
-      "server": true
+      "server": true,
+      "L": true
     }
 }

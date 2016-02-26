@@ -5,20 +5,33 @@ moduleForComponent('section/location/location-settings', 'Integration | Componen
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+test('field and update and triggers a save', function(assert) {
+  assert.expect(7);
+  const locationData = {name:'Silverlake', code:'nw-001', deliveryRate:10};
+  this.set('location', locationData);
 
-  this.render(hbs`{{section/location/location-settings}}`);
+  this.set('fieldChanged', (model, key, val) => {
+    assert.ok(model, 'model undefined');
+    assert.ok(key, 'key undefined');
+    assert.ok(val, 'val undefined');
+  });
 
-  assert.equal(this.$().text().trim(), '');
+  this.set('save', () => {
+    assert.ok(true);
+  });
 
-  // Template block usage:"
-  this.render(hbs`
-    {{#section/location/location-settings}}
-      template block text
-    {{/section/location/location-settings}}
-  `);
+  this.render(hbs`{{section/location/location-settings
+                      model=location
+                      fieldChanged=(action fieldChanged)
+                      save=save}}`);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.name').val(), locationData.name);
+  assert.equal(this.$('.code').val(), locationData.code);
+  assert.equal(this.$('.deliveryRate').val(), locationData.deliveryRate);
+
+  // Should trigger addressChanged
+  this.$('.name').change();
+
+  // Should trigger save
+  this.$('.name').trigger('onblur');
 });

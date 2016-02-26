@@ -1,8 +1,6 @@
 import Em from 'ember';
 import computed from 'ember-computed-decorators';
 
-const { computed : { alias } } = Em;
-
 export default Em.Component.extend({
   classNames: ['col'],
   classNameBindings: ['indexStyle'],

@@ -1,5 +1,4 @@
 {{#leaflet-map
-    onMoveend=(action 'what')
     lat=lat
     lng=lng
     zoom=zoom as |layers|}}
@@ -13,7 +12,7 @@
   {{/each}}
 
   {{#each handledRouteVisits as |rv|}}
-    {{#layers.marker lat=rv.lat lng=rv.lng icon=(rp-icon rv rv.position)}}
+    {{#layers.marker lat=rv.lat lng=rv.lng icon=(rp-icon rv.positionFormatted rv.backgroundColor)}}
       {{rv.visitWindow.location.name}}
     {{/layers.marker}}
 
