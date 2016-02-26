@@ -29,7 +29,7 @@
   {{#layout/dd-container registerContainer=this.attrs.registerDropContainer registerId=(action this.attrs.registerRoutePlan model)}}
     {{#each model.sortedRouteVisits as |rv|}}
       {{section/distribution/route-visit
-        colorScheme=colorScheme
+        colorScheme=model.colorScheme
         model=rv
         data-location-hash=rv.locationHash}}
     {{/each}}

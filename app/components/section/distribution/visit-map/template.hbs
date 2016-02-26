@@ -7,15 +7,16 @@
   {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
 
   {{#each openVisitWindows as |vw|}}
-    {{#layers.marker lat=vw.lat lng=vw.lng icon=openIcon}}
+    {{#layers.marker lat=vw.lat lng=vw.lng}}
       {{vw.location.name}}
     {{/layers.marker}}
   {{/each}}
 
-  {{#each handledVisitWindows as |vw|}}
-    {{#layers.marker lat=vw.lat lng=vw.lng icon=takenLocations}}
-      {{vw.location.name}}
+  {{#each handledRouteVisits as |rv|}}
+    {{#layers.marker lat=rv.lat lng=rv.lng icon=(rp-icon rv rv.position)}}
+      {{rv.visitWindow.location.name}}
     {{/layers.marker}}
+
   {{/each}}
 
 {{/leaflet-map}}

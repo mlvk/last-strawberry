@@ -1,4 +1,8 @@
-{{model.name}}
+{{section/location/location-settings
+    model=model
+    fieldChanged=(route-action 'fieldChanged')
+    save=(route-action 'saveLocation')
+    delete=(route-action 'deleteLocation')}}
 
 {{section/location/item-desires
     itemDesires=model.itemDesires
@@ -15,6 +19,6 @@
     saveVisitWindow=(route-action 'saveVisitWindow')}}
 
 {{section/location/address-creator
-  model=model.address
-  addressChanged=(route-action 'addressChanged')
-  saveAddress=(route-action 'saveAddress')}}
+    model=model.address
+    fieldChanged=(route-action 'fieldChanged')
+    save=(route-action 'saveAddress')}}

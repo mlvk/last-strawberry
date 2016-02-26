@@ -7,6 +7,6 @@ export default PO.create({
 
   locationCount: count('.location'),
   
-  name: value('.section-company-settings-form .name'),
-  code: value('.section-company-settings-form .code')
+  name: value('.section_company_company-settings .name'),
+  code: value('.section_company_company-settings .code')
 });

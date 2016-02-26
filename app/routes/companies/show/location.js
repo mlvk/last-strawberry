@@ -112,8 +112,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.store.createRecord('visit-window', {location});
     },
 
-    addressChanged(model, key, value) {
+    fieldChanged(model, key, value) {
       model.set(key, value);
+    },
+
+    async saveLocation() {
+      const location = this.modelFor('companies.show.location');
+      if(!location.get('isSaving')) {
+        run(() => location.save());
+      }
     },
 
     async saveAddress() {
@@ -121,6 +128,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       const address = await location.get('address');
       if(!address.get('isSaving')) {
         run(() => address.save());
+      }
+    },
+
+    async deleteLocation() {
+      const location = this.modelFor('companies.show.location');
+      if(!location.get('isDeleted')) {
+        run(() => location.destroyRecord());
       }
     }
 

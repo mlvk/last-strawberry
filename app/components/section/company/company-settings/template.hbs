@@ -1,0 +1,39 @@
+<input
+  type="text"
+  name="name"
+  class="name"
+  placeholder="name"
+  value="{{model.name}}"
+  oninput={{action 'fieldChanged' 'name'}}
+  onchange={{action 'fieldChanged' 'name'}}
+  onblur={{action save}}>
+
+<input
+  type="text"
+  name="code"
+  class="code"
+  placeholder="code"
+  value="{{model.code}}"
+  oninput={{action 'fieldChanged' 'code'}}
+  onchange={{action 'fieldChanged' 'code'}}
+  onblur={{action save}}>
+
+<input
+  type="text"
+  name="creditRate"
+  class="creditRate"
+  placeholder="credit rate"
+  value="{{model.creditRate}}"
+  oninput={{action 'fieldChanged' 'creditRate'}}
+  onchange={{action 'fieldChanged' 'creditRate'}}
+  onblur={{action save}}>
+
+<input
+  type="text"
+  name="terms"
+  class="terms"
+  placeholder="terms"
+  value="{{model.terms}}"
+  oninput={{action 'fieldChanged' 'terms'}}
+  onchange={{action 'fieldChanged' 'terms'}}
+  onblur={{action save}}>

@@ -28,7 +28,12 @@ export default Em.Controller.extend({
 
   @computed('routePlans.@each.{date}', 'date')
   activeRoutePlans(rps, date) {
-    return rps.filter(rp => rp.get('date') === date);
+    return rps
+      .filter(rp => rp.get('date') === date)
+      .map((rp, index) => {
+        rp.set('index', index)
+        return rp;
+      });
   },
 
   @computed('routePlans.@each.{template}')

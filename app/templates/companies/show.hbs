@@ -1,9 +1,9 @@
 <div class="col stretch section">
-  {{section/company/settings-form
-      name=model.name
-      code=model.code
-      creditRate=model.creditRate
-      terms=model.terms}}
+  {{section/company/company-settings
+      model=model
+      fieldChanged=(route-action 'fieldChanged')
+      save=(route-action 'saveCompany')
+    }}
 
   <div class="row">
     {{#each model.locations as |location|}}
@@ -12,6 +12,12 @@
           code=location.code
           click=(route-action 'showLocation' location.id)}}
     {{/each}}
+    {{ui/icon-button
+      icon='add'
+      flat=true
+      color=colors.DARK_GREY
+      padding=0.5
+      click=(route-action 'createNewLocation')}}
   </div>
 
   {{outlet}}

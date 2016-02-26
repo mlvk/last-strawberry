@@ -1,6 +1,12 @@
 import Em from 'ember';
 import DS from 'ember-data';
 import computed from 'ember-computed-decorators';
+import colors from 'last-strawberry/constants/colors';
+
+const colorSchemes = [
+  {backgroundColor:colors.DARK_PINK, color:'white'},
+  {backgroundColor:colors.DOPE_BLUE, color:'white'}
+]
 
 export default DS.Model.extend({
   name: DS.attr('string'),
@@ -8,6 +14,11 @@ export default DS.Model.extend({
   date: DS.attr('string'),
   user: DS.belongsTo('user'),
   routeVisits: DS.hasMany('route-visit'),
+
+  @computed('index')
+  colorScheme(index) {
+    return colorSchemes[index];
+  },
 
   sortAsc: ['position:asc'],
   sortedRouteVisits: Em.computed.sort('routeVisits', 'sortAsc'),

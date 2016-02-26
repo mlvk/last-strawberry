@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['section_location_address-creator'],
+  classNames: ['section_location_location-settings'],
 
   actions: {
     fieldChanged(field, e) {
