@@ -4,7 +4,6 @@ export default function() {
 
   this.get('/addresses');
   this.get('/addresses/:id');
-
   this.patch('/addresses/:id');
   this.post('/addresses');
 
@@ -15,6 +14,9 @@ export default function() {
 
   this.get('/locations');
   this.get('/locations/:id');
+  this.patch('/locations/:id');
+  this.post('/locations');
+  this.delete('/locations/:id');
 
   this.get('/orders');
   this.get('/orders/:id');
@@ -73,5 +75,7 @@ export default function() {
     const {id, email, token, firstName, lastName} = users.where({email:emailStr})[0];
     return {id, email, token, first_name:firstName, last_name:lastName};
   });
+
+  this.passthrough('https://nominatim.openstreetmap.org/**');
 
 }

@@ -15,21 +15,14 @@ test('user should be able to add address info to location', function(assert) {
   const address = server.create('address');
   const location = server.create('location', {companyId:company.id, addressId:address.id});
 
+  const fullAddress = '86 7th Avenue, New York City, New York 11217';
+
   addressPO
     .visit({company_id:company.id, location_id:location.id})
-    .fillStreet('1 Center St')
-    .fillCity('New York')
-    .fillState('NY')
-    .fillZip('10021')
-    .fillLat('74')
-    .fillLon('75');
+    .fillSearchAddress(fullAddress)
+    .updateAddress();
 
   andThen(() => {
-    assert.equal(addressPO.street, '1 Center St', 'Street address did not match');
-    assert.equal(addressPO.city, 'New York', 'City did not match');
-    assert.equal(addressPO.state, 'NY', 'State did not match');
-    assert.equal(addressPO.zip, '10021', 'Zip did not match');
-    assert.equal(addressPO.lat, '74', 'Lat did not match');
-    assert.equal(addressPO.lon, '75', 'Lon did not match');
+    assert.equal(addressPO.fullAddress, fullAddress, 'Street address did not match');
   });
 });

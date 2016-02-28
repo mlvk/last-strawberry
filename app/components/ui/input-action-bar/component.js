@@ -9,8 +9,8 @@ export default Ember.Component.extend({
   },
   actions: {
     submit() {
-      this.attrs.submit(this.get('inputValue'));
-      this.set('inputValue', '');
+      this.attrs.submit(this.$('input').val());
+      this.$('input').val('')
     }
   }
 });

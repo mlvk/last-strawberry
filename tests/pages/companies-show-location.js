@@ -1,6 +1,6 @@
 import PO from 'last-strawberry/tests/page-object';
 
-const { clickable, fillable, visitable, text, value, hasClass, collection } = PO;
+const { clickable, fillable, visitable, text, hasClass, collection } = PO;
 
 const page = PO.create({
   visit: visitable('/companies/:company_id/locations/:location_id')
@@ -43,19 +43,11 @@ const visitWindowPO = PO.create({
 const addressPO = PO.create({
   visit: visitable('/companies/:company_id/locations/:location_id'),
 
-  fillStreet: fillable('.section_location_address-creator .street'),
-  fillCity: fillable('.section_location_address-creator .city'),
-  fillState: fillable('.section_location_address-creator .state'),
-  fillZip: fillable('.section_location_address-creator .zip'),
-  fillLat: fillable('.section_location_address-creator .lat'),
-  fillLon: fillable('.section_location_address-creator .lon'),
+  fillSearchAddress: fillable('.address-search input'),
 
-  street: value('.section_location_address-creator .street'),
-  city: value('.section_location_address-creator .city'),
-  state: value('.section_location_address-creator .state'),
-  zip: value('.section_location_address-creator .zip'),
-  lat: value('.section_location_address-creator .lat'),
-  lon: value('.section_location_address-creator .lon')
+  updateAddress: clickable('.address-search .submit'),
+
+  fullAddress: text('.full-address')
 });
 
 export { page, itemDesiresPO, visitSchedulePO, visitDaysPO, visitWindowPO, addressPO };

@@ -12,7 +12,9 @@
   {{/each}}
 
   {{#each handledRouteVisits as |rv|}}
+    {{log rv.positionFormatted rv.backgroundColor}}
     {{#layers.marker lat=rv.lat lng=rv.lng icon=(rp-icon rv.positionFormatted rv.backgroundColor)}}
+
       {{rv.visitWindow.location.name}}
     {{/layers.marker}}
 

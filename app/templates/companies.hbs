@@ -5,11 +5,13 @@
         model=companies
         itemClicked=(route-action 'showCompany')}}
 
-    {{ui/input-action-bar
-      class='create-new-company'
-      icon='add'
-      placeholder='Create new company...'
-      submit=(route-action 'createNewCompany')}}
+    <div class="row">
+      {{ui/input-action-bar
+        class='create-new-company'
+        icon='add'
+        placeholder='Create new company...'
+        submit=(route-action 'createNewCompany')}}
+    </div>
   </div>
 
   <div class="col-5">

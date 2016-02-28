@@ -37,3 +37,17 @@ ul, li {
   background: rgba(0,0,0,0.61); /* Some darker color when you click it */
   -webkit-border-radius: 100px;
 }
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}

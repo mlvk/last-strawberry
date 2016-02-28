@@ -1,8 +1,9 @@
 import Em from 'ember';
 import DS from 'ember-data';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
+import computed from 'ember-computed-decorators';
 
-const { computed, computed: { notEmpty, alias }} = Em;
+const { computed: { notEmpty, alias }} = Em;
 
 export default DS.Model.extend(LocationHashable, {
   routePlan: DS.belongsTo('route-plan'),
@@ -22,14 +23,14 @@ export default DS.Model.extend(LocationHashable, {
     return position + 1;
   },
 
-  @computed('routePlan.colorScheme.{color, backgroundColor}')
-  color(colorScheme) {
-    return colorScheme.color;
+  @computed('routePlan.colorScheme.{color}')
+  color(val) {
+    return val;
   },
 
-  @computed('routePlan.colorScheme.{color, backgroundColor}')
-  backgroundColor(colorScheme) {
-    return colorScheme.backgroundColor;
+  @computed('routePlan.colorScheme.{backgroundColor}')
+  backgroundColor(val) {
+    return val;
   },
 
   consumeOrders (orders) {

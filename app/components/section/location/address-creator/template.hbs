@@ -1,53 +1,25 @@
-<input
-  type="text"
-  name="street"
-  class="street"
-  value="{{model.street}}"
-  oninput={{action 'fieldChanged' 'street'}}
-  onchange={{action 'fieldChanged' 'street'}}
-  onblur={{action save}}>
+<div class="col stretch">
+  {{ui/input-action-bar
+      class='address-search'
+      icon='search'
+      placeholder='Search for address'
+      submit=(action 'searchAddress')}}
 
-<input
-  type="text"
-  name="city"
-  class="city"
-  value="{{model.city}}"
-  oninput={{action 'fieldChanged' 'city'}}
-  onchange={{action 'fieldChanged' 'city'}}
-  onblur={{action save}}>
+  {{#leaflet-map
+      lat=lat
+      lng=lng
+      zoom=zoom as |layers|}}
 
-<input
-  type="text"
-  name="state"
-  class="state"
-  value="{{model.state}}"
-  oninput={{action 'fieldChanged' 'state'}}
-  onchange={{action 'fieldChanged' 'state'}}
-  onblur={{action save}}>
-
-<input
-  type="text"
-  name="zip"
-  class="zip"
-  value="{{model.zip}}"
-  oninput={{action 'fieldChanged' 'zip'}}
-  onchange={{action 'fieldChanged' 'zip'}}
-  onblur={{action save}}>
-
-<input
-  type="text"
-  name="lat"
-  class="lat"
-  value="{{model.lat}}"
-  oninput={{action 'fieldChanged' 'lat'}}
-  onchange={{action 'fieldChanged' 'lat'}}
-  onblur={{action save}}>
-
-<input
-  type="text"
-  name="lon"
-  class="lon"
-  value="{{model.lng}}"
-  oninput={{action 'fieldChanged' 'lng'}}
-  onchange={{action 'fieldChanged' 'lng'}}
-  onblur={{action save}}>
+    {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
+      {{#if model}}
+        {{#layers.marker lat=model.lat lng=model.lng}}
+          <strong>{{model.street}}</strong>
+          <br>
+          <span>{{model.city}}, {{model.state}} {{model.zip}}</span>
+        {{/layers.marker}}
+      {{/if}}
+  {{/leaflet-map}}
+  <p class="full-address">
+    {{model.full}}
+  </p>
+</div>

@@ -1,24 +1,34 @@
-{{section/location/location-settings
-    model=model
-    fieldChanged=(route-action 'fieldChanged')
-    save=(route-action 'saveLocation')
-    delete=(route-action 'deleteLocation')}}
+<div class="row">
+  <div class="section col-2">
+    {{section/location/location-settings
+        model=model
+        fieldChanged=(route-action 'fieldChanged')
+        save=(route-action 'saveLocation')
+        delete=(route-action 'deleteLocation')}}
+  </div>
+  <div class="section col-2">
+    {{section/location/item-desires
+        itemDesires=model.itemDesires
+        items=items
+        change=(route-action 'updateItemDesires')}}
+  </div>
+</div>
 
-{{section/location/item-desires
-    itemDesires=model.itemDesires
-    items=items
-    change=(route-action 'updateItemDesires')}}
-
-{{section/location/visit-schedule
-    visitDays=model.visitDays
-    visitWindows=model.visitWindows
-    visitDaysChanged=(route-action 'updateVisitDays')
-    visitWindowDaysChanged=(route-action 'visitWindowDaysChanged')
-    visitWindowChanged=(route-action 'visitWindowChanged')
-    createVisitWindow=(route-action 'createVisitWindow')
-    saveVisitWindow=(route-action 'saveVisitWindow')}}
-
-{{section/location/address-creator
-    model=model.address
-    fieldChanged=(route-action 'fieldChanged')
-    save=(route-action 'saveAddress')}}
+<div class="row stretch">
+  <div class="section col-2">
+    {{section/location/address-creator
+        model=model.address
+        update=(route-action 'updateAddress')
+        save=(route-action 'saveAddress')}}
+  </div>
+  <div class="section col-2">
+    {{section/location/visit-schedule
+        visitDays=model.visitDays
+        visitWindows=model.visitWindows
+        visitDaysChanged=(route-action 'updateVisitDays')
+        visitWindowDaysChanged=(route-action 'visitWindowDaysChanged')
+        visitWindowChanged=(route-action 'visitWindowChanged')
+        createVisitWindow=(route-action 'createVisitWindow')
+        saveVisitWindow=(route-action 'saveVisitWindow')}}
+  </div>
+</div>
