@@ -6,6 +6,7 @@ const ORDER_INCLUDES = [
   'location.address',
   'location.company',
   'location.visit-windows',
+  'location.visit-windows.visit-window-days',
   'location.visit-windows.location',
   'order-items'
 ];
@@ -29,8 +30,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('orders', this.store.peekAll('order'));
     controller.set('routePlans', this.store.peekAll('route-plan'));
     controller.set('users', this.store.peekAll('user'));
-    controller.set('locations', this.store.peekAll('location'));
-    controller.set('visitWindows', this.store.peekAll('visit-window'));
+    // controller.set('locations', this.store.peekAll('location'));
+    // controller.set('visitWindows', this.store.peekAll('visit-window'));
   },
 
   model (params) {

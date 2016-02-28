@@ -23,8 +23,7 @@ export default Ember.Component.extend({
   },
 
   _visitWindowWithLocationHash(locationHash) {
-    const match = this.get('visitWindows').find(vw => vw.get('locationHash') === locationHash)
-    return match;
+    return this.get('visitWindows').find(vw => vw.get('locationHash') === locationHash);
   },
 
   _setupStreams() {
@@ -98,6 +97,7 @@ export default Ember.Component.extend({
       this.dropSubject.onNext();
       const ot = this._createRouteTransform(dragNode, dropNode, fromNode, sibNode);
       // Ember.run.schedule('afterRender', this, () => dragNode.parentElement.removeChild(dragNode));
+
       const routePlans = this.get('routePlans');
       routePlans.forEach(rp => rp.applyTranform(ot));
     });
@@ -112,7 +112,6 @@ export default Ember.Component.extend({
 
     const fromRoutePlan = this.ddMapping.get(fromPlanId);
     const toRoutePlan = this.ddMapping.get(toPlanId);
-
     return {locationHash, visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
   },
 

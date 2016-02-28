@@ -21,14 +21,17 @@ export default Em.Controller.extend({
 
   @computed('validOrders.[]')
   visitWindows (orders) {
-    return orders
-      .map(o => o.get('visitWindow'))
-      .filter(vw => (!!vw));
+    return _.flatten(orders
+        .map(o => o.get('location.visitWindows').toArray())
+        .map(vw => vw)
+      )
+      .filter(vw => vw.validForDate(this.get('date')));
   },
 
-  @computed('routePlans.@each.{date}', 'date')
+  @computed('routePlans.@each.{date,template}', 'date')
   activeRoutePlans(rps, date) {
     return rps
+      .filter(rp => !rp.get('template'))
       .filter(rp => rp.get('date') === date)
       .map((rp, index) => {
         rp.set('index', index)

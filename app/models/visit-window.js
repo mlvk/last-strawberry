@@ -12,5 +12,10 @@ export default DS.Model.extend(LocationHashable, {
 	visitWindowDays: DS.hasMany('visit-window-day'),
 
 	lat: alias('location.address.lat'),
-  lng: alias('location.address.lng')
+  lng: alias('location.address.lng'),
+
+	validForDate(date) {
+		const dayOfWeek = moment(date).day();
+		return !!this.get('visitWindowDays').find(vwd => vwd.get('day') === dayOfWeek);
+	}
 });
