@@ -19,6 +19,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+    fieldChanged(model, key, value) {
+      model.set(key, value);
+    },
+
     showLocation(id) {
       this.transitionTo('companies.show.location', id);
     },
