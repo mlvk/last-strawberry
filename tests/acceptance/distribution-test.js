@@ -12,6 +12,6 @@ test('visiting distribution defaults to tomorrows date', function(assert) {
   visit(`/distribution?date=${tomorrow}`);
 
   andThen(function() {
-    assert.equal(currentURL(), `/distribution`);
+    assert.equal(currentURL(), `/distribution?date=${tomorrow}`);
   });
 });

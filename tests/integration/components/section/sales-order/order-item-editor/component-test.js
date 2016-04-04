@@ -18,8 +18,7 @@ moduleForComponent('section/sales-order/order-item-editor', 'Integration | Compo
     this.set('save', () => {});
     this.set('delete', () => {});
 
-    this.render(hbs
-      `{{section/sales-order/order-item-editor
+    this.render(hbs`{{section/sales-order/order-item-editor
           update=(action update)
           save=(action save)
           delete=(action delete)

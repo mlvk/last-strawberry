@@ -18,6 +18,13 @@
       "$": true,
       "google": true,
       "Hammer": true,
-      "L": true
+      "L": true,
+      "andThen": true,
+      "currentURL": true,
+      "currentPath": true,
+      "currentRouteName": true,
+      "pauseTest": true,
+      "visit": true,
+      "server": true
     }
 }

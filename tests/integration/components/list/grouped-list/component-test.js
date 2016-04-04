@@ -14,8 +14,7 @@ moduleForComponent('list/grouped-list', 'Integration | Component | list/grouped 
     this.set('data', dataModel);
     this.set('handleItemClicked', () => {});
 
-    this.render(hbs
-      `{{list/grouped-list
+    this.render(hbs`{{list/grouped-list
           model=data
           itemClicked=(action handleItemClicked)}}`);
   }

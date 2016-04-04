@@ -12,8 +12,7 @@ test('clicking stub orders triggers callback', function(assert) {
     assert.ok(true);
   });
 
-  this.render(hbs
-    `{{section/sales-order/left-nav
+  this.render(hbs`{{section/sales-order/left-nav
         stubOrders=(action handleStubOrders)}}`);
 
   this.$('.stubOrders').click();
