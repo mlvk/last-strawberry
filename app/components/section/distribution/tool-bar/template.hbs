@@ -14,6 +14,7 @@
     placeholder="Apply a template" }}
 
   {{ui/icon-button
+    class='save'
     type='save'
     size=1.5
     flat=true
@@ -22,10 +23,12 @@
     click=this.attrs.saveRoutePlans}}
 
   {{ui/icon-button
+    class='add'
     type='add'
+    disabled=disabled
     size=1.5
     flat=true
     backgroundColor=colors.LIGHT_GREEN
     color=colors.DARK_GREY
-    click=this.attrs.newRoutePlan}}
+    click=(action 'handleCreateRoutePlan')}}
 </div>

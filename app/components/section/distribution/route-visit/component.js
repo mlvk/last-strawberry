@@ -12,9 +12,9 @@ export default Em.Component.extend({
   company: alias('location.company'),
   index: alias('model.position'),
 
-  @computed('model.orders.[]')
-  whatya(orders) {
-    return orders.get('length');
+  @computed('model.fulfillments.[]')
+  size(fulfillments) {
+    return fulfillments.get('length');
   },
 
   @style('colorScheme')

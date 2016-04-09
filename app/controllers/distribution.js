@@ -1,6 +1,6 @@
 import Em from 'ember';
 import computed from 'ember-computed-decorators';
-import co from "npm:co";
+// import co from "npm:co";
 
 // const { computed: { union }} = Em;
 
@@ -75,11 +75,12 @@ export default Em.Controller.extend({
     },
 
     destroyRoutePlan (routePlan) {
-      co(function *(){
-        const rvs = (yield routePlan.get('routeVisits')).toArray();
-        rvs.forEach(rv => rv.unloadRecord());
-        yield routePlan.destroyRecord();
-      });
+      routePlan.customDestroy();
+      // co(function *(){
+      //   const rvs = (yield routePlan.get('routeVisits')).toArray();
+      //   rvs.forEach(rv => rv.unloadRecord());
+      //   yield routePlan.destroyRecord();
+      // });
     },
 
     applyTemplate (routeTemplate) {

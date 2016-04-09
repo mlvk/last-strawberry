@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
+const { notEmpty } = Ember.computed;
 
 const SCROLL_SPEED = 20;
 
@@ -15,6 +16,8 @@ export default Ember.Component.extend({
   openOrderGroups (orders) {
     return _.groupBy(orders, order => order.get('locationHash'));
   },
+
+  hasOrderGroups: notEmpty('orders'),
 
   init() {
     this._super();
@@ -112,7 +115,7 @@ export default Ember.Component.extend({
 
     const fromRoutePlan = this.ddMapping.get(fromPlanId);
     const toRoutePlan = this.ddMapping.get(toPlanId);
-    return {locationHash, visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
+    return {visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
   },
 
   _clearSaveTemplate() {
