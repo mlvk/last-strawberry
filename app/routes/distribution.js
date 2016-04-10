@@ -13,8 +13,10 @@ const ORDER_INCLUDES = [
 
 const ROUTE_PLAN_INCLUDES = [
   'route-visits',
-  'route-visits.orders',
+  'route-visits.fulfillments',
+  'route-visits.fulfillments.order',
   'route-visits.visit-window',
+  'route-visits.route-plan',
   'user'
 ];
 
@@ -30,8 +32,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('orders', this.store.peekAll('order'));
     controller.set('routePlans', this.store.peekAll('route-plan'));
     controller.set('users', this.store.peekAll('user'));
-    // controller.set('locations', this.store.peekAll('location'));
-    // controller.set('visitWindows', this.store.peekAll('visit-window'));
   },
 
   model (params) {
@@ -41,6 +41,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.store.query('route-plan', {'filter[template]':true, include:ROUTE_PLAN_INCLUDES.join(',')}),
       this.store.findAll('user')
     ]);
+  },
+
+  async _saveRoutePlan(routePlan) {
+    await routePlan.save();
+
+    const rvs = await routePlan.get('routeVisits');
+
+    await rvs.save();
+
+    rvs.forEach(async function(rv) {
+      const fulfillments = await rv.get('fulfillments');
+      await fulfillments.save();
+      //
+      // debugger;
+      //
+      // fulfillments.forEach(f => {
+      //   const order = f.get('order');
+      //   debugger;
+      //   order.save();
+      // });
+
+    });
   },
 
   actions: {
@@ -59,6 +81,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           .createRecord('route-visit', {routePlan, visitWindow, position})
           .save();
       });
+    },
+
+    saveRoutePlans () {
+      this.get('controller.activeRoutePlans').forEach(::this._saveRoutePlan);
+    },
+
+    async destroyRoutePlan (routePlan) {
+      const fulfillments = routePlan.get('routeVisits')
+        .map(rv =>
+          rv.get('fulfillments')
+            .map(f => f));
+
+      const routeVisits = routePlan.get('routeVisits').map(rv => rv);
+      const unloadCollection = _.concat(fulfillments, routeVisits);
+
+      _.flatten(unloadCollection).forEach(r => r.unloadRecord());
+      routePlan.destroyRecord();
     }
   }
 });

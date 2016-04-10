@@ -32,13 +32,13 @@ export default DS.Model.extend(LocationHashable, {
   },
 
   consumeOrders (orders) {
-    orders
-      .filter(o => o.get('locationHash') === this.get('locationHash'))
-      .map(o => this._addOrder(o));
+    const matchingOrders = orders.filter(o => o.get('locationHash') === this.get('locationHash'));
+    const unmatchedOrders = orders.filter(o => o.get('locationHash') !== this.get('locationHash'));
 
-    this._removeMissingOrders(orders);
+    matchingOrders.forEach(o => this._createFulfillment(o));
+    unmatchedOrders.forEach(o => this._destroyFulfillmentsWithOrder(o));
 
-    return orders.filter(o => o.get('locationHash') !== this.get('locationHash'));
+    return unmatchedOrders;
   },
 
   customDestroy() {
@@ -46,33 +46,27 @@ export default DS.Model.extend(LocationHashable, {
     this.destroyRecord();
   },
 
-  _removeMissingOrders (orders) {
-    this.get('fulfillments').forEach(f => {
-      const hasOrder = orders.any(o => o === f.get('order'));
-
-      if(!hasOrder){
-        this._removeFulfillment(f);
-      }
-    });
+  _destroyFulfillmentsWithOrder (order) {
+    this.get('fulfillments')
+      .filter(f => f.get('order.id') === order.get('id'))
+      .forEach(f => f.destroyRecord());
   },
 
-  _addOrder (order) {
-    if(!this._containsOrder(order)){
-      this._createFulfillment(order);
-    }
-  },
+  //
+  // _removeFulfillment (f) {
+  //   this.get('fulfillments').removeObject(f);
+  //   f.destroyRecord();
+  // },
 
-  _removeFulfillment (f) {
-    this.get('fulfillments').removeObject(f);
-    f.destroyRecord();
-  },
-
-  _containsOrder(order) {
-    return this.get('fulfillments').any(f => f.get('order') === order);
+  _hasFulfillmentWithOrder(order) {
+    return this.get('fulfillments').any(f => f.get('order.id') === order.get('id'));
   },
 
   _createFulfillment(order) {
-    const fulfillment = this.get('store').createRecord('fulfillment', {order:order, routeVisit:this});
-    this.get('fulfillments').pushObject(fulfillment);
+    if(!this._hasFulfillmentWithOrder(order)){
+      const fulfillment = this.get('store').createRecord('fulfillment', {order, routeVisit:this});
+      this.get('fulfillments').pushObject(fulfillment);
+    }
+
   }
 });

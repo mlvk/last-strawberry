@@ -52,20 +52,19 @@ export default DS.Model.extend({
       .filter(rv => !!rv)
       .forEach(rv => rv.customDestroy());
 
-
     this.destroyRecord();
   },
 
   _destroyVisit(routeVisit) {
-    routeVisit.destroy();
+    routeVisit.customDestroy();
     this.get('routeVisits').removeObject(routeVisit);
 
     this.get('sortedRouteVisits').forEach((visit, i) => visit.set('position', i));
   },
 
   _removeVisits(routeVisits) {
-    routeVisits.forEach(routeVisits => {
-      this._destroyVisit(routeVisits);
+    routeVisits.forEach(routeVisit => {
+      this._destroyVisit(routeVisit);
     });
   },
 
@@ -80,7 +79,7 @@ export default DS.Model.extend({
   _processAddTransform(ot) {
     if(ot.toRoutePlan === this) {
       const collection = this.get('sortedRouteVisits');
-
+      
       const routeVisit = this.store.createRecord('route-visit', {visitWindow: ot.visitWindow});
 
       const updated = collection.reduce((acc, rv) => {

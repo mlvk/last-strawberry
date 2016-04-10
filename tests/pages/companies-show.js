@@ -6,7 +6,7 @@ export default PO.create({
   visit: visitable('/companies/:id'),
 
   locationCount: count('.location'),
-  
-  name: value('.section_company_company-settings .name'),
-  code: value('.section_company_company-settings .code')
+
+  name: value('.debug_section_companies_company-settings .name'),
+  code: value('.debug_section_companies_company-settings .code')
 });

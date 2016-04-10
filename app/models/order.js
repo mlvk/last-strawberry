@@ -12,15 +12,7 @@ export default DS.Model.extend(LocationHashable, {
   orderType: DS.attr('string', {defaultValue: SALES_ORDER}),
   location: DS.belongsTo('location'),
   orderItems: DS.hasMany('order-item'),
-  routeVisit: DS.belongsTo('route-visit'),
   deliveryDate: DS.attr('string'),
-  // sent: DS.attr('boolean'),
-  // voided: DS.attr('boolean'),
-  // fullfilled: DS.attr('boolean'),
-  // visitWindow: alias('location.visitWindows.firstObject'),
-  // name: alias('location.name'),
-  // company: alias('location.company.name'),
-
   lat: alias('location.address.lat'),
   lng: alias('location.address.lng'),
 

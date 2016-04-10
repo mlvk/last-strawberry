@@ -9,6 +9,8 @@ export default function startApp(attrs) {
   let attributes = Ember.assign({}, config.APP);
   attributes = Ember.assign(attributes, attrs); // use defaults, but you can override;
 
+  // $.mockjaxSettings.logging = false;
+
   Ember.run(() => {
     application = Application.create(attributes);
     application.setupForTesting();

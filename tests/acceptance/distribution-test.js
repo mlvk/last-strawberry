@@ -2,88 +2,66 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import page from '../pages/distribution';
+import { mockFindAll } from 'ember-data-factory-guy';
 
 moduleForAcceptance('Acceptance | distribution');
 
-test('visiting distribution defaults to tomorrows date', function(assert) {
+test('visiting distribution defaults to tomorrows date', async function(assert) {
   authenticateSession(this.application);
 
   const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 
-  page.visit({date:tomorrow});
+  await page.visit({date:tomorrow});
 
-  andThen(function() {
-    assert.equal(currentURL(), `/distribution?date=${tomorrow}`);
-  });
+  assert.equal(currentURL(), `/distribution?date=${tomorrow}`);
 });
 
-test('orders display when there are valid orders', function(assert) {
+test('orders display when there are valid orders', async function(assert) {
   authenticateSession(this.application);
 
-  const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+  mockFindAll('order', 10);
 
-  const item = server.create('item');
+  await page.visit();
 
-  const company = server.create('company');
-
-  const address1 = server.create('address');
-  const address2 = server.create('address');
-
-  const location1 = server.create('location', {companyId: company.id, addressId:address1.id});
-  const location2 = server.create('location', {companyId: company.id, addressId:address2.id});
-
-  const salesOrder1 = server.create('order', {locationId:location1.id, deliveryDate:tomorrow});
-  server.create('order-item', {orderId:salesOrder1.id, itemId:item.id, quantity:10});
-
-  const salesOrder2 = server.create('order', {locationId:location2.id, deliveryDate:tomorrow});
-  server.create('order-item', {orderId:salesOrder2.id, itemId:item.id, quantity:10});
-
-  page.visit({date:tomorrow});
-
-  andThen(function() {
-    assert.equal(page.orderGroups().count, 2);
-  });
+  assert.equal(page.orderGroups().count, 10);
 });
 
-test('cannot create route plans when no orders are present', function(assert) {
+test('cannot create route plans when no orders are present', async function(assert) {
   authenticateSession(this.application);
 
-  page
+  await page
     .visit()
     .createRoutePlan();
 
-  andThen(function() {
-    assert.equal(page.routePlans().count, 0);
-  });
+  assert.equal(page.routePlans().count, 0);
 });
 
-test('can delete route plan', function(assert) {
+test('admins can create route plans when orders are present', async function(assert) {
   authenticateSession(this.application);
 
-  const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+  mockFindAll('order', 10);
 
-  const item = server.create('item');
-
-  const company = server.create('company');
-
-  const address1 = server.create('address');
-  const address2 = server.create('address');
-
-  const location1 = server.create('location', {companyId: company.id, addressId:address1.id});
-  const location2 = server.create('location', {companyId: company.id, addressId:address2.id});
-
-  const salesOrder1 = server.create('order', {locationId:location1.id, deliveryDate:tomorrow});
-  server.create('order-item', {orderId:salesOrder1.id, itemId:item.id, quantity:10});
-
-  const salesOrder2 = server.create('order', {locationId:location2.id, deliveryDate:tomorrow});
-  server.create('order-item', {orderId:salesOrder2.id, itemId:item.id, quantity:10});
-  
-  page
+  await page
     .visit()
-    .createRoutePlan()
-    .deleteLastRoutePlan();
+    .createRoutePlan();
 
-  andThen(function() {
-    assert.equal(page.routePlans().count, 0);
-  });
+  assert.equal(page.routePlans().count, 1);
+});
+
+test('admins can delete route plans', async function(assert) {
+  assert.expect(2);
+
+  authenticateSession(this.application);
+
+  mockFindAll('order', 11);
+
+  await page
+    .visit()
+    .createRoutePlan();
+
+  assert.equal(page.routePlans().count, 1);
+
+  await page.deleteLastRoutePlan();
+
+  assert.equal(page.routePlans().count, 0);
 });

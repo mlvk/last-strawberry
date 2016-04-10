@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['section_company_company-settings'],
+  classNames: [],
 
   actions: {
     fieldChanged(field, e) {

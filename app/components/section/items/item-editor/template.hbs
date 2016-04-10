@@ -1,0 +1,9 @@
+{{one-way-input
+  class='name'
+  value=model.name update=(action 'fieldChanged' 'name')
+  focusOut=(action saveModel model)}}
+
+{{one-way-input
+  class='description'
+  value=model.description update=(action 'fieldChanged' 'description')
+  focusOut=(action saveModel model)}}

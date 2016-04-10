@@ -44,19 +44,6 @@ export default Em.Controller.extend({
     return rps.filter(rp => rp.get('template'));
   },
 
-  async saveRoutePlan(routePlan) {
-    await routePlan.save();
-
-    const rvs = await routePlan.get('routeVisits');
-
-    await rvs.save();
-
-    rvs.forEach(async function(rv) {
-      const orders = await rv.get('orders');
-      orders.save();
-    });
-  },
-
   actions: {
     routePlanChanged(/* routePlan */) {
 
@@ -68,19 +55,6 @@ export default Em.Controller.extend({
 
     newRoutePlan () {
       this.get('store').createRecord('route-plan', {date:this.get('date')});
-    },
-
-    saveRoutePlans () {
-      this.get('activeRoutePlans').forEach(::this.saveRoutePlan);
-    },
-
-    destroyRoutePlan (routePlan) {
-      routePlan.customDestroy();
-      // co(function *(){
-      //   const rvs = (yield routePlan.get('routeVisits')).toArray();
-      //   rvs.forEach(rv => rv.unloadRecord());
-      //   yield routePlan.destroyRecord();
-      // });
     },
 
     applyTemplate (routeTemplate) {

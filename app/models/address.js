@@ -1,7 +1,8 @@
 import DS from 'ember-data';
+import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import computed from 'ember-computed-decorators';
 
-export default DS.Model.extend({
+export default DS.Model.extend(LocationHashable, {
   street: DS.attr('string'),
   city: DS.attr('string'),
   state: DS.attr('string'),

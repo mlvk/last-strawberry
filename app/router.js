@@ -18,6 +18,8 @@ Router.map(function() {
 
   this.route('distribution');
 
+  this.route('items');
+
   this.route('companies', function() {
     this.route('show', {path:':company_id'}, function() {
       this.route('location', {path:'/locations/:location_id'});
