@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
-import page from '../pages/distribution';
+import page from 'last-strawberry/tests/pages/distribution';
 import { mockFindAll } from 'ember-data-factory-guy';
 
 moduleForAcceptance('Acceptance | distribution');

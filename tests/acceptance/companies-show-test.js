@@ -1,4 +1,4 @@
-import page from '../pages/companies-show';
+import page from 'last-strawberry/tests/pages/companies-show';
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';

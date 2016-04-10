@@ -2,7 +2,7 @@ import {
   page,
   visitSchedulePO,
   visitDaysPO
-} from '../../../../pages/companies-show-location';
+} from 'last-strawberry/tests/pages/companies-show-location';
 
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';

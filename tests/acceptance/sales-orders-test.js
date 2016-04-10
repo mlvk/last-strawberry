@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
-import { page } from '../pages/sales-orders';
+import { page } from 'last-strawberry/tests/pages/sales-orders';
 
 moduleForAcceptance('Acceptance | sales orders');
 

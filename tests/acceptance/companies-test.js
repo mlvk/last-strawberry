@@ -1,5 +1,5 @@
-import page from '../pages/companies';
-import companyShowPO from '../pages/companies-show';
+import page from 'last-strawberry/tests/pages/companies';
+import companyShowPO from 'last-strawberry/tests/pages/companies-show';
 
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
