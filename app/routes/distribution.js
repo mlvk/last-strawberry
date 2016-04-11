@@ -44,25 +44,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   async _saveRoutePlan(routePlan) {
-    await routePlan.save();
+    if(routePlan.get('hasDirtyAttributes')){
+      await routePlan.save();
+    }
 
     const rvs = await routePlan.get('routeVisits');
 
-    await rvs.save();
+    rvs
+      .filter(rv => rv.get('hasDirtyAttributes'))
+      .forEach(async rv => await rv.save());
 
-    rvs.forEach(async function(rv) {
-      const fulfillments = await rv.get('fulfillments');
-      await fulfillments.save();
-      //
-      // debugger;
-      //
-      // fulfillments.forEach(f => {
-      //   const order = f.get('order');
-      //   debugger;
-      //   order.save();
-      // });
-
-    });
+    rvs
+      .map(rv => rv.get('fulfillments')
+        .filter(f => f.get('hasDirtyAttributes'))
+        .forEach(async f => await f.save()));
   },
 
   actions: {
@@ -98,6 +93,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
       _.flatten(unloadCollection).forEach(r => r.unloadRecord());
       routePlan.destroyRecord();
+    },
+
+    async deleteRouteVisit(routePlan, routeVisit) {
+      routeVisit.get('fulfillments').forEach(f => f.unloadRecord());
+      routeVisit.destroyRecord();
     }
   }
 });

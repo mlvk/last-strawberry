@@ -40,7 +40,7 @@ export default Em.Controller.extend({
   },
 
   @computed('routePlans.@each.{template}')
-  routeTemplates(rps) {
+  routePlanTemplates(rps) {
     return rps.filter(rp => rp.get('template'));
   },
 

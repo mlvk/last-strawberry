@@ -3,13 +3,15 @@ import DS from 'ember-data';
 import computed from 'ember-computed-decorators';
 
 const { computed: { alias }} = Em;
+const { attr, hasMany } = DS;
 
 export default DS.Model.extend({
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
-  phone: DS.attr('string'),
-  email: DS.attr('string'),
-  routePlans: DS.hasMany('route-plan'),
+  firstName: attr('string'),
+  lastName: attr('string'),
+  phone: attr('string'),
+  email: attr('string'),
+  routePlans: hasMany('route-plan'),
+  role: attr('string', {defaultValue:'pending'}),
 
   @computed('firstName', 'lastName')
   name(first, last) {

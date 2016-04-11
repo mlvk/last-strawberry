@@ -7,6 +7,6 @@ export default PO.create({
 
   locationCount: count('.location'),
 
-  name: value('.debug_section_companies_company-settings .name'),
-  code: value('.debug_section_companies_company-settings .code')
+  name: value('.debug_sections_companies_company-settings .name'),
+  code: value('.debug_sections_companies_company-settings .code')
 });

@@ -1,5 +1,5 @@
 <div class="col stretch section">
-  {{section/companies/company-settings
+  {{sections/companies/company-settings
       model=model
       fieldChanged=(route-action 'fieldChanged')
       save=(route-action 'saveCompany')
@@ -7,7 +7,7 @@
 
   <div class="row">
     {{#each model.locations as |location|}}
-      {{section/location/summary-card
+      {{sections/locations/summary-card
           name=location.name
           code=location.code
           click=(route-action 'showLocation' location.id)}}

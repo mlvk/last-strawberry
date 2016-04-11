@@ -1,13 +1,13 @@
 <div class="row">
   <div class="section col-2">
-    {{section/location/location-settings
+    {{sections/locations/location-settings
         model=model
         fieldChanged=(route-action 'fieldChanged')
         save=(route-action 'saveLocation')
         delete=(route-action 'deleteLocation')}}
   </div>
   <div class="section col-2">
-    {{section/location/item-desires
+    {{sections/locations/item-desires
         itemDesires=model.itemDesires
         items=items
         change=(route-action 'updateItemDesires')}}
@@ -16,13 +16,13 @@
 
 <div class="row stretch">
   <div class="section col-2">
-    {{section/location/address-creator
+    {{sections/locations/address-creator
         model=model.address
         update=(route-action 'updateAddress')
         save=(route-action 'saveAddress')}}
   </div>
   <div class="section col-2">
-    {{section/location/visit-schedule
+    {{sections/locations/visit-schedule
         visitDays=model.visitDays
         visitWindows=model.visitWindows
         visitDaysChanged=(route-action 'updateVisitDays')

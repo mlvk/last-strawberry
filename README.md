@@ -1,5 +1,6 @@
 # last-strawberry
 [![Build Status][travis-badge]][travis-badge-url]
+[![Code Climate](https://codeclimate.com/github/brancusi/last-strawberry/badges/gpa.svg)](https://codeclimate.com/github/brancusi/last-strawberry)
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.

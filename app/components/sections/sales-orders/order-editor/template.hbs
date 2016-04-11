@@ -1,0 +1,19 @@
+<span class="locationName">
+  {{model.location.name}}
+</span>
+
+{{ui/icon-button
+  type='remove'
+  class='delete'
+  flat=true
+  color=colors.DARK_GREY
+  padding=0.5
+  click=deleteOrder}}
+
+{{#each model.orderItems as |orderItem|}}
+  {{sections/sales-orders/order-item-editor
+      model=orderItem
+      update=updateOrderItem
+      save=saveOrderItem
+      delete=deleteOrderItem}}
+{{/each}}

@@ -1,0 +1,20 @@
+{{ui/day-of-week-selector
+    class="visit-days"
+    model=visitDays
+    change=visitDaysChanged}}
+
+{{ui/icon-button
+  class='create-visit-window'
+  type='add'
+  flat=true
+  color=colors.DARK_GREY
+  padding=0.5
+  click=createVisitWindow}}
+
+{{#each visitWindows as |visitWindow|}}
+  {{sections/locations/visit-window
+    model=visitWindow
+    visitWindowChanged=visitWindowChanged
+    visitWindowDaysChanged=visitWindowDaysChanged
+    saveVisitWindow=saveVisitWindow}}
+{{/each}}

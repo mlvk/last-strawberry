@@ -12,10 +12,6 @@ Router.map(function() {
     this.route('show', {path:':id'});
   });
 
-  this.route('clients', function() {
-    this.route('show', {path:':id'});
-  });
-
   this.route('distribution');
 
   this.route('items');

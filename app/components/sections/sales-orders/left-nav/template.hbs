@@ -1,0 +1,25 @@
+<div class="col">
+
+  <div class="row">
+    <label>
+      Delivery Date:{{deliveryDate}}
+      {{pikaday-input
+          id='datePicker'
+          value=deliveryDate
+          onSelected=dateSelected
+          format='MM-DD-YYYY'}}
+    </label>
+
+    {{ui/icon-button
+      class='stubOrders'
+      flat=true
+      color=colors.DARK_GREY
+      label='Stub Orders'
+      type='add'
+      click=stubOrders}}
+  </div>
+
+  {{lists/grouped-list
+      itemClicked=(route-action 'showSalesOrder')
+      model=groupedSalesOrders}}
+</div>

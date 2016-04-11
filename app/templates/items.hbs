@@ -9,7 +9,7 @@
 <div class='row stretch'>
   <div class="col">
     {{#each model as |item|}}
-      {{section/items/item-editor
+      {{sections/items/item-editor
           model=item
           fieldChanged=(route-action 'itemFieldChanged')
           saveModel=(route-action 'saveModel')}}

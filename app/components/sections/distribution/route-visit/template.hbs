@@ -1,0 +1,15 @@
+{{#ui/dd-card
+  title=location.code
+  index=index
+  action=(action deleteRouteVisit model)
+  actionIcon='clear'
+  backgroundColor=colorScheme.backgroundColor}}
+
+  <span style={{textStyles}} class="company">
+    {{company.name}} - {{size}}
+  </span>
+
+  <span style={{textStyles}} class="nickname">
+    {{location.name}}
+  </span>
+{{/ui/dd-card}}

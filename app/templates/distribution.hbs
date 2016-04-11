@@ -1,20 +1,21 @@
 <div class='row stretch'>
-  {{section/distribution/route-plan-canvas
+  {{sections/distribution/route-plan-canvas
     date=date
     orders=validOrders
     visitWindows=visitWindows
     routePlans=activeRoutePlans
-    routeTemplates=routeTemplates
+    routePlanTemplates=routePlanTemplates
     saveTemplate=(route-action 'saveTemplate')
     saveRoutePlans=(route-action 'saveRoutePlans')
     destroyRoutePlan=(route-action 'destroyRoutePlan')
+    deleteRouteVisit=(route-action 'deleteRouteVisit')
     applyTemplate=(action 'applyTemplate')
     newRoutePlan=(action 'newRoutePlan')
     onDateSelected=(action 'onDateSelected')
     routePlanChanged=(action 'routePlanChanged')
     users=users}}
 
-  {{section/distribution/visit-map
+  {{sections/distribution/visit-map
     orders=validOrders
     visitWindows=visitWindows
     routePlans=activeRoutePlans}}

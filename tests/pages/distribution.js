@@ -11,11 +11,11 @@ const {
 export default PO.create({
   visit: visitable('/distribution'),
 
-  createRoutePlan: clickable('.debug_section_distribution_tool-bar .add'),
-  deleteLastRoutePlan: clickable('.debug_section_distribution_route-plan:last-child .delete'),
+  createRoutePlan: clickable('.debug_sections_distribution_tool-bar .add'),
+  deleteLastRoutePlan: clickable('.debug_sections_distribution_route-plan:last-child .delete'),
 
   orderGroups: collection({
-    itemScope: '.debug_section_distribution_order-group',
+    itemScope: '.debug_sections_distribution_order-group',
 
     item: {
       title: text('.debug_passive_title-bar .span')
@@ -23,10 +23,16 @@ export default PO.create({
   }),
 
   routePlans: collection({
-    itemScope: '.debug_section_distribution_route-plan',
+    itemScope: '.debug_sections_distribution_route-plan',
 
     item: {
-      title: text('.debug_passive_title-bar .span')
+      routeVisits: collection({
+        itemScope: '.debug_sections_distribution_route-visit',
+        item: {
+          title: text('.title'),
+          delete: clickable('.action')
+        }
+      })
     }
   })
 });

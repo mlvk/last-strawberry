@@ -40,8 +40,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			model.destroyRecord();
 		},
 
-		deleteOrder(model) {
-			model.destroyRecord();
+		async deleteOrder(model) {
+			await model.destroyRecord();
+
 			this.transitionTo('sales-orders');
 		}
 	}

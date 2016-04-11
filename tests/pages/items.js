@@ -12,10 +12,10 @@ export default PO.create({
   visit: visitable('/items'),
 
   createNewItem: clickable('.add'),
-  // deleteLastRoutePlan: clickable('.debug_section_distribution_route-plan:last-child .delete'),
+  // deleteLastRoutePlan: clickable('.debug_sections_distribution_route-plan:last-child .delete'),
 
   items: collection({
-    itemScope: '.debug_section_items_item-editor',
+    itemScope: '.debug_sections_items_item-editor',
 
     item: {
       title: text('.debug_passive_title-bar .span')
