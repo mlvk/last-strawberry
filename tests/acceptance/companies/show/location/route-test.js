@@ -3,17 +3,29 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 
+import {
+  make,
+  mockFind,
+  mockFindAll
+} from 'ember-data-factory-guy';
+
 moduleForAcceptance('Acceptance | companies/show/location/visit-day');
 
-test('renders correct url', function(assert) {
+test('renders correct url', async function(assert) {
   authenticateSession(this.application);
 
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+  const location = make('location');
+  const company = await location.get('company');
 
-  page.visit({company_id:company.id, location_id:location.id});
+  mockFindAll('company').returns({models: [company]});
+  mockFind('company').returns({model: company});
+  mockFind('location').returns({model: location});
+  mockFindAll('location').returns({models: [location]});
+  mockFindAll('item', 5);
+  mockFindAll('price-tier', 1);
 
-  andThen(function() {
-    assert.equal(currentURL(), `/companies/${company.id}/locations/${location.id}`);
-  });
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
+
+  assert.equal(currentURL(), `/companies/${company.get('id')}/locations/${location.get('id')}`);
+
 });

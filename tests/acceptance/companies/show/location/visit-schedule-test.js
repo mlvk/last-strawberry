@@ -8,49 +8,56 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | companies/show/location/visit-schedule');
+import {
+  make,
+  mockFind,
+  mockFindAll
+} from 'ember-data-factory-guy';
 
-test('renders default item desires when none are present', function(assert) {
-  authenticateSession(this.application);
+let company,
+    location;
 
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+moduleForAcceptance('Acceptance | companies/show/location/visit-schedule', {
+  beforeEach() {
+    authenticateSession(this.application);
 
-  page.visit({company_id:company.id, location_id:location.id});
+    const priceTier = make('price-tier');
+    company = make('company', {priceTier});
+    location = make('location', {company});
 
-  andThen(function() {
-    assert.equal(7, visitDaysPO.dayOptions().count, 'Did not render the correct number of items');
-  });
+    mockFindAll('company').returns({models: [company]});
+    mockFindAll('location').returns({models: [location]});
+    mockFind('company').returns({model: company});
+    mockFind('location').returns({model: location});
+    mockFindAll('item', 5);
+    mockFindAll('price-tier').returns({models: [priceTier]});
+  }
 });
 
-test('adds enabled class to enabled items', function(assert) {
-  authenticateSession(this.application);
+async function visitWithDefaults() {
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
+}
 
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+test('renders full week of visit day options when none present', async function(assert) {
+  await visitWithDefaults();
 
-  const visitDays = [0,1,2,3,4,5,6]
-    .map(day => server.create('visit-day', {locationId:location.id, day}));
-
-  page.visit({company_id:company.id, location_id:location.id});
-
-  andThen(function() {
-    visitDays.forEach((visitDay, i) => assert.equal(visitDay.enabled, visitDaysPO.dayOptions(i).enabled));
-  });
+  assert.equal(7, visitDaysPO.dayOptions().count, 'Did not render the correct number of items');
 });
 
-test('clicking add visit window creates a new visit window', function(assert) {
-  authenticateSession(this.application);
+test('adds enabled class to enabled items', async function(assert) {
+  const visitDays = [0,1,2,3,4,5,6].map(day => make('visit-day', {location, day, enabled:true}));
 
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+  await visitWithDefaults();
 
-  page.visit({company_id:company.id, location_id:location.id});
+  visitDays.forEach((visitDay, i) => assert.equal(visitDay.get('enabled'), visitDaysPO.dayOptions(i).enabled));
+});
 
-  assert.equal(visitSchedulePO.visitWindows().count, 0);
-  visitSchedulePO.createNewVisitWindow();
+test('clicking add visit window creates a new visit window', async function(assert) {
+  await visitWithDefaults();
 
-  andThen(function() {
-    assert.equal(visitSchedulePO.visitWindows().count, 1);
-  });
+  assert.equal(visitSchedulePO.visitWindows().count, 1);
+
+  await visitSchedulePO.createNewVisitWindow();
+
+  assert.equal(visitSchedulePO.visitWindows().count, 2);
 });

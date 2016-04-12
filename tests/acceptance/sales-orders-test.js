@@ -3,52 +3,49 @@ import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-accept
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import { page } from 'last-strawberry/tests/pages/sales-orders';
 
-moduleForAcceptance('Acceptance | sales orders');
+import {
+  make,
+  mockFind,
+  mockFindAll
+} from 'ember-data-factory-guy';
 
-test('navigates to correct url', function(assert) {
-  authenticateSession(this.application);
+const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 
-  page.visit();
+moduleForAcceptance('Acceptance | sales orders', {
+  beforeEach() {
+    authenticateSession(this.application);
 
-  andThen(function() {
-    assert.equal(currentURL(), '/sales-orders');
-  });
+    mockFindAll('item');
+    mockFindAll('company');
+  }
 });
 
-test('should automatically show tomorrows orders', function(assert) {
-  authenticateSession(this.application);
+test('navigates to correct url', async function(assert) {
+  mockFindAll('order');
 
-  const company = server.create('company');
-  const locations = server.createList('location', 10, {companyId: company.id});
-  const salesOrders = locations
-    .map(location => {
-      return server.create('order', {locationId:location.id, deliveryDate: moment().add(1, 'days').format('YYYY-MM-DD')});
-    });
+  await page.visit();
 
-  page.visit();
-
-  andThen(function() {
-    assert.equal(page.locations().count, salesOrders.length, 'Wrong number of locations rendered');
-  });
+  assert.equal(currentURL(), '/sales-orders');
 });
 
-test('should show sales order when location is clicked', function(assert) {
-  authenticateSession(this.application);
+test('should automatically show tomorrows orders', async function(assert) {
+  mockFindAll('order', 5, {deliveryDate: tomorrow});
 
-  const company = server.create('company');
-  const locations = server.createList('location', 10, {companyId: company.id});
-  const salesOrders = locations
-    .map(location => {
-      return server.create('order', {locationId:location.id, deliveryDate: moment().add(1, 'days').format('YYYY-MM-DD')});
-    });
+  await page.visit({deliveryDate: tomorrow});
 
-  page
-    .visit()
-    .locations(1)
+  assert.equal(page.locations().count, 5, 'Wrong number of locations rendered');
+});
+
+test('should show sales order when location is clicked', async function(assert) {
+  const order = make('order', {deliveryDate: tomorrow});
+
+  mockFindAll('order').returns({models: [order]});
+  mockFind('order').returns({model: order});
+
+  await page
+    .visit({deliveryDate: tomorrow})
+    .locations(0)
     .click();
 
-  andThen(() => {
-    const id = salesOrders[1].id;
-    assert.equal(currentURL(), `/sales-orders/${id}`, 'URL does not match expected');
-  });
+  assert.equal(currentURL(), `/sales-orders/${order.get('id')}`, 'URL does not match expected');
 });

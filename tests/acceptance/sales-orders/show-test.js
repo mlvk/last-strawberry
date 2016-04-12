@@ -3,52 +3,54 @@ import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-accept
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import { page, orderEditorPO } from 'last-strawberry/tests/pages/sales-orders-show';
 
-moduleForAcceptance('Acceptance | sales orders/show');
+import {
+  make,
+  mockFind,
+  mockFindAll,
+  mockDelete
+} from 'ember-data-factory-guy';
 
-test('navigates to correct url', function(assert) {
-  authenticateSession(this.application);
+moduleForAcceptance('Acceptance | sales orders/show', {
+  beforeEach() {
+    authenticateSession(this.application);
 
-  const company = server.create('company');
-  const location = server.create('location', {companyId: company.id});
-  const salesOrder = server.create('order', {locationId:location.id});
-
-  page.visit({id:salesOrder.id});
-
-  andThen(function() {
-    assert.equal(currentURL(), `/sales-orders/${salesOrder.id}`);
-  });
+    mockFindAll('item');
+    mockFindAll('company');
+  }
 });
 
-test('displays the correct sales order', function(assert) {
-  authenticateSession(this.application);
+test('navigates to correct url', async function(assert) {
+  const order = make('order');
+  mockFindAll('order').returns({models: [order]});
+  mockFind('order').returns({model: order});
 
-  const company = server.create('company');
-  const location = server.create('location', {companyId: company.id});
-  const salesOrder = server.create('order', {locationId:location.id});
+  await page.visit({id:order.get('id')});
 
-  page.visit({id:salesOrder.id});
-
-  andThen(function() {
-    assert.equal(orderEditorPO.locationName, location.name, 'sales order location name did not match expected');
-  });
+  assert.equal(currentURL(), `/sales-orders/${order.get('id')}`);
 });
 
-test('can delete sales order', function(assert) {
-  authenticateSession(this.application);
+test('displays the correct sales order', async function(assert) {
+  const location = make('location');
+  const order = make('order', {location});
+  mockFindAll('order').returns({models: [order]});
+  mockFind('order').returns({model: order});
 
-  const company = server.create('company');
-  const location = server.create('location', {companyId: company.id});
-  const salesOrder = server.create('order', {locationId:location.id});
+  await page.visit({id:order.get('id')});
 
-  page.visit({id:salesOrder.id});
+  assert.equal(orderEditorPO.locationName, location.get('name'), 'sales order location name did not match expected');
+});
 
-  andThen(function() {
-    assert.equal(currentURL(), `/sales-orders/${salesOrder.id}`);
-  });
+test('can delete sales order', async function(assert) {
+  const order = make('order');
+  mockFindAll('order').returns({models: [order]});
+  mockFind('order').returns({model: order});
 
-  orderEditorPO.deleteOrder();
+  await page.visit({id:order.get('id')});
 
-  andThen(function() {
-    assert.equal(currentURL(), `/sales-orders`);
-  });
+  assert.equal(currentURL(), `/sales-orders/${order.get('id')}`);
+
+  mockDelete('order', order.get('id'));
+  await orderEditorPO.deleteOrder();
+
+  assert.equal(currentURL(), `/sales-orders`);
 });

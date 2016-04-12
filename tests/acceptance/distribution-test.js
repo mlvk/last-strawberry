@@ -2,14 +2,34 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import page from 'last-strawberry/tests/pages/distribution';
-import { make, makeList, mockDelete, mockFindAll } from 'ember-data-factory-guy';
 
-moduleForAcceptance('Acceptance | distribution');
+import {
+  make,
+  makeList,
+  mockDelete,
+  mockFindAll
+} from 'ember-data-factory-guy';
+
+const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+
+moduleForAcceptance('Acceptance | distribution', {
+  beforeEach() {
+    authenticateSession(this.application);
+    mockFindAll('user', 1);
+  }
+});
 
 test('visiting distribution defaults to tomorrows date', async function(assert) {
-  authenticateSession(this.application);
+  const locations = makeList('location', 5);
+  const orders = locations.map(location => make('order', {location}));
+  const routePlan = make('route-plan');
+  orders.map(async order => {
+    const visitWindow = await order.get('location.defaultVisitWindow');
+    return make('route-visit', {visitWindow, routePlan});
+  });
 
-  const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+  mockFindAll('order').returns({models: orders});
+  mockFindAll('route-plan').returns({models: [routePlan]});
 
   await page.visit({date:tomorrow});
 
@@ -17,17 +37,17 @@ test('visiting distribution defaults to tomorrows date', async function(assert) 
 });
 
 test('orders display when there are valid orders', async function(assert) {
-  authenticateSession(this.application);
-
-  mockFindAll('order', 10);
+  mockFindAll('order', 5, {deliveryDate:tomorrow});
+  mockFindAll('route-plan');
 
   await page.visit();
 
-  assert.equal(page.orderGroups().count, 10);
+  assert.equal(page.orderGroups().count, 5);
 });
 
 test('cannot create route plans when no orders are present', async function(assert) {
-  authenticateSession(this.application);
+  mockFindAll('order');
+  mockFindAll('route-plan');
 
   await page
     .visit()
@@ -36,9 +56,8 @@ test('cannot create route plans when no orders are present', async function(asse
   assert.equal(page.routePlans().count, 0);
 });
 
-test('admins can create route plans when orders are present', async function(assert) {
-  authenticateSession(this.application);
-
+test('can create route plans when orders are present', async function(assert) {
+  mockFindAll('route-plan');
   mockFindAll('order', 10);
 
   await page
@@ -48,14 +67,11 @@ test('admins can create route plans when orders are present', async function(ass
   assert.equal(page.routePlans().count, 1);
 });
 
-test('admins can delete route plans', async function(assert) {
+test('can delete route plans', async function(assert) {
   assert.expect(2);
 
-  authenticateSession(this.application);
-
-  const routeVisits = makeList('order', 5).map(o => make('route-visit', {visitWindow:o.get('location.defaultVisitWindow')}));
-  make('route-plan', {routeVisits});
-  
+  mockFindAll('order');
+  mockFindAll('route-plan', 1);
   await page.visit();
 
   assert.equal(page.routePlans().count, 1);
@@ -67,11 +83,12 @@ test('admins can delete route plans', async function(assert) {
 });
 
 test('admins can delete individual route visit', async function(assert) {
-  authenticateSession(this.application);
+  const orders = makeList('order', 5);
+  const routePlan = make('route-plan');
+  orders.map(o => make('route-visit', {routePlan, visitWindow:o.get('location.defaultVisitWindow')}));
 
-  const routeVisits = makeList('order', 5).map(o => make('route-visit', {visitWindow:o.get('location.defaultVisitWindow')}));
-  make('route-plan', {routeVisits});
-
+  mockFindAll('route-plan').returns({models: [routePlan]});
+  mockFindAll('order').returns({models: orders});
   await page.visit();
 
   assert.equal(page.routePlans(0).routeVisits().count, 5);

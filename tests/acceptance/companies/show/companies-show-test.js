@@ -2,9 +2,14 @@ import page from 'last-strawberry/tests/pages/companies-show';
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
-import { make, makeList, mockDelete, mockQueryRecord, mockFind, mockFindAll } from 'ember-data-factory-guy';
 
-moduleForAcceptance('Acceptance | locations');
+import {
+  makeList,
+  mockFind,
+  mockFindAll
+} from 'ember-data-factory-guy';
+
+moduleForAcceptance('Acceptance | companies/show');
 
 test('renders locations', function(assert) {
   authenticateSession(this.application);
@@ -13,6 +18,8 @@ test('renders locations', function(assert) {
   const company = companies[0];
   mockFindAll('company').returns({models:companies});
 
+  mockFindAll('item');
+  mockFindAll('price-tier');
   mockFind('company').returns({model:company});
 
   const locations = makeList('location', 10, {company});
