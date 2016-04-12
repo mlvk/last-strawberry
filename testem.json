@@ -6,6 +6,6 @@
     "PhantomJS"
   ],
   "launch_in_dev": [
-    "PhantomJS"
+    "Chrome 49.0"
   ]
 }

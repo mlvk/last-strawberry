@@ -41,8 +41,6 @@ const visitWindowPO = PO.create({
 });
 
 const addressPO = PO.create({
-  visit: visitable('/companies/:company_id/locations/:location_id'),
-
   fillSearchAddress: fillable('.address-search input'),
 
   updateAddress: clickable('.address-search .submit'),

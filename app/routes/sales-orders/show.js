@@ -20,11 +20,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 	model(params){
     this.params = params;
-    return this.store.findRecord('order', params.id, {
-      adapterOptions: {
-        query: {include:INCLUDES.join(',')}
-      }
-    });
+    return this.store.findRecord('order', params.id, {include:INCLUDES.join(',')});
 	},
 
 	actions: {

@@ -8,6 +8,7 @@ FactoryGuy.define('location', {
     active: true,
     address: FactoryGuy.belongsTo('address'),
     visitWindows: FactoryGuy.hasMany('visit-window', 3),
-    company: FactoryGuy.belongsTo('company')
+    company: FactoryGuy.belongsTo('company'),
+    itemDesires: FactoryGuy.hasMany('item-desire')
   }
 });

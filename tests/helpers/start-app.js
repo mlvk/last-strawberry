@@ -9,7 +9,7 @@ export default function startApp(attrs) {
   let attributes = Ember.assign({}, config.APP);
   attributes = Ember.assign(attributes, attrs); // use defaults, but you can override;
 
-  $.mockjaxSettings.logging = false;
+  $.mockjaxSettings.logging = true;
 
   Ember.run(() => {
     decorateComponentClass();

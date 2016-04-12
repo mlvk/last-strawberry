@@ -2,97 +2,69 @@ import { page, itemDesiresPO } from 'last-strawberry/tests/pages/companies-show-
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
+import {
+  make,
+  makeList,
+  mockUpdate,
+  mockFind,
+  mockFindAll } from 'ember-data-factory-guy';
 
-moduleForAcceptance('Acceptance | companies/show/location/item-desires');
+let items,
+    priceTier,
+    company,
+    location;
 
-test('renders default item desires when none are present', function(assert) {
-  authenticateSession(this.application);
+moduleForAcceptance('Acceptance | companies/show/location/item-desires', {
+  beforeEach() {
+    authenticateSession(this.application);
 
-  const items = server.createList('item', 12);
+    items = makeList('item', 3);
+    priceTier = make('price-tier');
+    company = make('company', {priceTier});
+    location = make('location', {company});
 
-  const company = server.schema.create('company');
-  const location = company.createLocation();
-
-  page.visit({company_id:company.id, location_id:location.id});
-
-  andThen(function() {
-    assert.equal(items.length, itemDesiresPO.items().count, 'Did not render the correct number of items');
-  });
+    mockFind('location').returns({model: location});
+    mockFind('company').returns({model: company});
+    mockFindAll('item').returns({models: items});
+    mockFindAll('company').returns({models: [company]});
+    mockFindAll('priceTier').returns({models: [priceTier]});
+  }
 });
 
-test('adds enabled class to enabled items', function(assert) {
-  authenticateSession(this.application);
+test('renders default item desires when no item desires are present', async function(assert) {
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  const items = server.createList('item', 11);
-
-  const company = server.schema.create('company');
-  const location = company.createLocation();
-
-  const itemDesires = items
-    .map(item => server.create('item-desire', {locationId:location.id, itemId:item.id}));
-
-  page.visit({company_id:company.id, location_id:location.id});
-
-  andThen(function() {
-    itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.enabled, itemDesiresPO.items(i).enabled));
-  });
+  assert.equal(items.length, itemDesiresPO.items().count, 'Did not render the correct number of items');
 });
 
-test('item desires toggle on click', function(assert) {
-  authenticateSession(this.application);
+test('adds enabled class to enabled items', async function(assert) {
+  assert.expect(items.length);
 
-  const items = server.createList('item', 15);
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+  const itemDesires = items.map(item => make('item-desire', {item, location, enabled:true}));
 
-  const itemDesires = items
-    .map(item => server.create('item-desire', {locationId:location.id, itemId:item.id, enabled:false}));
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  page.visit({company_id:company.id, location_id:location.id});
-
-  itemDesiresPO.items(0).click();
-
-  andThen(function() {
-    const expectedCollection = itemDesires
-      .map((itemDesire, i) => {
-        if(i === 0) {
-          return {id:itemDesire.id, text:itemDesire.text, enabled:true};
-        } else {
-          return itemDesire;
-        }
-      });
-
-    expectedCollection
-      .forEach((itemDesire, i) =>
-        assert.equal(Boolean(itemDesire.enabled), itemDesiresPO.items(i).enabled, "Didn't toggle after item click"));
-  });
+  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemDesiresPO.items(i).enabled));
 });
 
-test('item desires are toggled on click when passed empty item desires collection', function(assert) {
-  authenticateSession(this.application);
+test('does not add enabled class to disabled items', async function(assert) {
+  assert.expect(items.length);
 
-  const items = server.createList('item', 11);
-  const company = server.schema.create('company');
-  const location = company.createLocation();
+  const itemDesires = items.map(item => make('item-desire', {item, location, enabled:false}));
 
-  page.visit({company_id:company.id, location_id:location.id});
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  itemDesiresPO.items(0).click();
+  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemDesiresPO.items(i).enabled));
+});
 
-  andThen(function() {
-    const expectedCollection = items
-      .map((item, i) => {
-        if(i === 0) {
-          return {id:item.id, text:item.name, enabled:true};
-        } else {
-          return item;
-        }
-      });
+test('item desires toggle on click', async function(assert) {
+  const itemDesires = items.map(item => make('item-desire', {item, location, enabled:true}));
 
-    expectedCollection
-      .forEach((itemDesire, i) => {
-        assert.equal(Boolean(itemDesire.enabled), itemDesiresPO.items(i).enabled, "Didn't toggle after item click!");
-      });
-  });
+  await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
+  mockUpdate(itemDesires[0]);
+  await itemDesiresPO.items(0).click();
+
+  assert.equal(false, itemDesiresPO.items(0).enabled, "Didn't toggle after item click");
+  assert.equal(true, itemDesiresPO.items(1).enabled, "Changed even though wasn't clicked");
 });

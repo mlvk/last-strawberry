@@ -8,8 +8,8 @@ FactoryGuy.define('user', {
   },
 
   traits: {
-      admin: { role: 'admin' },
-      driver: { role: 'driver' },
-      accountant: { role: 'accountant' }
-    }
+    admin: { role: 'admin' },
+    driver: { role: 'driver' },
+    accountant: { role: 'accountant' }
+  }
 });

@@ -2,72 +2,72 @@ export default function() {
 
   this.timing = 0;
 
-  this.get('/addresses');
-  this.get('/addresses/:id');
-  this.patch('/addresses/:id');
-  this.post('/addresses');
+  // this.get('/addresses');
+  // this.get('/addresses/:id');
+  // this.patch('/addresses/:id');
+  // this.post('/addresses');
 
-  this.get('/companies');
-  this.get('/companies/:id');
-  this.patch('/companies/:id');
-  this.post('/companies');
+  // this.get('/companies');
+  // this.get('/companies/:id');
+  // this.patch('/companies/:id');
+  // this.post('/companies');
 
-  this.get('/locations');
-  this.get('/locations/:id');
-  this.patch('/locations/:id');
-  this.post('/locations');
-  this.delete('/locations/:id');
+  // this.get('/locations');
+  // this.get('/locations/:id');
+  // this.patch('/locations/:id');
+  // this.post('/locations');
+  // this.delete('/locations/:id');
 
-  this.get('/orders');
-  this.get('/orders/:id');
-  this.patch('/orders/:id');
-  this.post('/orders');
-  this.delete('/orders/:id');
-
-  this.get('/order-items');
-  this.get('/order-items/:id');
-  this.patch('/order-items/:id');
-  this.post('/order-items');
-  this.delete('/order-items/:id');
-
-  this.get('/items');
-  this.get('/items/:id');
-
-  this.get('/price-tiers');
-  this.get('/price-tiers/:id');
-
-  this.get('/item-prices');
-  this.get('/item-prices/:id');
-
-  this.get('/item-desires');
-  this.get('/item-desires/:id');
-  this.patch('/item-desires/:id');
-  this.post('/item-desires');
-
-  this.get('/visit-windows');
-  this.get('/visit-window/:id');
-  this.patch('/visit-windows/:id');
-  this.post('/visit-windows');
-
-  this.get('/visit-days');
-  this.get('/visit-days/:id');
-  this.patch('/visit-days/:id');
-  this.post('/visit-days');
-
-  this.get('/visit-window-days');
-  this.get('/visit-window-days/:id');
-  this.patch('/visit-window-days/:id');
-  this.post('/visit-window-days');
-
-  this.get('/route-plans');
-  this.get('/route-plans/:id');
-  this.patch('/route-plans/:id');
-  this.post('/route-plans');
-
-  this.get('/users');
-  this.get('/users/:id');
-  this.patch('/users/:id');
-  this.post('/users');
+  // this.get('/orders');
+  // this.get('/orders/:id');
+  // this.patch('/orders/:id');
+  // this.post('/orders');
+  // this.delete('/orders/:id');
+  //
+  // this.get('/order-items');
+  // this.get('/order-items/:id');
+  // this.patch('/order-items/:id');
+  // this.post('/order-items');
+  // this.delete('/order-items/:id');
+  //
+  // this.get('/items');
+  // this.get('/items/:id');
+  //
+  // this.get('/price-tiers');
+  // this.get('/price-tiers/:id');
+  //
+  // this.get('/item-prices');
+  // this.get('/item-prices/:id');
+  //
+  // this.get('/item-desires');
+  // this.get('/item-desires/:id');
+  // this.patch('/item-desires/:id');
+  // this.post('/item-desires');
+  //
+  // this.get('/visit-windows');
+  // this.get('/visit-window/:id');
+  // this.patch('/visit-windows/:id');
+  // this.post('/visit-windows');
+  //
+  // this.get('/visit-days');
+  // this.get('/visit-days/:id');
+  // this.patch('/visit-days/:id');
+  // this.post('/visit-days');
+  //
+  // this.get('/visit-window-days');
+  // this.get('/visit-window-days/:id');
+  // this.patch('/visit-window-days/:id');
+  // this.post('/visit-window-days');
+  //
+  // this.get('/route-plans');
+  // this.get('/route-plans/:id');
+  // this.patch('/route-plans/:id');
+  // this.post('/route-plans');
+  //
+  // this.get('/users');
+  // this.get('/users/:id');
+  // this.patch('/users/:id');
+  // this.post('/users');
 
   this.post('users/sign_in', ({db: {users}}, request) => {
     const formData = decodeURIComponent(request.requestBody);
