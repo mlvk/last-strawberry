@@ -1,8 +1,5 @@
 import Em from 'ember';
 import computed from 'ember-computed-decorators';
-// import co from "npm:co";
-
-// const { computed: { union }} = Em;
 
 export default Em.Controller.extend({
   store: Em.inject.service(),

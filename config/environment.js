@@ -37,10 +37,10 @@ module.exports = function(environment) {
 
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
-    'script-src': "'self' 'unsafe-eval' http://admin.dev:* https://cdn.mxpnl.com  *.googleapis.com *.cloudflare.com", // Allow scripts from https://cdn.mxpnl.com
+    'script-src': "'self' 'unsafe-eval' http://laststrawberry.dev:* http://admin.dev:* https://cdn.mxpnl.com  *.googleapis.com *.cloudflare.com", // Allow scripts from https://cdn.mxpnl.com
     'font-src': "'self' *.gstatic.com *.googleapis.com", // Allow fonts to be loaded from http://fonts.gstatic.com
-    'connect-src': "'self' ws://admin.dev:* http://localhost:3000 https://routific.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-    'img-src': "'self' data: *.gstatic.com *.googleapis.com",
+    'connect-src': "'self' ws://laststrawberry.dev:* ws://admin.dev:* http://localhost:3000 https://routific.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+    'img-src': "'self' data: *.basemaps.cartocdn.com",
     'style-src': "'self' 'unsafe-inline' *.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
     'media-src': "'self'"
   };
