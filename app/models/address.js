@@ -1,15 +1,18 @@
-import DS from 'ember-data';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import computed from 'ember-computed-decorators';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend(LocationHashable, {
-  street: DS.attr('string'),
-  city: DS.attr('string'),
-  state: DS.attr('string'),
-  zip: DS.attr('string'),
-  lat: DS.attr('number'),
-  lng: DS.attr('number'),
-  locations: DS.hasMany('location'),
+export default Model.extend(LocationHashable, {
+  street:     attr('string'),
+  city:       attr('string'),
+  state:      attr('string'),
+  zip:        attr('string'),
+  lat:        attr('number'),
+  lng:        attr('number'),
+
+  locations:  hasMany('location'),
 
   @computed('street', 'city', 'state', 'zip')
   full(street, city, state, zip) {

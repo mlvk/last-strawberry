@@ -1,12 +1,15 @@
-import Em from 'ember';
-import DS from 'ember-data';
+import Ember from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 
-const { computed: { lt } } = Em;
+const { lt } = Ember.computed;
 
-export default DS.Model.extend({
-  order: DS.belongsTo('order'),
-  item: DS.belongsTo('item'),
-  quantity: DS.attr('number', {defaultValue: 0}),
+export default Model.extend({
+  quantity:   attr('number', { defaultValue: 0 }),
 
-  empty: lt('quantity', 1)
+  order:      belongsTo('order'),
+  item:       belongsTo('item'),
+
+  empty:      lt('quantity', 1)
 });

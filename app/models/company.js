@@ -1,15 +1,19 @@
-import Em from 'ember';
-import DS from 'ember-data';
+import Ember from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { computed: { alias } } = Em;
+const { alias } = Ember.computed;
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  code: DS.attr('string'),
-  terms: DS.attr('number', {defaultValue:14}),
-  creditRate: DS.attr('number', {defaultValue:0}),
-  tag: DS.attr('string', {defaultValue:'customer'}),
-  priceTier: DS.belongsTo('price-tier'),
-  locations: DS.hasMany('location'),
-  text: alias('name')
+export default Model.extend({
+  name:       attr('string'),
+  code:       attr('string'),
+  terms:      attr('number', { defaultValue: 14 }),
+  creditRate: attr('number', { defaultValue: 0 }),
+  tag:        attr('string', { defaultValue: 'customer' }),
+
+  priceTier:  belongsTo('price-tier'),
+  locations:  hasMany('location'),
+
+  text:       alias('name')
 });

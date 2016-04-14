@@ -1,10 +1,13 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  description: DS.attr('string'),
-  position: DS.attr('number'),
-  orderItems: DS.hasMany('order-item'),
-  itemDesires: DS.hasMany('item-desire'),
-  itemPrice: DS.hasMany('item-price')
+export default Model.extend({
+  name:         attr('string'),
+  description:  attr('string'),
+  position:     attr('number'),
+
+  itemDesires:  hasMany('item-desire'),
+  itemPrices:    hasMany('item-price'),
+  orderItems:   hasMany('order-item')
 });

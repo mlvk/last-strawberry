@@ -1,20 +1,24 @@
-import Em from 'ember';
-import DS from 'ember-data';
+import Ember from 'ember';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import computed from 'ember-computed-decorators';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { computed: { notEmpty, alias }} = Em;
+const { alias, not, notEmpty } = Ember.computed;
 
-export default DS.Model.extend(LocationHashable, {
-  routePlan: DS.belongsTo('route-plan'),
-  fulfillments: DS.hasMany('fulfillment'),
-  visitWindow: DS.belongsTo('visit-window'),
-  position: DS.attr('number'),
-  arriveAt: DS.attr('number'),
-  departAt: DS.attr('number'),
-  isValid: notEmpty('fulfillments'),
-  lat: alias('visitWindow.lat'),
-  lng: alias('visitWindow.lng'),
+export default Model.extend(LocationHashable, {
+  position:       attr('number'),
+  arriveAt:       attr('number'),
+  departAt:       attr('number'),
+
+  fulfillments:   hasMany('fulfillment'),
+  routePlan:      belongsTo('route-plan'),
+  visitWindow:    belongsTo('visit-window'),
+
+  isValid:        notEmpty('fulfillments'),
+  lat:            alias('visitWindow.lat'),
+  lng:            alias('visitWindow.lng'),
 
   @computed('position')
   positionFormatted(position) {
@@ -30,6 +34,13 @@ export default DS.Model.extend(LocationHashable, {
   backgroundColor(val) {
     return val;
   },
+
+  @computed('fulfillments.@each.{isPending}')
+  pending(fulfillments) {
+    return fulfillments.any(f => f.get('isPending'));
+  },
+
+  fulfilled: not('pending'),
 
   consumeOrders (orders) {
     const matchingOrders = orders.filter(o => o.get('locationHash') === this.get('locationHash'));
@@ -67,6 +78,5 @@ export default DS.Model.extend(LocationHashable, {
       const fulfillment = this.get('store').createRecord('fulfillment', {order, routeVisit:this});
       this.get('fulfillments').pushObject(fulfillment);
     }
-
   }
 });

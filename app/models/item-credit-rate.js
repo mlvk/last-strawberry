@@ -3,8 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
-  day:          attr('number'),
-  enabled:      attr('boolean'),
-
-  visitWindow:  belongsTo('visit-window')
+  item:       belongsTo('item'),
+  location:   belongsTo('location'),
+  rate:       attr('number')
 });

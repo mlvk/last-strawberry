@@ -1,18 +1,21 @@
-import DS from 'ember-data';
+import Ember from 'ember';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
-import Em from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { computed: { alias }} = Em;
+const { alias } = Ember.computed;
 
-export default DS.Model.extend(LocationHashable, {
-	min: DS.attr('number', {defaultValue: 480}),
-  max: DS.attr('number', {defaultValue: 720}),
-	service: DS.attr('number', {defaultValue: 15}),
-	location: DS.belongsTo('location'),
-	visitWindowDays: DS.hasMany('visit-window-day'),
+export default Model.extend(LocationHashable, {
+	min: 							attr('number', {defaultValue: 480}),
+  max: 							attr('number', {defaultValue: 720}),
+	service: 					attr('number', {defaultValue: 15}),
 
-	lat: alias('location.address.lat'),
-  lng: alias('location.address.lng'),
+	location: 				belongsTo('location'),
+	visitWindowDays: 	hasMany('visit-window-day'),
+
+	lat: 							alias('location.address.lat'),
+  lng: 							alias('location.address.lng'),
 
 	validForDate(date) {
 		const dayOfWeek = moment(date).day();

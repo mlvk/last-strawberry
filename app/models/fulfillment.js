@@ -1,8 +1,15 @@
-import DS from 'ember-data';
 import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
+const { bool, equal } = Ember.computed;
+
 export default Model.extend({
-  routeVisit: belongsTo('route-visit'),
-  order: DS.belongsTo('order')
+  fulfillmentState:   attr('string'),
+
+  routeVisit:         belongsTo('route-visit'),
+  order:              belongsTo('order'),
+
+  isPending:          equal('fulfillmentState', 'pending'),
+  isFulfilled:        bool('isPending')
 });

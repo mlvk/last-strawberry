@@ -50,7 +50,7 @@ function expandPropertyList(propertyList) {
 
 function buildStyles(data) {
   const str = Object.keys(data).reduce((acc, cur) => `${acc}${cur}:${data[cur]};`, '');
-  return new Ember.Handlebars.SafeString(str);
+  return new Ember.String.htmlSafe(str);
 }
 
 function callUserSuppliedGet(params, func) {

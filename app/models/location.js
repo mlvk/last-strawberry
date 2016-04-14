@@ -1,26 +1,25 @@
-import DS from 'ember-data';
-import Em from 'ember';
+import Ember from 'ember';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
-import computed from 'ember-computed-decorators';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { computed: { alias }} = Em;
+const { alias } = Ember.computed;
 
-export default DS.Model.extend(LocationHashable, {
-  active: DS.attr('boolean', {defaultValue:true}),
-  address: DS.belongsTo('address'),
-  code: DS.attr('string'),
-  company: DS.belongsTo('company'),
-  deliveryRate: DS.attr('number', {defaultValue:10}),
-  itemDesires: DS.hasMany('item-desire'),
-  name: DS.attr('string'),
-  orders: DS.hasMany('order'),
-  visitDays: DS.hasMany('visit-day'),
-  visitWindows: DS.hasMany('visit-window'),
+export default Model.extend(LocationHashable, {
+  name:                 attr('string'),
+  code:                 attr('string'),
+  deliveryRate:         attr('number',  { defaultValue: 10 }),
+  active:               attr('boolean', { defaultValue: true }),
 
-  @computed('visitWindows')
-  defaultVisitWindow(visitWindows) {
-    return visitWindows.get('firstObject');
-  },
-  lat: alias('address.lat'),
-  lng: alias('address.lng')
+  address:              belongsTo('address'),
+  company:              belongsTo('company'),
+  itemDesires:          hasMany('item-desire'),
+  orders:               hasMany('order'),
+  visitDays:            hasMany('visit-day'),
+  visitWindows:         hasMany('visit-window'),
+
+  defaultVisitWindow:   alias('visitWindows.firstObject'),
+  lat:                  alias('address.lat'),
+  lng:                  alias('address.lng')
 });

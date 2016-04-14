@@ -1,7 +1,10 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  location: DS.belongsTo('location'),
-  day: DS.attr('number'),
-  enabled: DS.attr('boolean')
+export default Model.extend({
+  day:        attr('number'),
+  enabled:    attr('boolean'),
+  
+  location:   belongsTo('location')
 });

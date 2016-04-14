@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 import computed from 'ember-computed-decorators';
 import colors from 'last-strawberry/constants/colors';
 
@@ -11,20 +13,20 @@ const colorSchemes = [
   {backgroundColor:colors.DOPE_BLUE, color:'white'}
 ]
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  template: DS.attr('boolean'),
-  date: DS.attr('string'),
-  user: DS.belongsTo('user'),
-  routeVisits: DS.hasMany('route-visit'),
+export default Model.extend({
+  name:               attr('string'),
+  template:           attr('boolean'),
+  date:               attr('string'),
+
+  user:               belongsTo('user'),
+  routeVisits:        hasMany('route-visit'),
+
+  sortedRouteVisits:  sort('routeVisits', () => ['position:asc']),
 
   @computed('index')
   colorScheme(index) {
     return colorSchemes[index];
   },
-
-  sortAsc: ['position:asc'],
-  sortedRouteVisits: sort('routeVisits', 'sortAsc'),
 
   @computed('date')
   formattedDate(date) {
@@ -79,7 +81,7 @@ export default DS.Model.extend({
   _processAddTransform(ot) {
     if(ot.toRoutePlan === this) {
       const collection = this.get('sortedRouteVisits');
-      
+
       const routeVisit = this.store.createRecord('route-visit', {visitWindow: ot.visitWindow});
 
       const updated = collection.reduce((acc, rv) => {
