@@ -33,10 +33,10 @@ export default Model.extend({
     return moment(date, 'YYYY-MM-DD').format("dddd, MMM Do - YYYY");
   },
 
-  @computed('routeVisits.@each.{locationHash}')
-  hash(rvs) {
-    return rvs.reduce((acc, cur) => acc + cur.get('locationHash'), '');
-  },
+  // @computed('routeVisits.@each.{locationHash}')
+  // hash(rvs) {
+  //   return rvs.reduce((acc, cur) => acc + cur.get('locationHash'), '');
+  // },
 
   applyTranform(ot) {
     this._processRemoveTransform(ot);
