@@ -75,7 +75,9 @@ export default Model.extend(LocationHashable, {
 
   _createFulfillment(order) {
     if(!this._hasFulfillmentWithOrder(order)){
-      const fulfillment = this.get('store').createRecord('fulfillment', {order, routeVisit:this});
+      const routeVisit = this;
+      
+      const fulfillment = this.get('store').createRecord('fulfillment', {order, routeVisit});
       this.get('fulfillments').pushObject(fulfillment);
     }
   }

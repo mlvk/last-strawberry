@@ -56,8 +56,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     rvs
       .map(rv => rv.get('fulfillments')
-        .filter(f => f.get('hasDirtyAttributes'))
-        .forEach(async f => await f.save()));
+      .filter(f => f.get('hasDirtyAttributes'))
+      .forEach(async f => await f.save()));
   },
 
   actions: {
