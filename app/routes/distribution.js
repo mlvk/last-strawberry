@@ -50,14 +50,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     const rvs = await routePlan.get('routeVisits');
 
-    rvs
+    await Promise.all(rvs
       .filter(rv => rv.get('hasDirtyAttributes'))
-      .forEach(async rv => await rv.save());
+      .map(rv => rv.save()));
 
     rvs
       .map(rv => rv.get('fulfillments')
       .filter(f => f.get('hasDirtyAttributes'))
-      .forEach(async f => await f.save()));
+      .forEach(f => f.save()));
   },
 
   actions: {
