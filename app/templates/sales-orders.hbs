@@ -1,5 +1,6 @@
 <div class="row stretch">
   {{sections/sales-orders/left-nav
+      currentSelectedOrder=currentSelectedOrder
       deliveryDate=deliveryDate
       dateSelected=(route-action 'changeDeliveryDate')
       stubOrders=(route-action 'stubOrders')

@@ -13,7 +13,7 @@ const page = PO.create({
 });
 
 const orderEditorPO = PO.create({
-  locationName: text('.locationName'),
+  locationName: text('.locationInfo'),
   salesOrderItems: collection({
     itemScope: '.salesOrderItem',
 
@@ -22,7 +22,7 @@ const orderEditorPO = PO.create({
       quantity: text('.quantity')
     }
   }),
-  
+
   deleteOrder: clickable('.section_sales-order_order-editor .delete')
 });
 

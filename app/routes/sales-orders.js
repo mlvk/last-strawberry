@@ -23,6 +23,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 	setupController(controller, model) {
     this._super(controller, model);
+
 		controller.set('salesOrders', this.store.peekAll('order'));
 		controller.set('companies', this.store.peekAll('company'));
 	},

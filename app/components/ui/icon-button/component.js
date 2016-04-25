@@ -1,10 +1,10 @@
-import Em from 'ember';
+import Ember from 'ember';
 import style from 'last-strawberry/utils/styles';
 
-const { computed: { notEmpty }} = Em;
+const { notEmpty } = Ember.computed;
 
-export default Em.Component.extend({
-  classNames: ['row', 'ui_icon-button', 'btn'],
+export default Ember.Component.extend({
+  classNames: ['row', 'stretch', 'ui_icon-button', 'btn'],
   classNameBindings: ['disabled:disabled', 'flat:flat:card-1'],
   attributeBindings:['componentStyles:style'],
 

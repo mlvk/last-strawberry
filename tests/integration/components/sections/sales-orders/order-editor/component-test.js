@@ -1,26 +1,20 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { make, manualSetup } from 'ember-data-factory-guy';
+import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';
 
-const dataModel = {
-  location: {
-    company: {
-      name: 'bar'
-    },
-    name : 'foo'
-  },
-  orderItems: [
-    { name: 'cheese', quantity: 1 },
-    { name: 'milk', quantity: 2 },
-    { name: 'eggs', quantity: 3 }
-  ]
-};
+let model;
 
 moduleForComponent('sections/sales-order/order-editor', 'Integration | Component | sections/sales orders/order editor', {
   integration: true,
 
   beforeEach: function () {
-    this.set('data', dataModel);
+    decorateComponentClass();
+    manualSetup(this.container);
 
+    model = make('order');
+
+    this.set('model', model);
     this.set('updateOrderItem', () => {});
     this.set('saveOrderItem', () => {});
     this.set('deleteOrderItem', () => {});
@@ -29,14 +23,14 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
           updateOrderItem=(action updateOrderItem)
           saveOrderItem=(action saveOrderItem)
           deleteOrderItem=(action deleteOrderItem)
-          model=data}}`);
+          model=model}}`);
   }
 });
 
 test('it displays the company name', function(assert) {
-  assert.equal(this.$('.locationName').text().trim(), dataModel.location.name);
+  assert.equal(this.$('.locationInfo').text().trim(), `${model.get('location.code')} - ${model.get('location.name')}`);
 });
 
 test('it displays a list of order-items', function(assert) {
-  assert.equal(this.$('.orderItem').length, 3);
+  assert.equal(this.$('.debug_sections_sales-orders_order-item-editor').length, model.get('orderItems.length'));
 });

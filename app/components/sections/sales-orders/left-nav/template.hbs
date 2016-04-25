@@ -1,25 +1,29 @@
-<div class="col">
+<div class="col stretch">
+  <div class="row">
+    {{ui/date-picker
+      date=deliveryDate
+      onSelected=dateSelected
+      format='MM-DD-YYYY'}}
+  </div>
 
   <div class="row">
-    <label>
-      Delivery Date:{{deliveryDate}}
-      {{pikaday-input
-          id='datePicker'
-          value=deliveryDate
-          onSelected=dateSelected
-          format='MM-DD-YYYY'}}
-    </label>
+    {{ui/filter-bar
+        placeholder='Search...'
+        onChange=(action 'filterOrders')}}
 
-    {{ui/icon-button
-      class='stubOrders'
-      flat=true
-      color=colors.DARK_GREY
-      label='Stub Orders'
-      type='add'
-      click=stubOrders}}
+    {{#ui/popup-menu}}
+      {{ui/icon-button
+        class='stubOrders'
+        flat=true
+        color=colors.DARK_GREY
+        label='Stub Orders'
+        type='add'
+        click=stubOrders}}
+    {{/ui/popup-menu}}
   </div>
 
   {{lists/grouped-list
+      highlightedItem=currentSelectedOrder
       itemClicked=(route-action 'showSalesOrder')
       model=groupedSalesOrders}}
 </div>

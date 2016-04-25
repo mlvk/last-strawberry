@@ -57,6 +57,7 @@
     "ember-route-action-helper": "0.3.0",
     "ember-simple-auth": "simplabs/ember-simple-auth",
     "ember-tether": "0.3.0",
+    "ember-truth-helpers": "1.2.0",
     "eslint-config-ember": "0.3.0",
     "loader.js": "^4.0.1",
     "moment": "2.11.2",

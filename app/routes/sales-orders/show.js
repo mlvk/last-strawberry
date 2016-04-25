@@ -16,6 +16,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     this._super(controller, model);
 
 		controller.set('items', this.store.peekAll('item'));
+
+		const salesOrderController = this.controllerFor('sales-orders');
+		salesOrderController.set('currentSelectedOrder', model);
 	},
 
 	model(params){
@@ -23,13 +26,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return this.store.findRecord('order', params.id, {include:INCLUDES.join(',')});
 	},
 
+	clearSalesOrderController: function(){
+		const salesOrderController = this.controllerFor('sales-orders');
+    salesOrderController.set('currentSelectedOrder', undefined);
+  }.on('deactivate'),
+
 	actions: {
 		updateOrderItem(model, quantity) {
 			model.set('quantity', quantity);
 		},
 
 		saveOrderItem(model) {
-			return model.save();
+			if(model.get('hasDirtyAttributes')) {
+				return model.save();
+			}
 		},
 
 		deleteOrderItem(model) {

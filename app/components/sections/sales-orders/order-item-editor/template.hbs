@@ -1,4 +1,8 @@
-<span class="orderItem">
+<span class="index">
+  {{formattedIndex}}
+</span>
+
+<span class="name">
   {{model.item.name}}
 </span>
 
@@ -9,7 +13,8 @@
   value={{model.quantity}}
   oninput={{action 'update'}}
   onchange={{action 'update'}}
-  onblur={{action save model}}>
+  onfocus={{action 'onFocus'}}
+  onblur={{action 'onBlur'}}>
 
 {{ui/icon-button
   class='delete'
