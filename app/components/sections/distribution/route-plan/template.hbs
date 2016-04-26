@@ -1,10 +1,13 @@
 <div class="row headerContainer">
-  {{ember-selectize
-    content=users
-    optionValuePath="content"
-    optionLabelPath="content.name"
-    selection=model.user
-    placeholder="Select a driver" }}
+  {{#power-select
+      selected=model.user
+      options=users
+      placeholder="Select a driver"
+      searchEnabled=false
+      onchange=(action (mut model.user))
+      as |user|}}
+    {{user.name}}
+  {{/power-select}}
 
   <div class="col uiContainer">
     {{ui/icon-button

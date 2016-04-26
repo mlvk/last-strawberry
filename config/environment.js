@@ -52,7 +52,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.apiHost = 'http://localhost:3000';
+    ENV.apiHost = process.env.API_HOST;
 
     ENV['ember-cli-mirage'] = {
       enabled: false
@@ -77,7 +77,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.apiHost = process.env.API_ENDPOINT
+    ENV.apiHost = process.env.API_HOST;
   }
 
   return ENV;

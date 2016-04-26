@@ -11,6 +11,7 @@ const SALES_ORDER = 'sales-order';
 const PURCHASE_ORDER = 'purchase-order';
 
 export default Model.extend(LocationHashable, {
+  orderNumber:      attr('string'),
   orderType:        attr('string', {defaultValue: SALES_ORDER}),
   deliveryDate:     attr('string'),
 
