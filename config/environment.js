@@ -33,7 +33,7 @@ module.exports = function(environment) {
      },
   };
 
-  ENV.apiHost = ''
+  ENV.apiHost = 'http://localhost:3000';
 
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
@@ -47,16 +47,11 @@ module.exports = function(environment) {
 
   ENV['ember-simple-auth'] = {
     authenticationRoute: 'login',
-    routeAfterAuthentication: 'companies',
-    routeIfAlreadyAuthenticated: 'companies'
+    routeAfterAuthentication: 'orders',
+    routeIfAlreadyAuthenticated: 'orders'
   };
 
   if (environment === 'development') {
-    ENV.apiHost = process.env.API_HOST;
-
-    ENV['ember-cli-mirage'] = {
-      enabled: false
-    }
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
