@@ -1,6 +1,5 @@
-<div class="row toolbar">
-
-  <div class="col">
+<div class="row">
+  <div class="col stretch">
     <span class="company">
       {{model.location.company.name}}
     </span>
@@ -15,17 +14,28 @@
       <span class="salesOrderNumber">
         INV-042116-19281
       </span>
+      <div class="row stretch toolbar">
+        <div class="row">
+          {{ui/icon-button
+              type='local_printshop'
+              class='print'
+              flat=true
+              color=colors.DARK_GREY
+              size=1.2
+              action=(action 'printOrder')}}
+        </div>
+        <div class="row">
+          {{ui/icon-button
+              type='close'
+              class='delete'
+              flat=true
+              color=colors.DARK_GREY
+              size=1.2
+              click=deleteOrder}}
+        </div>
+      </div>
     </div>
   </div>
-
-  {{ui/icon-button
-    label='delete'
-    type='close'
-    class='delete'
-    flat=true
-    backgroundColor=colors.DARK_GREY
-    size=1.2
-    click=deleteOrder}}
 </div>
 
 {{#each model.orderItems as |orderItem i|}}
@@ -33,6 +43,7 @@
       index=i
       model=orderItem
       update=updateOrderItem
+      onOrderItemChange=onOrderItemChange
       save=saveOrderItem
       delete=deleteOrderItem}}
 {{/each}}

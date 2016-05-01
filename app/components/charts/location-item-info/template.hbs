@@ -1,0 +1,21 @@
+{{ui/title-bar title='Latest delivery info'}}
+
+<div class="col mainContentContainer">
+  {{#if hasData}}
+    <span>
+      <span class="value">{{data.quantity}}</span> <span class="copy">currently in stock</span>
+    </span>
+    <span>
+      <span class="value">{{data.returns}}</span> <span class="copy">returned</span>
+    </span>
+  {{else}}
+    <span class="noDataMessage">No sales data for this item.</span>
+  {{/if}}
+</div>
+
+<div class="row footer">
+  <span class="updatedAt">Last updated {{moment-from-now data.timestamp interval=1000}}</span>
+  {{ui/simple-spinner
+      size=1
+      enabled=loading}}
+</div>

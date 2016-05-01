@@ -12,7 +12,30 @@
 
 .name {
   margin-left: 1em;
-  min-width: 20em;
+  min-width: 16em;
+}
+
+.unitPriceContainer {
+  justify-content: flex-end;
+  width: 5em;
+  margin-right: 3em;
+}
+
+.unitPrice {
+  width: 5em;
+  font-style: italic;
+  text-decoration: underline;
+  text-align: right;
+}
+
+.unitPriceEditing input {
+  width: 3em;
+  text-decoration:none;
+  font-style: normal;
+  background: rgba( $off-white, 1 );
+  color: $dark-grey;
+  border: 3px solid rgba( #4C4C4C, 0.6 );
+  text-align: right;
 }
 
 .quantity {

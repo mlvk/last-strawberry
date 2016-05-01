@@ -7,6 +7,7 @@ const { lt } = Ember.computed;
 
 export default Model.extend({
   quantity:   attr('number', { defaultValue: 0 }),
+  unitPrice:  attr('number', { defaultValue: 0 }),
 
   order:      belongsTo('order'),
   item:       belongsTo('item'),

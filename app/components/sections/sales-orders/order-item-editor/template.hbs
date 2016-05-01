@@ -6,6 +6,25 @@
   {{model.item.name}}
 </span>
 
+<div class="row unitPriceContainer">
+
+  {{#if editingUnitPrice}}
+    {{ui/auto-focus-input
+        type="text"
+        class="unitPriceEditing"
+        name=(concat model.item.name '-unitPrice')
+        value=model.unitPrice
+        onChange=(action 'updateUnitPrice')
+        onFocus=(action 'onFocus')
+        onBlur=(action 'onBlurUnitPrice')}}
+  {{else}}
+    <span class="unitPrice" {{action 'toggleUnitPriceEditing'}}>
+      {{currency model.unitPrice}}
+    </span>
+  {{/if}}
+
+</div>
+
 <input
   type="text"
   class="quantity"

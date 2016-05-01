@@ -19,6 +19,14 @@
   font-size: 1.4em;
 }
 
+.iconContainer {
+  align-items: center;
+  justify-content: center;
+}
+
 .material-icons {
+  display: flex;
   font-size: 2em;
+  align-items: center;
+  justify-content: center;
 }

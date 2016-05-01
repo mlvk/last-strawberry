@@ -32,8 +32,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   }.on('deactivate'),
 
 	actions: {
-		updateOrderItem(model, quantity) {
-			model.set('quantity', quantity);
+		updateOrderItem(model, key, val) {
+			model.set(key, val);
 		},
 
 		saveOrderItem(model) {

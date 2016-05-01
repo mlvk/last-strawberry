@@ -42,6 +42,10 @@ module.exports = function(defaults) {
   app.import('bower_components/dragula.js/dist/dragula.min.js');
   app.import('bower_components/dragula.js/dist/dragula.min.css');
   app.import('bower_components/string/dist/string.min.js');
+  app.import('bower_components/numeral/min/numeral.min.js');
+  app.import('bower_components/rxjs/dist/rx.all.min.js');
+  app.import('bower_components/immutable/dist/immutable.min.js');
+  app.import('bower_components/firebase/firebase.js');
 
   return app.toTree();
 };

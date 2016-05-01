@@ -2,8 +2,10 @@
   <span class="label">{{label}}</span>
 {{/if}}
 
-{{#if disabled}}
-  <i class="material-icons">not_interested</i>
-{{else}}
-  <i class="material-icons">{{type}}</i>
-{{/if}}
+<div class="iconContainer row">
+  {{#if disabled}}
+    <i class="material-icons">not_interested</i>
+  {{else}}
+    <i class="material-icons">{{iconName}}</i>
+  {{/if}}
+</div>

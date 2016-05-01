@@ -16,7 +16,12 @@
     "leaflet": "~0.7.7",
     "tether": "^1.0.3",
     "jquery-mockjax": "2.0.1",
-    "lodash": "^4.9.0"
+    "lodash": "^4.9.0",
+    "numeral": "^1.5.3",
+    "immutable": "^3.8.1",
+    "rxjs": "^4.1.0",
+    "gsap": "^1.18.4",
+    "firebase": "^2.4.2"
   },
   "resolutions": {
     "ember-qunit-notifications": "0.1.0",

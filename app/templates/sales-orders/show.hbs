@@ -3,4 +3,12 @@
     updateOrderItem=(route-action 'updateOrderItem')
     saveOrderItem=(route-action 'saveOrderItem')
     deleteOrderItem=(route-action 'deleteOrderItem')
+    onOrderItemChange=(action 'onOrderItemChange')
     deleteOrder=(route-action 'deleteOrder' model)}}
+
+<div class="col">
+  {{charts/location-item-info
+      item=item
+      model=model
+      dataPath=dataPath}}
+</div>

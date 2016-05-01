@@ -1,0 +1,36 @@
+& {
+  margin: 2em;
+  width: 15em;
+  background: $dark-orange;
+  color: $dark-grey;
+}
+
+.mainContentContainer {
+  padding: 1em;
+  font-size: 1.2em;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.copy {
+  font-style: italic;
+}
+
+.noDataMessage {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.footer {
+  padding: 0.4em;
+  background: rgba(white, 0.2);
+  align-items: flex-end;
+  justify-content: space-between;
+
+  .updatedAt {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}

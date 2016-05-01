@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import style from 'last-strawberry/utils/styles';
+import computed from 'ember-computed-decorators';
 
 const { notEmpty } = Ember.computed;
 
@@ -9,6 +10,26 @@ export default Ember.Component.extend({
   attributeBindings:['componentStyles:style'],
 
   hasLabel: notEmpty('label'),
+
+  loadingChanged: Ember.observer('loading', function() {
+    Ember.run.once(this, 'updateSpinState');
+  }),
+
+  updateSpinState() {
+    const targ = this.$('.iconContainer');
+    if(targ){
+      if(this.get('loading')) {
+        TweenMax.to(targ, 0.5, {rotation:360, repeat:-1});
+      } else {
+        TweenMax.to(targ, 0, {rotation:0});
+      }
+    }
+  },
+
+  @computed('type', 'loading')
+  iconName(type, loading) {
+    return loading ? 'loop' : type;
+  },
 
   @style('size', 'padding', 'color', 'backgroundColor', 'borderRadius')
   componentStyles(
@@ -26,5 +47,16 @@ export default Ember.Component.extend({
       'color': color,
       'background-color': backgroundColor
     };
+  },
+
+  click() {
+    if(!this.get('loading')){
+      this.set('loading', true);
+
+      Ember.RSVP.allSettled([this.attrs.action()])
+        .then(res => this.set('loading', false))
+        .catch(err => this.set('loading', false));
+    }
   }
+
 });
