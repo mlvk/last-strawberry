@@ -54,8 +54,8 @@ export default Ember.Component.extend({
       this.set('loading', true);
 
       Ember.RSVP.allSettled([this.attrs.action()])
-        .then(res => this.set('loading', false))
-        .catch(err => this.set('loading', false));
+        .then(() => this.set('loading', false))
+        .catch(() => this.set('loading', false));
     }
   }
 

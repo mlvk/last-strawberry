@@ -11,13 +11,9 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    update(e) {
-      this.attrs.update(this.get('model'), 'quantity', e.target.value);
-    },
-
-    updateUnitPrice(e) {
+    update(key, e) {
       const newVal = e.target.value || 0;
-      this.attrs.update(this.get('model'), 'unitPrice', newVal);
+      this.attrs.update(this.get('model'), key, newVal);
     },
 
     onFocus() {

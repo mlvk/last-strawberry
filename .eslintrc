@@ -25,6 +25,9 @@
       "currentRouteName": true,
       "pauseTest": true,
       "visit": true,
-      "server": true
+      "server": true,
+      "TweenMax": true,
+      "numeral": true,
+      "Firebase": true
     }
 }

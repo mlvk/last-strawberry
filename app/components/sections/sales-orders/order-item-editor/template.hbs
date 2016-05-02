@@ -14,7 +14,7 @@
         class="unitPriceEditing"
         name=(concat model.item.name '-unitPrice')
         value=model.unitPrice
-        onChange=(action 'updateUnitPrice')
+        onChange=(action 'update' 'unitPrice')
         onFocus=(action 'onFocus')
         onBlur=(action 'onBlurUnitPrice')}}
   {{else}}
@@ -30,8 +30,8 @@
   class="quantity"
   name="{{model.item.name}}-qty"
   value={{model.quantity}}
-  oninput={{action 'update'}}
-  onchange={{action 'update'}}
+  oninput={{action 'update' 'quantity'}}
+  onchange={{action 'update' 'quantity'}}
   onfocus={{action 'onFocus'}}
   onblur={{action 'onBlur'}}>
 

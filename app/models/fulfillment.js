@@ -6,11 +6,11 @@ import { belongsTo } from 'ember-data/relationships';
 const { bool, equal } = Ember.computed;
 
 export default Model.extend({
-  fulfillmentState:   attr('string'),
+  deliveryState:      attr('string', {defaultValue:'pending'}),
 
   routeVisit:         belongsTo('route-visit'),
   order:              belongsTo('order'),
 
-  isPending:          equal('fulfillmentState', 'pending'),
+  isPending:          equal('deliveryState', 'pending'),
   isFulfilled:        bool('isPending')
 });

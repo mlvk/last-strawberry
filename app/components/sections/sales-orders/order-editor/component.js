@@ -11,6 +11,6 @@ export default Ember.Component.extend({
         .generateInvoices([this.get('model')])
         .then(pdfData => downloadFile(pdfData.url, `${this.get('model.orderNumber')}.pdf`))
         .catch(err => err);
-    },
+    }
   }
 });

@@ -53,7 +53,5 @@ export default Ember.Component.extend({
     this.set('data', snapshot.val());
   },
 
-  errorHander(msg) {
-    console.log(msg);
-  }
+  errorHander(/* msg */) {}
 });

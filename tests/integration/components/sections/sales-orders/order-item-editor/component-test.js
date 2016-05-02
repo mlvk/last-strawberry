@@ -16,11 +16,13 @@ moduleForComponent('sections/sales-order/order-item-editor', 'Integration | Comp
 
     this.set('model', model);
     this.set('update', () => {});
+    this.set('onOrderItemChange', () => {});
     this.set('save', () => {});
     this.set('delete', () => {});
 
     this.render(hbs`{{sections/sales-orders/order-item-editor
           update=(action update)
+          onOrderItemChange=(action onOrderItemChange)
           save=(action save)
           delete=(action delete)
           model=model}}`);
@@ -36,15 +38,27 @@ test('it displays quantity', function(assert) {
 });
 
 test('it calls update when quantity is changed', function(assert) {
-  assert.expect(2);
+  assert.expect(6);
 
-  this.set('update', (model, quantity) => {
+  this.set('update', (model, field, val) => {
     assert.ok(!!model);
-    assert.equal(quantity, 2);
+    assert.equal(field, 'quantity');
+    assert.equal(val, 2);
   });
 
   this.$('.quantity').val(2);
   this.$('.quantity').change();
+
+  this.set('update', (model, field, val) => {
+    assert.ok(!!model);
+    assert.equal(field, 'unitPrice')
+    assert.equal(val, 5.40);
+  });
+
+  this.$('.unitPrice').click();
+
+  this.$('.unitPriceEditing input').val(5.40);
+  this.$('.unitPriceEditing input').change();
 });
 
 test('it calls save onblur quantity', function(assert) {
