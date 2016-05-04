@@ -15,6 +15,7 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
     model = make('order');
 
     this.set('model', model);
+    this.set('items', []);
     this.set('updateOrderItem', () => {});
     this.set('saveOrderItem', () => {});
     this.set('deleteOrderItem', () => {});
@@ -23,6 +24,7 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
           updateOrderItem=(action updateOrderItem)
           saveOrderItem=(action saveOrderItem)
           deleteOrderItem=(action deleteOrderItem)
+          items=items
           model=model}}`);
   }
 });

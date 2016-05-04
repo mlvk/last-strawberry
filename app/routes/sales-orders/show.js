@@ -32,13 +32,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   }.on('deactivate'),
 
 	actions: {
+		async createOrderItem(item) {
+			const order = this.modelFor('sales-orders.show');
+			const company = await order.get('location.company');
+
+			const unitPrice = await company.priceForItem(item);
+			this.store
+				.createRecord('order-item', {item, order, unitPrice})
+				.save();
+		},
+
 		updateOrderItem(model, key, val) {
 			model.set(key, val);
 		},
 
 		saveOrderItem(model) {
 			if(model.get('hasDirtyAttributes')) {
-				return model.save();
+				return model
+					.save()
+					.catch(() => model.rollbackAttributes());
 			}
 		},
 

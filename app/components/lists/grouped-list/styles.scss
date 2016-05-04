@@ -6,6 +6,8 @@
 
 .group {
   margin-bottom: 0.4em;
+  // flex: 1;
+  // border: 1px solid red;
 }
 
 .parent {
@@ -15,6 +17,7 @@
 .child {
   padding-left: 1em;
   font-size: 0.9em;
+  // min-height: 3em;
 }
 
 a {

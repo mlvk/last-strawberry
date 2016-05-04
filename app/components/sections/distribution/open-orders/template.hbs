@@ -4,7 +4,7 @@
   </span>
 </span>
 {{#layouts/scroll-container}}
-  {{#layouts/dd-container registerContainer=this.attrs.registerDropContainer}}
+  {{#layouts/dd-container registerContainer=registerDropContainer}}
     {{#each-in orderGroups as |key og|}}
       {{sections/distribution/order-group
         data-location-hash=key

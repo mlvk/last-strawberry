@@ -21,11 +21,13 @@
     "immutable": "^3.8.1",
     "rxjs": "^4.1.0",
     "gsap": "^1.18.4",
-    "firebase": "^2.4.2"
+    "firebase": "^2.4.2",
+    "chartjs": "1.0.2"
   },
   "resolutions": {
     "ember-qunit-notifications": "0.1.0",
     "ceibo": "1.1.0",
-    "ember": "beta"
+    "ember": "beta",
+    "chartjs": "1.0.2"
   }
 }

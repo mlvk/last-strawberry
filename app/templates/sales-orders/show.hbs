@@ -1,5 +1,7 @@
 {{sections/sales-orders/order-editor
     model=model
+    items=items
+    createOrderItem=(route-action 'createOrderItem')
     updateOrderItem=(route-action 'updateOrderItem')
     saveOrderItem=(route-action 'saveOrderItem')
     deleteOrderItem=(route-action 'deleteOrderItem')
@@ -11,4 +13,8 @@
       item=item
       model=model
       dataPath=dataPath}}
+</div>
+
+<div class="col">
+  {{charts/item-location-sales-trend}}
 </div>

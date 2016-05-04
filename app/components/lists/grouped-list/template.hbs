@@ -1,14 +1,10 @@
 {{#layouts/scroll-container}}
-  <div class="col stretch mainContainer">
-    {{#each-in model as |key group|}}
-      <div class="group col">
-        <span class="parent">{{key}}</span>
-        <div class="col stretch">
-          {{#each group as |item|}}
-            <a class="child row stretch {{if (eq highlightedItem item) 'highlighted'}}" {{action itemClicked item}}>{{item.location.name}}</a>
-          {{/each}}
-        </div>
-      </div>
-    {{/each-in}}
-  </div>
+  <div class="col">
+  {{#each-in model as |key group|}}
+      <span class="parent">{{key}}</span>
+      {{#each group as |item|}}
+        <a class="child {{if (eq highlightedItem item) 'highlighted'}}" {{action itemClicked item}}>{{item.location.name}}</a>
+      {{/each}}
+  {{/each-in}}
+</div>
 {{/layouts/scroll-container}}

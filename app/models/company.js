@@ -7,12 +7,18 @@ const { alias } = Ember.computed;
 
 export default Model.extend({
   name:       attr('string'),
-  code:       attr('string'),
   terms:      attr('number', { defaultValue: 14 }),
   tag:        attr('string', { defaultValue: 'customer' }),
 
   priceTier:  belongsTo('price-tier'),
   locations:  hasMany('location'),
 
-  text:       alias('name')
+  text:       alias('name'),
+
+  async priceForItem(item) {
+    const itemPrices = await this.get('priceTier.itemPrices');
+
+    const itemPrice = itemPrices.find(async itemPrice => await itemPrice.get('item.name') === item.get('name'));
+    return itemPrice.get('price')
+  }
 });

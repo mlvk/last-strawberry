@@ -4,13 +4,12 @@ import computed from 'ember-computed-decorators';
 const { notEmpty } = Ember.computed;
 
 export default Ember.Controller.extend({
-
   hasDataPath: notEmpty('dataPath'),
 
-  @computed('item.name', 'model.location.code')
-  dataPath(name, code) {
+  @computed('item.name', 'model.location.id')
+  dataPath(name, id) {
     if(name) {
-      return `locations/${code}/${name}`;
+      return `locations/${id}/${name}`;
     } else {
       return undefined;
     }

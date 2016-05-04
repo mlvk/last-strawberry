@@ -40,3 +40,13 @@
   font-size: 1.2em;
   color: $dark-grey;
 }
+
+.addOrderItemContainer {
+  border-top: 1px solid $light-grey;
+  padding-top: 2em;
+  margin-top: 2em;
+
+  .search {
+    max-width: 15em;
+  }
+}

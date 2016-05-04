@@ -4,7 +4,7 @@
       {{model.location.company.name}}
     </span>
     <span class="locationInfo">
-      {{model.location.code}} - {{model.location.name}}
+      {{model.location.id}} - {{model.location.name}}
     </span>
 
     <div class="row invoiceHeaderContainer">
@@ -12,7 +12,7 @@
         Invoice
       </span>
       <span class="salesOrderNumber">
-        INV-042116-19281
+        {{model.orderNumber}}
       </span>
       <div class="row stretch toolbar">
         <div class="row">
@@ -47,3 +47,17 @@
       save=saveOrderItem
       delete=deleteOrderItem}}
 {{/each}}
+
+{{#if hasMissingItems}}
+  <div class="addOrderItemContainer">
+    {{#power-select
+        class='search'
+        placeholder='Add item manually'
+        selected=customAddItemResult
+        options=missingItems
+        onchange=(action "createOrderItem")
+        as |item|}}
+          {{item.name}}
+    {{/power-select}}
+  </div>
+{{/if}}

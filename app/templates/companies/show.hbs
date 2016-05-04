@@ -1,11 +1,11 @@
-<div class="col stretch section">
+<div class="col section">
   {{sections/companies/company-settings
       model=model
       fieldChanged=(route-action 'fieldChanged')
       save=(route-action 'saveCompany')
     }}
 
-  <div class="row">
+  <div class="row wrap">
     {{#each model.locations as |location|}}
       {{sections/locations/summary-card
           name=location.name

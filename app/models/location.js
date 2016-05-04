@@ -8,7 +8,6 @@ const { alias } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   name:                 attr('string'),
-  code:                 attr('string'),
   deliveryRate:         attr('number',  { defaultValue: 10 }),
   active:               attr('boolean', { defaultValue: true }),
 

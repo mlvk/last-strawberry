@@ -30,7 +30,7 @@
 </div>
 
 {{#layouts/scroll-container}}
-  {{#layouts/dd-container registerContainer=this.attrs.registerDropContainer registerId=(action this.attrs.registerRoutePlan model)}}
+  {{#layouts/dd-container registerContainer=registerDropContainer registerId=(action registerRoutePlan model)}}
     {{#each model.sortedRouteVisits as |rv|}}
       {{sections/distribution/route-visit
         colorScheme=model.colorScheme

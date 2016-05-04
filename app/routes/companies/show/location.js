@@ -22,9 +22,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return this.store.findRecord('location', params.location_id, {include:INCLUDES.join(',')});
   },
 
-  _saveRecord(record) {
-    if(!record.get('isSaving')) {
-      return record.save();
+  async _saveAddress() {
+    const location = this.modelFor('companies.show.location');
+    const address = await location.get('address');
+
+    if(!address.get('isSaving')) {
+      await address.save();
+      location.save();
     }
   },
 
@@ -128,25 +132,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       let address = await location.get('address');
       if(!address) {
         address = this.store.createRecord('address');
-        Ember.run(() => {
+        // Ember.run(() => {
           location.set('address', address);
-        })
+        // })
       }
       Ember.run(() => {
         address.setProperties(newAddressData);
-        this._saveRecord(address)
-          .then(() => {
-            this._saveRecord(location);
-          })
+        this._saveAddress();
+        // this._saveRecord(address)
+        //   .then(() => {
+        //     this._saveRecord(location);
+        //   })
       });
     },
 
-    async saveAddress() {
-      const location = this.modelFor('companies.show.location');
-      const address = await location.get('address');
-
-      await this._saveRecord(address);
-      await this._saveRecord(location);
+    saveAddress() {
+      this._saveAddress();
     },
 
     async deleteLocation() {

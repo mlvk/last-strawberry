@@ -10,7 +10,10 @@ const MODEL_INCLUDES = [
 	'order-items',
 	'order-items.item',
   'location',
-  'location.company'
+  'location.company',
+  'location.company.price-tier',
+  'location.company.price-tier.item-prices',
+  'location.company.price-tier.item-prices.item'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {

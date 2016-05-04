@@ -2,7 +2,7 @@ import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
 export default Ember.Component.extend({
-  classNames: ['section_sales-order_left-nav', 'row', 'stretch'],
+  classNames: ['section_sales-order_left-nav', 'col', 'stretch'],
 
   @computed('salesOrders', 'query')
   filterOrders(salesOrders, query){

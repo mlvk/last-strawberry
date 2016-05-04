@@ -35,7 +35,7 @@ export default Ember.Component.extend({
     this.dragOverSubject = new Rx.Subject();
     this.dragOvers = this.dragOverSubject
       .map(container => {
-        const $c = $(container).closest('.scrollContentY');
+        const $c = $(container).closest('.container');
         const cDom = $c[0];
         return {$c, cDom}
       });
@@ -115,6 +115,7 @@ export default Ember.Component.extend({
 
     const fromRoutePlan = this.ddMapping.get(fromPlanId);
     const toRoutePlan = this.ddMapping.get(toPlanId);
+
     return {visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
   },
 
@@ -124,14 +125,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    registerDropContainer(...args) {
-      let container;
-      if(args[1]) {
-        container = args[1];
-      } else {
-        container = args[0];
-      }
-
+    registerDropContainer(container) {
       this.drake.containers.push(container);
     },
 
