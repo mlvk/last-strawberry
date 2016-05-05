@@ -1,3 +1,6 @@
-{{ui/label-checkbox-group
-    model=collection
-    change=change}}
+{{#each collection as |item|}}
+  {{log item}}
+  {{ui/label-checkbox
+      click=(action 'onDayClick' item)
+      model=item}}
+{{/each}}

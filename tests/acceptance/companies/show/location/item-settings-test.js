@@ -1,4 +1,4 @@
-import { page, itemDesiresPO } from 'last-strawberry/tests/pages/companies-show-location';
+import { page, itemSettingsPO } from 'last-strawberry/tests/pages/companies-show-location';
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
@@ -14,7 +14,7 @@ let items,
     company,
     location;
 
-moduleForAcceptance('Acceptance | companies/show/location/item-desires', {
+moduleForAcceptance('Acceptance | companies/show/location/item-settings', {
   beforeEach() {
     authenticateSession(this.application);
 
@@ -34,7 +34,7 @@ moduleForAcceptance('Acceptance | companies/show/location/item-desires', {
 test('renders default item desires when no item desires are present', async function(assert) {
   await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  assert.equal(items.length, itemDesiresPO.items().count, 'Did not render the correct number of items');
+  assert.equal(items.length, itemSettingsPO.itemSettings().count, 'Did not render the correct number of itemSettings');
 });
 
 test('adds enabled class to enabled items', async function(assert) {
@@ -44,7 +44,7 @@ test('adds enabled class to enabled items', async function(assert) {
 
   await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemDesiresPO.items(i).enabled));
+  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemSettingsPO.itemSettings(i).itemDesire.enabled));
 });
 
 test('does not add enabled class to disabled items', async function(assert) {
@@ -54,7 +54,7 @@ test('does not add enabled class to disabled items', async function(assert) {
 
   await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
-  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemDesiresPO.items(i).enabled));
+  itemDesires.forEach((itemDesire, i) => assert.equal(itemDesire.get('enabled'), itemSettingsPO.itemSettings(i).itemDesire.enabled));
 });
 
 test('item desires toggle on click', async function(assert) {
@@ -63,8 +63,8 @@ test('item desires toggle on click', async function(assert) {
   await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 
   mockUpdate(itemDesires[0]);
-  await itemDesiresPO.items(0).click();
+  await itemSettingsPO.itemSettings(0).itemDesire.toggle();
 
-  assert.equal(false, itemDesiresPO.items(0).enabled, "Didn't toggle after item click");
-  assert.equal(true, itemDesiresPO.items(1).enabled, "Changed even though wasn't clicked");
+  assert.equal(false, itemSettingsPO.itemSettings(0).itemDesire.enabled, "Didn't toggle after item click");
+  assert.equal(true, itemSettingsPO.itemSettings(1).itemDesire.enabled, "Changed even though wasn't clicked");
 });

@@ -1,0 +1,9 @@
+{{sections/locations/visit-schedule
+    model=model.visitDays
+    onChange=onVisitDayChange
+    createVisitWindow=createVisitWindow}}
+
+{{sections/locations/visit-windows-manager
+    model=model.visitWindows
+    onChange=onVisitWindowChange
+    onDayChange=onVisitWindowDayChange}}

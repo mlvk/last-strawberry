@@ -3,7 +3,7 @@
     {{ui/day-of-week-selector
         class="visitWindowDays"
         model=model.visitWindowDays
-        change=(action visitWindowDaysChanged model)}}
+        change=(action onDayChange model)}}
   </div>
 
   <div class="row settings">
@@ -30,8 +30,7 @@
         type="text"
         name="service"
         value="{{model.service}}"
-        oninput={{action 'serviceChanged'}}
-        onblur={{action saveVisitWindow model}}>
+        onblur={{action 'serviceChanged'}}>
       <span class="instruction">Service time</span>
     </div>
 

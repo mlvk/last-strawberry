@@ -5,11 +5,11 @@ FactoryGuy.define('location', {
     company: FactoryGuy.belongsTo('company'),
     address: FactoryGuy.belongsTo('address'),
     name: FactoryGuy.generate(num => `Location ${num}`),
-    code: FactoryGuy.generate(num => `Code ${num}`),
     delivery_rate: 10,
     active: true,
     visitWindows: FactoryGuy.hasMany('visit-window', 1),
     itemDesires: FactoryGuy.hasMany('item-desire'),
+    itemCreditRates: FactoryGuy.hasMany('item-credit-rate'),
     visitDays: FactoryGuy.hasMany('visit-day')
   }
 });

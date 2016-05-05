@@ -1,0 +1,6 @@
+{{#each model as |visitWindow|}}
+  {{sections/locations/visit-window
+      model=visitWindow
+      onChange=onChange
+      onDayChange=onDayChange}}
+{{/each}}

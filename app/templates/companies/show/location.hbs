@@ -11,21 +11,18 @@
         update=(route-action 'updateAddress')
         save=(route-action 'saveAddress')}}
   </div>
-{{log itemSettings}}
+  
   <div class="col-2">
-    {{sections/locations/item-desires
+    {{sections/locations/item-settings
         itemSettings=itemSettings
         onDesireChange=(route-action 'updateItemDesire')
-        onCreditChange=(route-action 'updateItemCreditRate')
-      }}
+        onCreditChange=(route-action 'updateItemCreditRate')}}
 
-    {{sections/locations/visit-schedule
-        visitDays=model.visitDays
-        visitWindows=model.visitWindows
-        visitDaysChanged=(route-action 'updateVisitDays')
-        visitWindowDaysChanged=(route-action 'visitWindowDaysChanged')
-        visitWindowChanged=(route-action 'visitWindowChanged')
-        createVisitWindow=(route-action 'createVisitWindow')
-        saveVisitWindow=(route-action 'saveVisitWindow')}}
+    {{sections/locations/schedule-manager
+        model=model
+        onVisitDayChange=(route-action 'onVisitDayChange')
+        onVisitWindowChange=(route-action 'onVisitWindowChange')
+        onVisitWindowDayChange=(route-action 'onVisitWindowDayChange')
+        createVisitWindow=(route-action 'createVisitWindow')}}
   </div>
 </div>

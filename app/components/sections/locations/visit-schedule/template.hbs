@@ -6,25 +6,17 @@
   <div class="row stretch content">
     {{ui/day-of-week-selector
         class="visitDays"
-        model=visitDays
-        change=visitDaysChanged}}
+        model=model
+        change=onChange}}
 
     {{ui/icon-button
-      class='createVisitWindow'
-      type='add'
-      label='Visit Window'
-      size=1.5
-      flat=true
-      backgroundColor=colors.DARK_GREY
-      padding=0.5
-      click=createVisitWindow}}
+        class='createVisitWindow'
+        type='add'
+        label='Visit Window'
+        size=1.5
+        flat=true
+        backgroundColor=colors.DARK_GREY
+        padding=0.5
+        click=createVisitWindow}}
   </div>
 </div>
-
-{{#each visitWindows as |visitWindow|}}
-  {{sections/locations/visit-window
-      model=visitWindow
-      visitWindowChanged=visitWindowChanged
-      visitWindowDaysChanged=visitWindowDaysChanged
-      saveVisitWindow=saveVisitWindow}}
-{{/each}}

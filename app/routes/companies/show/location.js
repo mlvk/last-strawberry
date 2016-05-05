@@ -69,85 +69,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     updateItemCreditRate(itemCreditRate, rate) {
       itemCreditRate.set('rate', rate);
       itemCreditRate.save();
-
-      // const location = this.modelFor('companies.show.location');
-      // const itemDesires = location.get('itemDesires');
-      //
-      // source
-      //   .map(({id, enabled}) => {
-      //     const itemDesirePredicate = resource => resource.get('item.id') === id;
-      //     const itemPredicate = resource => resource.get('id') === id;
-      //     const item = this.store.peekAll('item').find(itemPredicate);
-      //
-      //     let match = itemDesires.find(itemDesirePredicate);
-      //
-      //     if(!match) {
-      //       match = this.store.createRecord('item-desire', {item, location});
-      //     }
-      //
-      //     match.set('enabled', enabled);
-      //     return match;
-      //   })
-      //   .filter(itemDesire => itemDesire.get('hasDirtyAttributes'))
-      //   .forEach(itemDesire => itemDesire.save());
-      //
-      // return this.modelFor('companies.show.location').get('itemDesires');
     },
 
-    updateVisitDays(source) {
+    onVisitDayChange(day, enabled) {
       const location = this.modelFor('companies.show.location');
       const visitDays = location.get('visitDays');
 
-      source
-        .map(({id, enabled}) => {
-          const visitDayPredicate = resource => resource.get('day') === id;
-          const day = id;
+      const visitDay = visitDays.find(visitDay => visitDay.get('day') === day) || this.store.createRecord('visit-day', {location, day});
 
-          let match = visitDays.find(visitDayPredicate);
-
-          if(!match) {
-            match = this.store.createRecord('visit-day', {location, day});
-          }
-
-          match.set('enabled', enabled);
-          return match;
-        })
-        .filter(visitDay => visitDay.get('hasDirtyAttributes'))
-        .forEach(visitDay => visitDay.save());
-
-      return this.modelFor('companies.show.location').get('visitDays');
+      visitDay.set('enabled', enabled);
+      visitDay.save();
     },
 
-    async visitWindowDaysChanged(visitWindow, newSelections) {
-      await visitWindow.save();
+    async onVisitWindowDayChange(visitWindow, day, enabled) {
+      if(visitWindow.get('hasDirtyAttributes')) {
+        await visitWindow.save();
+      }
 
-      newSelections
-        .map(({id, enabled}) => {
-          const visitWindowDayPredicate = resource => resource.get('day') === id;
-          const day = id;
+      const visitWindowDay = visitWindow.get('visitWindowDays').find(vwd => vwd.get('day') === day) || this.store.createRecord('visit-window-day', {visitWindow, day});
 
-          let match = visitWindow.get('visitWindowDays').find(visitWindowDayPredicate);
-
-          if(!match) {
-            match = this.store.createRecord('visit-window-day', {visitWindow, day});
-          }
-
-          match.set('enabled', enabled);
-          return match;
-        })
-        .filter(visitWindowDay => visitWindowDay.get('hasDirtyAttributes'))
-        .map(visitWindowDay => visitWindowDay.save());
-
-      return this.modelFor('companies.show.location').get('visitWindows');
+      visitWindowDay.set('enabled', enabled);
+      visitWindowDay.save();
     },
 
-    visitWindowChanged(model, attr, val) {
-      console.log(attr, val);
+    onVisitWindowChange(model, attr, val) {
+      console.log('onVisitWindowChange');
       model.set(attr, val);
-      model.save();
-    },
-
-    saveVisitWindow(model) {
       model.save();
     },
 

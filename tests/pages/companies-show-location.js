@@ -6,28 +6,39 @@ const page = PO.create({
   visit: visitable('/companies/:company_id/locations/:location_id')
 });
 
-const itemDesiresPO = PO.create({
-  items: collection({
-    itemScope: '.item-desires .ui_label-checkbox',
+const itemSettingsPO = PO.create({
+  itemSettings: collection({
+    itemScope: '.debug_sections_locations_item-setting',
 
     item: {
-      label: text('.label'),
-      enabled: hasClass('enabled')
+      label: text('.productName'),
+
+      itemDesire: {
+        scope: '.debug_ui_toggle-button',
+        enabled: hasClass('selected'),
+        toggle: clickable()
+      },
+
+      itemCreditRate: {
+        scope: '.debug_ui_toggle-button',
+        enabled: hasClass('selected')
+      }
+
     }
   })
 });
 
 const visitSchedulePO = PO.create({
   visitWindows: collection({
-    itemScope: '.visit-schedule .visit-window'
+    itemScope: '.debug_sections_locations_visit-window'
   }),
 
-  createNewVisitWindow: clickable('.visit-schedule .create-visit-window')
+  createNewVisitWindow: clickable('.createVisitWindow')
 });
 
 const visitDaysPO = PO.create({
   dayOptions: collection({
-    itemScope: '.visit-schedule .visit-days .ui_label-checkbox',
+    itemScope: '.debug_sections_locations_visit-schedule .debug_ui_label-checkbox',
 
     item: {
       label: text('.label'),
@@ -36,16 +47,14 @@ const visitDaysPO = PO.create({
   })
 });
 
-const visitWindowPO = PO.create({
-
-});
-
 const addressPO = PO.create({
-  fillSearchAddress: fillable('.address-search input'),
+  scope: '.debug_sections_locations_address-creator',
 
-  updateAddress: clickable('.address-search .submit'),
+  fillSearchAddress: fillable('input'),
 
-  fullAddress: text('.full-address')
+  updateAddress: clickable('.submit'),
+
+  fullAddress: text('.fullAddress')
 });
 
-export { page, itemDesiresPO, visitSchedulePO, visitDaysPO, visitWindowPO, addressPO };
+export { page, itemSettingsPO, visitSchedulePO, visitDaysPO, addressPO };

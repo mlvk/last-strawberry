@@ -34,10 +34,11 @@ const {
 
 
 const page = PO.create({
+
   visit: visitable('/sales-orders'),
 
   locations: collection({
-    itemScope: '.list_grouped-list .child',
+    itemScope: '.debug_sections_sales-orders_left-nav .child',
 
     item: {
       label: text('.label')
@@ -45,7 +46,7 @@ const page = PO.create({
   }),
 
   companies: collection({
-    itemScope: '.list_grouped-list .parent',
+    itemScope: '.debug_sections_sales-orders_left-nav .parent',
 
     item: {
       label: text('.label')

@@ -38,7 +38,7 @@ async function visitWithDefaults() {
   await page.visit({company_id:company.get('id'), location_id:location.get('id')});
 }
 
-test('renders full week of visit day options when none present', async function(assert) {
+test('renders visit days and default visit windows no data passed in', async function(assert) {
   await visitWithDefaults();
 
   assert.equal(7, visitDaysPO.dayOptions().count, 'Did not render the correct number of items');

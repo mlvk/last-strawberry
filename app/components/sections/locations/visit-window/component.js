@@ -7,11 +7,11 @@ export default Ember.Component.extend({
     timeChanged(key, e) {
       const time = moment(e.target.value, 'hh:mm a');
       const minutes = time.minute() + (time.hour() * 60);
-      this.attrs.visitWindowChanged(this.get('model'), key, minutes);
+      this.attrs.onChange(this.get('model'), key, minutes);
     },
 
     serviceChanged(e) {
-      this.attrs.visitWindowChanged(this.get('model'), 'service', e.target.value);
+      this.attrs.onChange(this.get('model'), 'service', e.target.value);
     }
   }
 });

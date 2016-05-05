@@ -7,7 +7,7 @@ moduleForComponent('sections/locations/location-settings', 'Integration | Compon
 
 test('field and update and triggers a save', function(assert) {
   assert.expect(7);
-  const locationData = {name:'Silverlake', code:'nw-001', deliveryRate:10};
+  const locationData = {name:'Silverlake', deliveryRate:10};
   this.set('location', locationData);
 
   this.set('fieldChanged', (model, key, val) => {

@@ -13,9 +13,10 @@ const page = PO.create({
 });
 
 const orderEditorPO = PO.create({
+  scope: '.debug_sections_sales-orders_order-editor',
   locationName: text('.locationInfo'),
   salesOrderItems: collection({
-    itemScope: '.salesOrderItem',
+    itemScope: '.debug_sections_sales-orders_order-item-editor',
 
     item: {
       name: text('.name'),
@@ -23,7 +24,7 @@ const orderEditorPO = PO.create({
     }
   }),
 
-  deleteOrder: clickable('.section_sales-order_order-editor .delete')
+  deleteOrder: clickable('.toolbar .delete')
 });
 
 export { page, orderEditorPO };

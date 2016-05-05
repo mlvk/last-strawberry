@@ -32,7 +32,7 @@ test('should automatically show tomorrows orders', async function(assert) {
   mockFindAll('order', 5, {deliveryDate: tomorrow});
 
   await page.visit({deliveryDate: tomorrow});
-
+  
   assert.equal(page.locations().count, 5, 'Wrong number of locations rendered');
 });
 
