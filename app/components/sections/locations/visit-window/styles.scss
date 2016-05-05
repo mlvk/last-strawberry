@@ -1,0 +1,56 @@
+& {
+  background: #B0F4FF;
+  justify-content: space-between;
+  margin-bottom: 0.25em;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid $dark-grey;
+ // width: 100%;
+ // margin-left: 0.4em;
+ font-size: 0.9em;
+ background: none;
+
+ // text-decoration: underline;
+}
+
+.ui_label-checkbox-group {
+  flex-wrap: nowrap;
+}
+
+.settings {
+  align-items: center;
+}
+
+.formField {
+  // width: 10em;
+  padding: 0.3em;
+  margin-left: 0.3em;
+}
+
+.instruction {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.content {
+  padding: 1em;
+}
+
+.infoContainer {
+  align-items: baseline;
+  background: $dark-orange;
+
+  .header {
+    font-weight: 600;
+    font-size: 1em;
+    padding: 1em
+  }
+
+  .description {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+}

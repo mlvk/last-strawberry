@@ -1,7 +1,7 @@
-import Em from 'ember';
+import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
-export default Em.Component.extend({
+export default Ember.Component.extend({
   classNames: ['section_location_address-creator', 'col', 'stretch'],
 
   @computed('model.lat')
@@ -22,7 +22,7 @@ export default Em.Component.extend({
       const geoApiUrl = 'https://nominatim.openstreetmap.org/search';
       const queryUrl = `${geoApiUrl}?q=${query}&format=json&addressdetails=1`
       //  http://nominatim.openstreetmap.org/search?q=135+pilkington+avenue,+birmingham&format=xml&polygon=1&addressdetails=1
-      const response = await Em.$.ajax(queryUrl);
+      const response = await Ember.$.ajax(queryUrl);
 
       const {lat, lon, address: { house_number, road, city, state, postcode}} = response[0];
       const street = `${house_number} ${road}`;

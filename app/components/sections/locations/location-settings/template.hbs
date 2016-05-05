@@ -2,7 +2,7 @@
   type="text"
   name="name"
   class="name"
-  placeholder="name"
+  placeholder="Location nickname"
   value="{{model.name}}"
   oninput={{action 'fieldChanged' 'name'}}
   onchange={{action 'fieldChanged' 'name'}}
@@ -10,27 +10,10 @@
 
 <input
   type="text"
-  name="code"
-  class="code"
-  placeholder="code"
-  value="{{model.code}}"
-  oninput={{action 'fieldChanged' 'code'}}
-  onchange={{action 'fieldChanged' 'code'}}
-  onblur={{action save}}>
-
-<input
-  type="text"
   name="deliveryRate"
   class="deliveryRate"
-  placeholder='delivery rate'
+  placeholder='Delivery rate'
   value="{{model.deliveryRate}}"
   oninput={{action 'fieldChanged' 'deliveryRate'}}
   onchange={{action 'fieldChanged' 'deliveryRate'}}
   onblur={{action save}}>
-
-{{ui/icon-button
-  type='remove'
-  flat=true
-  color=colors.DARK_GREY
-  padding=0.5
-  click=delete}}

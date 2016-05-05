@@ -1,20 +1,30 @@
-{{ui/day-of-week-selector
-    class="visit-days"
-    model=visitDays
-    change=visitDaysChanged}}
+<div class="col stretch deliverySchedule card-1">
+  <div class="row stretch infoContainer">
+    <span class="header">Delivery Schedule</span>
+    <span class="description">Select all the days this location should recieve product.</span>
+  </div>
+  <div class="row stretch content">
+    {{ui/day-of-week-selector
+        class="visitDays"
+        model=visitDays
+        change=visitDaysChanged}}
 
-{{ui/icon-button
-  class='create-visit-window'
-  type='add'
-  flat=true
-  color=colors.DARK_GREY
-  padding=0.5
-  click=createVisitWindow}}
+    {{ui/icon-button
+      class='createVisitWindow'
+      type='add'
+      label='Visit Window'
+      size=1.5
+      flat=true
+      backgroundColor=colors.DARK_GREY
+      padding=0.5
+      click=createVisitWindow}}
+  </div>
+</div>
 
 {{#each visitWindows as |visitWindow|}}
   {{sections/locations/visit-window
-    model=visitWindow
-    visitWindowChanged=visitWindowChanged
-    visitWindowDaysChanged=visitWindowDaysChanged
-    saveVisitWindow=saveVisitWindow}}
+      model=visitWindow
+      visitWindowChanged=visitWindowChanged
+      visitWindowDaysChanged=visitWindowDaysChanged
+      saveVisitWindow=saveVisitWindow}}
 {{/each}}

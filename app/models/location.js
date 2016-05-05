@@ -14,6 +14,7 @@ export default Model.extend(LocationHashable, {
   address:              belongsTo('address'),
   company:              belongsTo('company'),
   itemDesires:          hasMany('item-desire'),
+  itemCreditRates:      hasMany('item-credit-rate'),
   orders:               hasMany('order'),
   visitDays:            hasMany('visit-day'),
   visitWindows:         hasMany('visit-window'),

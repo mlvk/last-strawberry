@@ -10,11 +10,23 @@ const INCLUDES = [
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
+  setupController(controller, model) {
+    controller.set('priceTiers', this.store.peekAll('price-tier'));
+    this._super(controller, model);
+  },
+
   model(params){
     return this.store.findRecord('company', params.company_id, {include:INCLUDES.join(',')});
   },
 
   actions: {
+    updatePriceTier(priceTier) {
+      const company = this.modelFor('companies.show');
+
+      company.set('priceTier', priceTier);
+      company.save();
+    },
+
     fieldChanged(model, key, value) {
       model.set(key, value);
     },
@@ -36,13 +48,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     async createNewLocation() {
       const company = this.modelFor('companies.show');
-      const currentLocationCount = company.get('locations.length');
-      const newSuffix = S(currentLocationCount + 1).padLeft(3, '0');
-      const code = `${company.get('code')}-${newSuffix}`;
-      const name = 'untitled';
-      const address = this.store.createRecord('address');
-      const location = this.store.createRecord('location', {company, code, name, address});
+
+      const location = this.store.createRecord('location', {company, name});
       await location.save();
+
       this.transitionTo('companies.show.location', location);
     }
 

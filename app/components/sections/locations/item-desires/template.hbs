@@ -1,3 +1,6 @@
-{{ui/label-checkbox-group
-  model=collection
-  change=change}}
+{{#each itemSettings as |itemSetting|}}
+  {{sections/locations/item-setting
+      onCreditChange=onCreditChange
+      onDesireChange=onDesireChange
+      model=itemSetting}}
+{{/each}}

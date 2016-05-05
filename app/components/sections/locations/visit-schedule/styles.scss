@@ -14,6 +14,42 @@
 //   }
 // }
 
+.deliverySchedule {
+
+  background: $light-green;
+  justify-content: space-between;
+  margin-bottom: 1em;
+
+  .infoContainer {
+    align-items: baseline;
+    background: $dark-orange;
+  }
+
+  .header {
+    font-weight: 600;
+    font-size: 1em;
+    padding: 1em
+  }
+
+  .description {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  .content {
+    padding: 1em;
+    justify-content: space-between;
+  }
+
+  .visitDays {
+    margin-right: 1em;
+  }
+}
+
+// .createVisitWindow {
+//   margin-top: 1em;
+//   margin-bottom: 1em;
+// }
 //
 // &.enabled {
 //   background: $light-blue;

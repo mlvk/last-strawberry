@@ -1,0 +1,17 @@
+{{ui/icon-button
+  class='add'
+  type='add'
+  size=2
+  flat=true
+  backgroundColor=colors.DARK_GREY
+  padding=0.5
+  click=createNewLocation}}
+
+<div class="row wrap locations">
+  {{#each locations as |location|}}
+    {{sections/locations/summary-card
+        name=location.name
+        id=location.id
+        click=(action showLocation location.id)}}
+  {{/each}}
+</div>

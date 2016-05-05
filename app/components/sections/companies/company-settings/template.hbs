@@ -1,19 +1,32 @@
-<input
-  type="text"
-  name="name"
-  class="name"
-  placeholder="name"
-  value="{{model.name}}"
-  oninput={{action 'fieldChanged' 'name'}}
-  onchange={{action 'fieldChanged' 'name'}}
-  onblur={{action save}}>
+<div class="col">
+    <input
+      type="text"
+      name="name"
+      class="name"
+      placeholder="name"
+      value="{{model.name}}"
+      oninput={{action 'fieldChanged' 'name'}}
+      onchange={{action 'fieldChanged' 'name'}}
+      onblur={{action save}}>
 
-<input
-  type="text"
-  name="terms"
-  class="terms"
-  placeholder="terms"
-  value="{{model.terms}}"
-  oninput={{action 'fieldChanged' 'terms'}}
-  onchange={{action 'fieldChanged' 'terms'}}
-  onblur={{action save}}>
+    <input
+      type="text"
+      name="terms"
+      class="terms"
+      placeholder="terms"
+      value="{{model.terms}}"
+      oninput={{action 'fieldChanged' 'terms'}}
+      onchange={{action 'fieldChanged' 'terms'}}
+      onblur={{action save}}>
+
+  {{#power-select
+      class='priceTiers'
+      selected=model.priceTier
+      options=priceTiers
+      placeholder="Select a price tier"
+      searchEnabled=false
+      onchange=(action updatePriceTier)
+      as |priceTier|}}
+    {{priceTier.name}}
+  {{/power-select}}
+</div>

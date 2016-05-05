@@ -1,11 +1,12 @@
-<div class="col stretch">
+<div class="col stretch content">
   {{ui/input-action-bar
-      class='address-search'
+      class='addressSearch'
       type='search'
       placeholder='Search for address'
       submit=(action 'searchAddress')}}
 
   {{#leaflet-map
+      scrollWheelZoom=false
       lat=lat
       lng=lng
       zoom=zoom as |layers|}}
@@ -19,7 +20,6 @@
         {{/layers.marker}}
       {{/if}}
   {{/leaflet-map}}
-  <p class="full-address">
-    {{model.full}}
-  </p>
+
 </div>
+<span class="fullAddress">{{model.full}}</span>

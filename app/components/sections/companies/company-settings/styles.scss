@@ -1,7 +1,12 @@
-.name, .terms {
+input {
   border: none;
   font-size: 1.2em;
   border-bottom: 1px solid $dark-grey;
   padding: 0.4em;
   margin: 0.5em;
+}
+
+.priceTiers {
+  margin: 1em;
+  // width: 40em;
 }

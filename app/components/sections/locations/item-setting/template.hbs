@@ -1,0 +1,18 @@
+<span class="productName row stretch">
+  {{model.item.name}}
+</span>
+
+<div class="row">
+  <input
+    type="text"
+    name="creditRate"
+    class="creditRate"
+    value={{model.itemCreditRate.rate}}
+    onblur={{action 'creditRateChanged'}}
+    placeholder="Credit rate">
+
+  {{ui/toggle-button
+      click=(action 'toggle')
+      selected=model.itemDesire.enabled
+      label='Y'}}
+</div>

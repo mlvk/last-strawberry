@@ -1,27 +1,24 @@
-<div class="row">
-  <div class="section col-2">
+<div class="row wrap">
+  <div class="col-2">
     {{sections/locations/location-settings
         model=model
         fieldChanged=(route-action 'fieldChanged')
         save=(route-action 'saveLocation')
         delete=(route-action 'deleteLocation')}}
-  </div>
-  <div class="section col-2">
-    {{sections/locations/item-desires
-        itemDesires=model.itemDesires
-        items=items
-        change=(route-action 'updateItemDesires')}}
-  </div>
-</div>
 
-<div class="row stretch">
-  <div class="section col-2">
     {{sections/locations/address-creator
         model=model.address
         update=(route-action 'updateAddress')
         save=(route-action 'saveAddress')}}
   </div>
-  <div class="section col-2">
+{{log itemSettings}}
+  <div class="col-2">
+    {{sections/locations/item-desires
+        itemSettings=itemSettings
+        onDesireChange=(route-action 'updateItemDesire')
+        onCreditChange=(route-action 'updateItemCreditRate')
+      }}
+
     {{sections/locations/visit-schedule
         visitDays=model.visitDays
         visitWindows=model.visitWindows

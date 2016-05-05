@@ -1,11 +1,13 @@
 .ui_label-checkbox {
+  margin-right: 0.25em;
   padding: 0.5em;
-  margin: 0.5em;
+  // margin: 0.5em;
   width: 2em;
   height: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px solid $dark-grey;
   background: $light-blue;
 
   &.enabled {
@@ -15,4 +17,8 @@
   .label {
     text-transform: uppercase;
   }
+}
+
+.ui_label-checkbox:last-child {
+  margin-right: 0;
 }

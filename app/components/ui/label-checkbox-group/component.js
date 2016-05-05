@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['ui_label-checkbox-group', 'row'],
+  classNames: ['ui_label-checkbox-group', 'row', 'wrap'],
   actions: {
     itemClicked({id, text, enabled}) {
       const newCollection = this.get('model')

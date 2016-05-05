@@ -6,12 +6,15 @@ const INCLUDES = [
   'address',
   'item-desires',
   'item-desires.item',
+  'item-credit-rates',
+  'item-credit-rates.item',
   'visit-days',
   'visit-windows',
   'visit-windows.visit-window-days'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
   setupController(controller, model) {
     this._super(controller, model);
 
@@ -20,6 +23,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model(params){
     return this.store.findRecord('location', params.location_id, {include:INCLUDES.join(',')});
+  },
+
+  afterModel(model) {
+    const itemDesires = model.get('itemDesires');
+    const itemCreditRates = model.get('itemCreditRates');
+
+    const items = this.store.peekAll('item');
+
+    items.forEach(item => {
+      const matchingItemDesire = itemDesires.find(itemDesire => itemDesire.get('item.id') === item.get('id'));
+
+      if(!matchingItemDesire) {
+        const itemDesire = this.store.createRecord('item-desire', {location:model, item});
+        model.get('itemDesires').pushObject(itemDesire);
+      }
+
+      const matchingItemCreditRate = itemCreditRates.find(itemCreditRate => itemCreditRate.get('item.id') === item.get('id'));
+      if(!matchingItemCreditRate) {
+        const itemCreditRate = this.store.createRecord('item-credit-rate', {location:model, item});
+        model.get('itemCreditRates').pushObject(itemCreditRate);
+      }
+    });
+
+    return model;
   },
 
   async _saveAddress() {
@@ -33,29 +60,38 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
-    updateItemDesires(source) {
-      const location = this.modelFor('companies.show.location');
-      const itemDesires = location.get('itemDesires');
 
-      source
-        .map(({id, enabled}) => {
-          const itemDesirePredicate = resource => resource.get('item.id') === id;
-          const itemPredicate = resource => resource.get('id') === id;
-          const item = this.store.peekAll('item').find(itemPredicate);
+    updateItemDesire(itemDesire, enabled) {
+      itemDesire.set('enabled', enabled);
+      itemDesire.save();
+    },
 
-          let match = itemDesires.find(itemDesirePredicate);
+    updateItemCreditRate(itemCreditRate, rate) {
+      itemCreditRate.set('rate', rate);
+      itemCreditRate.save();
 
-          if(!match) {
-            match = this.store.createRecord('item-desire', {item, location});
-          }
-
-          match.set('enabled', enabled);
-          return match;
-        })
-        .filter(itemDesire => itemDesire.get('hasDirtyAttributes'))
-        .forEach(itemDesire => itemDesire.save());
-
-      return this.modelFor('companies.show.location').get('itemDesires');
+      // const location = this.modelFor('companies.show.location');
+      // const itemDesires = location.get('itemDesires');
+      //
+      // source
+      //   .map(({id, enabled}) => {
+      //     const itemDesirePredicate = resource => resource.get('item.id') === id;
+      //     const itemPredicate = resource => resource.get('id') === id;
+      //     const item = this.store.peekAll('item').find(itemPredicate);
+      //
+      //     let match = itemDesires.find(itemDesirePredicate);
+      //
+      //     if(!match) {
+      //       match = this.store.createRecord('item-desire', {item, location});
+      //     }
+      //
+      //     match.set('enabled', enabled);
+      //     return match;
+      //   })
+      //   .filter(itemDesire => itemDesire.get('hasDirtyAttributes'))
+      //   .forEach(itemDesire => itemDesire.save());
+      //
+      // return this.modelFor('companies.show.location').get('itemDesires');
     },
 
     updateVisitDays(source) {
@@ -105,8 +141,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       return this.modelFor('companies.show.location').get('visitWindows');
     },
 
-    visitWindowChanged(model, attr, e) {
-      model.set(attr, e.target.value);
+    visitWindowChanged(model, attr, val) {
+      console.log(attr, val);
+      model.set(attr, val);
+      model.save();
     },
 
     saveVisitWindow(model) {
@@ -130,20 +168,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     async updateAddress(newAddressData) {
       const location = this.modelFor('companies.show.location');
       let address = await location.get('address');
+
       if(!address) {
         address = this.store.createRecord('address');
-        // Ember.run(() => {
-          location.set('address', address);
-        // })
+        location.set('address', address);
       }
-      Ember.run(() => {
-        address.setProperties(newAddressData);
-        this._saveAddress();
-        // this._saveRecord(address)
-        //   .then(() => {
-        //     this._saveRecord(location);
-        //   })
-      });
+
+      address.setProperties(newAddressData);
+      this._saveAddress();
     },
 
     saveAddress() {
