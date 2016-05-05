@@ -30,7 +30,7 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
 });
 
 test('it displays the company name', function(assert) {
-  assert.equal(this.$('.locationInfo').text().trim(), `${model.get('location.code')} - ${model.get('location.name')}`);
+  assert.equal(this.$('.locationInfo').text().trim(), `${model.get('location.id')} - ${model.get('location.name')}`);
 });
 
 test('it displays a list of order-items', function(assert) {

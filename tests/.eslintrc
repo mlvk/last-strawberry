@@ -36,6 +36,7 @@
       "pauseTest": true,
       "server": true,
       "TweenMax": true,
+      "Linear": true,
       "L": true,
       "numeral": true,
       "Firebase": true

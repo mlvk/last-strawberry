@@ -26,6 +26,7 @@
       "pauseTest": true,
       "visit": true,
       "server": true,
+      "Linear": true,
       "TweenMax": true,
       "numeral": true,
       "Firebase": true

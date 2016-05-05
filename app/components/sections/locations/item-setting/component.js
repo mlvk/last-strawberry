@@ -9,7 +9,7 @@ export default Ember.Component.extend({
       this.attrs.onCreditChange(this.get('model.itemCreditRate'), rate);
     },
 
-    toggle(enabled) {
+    toggle() {
       this.attrs.onDesireChange(this.get('model.itemDesire'), !this.get('model.itemDesire.enabled'));
     }
   }

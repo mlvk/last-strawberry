@@ -7,19 +7,19 @@ moduleForComponent('sections/locations/summary-card', 'Integration | Component |
 
 test('it renders', function(assert) {
   this.set('name', 'Wutang Clan');
-  this.set('code', 'WC');
+  this.set('id', 1);
 
   this.set('clicked', (id) => {
-    assert.equal(id, '1');
+    assert.equal(id, 1);
   });
 
   this.render(hbs`{{sections/locations/summary-card
                     name=name
-                    code=code
+                    id=id
                     click=(action clicked 1)}}`);
 
   assert.equal(this.$('.name').text().trim(), 'Wutang Clan');
-  assert.equal(this.$('.code').text().trim(), 'WC');
+  assert.equal(this.$('.id').text().trim(), '1');
 
   this.$('.location').click();
 });

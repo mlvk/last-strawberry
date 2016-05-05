@@ -93,7 +93,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     onVisitWindowChange(model, attr, val) {
-      console.log('onVisitWindowChange');
       model.set(attr, val);
       model.save();
     },

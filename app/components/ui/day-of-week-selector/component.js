@@ -8,7 +8,6 @@ export default Ember.Component.extend({
 
   @computed('model.@each.{enabled}')
   collection(model = []) {
-    console.log(model);
     return DAYS_OF_WEEK.map((item, i) => {
       const match = model.find(record => record.get('day') === i);
 

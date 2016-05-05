@@ -13,7 +13,8 @@ moduleForModel('route-visit', 'Unit | Model | route visit', {
     'model:item-desire',
     'model:visit-day',
     'model:visit-window-day',
-    'model:order-item'
+    'model:order-item',
+    'model:item-credit-rate'
   ]
 });
 

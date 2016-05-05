@@ -9,7 +9,8 @@ moduleForModel('location', 'Unit | Model | location', {
     'model:visit-day',
     'model:visit-window',
     'model:price-tier',
-    'model:order'
+    'model:order',
+    'model:item-credit-rate'
   ]
 });
 
