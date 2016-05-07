@@ -5,7 +5,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias, not, notEmpty } = Ember.computed;
+const { alias, not, empty, notEmpty } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   position:       attr('number'),
@@ -18,10 +18,12 @@ export default Model.extend(LocationHashable, {
   address:        belongsTo('address'),
 
   isValid:        notEmpty('fulfillments'),
-  lat:            alias('visitWindow.lat'),
-  lng:            alias('visitWindow.lng'),
 
   visitWindow:    alias('address.visitWindows.firstObject'),
+  lat:            alias('address.lat'),
+  lng:            alias('address.lng'),
+
+  isOrphan:       empty('routePlan.id'),
 
   @computed('position')
   positionFormatted(position) {

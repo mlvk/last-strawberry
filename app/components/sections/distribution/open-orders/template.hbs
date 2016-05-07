@@ -5,10 +5,10 @@
 </span>
 {{#layouts/scroll-container}}
   {{#layouts/dd-container registerContainer=registerDropContainer}}
-    {{#each-in orderGroups as |key og|}}
+    {{#each model as |routeVisit|}}
       {{sections/distribution/order-group
-        data-location-hash=key
-        model=og}}
-    {{/each-in}}
+        data-location-hash=routeVisit.id
+        model=routeVisit}}
+    {{/each}}
   {{/layouts/dd-container}}
 {{/layouts/scroll-container}}

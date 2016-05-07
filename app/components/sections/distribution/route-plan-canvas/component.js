@@ -7,17 +7,38 @@ const SCROLL_SPEED = 20;
 export default Ember.Component.extend({
   classNames: ['col', 'stretch'],
 
-  openOrders: Ember.computed('orders.[]', 'routePlans.@each.routeVisits', function(){
-    return this.get('routePlans')
-      .reduce((acc, rp) => rp.consumeOrders(acc), this.get('orders'));
-  }),
+  // openOrders: Ember.computed('orders.[]', 'routePlans.@each.routeVisits', function(){
+  //   return this.get('routePlans')
+  //     .reduce((acc, rp) => rp.consumeOrders(acc), this.get('orders'));
+  // }),
+  //
+  // @computed('openOrders.[]')
+  // openOrderGroups (orders) {
+  //   return _.groupBy(orders, order => order.get('locationHash'));
+  // },
+  //
+  // hasOrderGroups: notEmpty('orders'),
 
-  @computed('openOrders.[]')
-  openOrderGroups (orders) {
-    return _.groupBy(orders, order => order.get('locationHash'));
+  @computed('routeVisits.@each.{isOrphan}')
+  orphanedRouteVisits(routeVisits) {
+    return routeVisits.filter(rv => rv.get('isOrphan'));
   },
 
-  hasOrderGroups: notEmpty('orders'),
+  @computed('routePlans.@each.{date,template}', 'date')
+  activeRoutePlans(routePlans, date) {
+    return routePlans
+      .filter(rp => !rp.get('template'))
+      .filter(rp => rp.get('date') === date)
+      .map((rp, index) => {
+        rp.set('index', index)
+        return rp;
+      });
+  },
+
+  @computed('routePlans.@each.{template}')
+  routePlanTemplates(rps) {
+    return rps.filter(rp => rp.get('template'));
+  },
 
   init() {
     this._super();
@@ -25,8 +46,12 @@ export default Ember.Component.extend({
     this._setupDragula();
   },
 
-  _visitWindowWithLocationHash(locationHash) {
-    return this.get('visitWindows').find(vw => vw.get('locationHash') === locationHash);
+  // _visitWindowWithLocationHash(locationHash) {
+  //   return this.get('visitWindows').find(vw => vw.get('locationHash') === locationHash);
+  // },
+
+  _routeVisitWithId(id) {
+    return this.get('routeVisits').find(rv => rv.get('id') === `${id}`);
   },
 
   _setupStreams() {
@@ -99,24 +124,45 @@ export default Ember.Component.extend({
     this.drake.on('drop', (dragNode, dropNode, fromNode, sibNode) => {
       this.dropSubject.onNext();
       const ot = this._createRouteTransform(dragNode, dropNode, fromNode, sibNode);
-      // Ember.run.schedule('afterRender', this, () => dragNode.parentElement.removeChild(dragNode));
+      Ember.run.schedule('afterRender', this, () => {
+        if(dragNode.parentElement && (ot.fromRoutePlan !== ot.toRoutePlan)) {
+          dragNode.parentElement.removeChild(dragNode)
+        }
+      });
 
-      const routePlans = this.get('routePlans');
-      routePlans.forEach(rp => rp.applyTranform(ot));
+      this.attrs.routeVisitChanged(ot.routeVisit, ot.toRoutePlan, ot.position);
+
+      // ot.routeVisit.setProperties({routePlan:ot.toRoutePlan, position:ot.position});
     });
   },
 
   _createRouteTransform(dragNode, dropNode, fromNode, sibNode) {
     const fromPlanId = this.$(fromNode).data('drop-zone-id');
     const toPlanId = this.$(dropNode).data('drop-zone-id');
-    const locationHash = this.$(dragNode).data('location-hash');
-    const visitWindow = this._visitWindowWithLocationHash(locationHash);
-    const belowLocationHash = this.$(sibNode).data('location-hash');
-
+    const routeVisit = this._routeVisitWithId(this.$(dragNode).data('location-hash'));
+    const nextRouteVisitId = this.$(sibNode).data('location-hash');
+    const nextRouteVisit = this._routeVisitWithId(nextRouteVisitId);
     const fromRoutePlan = this.ddMapping.get(fromPlanId);
     const toRoutePlan = this.ddMapping.get(toPlanId);
+    const sortedRouteVisits = toRoutePlan.get('routeVisits').sortBy('position');
+    const lastPosition = sortedRouteVisits.get('lastObject.position') || 10;
+    let position = lastPosition + 10;
 
-    return {visitWindow, belowLocationHash, fromRoutePlan, toRoutePlan};
+    if(nextRouteVisit) {
+      const index = sortedRouteVisits.indexOf(nextRouteVisit);
+      let startRange = nextRouteVisit.get('position');
+      let endRange = 0;
+
+      const previousRouteVisit = sortedRouteVisits.objectAt(index-1);
+      if(previousRouteVisit) {
+        endRange = previousRouteVisit.get('position');
+      }
+
+      position = startRange - ((startRange - endRange)/2);
+      console.log(startRange, endRange, position);
+    }
+
+    return {routeVisit, position, fromRoutePlan, toRoutePlan};
   },
 
   _clearSaveTemplate() {

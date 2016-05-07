@@ -15,13 +15,13 @@ const colorSchemes = [
 
 export default Model.extend({
   name:               attr('string'),
-  template:           attr('boolean'),
+  template:           attr('boolean', {defaultValue: false}),
   date:               attr('string'),
 
   user:               belongsTo('user'),
   routeVisits:        hasMany('route-visit'),
 
-  sortedRouteVisits:  sort('routeVisits', () => ['position:asc']),
+  sortedRouteVisits:  sort('routeVisits', () => ['position:desc']),
 
   @computed('index')
   colorScheme(index) {

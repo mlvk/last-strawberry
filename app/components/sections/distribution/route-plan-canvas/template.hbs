@@ -1,28 +1,26 @@
 {{sections/distribution/tool-bar
-  date=date
-  canCreateRoutePlans=hasOrderGroups
-  routePlanTemplates=routePlanTemplates
-  newRoutePlan=newRoutePlan
-  onDateSelected=onDateSelected
-  applyTemplate=applyTemplate
-  saveRoutePlans=saveRoutePlans}}
+    date=date
+    canCreateRoutePlans=true
+    routePlanTemplates=routePlanTemplates
+    newRoutePlan=newRoutePlan
+    onDateSelected=onDateSelected
+    applyTemplate=applyTemplate}}
 
 <div class="row stretch">
   {{sections/distribution/open-orders
-    orderGroups=openOrderGroups
-    registerDropContainer=(action 'registerDropContainer')}}
+      model=orphanedRouteVisits
+      registerDropContainer=(action 'registerDropContainer')}}
 
-  {{#each routePlans as |rp index|}}
+  {{#each activeRoutePlans as |routePlan index|}}
     {{sections/distribution/route-plan
-      index=index
-      model=rp
-      users=users
-      saveTemplate=(action 'startSaveTemplate')
-      destroyRoutePlan=destroyRoutePlan
-      deleteRouteVisit=deleteRouteVisit
-      routePlanChanged=this.attrs.routePlanChanged
-      registerDropContainer=(action 'registerDropContainer')
-      registerRoutePlan=(action 'registerRoutePlan')}}
+        index=index
+        model=routePlan
+        users=users
+        saveTemplate=(action 'startSaveTemplate')
+        destroyRoutePlan=destroyRoutePlan
+        deleteRouteVisit=deleteRouteVisit
+        registerDropContainer=(action 'registerDropContainer')
+        registerRoutePlan=(action 'registerRoutePlan')}}
   {{/each}}
 </div>
 
