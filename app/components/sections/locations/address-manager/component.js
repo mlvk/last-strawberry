@@ -2,7 +2,7 @@ import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
 export default Ember.Component.extend({
-  classNames: ['section_location_address-creator', 'col', 'stretch'],
+  classNames: ['section_location_address-manager', 'col', 'stretch'],
 
   @computed('model.lat')
   lat(val) {

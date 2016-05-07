@@ -48,7 +48,7 @@ const visitDaysPO = PO.create({
 });
 
 const addressPO = PO.create({
-  scope: '.debug_sections_locations_address-creator',
+  scope: '.debug_sections_locations_address-manager',
 
   fillSearchAddress: fillable('input'),
 

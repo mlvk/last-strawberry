@@ -1,4 +1,17 @@
 <div class="col stretch content">
+
+  {{#power-select
+      class='addressSelect'
+      selected=model
+      options=addresses
+      placeholder="Select address"
+      searchField="full"
+      searchEnabled=true
+      onchange=switchAddress
+      as |address|}}
+    {{address.full}}
+  {{/power-select}}
+
   {{ui/input-action-bar
       class='addressSearch'
       type='search'

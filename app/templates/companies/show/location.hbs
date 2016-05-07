@@ -1,22 +1,17 @@
 <div class="row wrap">
-  <div class="col-2">
+  <div class="col stretch section">
     {{sections/locations/location-settings
         model=model
         fieldChanged=(route-action 'fieldChanged')
         save=(route-action 'saveLocation')
         delete=(route-action 'deleteLocation')}}
 
-    {{sections/locations/address-creator
+    {{sections/locations/address-manager
         model=model.address
+        addresses=addresses
         update=(route-action 'updateAddress')
+        switchAddress=(route-action 'switchAddress')
         save=(route-action 'saveAddress')}}
-  </div>
-  
-  <div class="col-2">
-    {{sections/locations/item-settings
-        itemSettings=itemSettings
-        onDesireChange=(route-action 'updateItemDesire')
-        onCreditChange=(route-action 'updateItemCreditRate')}}
 
     {{sections/locations/schedule-manager
         model=model
@@ -24,5 +19,12 @@
         onVisitWindowChange=(route-action 'onVisitWindowChange')
         onVisitWindowDayChange=(route-action 'onVisitWindowDayChange')
         createVisitWindow=(route-action 'createVisitWindow')}}
+  </div>
+
+  <div class="col stretch section">
+    {{sections/locations/item-settings
+        itemSettings=itemSettings
+        onDesireChange=(route-action 'updateItemDesire')
+        onCreditChange=(route-action 'updateItemCreditRate')}}
   </div>
 </div>

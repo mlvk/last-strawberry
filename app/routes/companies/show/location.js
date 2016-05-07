@@ -4,13 +4,13 @@ const { run } = Ember;
 
 const INCLUDES = [
   'address',
+  'address.visit-windows',
+  'address.visit-windows.visit-window-days',
   'item-desires',
   'item-desires.item',
   'item-credit-rates',
   'item-credit-rates.item',
-  'visit-days',
-  'visit-windows',
-  'visit-windows.visit-window-days'
+  'visit-days'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -60,14 +60,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
-
     updateItemDesire(itemDesire, enabled) {
       itemDesire.set('enabled', enabled);
       itemDesire.save();
     },
 
     updateItemCreditRate(itemCreditRate, rate) {
-      itemCreditRate.set('rate', rate);
+
+      let cleanedRate = 0;
+
+      if(rate >= 1 && rate <= 100) {
+        cleanedRate = rate/100;
+      }
+
+      if(rate < 1 && rate > 0) {
+        cleanedRate = rate;
+      }
+
+      if(rate >= 100) {
+        cleanedRate = 1;
+      }
+
+      if(rate <= 0) {
+        cleanedRate = 0;
+      }
+
+      itemCreditRate.set('rate', cleanedRate);
       itemCreditRate.save();
     },
 
@@ -99,7 +117,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     createVisitWindow() {
       const location = this.modelFor('companies.show.location');
-      this.store.createRecord('visit-window', {location});
+      const address = location.get('address');
+      this.store.createRecord('visit-window', {address});
     },
 
     fieldChanged(model, key, value) {
@@ -109,6 +128,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     async saveLocation() {
       const location = this.modelFor('companies.show.location');
       this._saveRecord(location);
+    },
+
+    switchAddress(address) {
+      const location = this.modelFor('companies.show.location');
+      location.set('address', address);
+      location.save();
     },
 
     async updateAddress(newAddressData) {

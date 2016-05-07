@@ -1,9 +1,8 @@
 & {
-  min-width: 15em;
-  min-height: 25em;
-
-  max-height: 40em;
-  margin: 1em;
+  // min-width: 12em;
+  min-height: 20em;
+  margin-top: 1em;
+  max-height: 30em;
 }
 
 .content {
@@ -24,4 +23,9 @@
   background: $dark-grey;
   color: $off-white;
   padding: 1em;
+}
+
+.addressSelect {
+  margin-top: 1em;
+  width: 100%;
 }

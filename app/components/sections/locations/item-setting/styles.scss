@@ -1,20 +1,44 @@
 & {
+  margin: 0 0.5em;
+  min-width: 17em;
   background: $light-blue;
-  padding: 1em;
-  margin: 1em;
+  // padding: 0.5em;
+  // margin: 1em;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 .productName {
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 1.0em;
+}
+
+&.disabled .productName {
+  text-decoration: line-through;
 }
 
 input {
+  padding: 0em;
+  margin: 0em;
+  font-size: 1em;
+  width: 4em;
   background: none;
   border: none;
   border-bottom: 1px solid $dark-grey;
 }
 
-.selected {
+.desiredToggle {
+  background: $hot-pink;
+}
+
+.desiredToggle.selected {
   background: $dark-orange;
+}
+
+.formFields {
+  align-items: baseline;
+  padding: 0.4em;
+}
+
+.desiredToggle {
+  margin-left: 1em;
 }

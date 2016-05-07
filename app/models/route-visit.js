@@ -14,11 +14,14 @@ export default Model.extend(LocationHashable, {
 
   fulfillments:   hasMany('fulfillment'),
   routePlan:      belongsTo('route-plan'),
-  visitWindow:    belongsTo('visit-window'),
+
+  address:        belongsTo('address'),
 
   isValid:        notEmpty('fulfillments'),
   lat:            alias('visitWindow.lat'),
   lng:            alias('visitWindow.lng'),
+
+  visitWindow:    alias('address.visitWindows.firstObject'),
 
   @computed('position')
   positionFormatted(position) {
@@ -76,7 +79,7 @@ export default Model.extend(LocationHashable, {
   _createFulfillment(order) {
     if(!this._hasFulfillmentWithOrder(order)){
       const routeVisit = this;
-      
+
       const fulfillment = this.get('store').createRecord('fulfillment', {order, routeVisit});
       this.get('fulfillments').pushObject(fulfillment);
     }

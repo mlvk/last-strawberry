@@ -15,5 +15,10 @@ export default Ember.Controller.extend({
           itemCreditRate
         }
       });
+  },
+
+  @computed('model.company.locations.@each.{locationHash}')
+  addresses(locations) {
+    return locations.map(location => location.get('address'));
   }
 });

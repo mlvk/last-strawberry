@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['card-1'],
+  classNames: ['col', 'card-1'],
 
   chartData: {
     labels: ['10/4', '10/10', '10/14', '10/19'],

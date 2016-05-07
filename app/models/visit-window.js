@@ -11,7 +11,7 @@ export default Model.extend(LocationHashable, {
   max: 							attr('number', {defaultValue: 720}),
 	service: 					attr('number', {defaultValue: 15}),
 
-	location: 				belongsTo('location'),
+	address:	 				belongsTo('address'),
 	visitWindowDays: 	hasMany('visit-window-day'),
 
 	lat: 							alias('location.address.lat'),

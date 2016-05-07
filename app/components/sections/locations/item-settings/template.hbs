@@ -1,5 +1,10 @@
-{{#each itemSettings as |itemSetting|}}
+<div class="row header">
+  Product Setting
+</div>
+
+{{#each itemSettings as |itemSetting i|}}
   {{sections/locations/item-setting
+      index=i
       onCreditChange=onCreditChange
       onDesireChange=onDesireChange
       model=itemSetting}}

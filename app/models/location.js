@@ -17,9 +17,8 @@ export default Model.extend(LocationHashable, {
   itemCreditRates:      hasMany('item-credit-rate'),
   orders:               hasMany('order'),
   visitDays:            hasMany('visit-day'),
-  visitWindows:         hasMany('visit-window'),
 
-  defaultVisitWindow:   alias('visitWindows.firstObject'),
+  visitWindows:         alias('address.visitWindows'),
   lat:                  alias('address.lat'),
   lng:                  alias('address.lng')
 });

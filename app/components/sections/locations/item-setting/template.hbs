@@ -1,18 +1,19 @@
-<span class="productName row stretch">
-  {{model.item.name}}
+<span class="productName">
+  {{indexFormatted}}. {{model.item.name}}
 </span>
 
-<div class="row">
+<div class="row formFields">
   <input
     type="text"
     name="creditRate"
     class="creditRate"
-    value={{model.itemCreditRate.rate}}
+    value="{{creditRate}}"
     onblur={{action 'creditRateChanged'}}
-    placeholder="Credit rate">
+    placeholder="Credit %">
 
   {{ui/toggle-button
+      class='desiredToggle'
       click=(action 'toggle')
       selected=model.itemDesire.enabled
-      label='Y'}}
+      label=(if model.itemDesire.enabled 'Y' 'N')}}
 </div>

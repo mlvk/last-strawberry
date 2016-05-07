@@ -1,9 +1,19 @@
-.ui_label-checkbox {
-  padding: 0.5em;
-  margin: 0.5em;
-  min-width: 15em;
-
-  &.enabled {
-    background: $light-blue;
-  }
+& {
+  // width: 100%;
+  background: $light-blue;
+  justify-content: space-between;
+  font-size: 0.9em;
 }
+
+.header {
+  background: $dark-grey;
+  padding: 1em;
+  color: $off-white;
+}
+
+// .ui_label-checkbox {
+//   padding: 0.5em;
+//   margin: 0.5em;
+//   // min-width: 15em;
+//   // background: $light-blue;
+// }
