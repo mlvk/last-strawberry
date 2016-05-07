@@ -21,7 +21,10 @@ export default Model.extend({
   user:               belongsTo('user'),
   routeVisits:        hasMany('route-visit'),
 
-  sortedRouteVisits:  sort('routeVisits', () => ['position:desc']),
+  @computed('routeVisits.@each.{position}')
+  sortedRouteVisits(routeVisits) {
+    return routeVisits.sortBy('position');
+  },
 
   @computed('index')
   colorScheme(index) {
