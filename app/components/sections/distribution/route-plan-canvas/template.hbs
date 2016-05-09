@@ -1,8 +1,8 @@
 {{sections/distribution/tool-bar
     date=date
     canCreateRoutePlans=true
-    routePlanTemplates=routePlanTemplates
-    newRoutePlan=newRoutePlan
+    routePlanBlueprints=routePlanBlueprints
+    createRoutePlan=createRoutePlan
     onDateSelected=onDateSelected
     applyTemplate=applyTemplate}}
 
@@ -16,21 +16,22 @@
         index=index
         model=routePlan
         users=users
-        saveTemplate=(action 'startSaveTemplate')
+        saveRoutePlanBlueprint=(action 'startSaveRoutePlanBlueprint')
+        updateRoutePlan=updateRoutePlan
         destroyRoutePlan=destroyRoutePlan
-        deleteRouteVisit=deleteRouteVisit
+        removeRouteVisit=removeRouteVisit
         registerDropContainer=(action 'registerDropContainer')
         registerRoutePlan=(action 'registerRoutePlan')}}
   {{/each}}
 </div>
 
-{{#if showSaveTemplateModal}}
-  {{#tether-dialog close='cancelSaveTemplate'
+{{#if showSaveRoutePlanBlueprintModal}}
+  {{#tether-dialog close='cancelSaveRoutePlanBlueprint'
       hasOverlay=false
       attachment='top left'
       targetAttachment='middle right'
-      target=saveTemplateOptions.trigger}}
+      target=saveRoutePlanBlueprintOptions.trigger}}
     {{ui/input-action-bar submit=(action 'submitTemplateName') autoFocus=true}}
-    <button {{action 'cancelSaveTemplate'}}>Close</button>
+    <button {{action 'cancelSaveRoutePlanBlueprint'}}>Close</button>
   {{/tether-dialog}}
 {{/if}}

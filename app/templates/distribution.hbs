@@ -2,15 +2,18 @@
   {{sections/distribution/route-plan-canvas
       date=date
       routePlans=routePlans
+      routePlanBlueprints=routePlanBlueprints
       routeVisits=routeVisits
-      saveTemplate=(route-action 'saveTemplate')
+      saveRoutePlanBlueprint=(route-action 'saveRoutePlanBlueprint')
       destroyRoutePlan=(route-action 'destroyRoutePlan')
-      routeVisitChanged=(route-action 'routeVisitChanged')
-      deleteRouteVisit=(route-action 'deleteRouteVisit')
+      onRouteVisitUpdate=(route-action 'onRouteVisitUpdate')
+      removeRouteVisit=(route-action 'removeRouteVisit')
       applyTemplate=(route-action 'applyTemplate')
-      newRoutePlan=(route-action 'newRoutePlan')
-      onDateSelected=(route-action 'onDateSelected')
+      createRoutePlan=(route-action 'createRoutePlan')
+      updateRoutePlan=(route-action 'updateRoutePlan')
+      onDateSelected=(action 'onDateSelected')
       users=users}}
 
-  <!-- {{sections/distribution/visit-map routeVisits=routeVisits}} -->
+  {{sections/distribution/visit-map
+      routeVisits=routeVisits}}
 </div>

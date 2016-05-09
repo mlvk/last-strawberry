@@ -6,10 +6,7 @@ function buildStyles(data) {
 }
 
 export function rpIcon(params) {
-  // const routeVisit = params[0];
-
-  // const colorScheme = routeVisit ? routeVisit.get('routePlan.colorScheme') : {backgroundColor:colors.LIGHT_GREY, color:'white'};
-  const label = params[0] || '';
+  const label = params[0] + 1 || '';
   const backgroundColor = params[1] || '#e3e3e3';
   const color = params[2] || '#fff';
   const labelStyles = {

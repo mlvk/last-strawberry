@@ -9,22 +9,25 @@ export default Em.Component.extend({
   lng: -117.90527343750001,
   zoom: 10,
 
-  @computed('routePlans.@each.{routeVisits}')
-  handledRouteVisits(rps) {
-    const rvs = rps
-      .map(rp => rp.get('routeVisits')
-          .map(rv => rv));
+  @computed('routeVisits.@each.{isOrphan,position}')
+  openRouteVisits(routeVisits) {
+    return routeVisits.filter(rv => rv.get('isOrphan'));
+  },
 
-    return _.flatten(rvs);
+  @computed('routeVisits.@each.{isOrphan,position}')
+  handledRouteVisits(routeVisits) {
+    return routeVisits.filter(rv => !rv.get('isOrphan'));
   },
 
   @computed('handledRouteVisits')
-  handledVisitWindowHashes(rvs) {
-    return _.flatten(rvs.map(rv => rv.get('visitWindow.locationHash')));
-  },
-
-  @computed('visitWindows', 'handledVisitWindowHashes')
-  openVisitWindows (visitWindows, handled) {
-    return visitWindows.filter(vw => !handled.contains(vw.get('locationHash')));
+  handledRouteVisitsNormalized(routeVisits) {
+    return _.chain(routeVisits)
+      .groupBy(rv => rv.get('routePlan.id'))
+      .map(group =>
+        group
+          .sortBy('position')
+          .map((rv, index) => ({rv, index})))
+          .flatten()
+          .value();
   }
 });

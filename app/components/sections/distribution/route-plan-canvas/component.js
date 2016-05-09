@@ -7,27 +7,14 @@ const SCROLL_SPEED = 20;
 export default Ember.Component.extend({
   classNames: ['col', 'stretch'],
 
-  // openOrders: Ember.computed('orders.[]', 'routePlans.@each.routeVisits', function(){
-  //   return this.get('routePlans')
-  //     .reduce((acc, rp) => rp.consumeOrders(acc), this.get('orders'));
-  // }),
-  //
-  // @computed('openOrders.[]')
-  // openOrderGroups (orders) {
-  //   return _.groupBy(orders, order => order.get('locationHash'));
-  // },
-  //
-  // hasOrderGroups: notEmpty('orders'),
-
   @computed('routeVisits.@each.{isOrphan}')
   orphanedRouteVisits(routeVisits) {
     return routeVisits.filter(rv => rv.get('isOrphan'));
   },
 
-  @computed('routePlans.@each.{date,template}', 'date')
+  @computed('routePlans.@each.{date}', 'date')
   activeRoutePlans(routePlans, date) {
     return routePlans
-      .filter(rp => !rp.get('template'))
       .filter(rp => rp.get('date') === date)
       .map((rp, index) => {
         rp.set('index', index)
@@ -35,20 +22,11 @@ export default Ember.Component.extend({
       });
   },
 
-  @computed('routePlans.@each.{template}')
-  routePlanTemplates(rps) {
-    return rps.filter(rp => rp.get('template'));
-  },
-
   init() {
     this._super();
     this._setupStreams();
     this._setupDragula();
   },
-
-  // _visitWindowWithLocationHash(locationHash) {
-  //   return this.get('visitWindows').find(vw => vw.get('locationHash') === locationHash);
-  // },
 
   _routeVisitWithId(id) {
     return this.get('routeVisits').find(rv => rv.get('id') === `${id}`);
@@ -122,17 +100,18 @@ export default Ember.Component.extend({
     this.drake.on('cancel', () => this.dropSubject.onNext())
 
     this.drake.on('drop', (dragNode, dropNode, fromNode, sibNode) => {
+
       this.dropSubject.onNext();
+
       const ot = this._createRouteTransform(dragNode, dropNode, fromNode, sibNode);
+
       Ember.run.schedule('afterRender', this, () => {
-        if(dragNode.parentElement && (ot.fromRoutePlan !== ot.toRoutePlan)) {
+        if(dragNode.parentElement && !ot.fromRoutePlan) {
           dragNode.parentElement.removeChild(dragNode)
         }
       });
 
-      this.attrs.routeVisitChanged(ot.routeVisit, ot.toRoutePlan, ot.position);
-
-      // ot.routeVisit.setProperties({routePlan:ot.toRoutePlan, position:ot.position});
+      this.attrs.onRouteVisitUpdate(ot.routeVisit, ot.toRoutePlan, ot.position);
     });
   },
 
@@ -159,15 +138,14 @@ export default Ember.Component.extend({
       }
 
       position = startRange - ((startRange - endRange)/2);
-      console.log(startRange, endRange, position);
     }
 
     return {routeVisit, position, fromRoutePlan, toRoutePlan};
   },
 
-  _clearSaveTemplate() {
-    this.set('showSaveTemplateModal', false);
-    this.set('saveTemplateOptions', undefined);
+  _clearSaveRoutePlanBlueprint() {
+    this.set('showSaveRoutePlanBlueprintModal', false);
+    this.set('saveRoutePlanBlueprintOptions', undefined);
   },
 
   actions: {
@@ -180,18 +158,17 @@ export default Ember.Component.extend({
     },
 
     submitTemplateName(name) {
-      this.attrs.saveTemplate(this.get('saveTemplateOptions.routePlan'), name);
-      this._clearSaveTemplate();
+      this.attrs.saveRoutePlanBlueprint(this.get('saveRoutePlanBlueprintOptions.routePlan'), name);
+      this._clearSaveRoutePlanBlueprint();
     },
 
-    startSaveTemplate(routePlan, trigger) {
-      this.set('saveTemplateOptions', {trigger, routePlan});
-      this.set('showSaveTemplateModal', true);
+    startSaveRoutePlanBlueprint(routePlan, trigger) {
+      this.set('saveRoutePlanBlueprintOptions', {trigger, routePlan});
+      this.set('showSaveRoutePlanBlueprintModal', true);
     },
 
-    cancelSaveTemplate() {
-      this._clearSaveTemplate();
+    cancelSaveRoutePlanBlueprint() {
+      this._clearSaveRoutePlanBlueprint();
     }
   }
-
 });

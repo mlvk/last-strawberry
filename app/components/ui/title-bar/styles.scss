@@ -2,6 +2,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.5);
+
 }
 
 .contentContainer {
@@ -16,7 +17,7 @@
 
 .title {
   margin-left: 0.5em;
-  font-size: 1.2em;
+  font-size: 1.0em;
   font-weight: 600;
   color: $dark-grey;
   cursor:default;

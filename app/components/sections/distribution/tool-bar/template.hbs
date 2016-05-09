@@ -6,24 +6,17 @@
 
 <div class="row uiContainer">
   {{#if hasRoutePlanTemplates}}
-    {{ember-selectize
-      class='templateSelect'
-      content=routePlanTemplates
-      value=currentSelectedRoutePlanTemplate
-      optionValuePath="content"
-      optionLabelPath="content.name"
-      select-item=(action 'selectRouteTemplate')
-      placeholder="Apply a template" }}
+    {{#power-select
+        class='templateSelect'
+        selected=currentSelectedRoutePlanTemplate
+        options=routePlanBlueprints
+        placeholder="Select a template"
+        searchEnabled=false
+        onchange=(action 'selectRouteTemplate')
+        as |blueprint|}}
+      {{blueprint.name}}
+    {{/power-select}}
   {{/if}}
-
-  {{ui/icon-button
-    class='save'
-    type='save'
-    size=1.5
-    flat=true
-    backgroundColor=colors.LIGHT_GREEN
-    color=colors.DARK_GREY
-    click=saveRoutePlans}}
 
   {{ui/icon-button
     class='add'

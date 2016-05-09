@@ -13,12 +13,12 @@ export default Ember.Component.extend({
   },
 
   disabled: not('canCreateRoutePlans'),
-  hasRoutePlanTemplates: notEmpty('routePlanTemplates'),
+  hasRoutePlanTemplates: notEmpty('routePlanBlueprints'),
 
   actions: {
     handleCreateRoutePlan() {
       if(!this.get('disabled')){
-        this.attrs.newRoutePlan();
+        this.attrs.createRoutePlan();
       }
     },
 

@@ -5,18 +5,12 @@
 
   {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
 
-  {{#each openVisitWindows as |vw|}}
-    {{#layers.marker lat=vw.lat lng=vw.lng}}
-      {{vw.location.name}}
-    {{/layers.marker}}
+  {{#each openRouteVisits as |rv|}}
+    {{sections/distribution/map-pin model=rv}}
   {{/each}}
 
-  {{#each handledRouteVisits as |rv|}}
-    {{#layers.marker lat=rv.lat lng=rv.lng icon=(rp-icon rv.positionFormatted rv.backgroundColor)}}
-
-      {{rv.visitWindow.location.name}}
-    {{/layers.marker}}
-
+  {{#each handledRouteVisitsNormalized as |data|}}
+    {{sections/distribution/map-pin model=data.rv index=data.index}}
   {{/each}}
 
 {{/leaflet-map}}

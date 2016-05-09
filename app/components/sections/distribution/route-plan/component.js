@@ -6,8 +6,8 @@ export default Em.Component.extend({
   classNameBindings: ['indexStyle'],
 
   @computed('model.id')
-  saveTemplateDomId(id) {
-    return `saveTemplate-${id}`
+  saveRoutePlanBlueprintDomId(id) {
+    return `saveRoutePlanBlueprint-${id}`
   },
 
   actions: {
@@ -15,8 +15,8 @@ export default Em.Component.extend({
       this.attrs.destroyRoutePlan(this.get('model'));
     },
 
-    saveTemplate() {
-      this.attrs.saveTemplate(this.get('model'), this.$('.saveTemplate'));
+    saveRoutePlanBlueprint() {
+      this.attrs.saveRoutePlanBlueprint(this.get('model'), this.$('.saveRoutePlanBlueprint'));
     }
   }
 });

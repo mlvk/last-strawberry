@@ -46,16 +46,16 @@ export default Ember.Controller.extend({
   //   return routeVisits.filter(rv => rv.get('isOrphan'));
   // },
 
-  // actions: {
+  actions: {
   //   routePlanChanged(/* routePlan */) {
   //
   //   },
   //
-  //   onDateSelected(date) {
-  //     this.set('date', moment(date).format('YYYY-MM-DD'));
-  //   },
+    onDateSelected(date) {
+      this.set('date', moment(date).format('YYYY-MM-DD'));
+    }
   //
-  //   newRoutePlan () {
+  //   createRoutePlan () {
   //     this.get('store').createRecord('route-plan', {date:this.get('date')});
   //   },
   //
@@ -74,5 +74,5 @@ export default Ember.Controller.extend({
   //         return store.createRecord('route-visit', cloneData);
   //       });
   //   }
-  // }
+  }
 });

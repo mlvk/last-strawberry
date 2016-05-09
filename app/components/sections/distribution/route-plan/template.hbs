@@ -4,7 +4,7 @@
       options=users
       placeholder="Select a driver"
       searchEnabled=false
-      onchange=(action (mut model.user))
+      onchange=(action updateRoutePlan model 'user')
       as |user|}}
     {{user.name}}
   {{/power-select}}
@@ -20,22 +20,23 @@
 
     {{ui/icon-button
       type='save'
-      class='saveTemplate'
+      class='saveRoutePlanBlueprint'
       flat=true
       color=colors.DARK_GREY
       padding=0.5
-      click=(action 'saveTemplate')}}
+      click=(action 'saveRoutePlanBlueprint')}}
 
   </div>
 </div>
 
-{{#layouts/scroll-container}}
+{{#layouts/scroll-container class='routeVisitsContainer'}}
   {{#layouts/dd-container registerContainer=registerDropContainer registerId=(action registerRoutePlan model)}}
-    {{#each model.sortedRouteVisits as |rv|}}
+    {{#each model.sortedRouteVisits as |rv i|}}
       {{sections/distribution/route-visit
         colorScheme=model.colorScheme
         model=rv
-        deleteRouteVisit=(action deleteRouteVisit model)
+        index=i
+        removeRouteVisit=removeRouteVisit
         data-location-hash=rv.id}}
     {{/each}}
   {{/layouts/dd-container}}

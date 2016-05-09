@@ -1,11 +1,17 @@
 {{#ui/dd-card
-  title=model.id
+  title=title
   index=index
-  action=(action deleteRouteVisit model)
+  action=(action removeRouteVisit model)
   actionIcon='clear'
   backgroundColor=colorScheme.backgroundColor}}
 
-  <span style={{textStyles}} class="company">
-    {{model.address.full}}
-  </span>
+  <div style={{textStyles}} class="col">
+    <span class="street">
+      {{model.address.street}}
+    </span>
+
+    <span class="city">
+      {{model.address.city}}
+    </span>
+  </div>
 {{/ui/dd-card}}
