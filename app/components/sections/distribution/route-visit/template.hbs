@@ -1,9 +1,10 @@
+
 {{#ui/dd-card
   title=title
   index=index
-  action=(action removeRouteVisit model)
+  action=(if (not model.isOrphan) (action 'removeRouteVisit'))
   actionIcon='clear'
-  backgroundColor=colorScheme.backgroundColor}}
+  backgroundColor=backgroundColor}}
 
   <div style={{textStyles}} class="col">
     <span class="street">

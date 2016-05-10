@@ -20,9 +20,22 @@ export default Ember.Component.extend({
   },
 
   @style('colorScheme')
-  textStyles(colorScheme = {color:'white'}) {
+  textStyles(colorScheme = {color:this.get('colors').DARK_GREY}) {
     return {
       'color':colorScheme.color
+    }
+  },
+
+  @computed('colorScheme')
+  backgroundColor(colorScheme = {backgroundColor: this.get('colors').DARK_ORANGE}) {
+    return colorScheme.backgroundColor;
+  },
+
+  actions: {
+    removeRouteVisit() {
+      if(this.attrs.removeRouteVisit) {
+        this.attrs.removeRouteVisit(this.get('model'));
+      }
     }
   }
 });

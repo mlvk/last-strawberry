@@ -83,7 +83,10 @@ export default Ember.Component.extend({
   _setupDragula() {
     this.ddMapping = new Immutable.Map();
     this.drake = dragula([], {
-      accepts: (el, target) => this.$(target).data('drop-zone-id') !== undefined
+      accepts: (el, target) => {
+        const disableDrop = this.$(target).hasClass('disable-drop');
+        return this.$(target).data('drop-zone-id') !== undefined && !disableDrop;
+      }
     });
     this._addDragulaListeners();
   },

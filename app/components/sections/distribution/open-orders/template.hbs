@@ -4,11 +4,11 @@
   </span>
 </span>
 {{#layouts/scroll-container}}
-  {{#layouts/dd-container registerContainer=registerDropContainer}}
-    {{#each model as |routeVisit|}}
-      {{sections/distribution/order-group
-        data-location-hash=routeVisit.id
-        model=routeVisit}}
+  {{#layouts/dd-container registerContainer=registerDropContainer disableDrop=true}}
+    {{#each model as |rv|}}
+      {{sections/distribution/route-visit
+          model=rv
+          data-location-hash=rv.id}}
     {{/each}}
   {{/layouts/dd-container}}
 {{/layouts/scroll-container}}
