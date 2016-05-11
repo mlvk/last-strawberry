@@ -9,16 +9,16 @@ export default Ember.Component.extend({
 
   pdfGenerator:     Ember.inject.service(),
 
-  hasMissingItems:  notEmpty('missingItems'),
+  // hasMissingItems:  notEmpty('missingItems'),
 
   isSalesOrder:     alias('model.isSalesOrder'),
   isPurchaseOrder:  not('isSalesOrder'),
 
-  @computed('model.orderItems.@each.{name}', 'items.@each.{name}')
-  missingItems(orderItems, items) {
-    return items
-      .filter(item => !orderItems.any(oi => oi.get('item.name') === item.get('name')));
-  },
+  // @computed('model.orderItems.@each.{name}', 'items.@each.{name}')
+  // missingItems(orderItems, items) {
+  //   return items
+  //     .filter(item => !orderItems.any(oi => oi.get('item.name') === item.get('name')));
+  // },
 
   actions: {
     printOrder() {

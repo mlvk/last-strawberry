@@ -8,22 +8,26 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 const { alias, not, empty, notEmpty } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
-  position:       attr('number'),
-  arriveAt:       attr('number'),
-  departAt:       attr('number'),
+  date:             attr('date'),
+  position:         attr('number'),
+  arriveAt:         attr('number'),
+  departAt:         attr('number'),
+  fulfillmentCount: attr('number'),
+  hasPickup:        attr('boolean'),
+  hasDrop:          attr('boolean'),
 
-  fulfillments:   hasMany('fulfillment'),
-  routePlan:      belongsTo('route-plan'),
+  fulfillments:     hasMany('fulfillment'),
+  routePlan:        belongsTo('route-plan'),
 
-  address:        belongsTo('address'),
+  address:          belongsTo('address'),
 
-  isValid:        notEmpty('fulfillments'),
+  isValid:          notEmpty('fulfillments'),
 
-  visitWindow:    alias('address.visitWindows.firstObject'),
-  lat:            alias('address.lat'),
-  lng:            alias('address.lng'),
+  visitWindow:      alias('address.visitWindows.firstObject'),
+  lat:              alias('address.lat'),
+  lng:              alias('address.lng'),
 
-  isOrphan:       empty('routePlan.id'),
+  isOrphan:         empty('routePlan.id'),
 
   @computed('routePlan.colorScheme.{color}')
   color(val) {

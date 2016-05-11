@@ -1,12 +1,12 @@
-import Em from 'ember';
+import Ember from 'ember';
 import style from 'last-strawberry/utils/styles';
 import colors from 'last-strawberry/constants/colors';
 
-export default Em.Component.extend({
+export default Ember.Component.extend({
   classNames: ['col'],
   attributeBindings:['componentStyles:style'],
 
-  @style('backgroundColor')
+  @style('colorScheme.backgroundColor')
   componentStyles(backgroundColor = colors.SKY_BLUE) {
     return {
       'background-color': backgroundColor

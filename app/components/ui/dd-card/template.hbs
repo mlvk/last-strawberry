@@ -1,9 +1,4 @@
-{{ui/title-bar
-  title=title
-  index=index
-  action=action
-  actionIcon=actionIcon}}
-
-<div class="ddCardContentContainer">
-  {{yield}}
-</div>
+{{yield (hash
+    title-bar=(component 'ui/title-bar')
+    footer=(component 'ui/dd-card/dd-card-footer' colorScheme=colorScheme)
+    address=(component 'ui/dd-card/dd-card-address' colorScheme=colorScheme))}}

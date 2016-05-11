@@ -48,16 +48,15 @@
       delete=deleteOrderItem}}
 {{/each}}
 
-{{#if hasMissingItems}}
   <div class="addOrderItemContainer">
     {{#power-select
         class='search'
         placeholder='Add item manually'
+        searchField='name'
         selected=customAddItemResult
-        options=missingItems
+        options=items
         onchange=(action "createOrderItem")
         as |item|}}
           {{item.name}}
     {{/power-select}}
   </div>
-{{/if}}

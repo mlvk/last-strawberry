@@ -20,7 +20,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 
 	model(params){
-    this.params = params;
     return this.store.findRecord('order', params.id, {include:INCLUDES.join(',')});
 	},
 
@@ -33,9 +32,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		async createOrderItem(item) {
 			const order = this.modelFor('purchase-orders.show');
 			const company = await order.get('location.company');
-
+			const unitPrice = await company.priceForItem(item);
 			this.store
-				.createRecord('order-item', {item, order, unitPrice:0})
+				.createRecord('order-item', {item, order, unitPrice})
 				.save();
 		},
 

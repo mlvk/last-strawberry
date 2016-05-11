@@ -1,4 +1,4 @@
-const colors = {
+export default {
   OFF_WHITE: "#F9F9F9",
   SLATE:"#232323",
   LIGHT_GREY:"#C9C9C9",
@@ -13,5 +13,3 @@ const colors = {
   HOT_PINK: "#FF646C",
   DOPE_BLUE: "#4DA6FF"
 }
-
-export default colors;

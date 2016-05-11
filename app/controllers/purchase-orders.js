@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
     });
   },
 
-  vendorLocations: filterBy('locations', 'isCustomer', true),
+  vendorLocations: filterBy('locations', 'isVendor', true),
 
   actions: {
     onRequestNewOrder() {

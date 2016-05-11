@@ -2,7 +2,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import Ember from 'ember';
 import config from 'last-strawberry/config/environment';
 
-const BEFORE_MODEL_INCLUDES = [
+const COMPANY_MODEL_INCLUDES = [
+  'items',
   'locations'
 ];
 
@@ -34,7 +35,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     return Ember.RSVP.all([
       this.store.query('item', {'filter[is_purchased]':true}),
-      this.store.query('company', {include:BEFORE_MODEL_INCLUDES.join(',')}),
+      this.store.query('company', {'filter[is_vendor]':true, include:COMPANY_MODEL_INCLUDES.join(',')}),
       this.store.query('order', {
         'filter[order_type]':'purchase-order',
         'filter[delivery_date]':params.deliveryDate,

@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 const ROUTE_VISIT_INCLUDES = [
   'address',
+  'address.visit-windows',
+  'address.visit-windows.visit-window-days',
   'address.locations',
   'address.locations.company'
 ];

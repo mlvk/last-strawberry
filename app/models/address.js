@@ -19,5 +19,9 @@ export default Model.extend(LocationHashable, {
   @computed('street', 'city', 'state', 'zip')
   full(street, city, state, zip) {
     return `${street}, ${city}, ${state} ${zip}`;
+  },
+
+  visitWindowForDate(date) {
+    return this.get('visitWindows').find(vw => vw.validForDate(date));
   }
 });

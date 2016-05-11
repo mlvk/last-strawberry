@@ -23,7 +23,6 @@ export default Ember.Component.extend({
 
     onBlur() {
       this._blur();
-      // this.attrs.onOrderItemChange(undefined);
     },
 
     onBlurUnitPrice() {

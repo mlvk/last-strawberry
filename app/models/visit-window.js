@@ -19,6 +19,8 @@ export default Model.extend(LocationHashable, {
 
 	validForDate(date) {
 		const dayOfWeek = moment(date).day();
-		return !!this.get('visitWindowDays').find(vwd => vwd.get('day') === dayOfWeek);
+		return !!this.get('visitWindowDays').find(vwd => {
+			return vwd.get('day') === dayOfWeek && vwd.get('enabled');
+		});
 	}
 });

@@ -1,17 +1,21 @@
-{{#ui/dd-card
-  title=title
-  index=index
-  action=(if (not model.isOrphan) (action 'removeRouteVisit'))
-  actionIcon='clear'
-  backgroundColor=backgroundColor}}
+{{#ui/dd-card colorScheme=colorScheme as |card|}}
+  {{card.title-bar
+      title=title
+      index=index
+      actionIcon='clear'
+      action=(if (not model.isOrphan) (action 'removeRouteVisit'))}}
 
-  <div style={{textStyles}} class="col">
-    <span class="street">
-      {{model.address.street}}
-    </span>
+  {{card.address model.address}}
 
-    <span class="city">
-      {{model.address.city}}
-    </span>
-  </div>
+  {{#card.footer}}
+    <div class="row spaceBetween">
+      <div class="visitWindow">
+        {{minutes-to-time validVisitWindow.min}} - {{minutes-to-time validVisitWindow.max}}
+      </div>
+      <div class="estimatedArrival">
+        6:43am
+      </div>
+    </div>
+  {{/card.footer}}
+
 {{/ui/dd-card}}
