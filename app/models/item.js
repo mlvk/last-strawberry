@@ -5,7 +5,11 @@ import { hasMany } from 'ember-data/relationships';
 export default Model.extend({
   name:             attr('string'),
   description:      attr('string'),
+  code:             attr('string'),
   position:         attr('number'),
+  tag:              attr('string'),
+  isPurchased:      attr('boolean'),
+  isSold:           attr('boolean'),
 
   itemDesires:      hasMany('item-desire'),
   itemCreditRates:  hasMany('item-credit-rate'),

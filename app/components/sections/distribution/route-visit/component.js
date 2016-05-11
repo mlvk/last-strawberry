@@ -15,7 +15,6 @@ export default Ember.Component.extend({
 
   @computed('company.name', 'locations.firstObject.id', 'addressHasMultipleLocations')
   title(companyName, locationId, hasMultiple) {
-    console.log(companyName, locationId, hasMultiple);
     return hasMultiple ? `${companyName} - Multiple` : `${companyName} - ${locationId}`;
   },
 

@@ -1,12 +1,16 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
-export default Ember.Component.extend({
-  classNames: ['section_sales-order_left-nav', 'col', 'stretch'],
+const { notEmpty } = Ember.computed;
 
-  @computed('salesOrders', 'query')
-  filterOrders(salesOrders, query){
-    return salesOrders
+export default Ember.Component.extend({
+  classNames: ['col', 'stretch'],
+
+  hasStubAction: notEmpty('stubOrders'),
+
+  @computed('orders', 'query')
+  filterOrders(orders, query){
+    return orders
       .filter(so => {
         const reg = new RegExp(query, 'i');
         return reg.test(so.get('location.company.name'));
@@ -14,9 +18,9 @@ export default Ember.Component.extend({
   },
 
   @computed('filterOrders')
-  groupedSalesOrders(salesOrders) {
+  groupedOrders(orders) {
     return _
-      .chain(salesOrders)
+      .chain(orders)
       .sortBy(item => item.get('location.company.name'))
       .groupBy(item => item.get('location.company.name'))
       .value();

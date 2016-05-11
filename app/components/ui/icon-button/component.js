@@ -5,7 +5,7 @@ import computed from 'ember-computed-decorators';
 const { notEmpty } = Ember.computed;
 
 export default Ember.Component.extend({
-  classNames: ['ui_icon-button', 'btn'],
+  classNames: ['row', 'ui_icon-button', 'btn'],
   classNameBindings: ['disabled:disabled', 'flat:flat:card-1'],
   attributeBindings:['componentStyles:style'],
 

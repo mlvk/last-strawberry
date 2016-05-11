@@ -3,8 +3,9 @@ import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
+import computed from 'ember-computed-decorators';
 
-const { alias } = Ember.computed;
+const { alias, bool } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   name:                 attr('string'),
@@ -20,5 +21,13 @@ export default Model.extend(LocationHashable, {
 
   visitWindows:         alias('address.visitWindows'),
   lat:                  alias('address.lat'),
-  lng:                  alias('address.lng')
+  lng:                  alias('address.lng'),
+
+  isCustomer:           alias('company.isCustomer'),
+  isVendor:             alias('company.isVendor'),
+
+  @computed('name', 'id', 'company.name')
+  label(name, id, companyName) {
+    return `${companyName} - ${name} - ${id}`
+  }
 });

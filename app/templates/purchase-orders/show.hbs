@@ -1,3 +1,4 @@
+{{log filteredItems}}
 {{sections/sales-orders/order-editor
     model=model
     items=filteredItems
@@ -7,12 +8,3 @@
     deleteOrderItem=(route-action 'deleteOrderItem')
     onOrderItemChange=(action 'onOrderItemChange')
     deleteOrder=(route-action 'deleteOrder' model)}}
-
-<div class="row wrap">
-  {{charts/location-item-info
-      item=item
-      model=model
-      dataPath=dataPath}}
-
-  {{charts/item-location-sales-trend}}
-</div>

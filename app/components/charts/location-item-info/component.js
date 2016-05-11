@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import computed from 'ember-computed-decorators';
 const { notEmpty } = Ember.computed;
 
 export default Ember.Component.extend({
@@ -9,6 +9,11 @@ export default Ember.Component.extend({
 
   dataPathChanges:  new Rx.Subject(),
   hasData:          notEmpty('data'),
+
+  @computed('data.timestamp')
+  lastUpdated(timestamp) {
+    return timestamp || moment().subtract(30, 'day');
+  },
 
   didInsertElement() {
     this.subscription = this.dataPathChanges

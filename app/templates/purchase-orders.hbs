@@ -2,19 +2,18 @@
     currentSelectedOrder=currentSelectedOrder
     deliveryDate=deliveryDate
     onDateSelected=(route-action 'onDateSelected')
-    stubOrders=(route-action 'stubOrders')
     onRequestNewOrder=(action 'onRequestNewOrder')
     onOrderSelected=(route-action 'onOrderSelected')
-    orders=filteredSalesOrders}}
+    orders=filteredOrders}}
 {{outlet}}
 
-{{#if showCreateSalesOrderModal}}
+{{#if showCreateOrderModal}}
   {{#tether-dialog}}
     {{modals/item-selector
-        title='Create new sales order'
+        title='Create new purchase order'
         placeholder='Search for location'
-        model=customerLocations
-        close=(action 'closeCreateSalesOrder')
-        onSubmit=(route-action 'createSalesOrder')}}
+        model=vendorLocations
+        close=(action 'closeCreateOrder')
+        onSubmit=(route-action 'createOrder')}}
   {{/tether-dialog}}
 {{/if}}

@@ -1,5 +1,4 @@
 {{#each collection as |item|}}
-  {{log item}}
   {{ui/label-checkbox
       click=(action 'onDayClick' item)
       model=item}}

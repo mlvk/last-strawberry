@@ -2,7 +2,7 @@ import Ember from 'ember';
 import downloadFile from 'last-strawberry/utils/download-file';
 import computed from 'ember-computed-decorators';
 
-const { notEmpty } = Ember.computed;
+const { alias, not, notEmpty } = Ember.computed;
 
 export default Ember.Component.extend({
   classNames:       ['section_sales-order_order-editor', 'col'],
@@ -10,7 +10,10 @@ export default Ember.Component.extend({
   pdfGenerator:     Ember.inject.service(),
 
   hasMissingItems:  notEmpty('missingItems'),
-  
+
+  isSalesOrder:     alias('model.isSalesOrder'),
+  isPurchaseOrder:  not('isSalesOrder'),
+
   @computed('model.orderItems.@each.{name}', 'items.@each.{name}')
   missingItems(orderItems, items) {
     return items

@@ -1,0 +1,39 @@
+<div class="row">
+  {{ui/date-picker
+    date=deliveryDate
+    onSelected=onDateSelected
+    format='MM-DD-YYYY'}}
+</div>
+
+<div class="row">
+  {{ui/filter-bar
+      placeholder='Search...'
+      onChange=(action 'filterOrders')}}
+
+    {{#ui/popup-menu}}
+
+      {{#if hasStubAction}}
+        {{ui/icon-button
+          class='stubOrders'
+          flat=true
+          color=colors.DARK_GREY
+          label='Stub Orders'
+          type='add'
+          click=stubOrders}}
+      {{/if}}
+
+    {{ui/icon-button
+      class='createOrder'
+      flat=true
+      color=colors.DARK_GREY
+      label='New Order'
+      type='add'
+      click=onRequestNewOrder}}
+
+  {{/ui/popup-menu}}
+</div>
+
+{{lists/grouped-list
+    highlightedItem=currentSelectedOrder
+    itemClicked=onOrderSelected
+    model=groupedOrders}}

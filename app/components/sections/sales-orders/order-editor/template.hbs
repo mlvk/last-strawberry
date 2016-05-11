@@ -9,7 +9,7 @@
 
     <div class="row invoiceHeaderContainer">
       <span class="invoiceLabel">
-        Invoice
+        {{if isSalesOrder 'Invoice' 'Purchase Order'}}
       </span>
       <span class="salesOrderNumber">
         {{model.orderNumber}}

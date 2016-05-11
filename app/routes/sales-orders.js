@@ -29,21 +29,39 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 		controller.set('salesOrders', this.store.peekAll('order'));
 		controller.set('companies', this.store.peekAll('company'));
+    controller.set('locations', this.store.peekAll('location'));
 	},
 
 	model(params){
     this.params = params;
 
     return Ember.RSVP.all([
-      this.store.findAll('item'),
+      this.store.query('item', {'filter[is_sold]':true}),
       this.store.query('company', {include:BEFORE_MODEL_INCLUDES.join(',')}),
-      this.store.query('order', {'filter[delivery_date]':params.deliveryDate, include:MODEL_INCLUDES.join(',')})
+      this.store.query('order', {
+        'filter[order_type]':'sales-order',
+        'filter[delivery_date]':params.deliveryDate,
+        include:MODEL_INCLUDES.join(',')
+      })
     ]);
 	},
 
+  showSalesOrder(order) {
+    this.transitionTo('sales-orders.show', order.get('id'));
+  },
+
   actions: {
-    showSalesOrder(order) {
-      this.transitionTo('sales-orders.show', order.get('id'));
+    onOrderSelected(order) {
+      this.showSalesOrder(order);
+    },
+
+    async createSalesOrder(location) {
+      const deliveryDate = this.paramsFor('sales-orders').deliveryDate;
+      const order = await this.store
+        .createRecord('order', {location, deliveryDate})
+        .save();
+
+      this.showSalesOrder(order);
     },
 
     stubOrders () {
@@ -65,7 +83,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       });
     },
 
-    changeDeliveryDate(date) {
+    onDateSelected(date) {
       const deliveryDate = this.paramsFor('sales-orders').deliveryDate;
 
       if(deliveryDate !== moment(date).format('YYYY-MM-DD')) {

@@ -33,6 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   model (params) {
+    this.store.unloadAll('route-visit');
     return Ember.RSVP.all([
       this.store.query('route-visit', {'filter[date]':params.date, include:ROUTE_VISIT_INCLUDES.join(',')}),
       this.store.query('route-plan', {'filter[date]':params.date, include:ROUTE_PLAN_INCLUDES.join(',')}),
@@ -83,7 +84,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .forEach(slot => {
           const match = orphanedRouteVisits.find(rv => rv.get('address.id') === slot.get('address.id'));
           if(match) {
-            match.setProperties({position:slot.get('position'), routePlan});
+            match.setProperties({position:10+slot.get('position'), routePlan});
             match.save();
           }
         });

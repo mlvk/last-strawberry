@@ -1,14 +1,29 @@
-<div class="row">
+<div class="row main">
   {{link-to 'Grand Central Station' 'index' class='homeLink'}}
   <div class="row navLinksContainer">
     {{link-to 'Orders' 'sales-orders'}}
-    {{link-to 'Companies' 'companies'}}
+    {{link-to 'Purchases' 'purchase-orders'}}
     {{link-to 'Distribution' 'distribution'}}
-    {{link-to 'Items' 'items'}}
+
+    {{#ui/popup-menu}}
+      {{ui/icon-button
+        class='stubOrders'
+        flat=true
+        color=colors.DARK_GREY
+        label='Items'
+        type='add'}}
+
+      {{ui/icon-button
+        class='createOrder'
+        flat=true
+        color=colors.DARK_GREY
+        label='Customers'
+        type='add'}}
+    {{/ui/popup-menu}}
   </div>
 </div>
 
-<div class="row">
+<div class="row user">
   {{#if authenticated}}
 
     <span class="buttonContent row">

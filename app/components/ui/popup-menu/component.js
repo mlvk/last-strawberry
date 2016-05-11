@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['row', 'stretch'],
+  classNames: ['row'],
 
   didInsertElement() {
     this.mouseUps = Rx.Observable.fromEvent(window, 'mouseup');

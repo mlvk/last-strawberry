@@ -1,0 +1,29 @@
+{{title}}
+{{body}}
+{{#power-select
+    selected=currentItem
+    options=model
+    placeholder=placeholder
+    searchEnabled=true
+    searchField='label'
+    onchange=(action 'stashSelection')
+    as |location|}}
+  {{location.label}}
+{{/power-select}}
+
+{{ui/icon-button
+  class='cancel'
+  flat=true
+  color=colors.DARK_GREY
+  label='Cancel'
+  type='close'
+  click=close}}
+
+{{ui/icon-button
+  class='submit'
+  flat=true
+  color=colors.DARK_GREY
+  label='Submit'
+  type='add'
+  disabled=notReady
+  click=(action 'onSubmit')}}

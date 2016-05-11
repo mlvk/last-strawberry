@@ -3,7 +3,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias } = Ember.computed;
+const { alias, equal, not } = Ember.computed;
 
 export default Model.extend({
   name:       attr('string'),
@@ -15,8 +15,12 @@ export default Model.extend({
 
   text:       alias('name'),
 
+  isCustomer: equal('tag', 'customer'),
+  isVendor: not('isCustomer'),
+
   async priceForItem(item) {
-    const itemPrices = await this.get('priceTier.itemPrices');
+    const priceTier = await this.get('priceTier');
+    const itemPrices = await priceTier.get('itemPrices');
 
     const itemPrice = itemPrices.find(async itemPrice => await itemPrice.get('item.name') === item.get('name'));
     return itemPrice.get('price')
