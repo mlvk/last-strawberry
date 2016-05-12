@@ -1,0 +1,77 @@
+<header>
+  <span class="title">
+    New Item for {{company.name}}
+  </span>
+</header>
+
+<div class="body">
+  <input
+    type="text"
+    name="name"
+    class="name"
+    placeholder="Item name"
+    value="{{formData.name}}"
+    oninput={{action 'fieldChanged' 'name'}}
+    onchange={{action 'fieldChanged' 'name'}}>
+
+<div class="row spaceBetween">
+  <input
+    type="text"
+    name="code"
+    class="code"
+    placeholder="Item code"
+    value="{{formData.code}}"
+    oninput={{action 'fieldChanged' 'code'}}
+    onchange={{action 'fieldChanged' 'code'}}>
+
+  <input
+    type="text"
+    name="unit"
+    class="unit"
+    placeholder="Unit i.e. lb"
+    value="{{formData.unitOfMeasure}}"
+    oninput={{action 'fieldChanged' 'unitOfMeasure'}}
+    onchange={{action 'fieldChanged' 'unitOfMeasure'}}>
+
+  <input
+    type="text"
+    name="price"
+    class="price"
+    placeholder="Price"
+    value="{{formData.defaultPrice}}"
+    oninput={{action 'fieldChanged' 'defaultPrice'}}
+    onchange={{action 'fieldChanged' 'defaultPrice'}}>
+</div>
+
+<input
+  type="text"
+  name="description"
+  class="description"
+  placeholder="Item description"
+  value="{{formData.description}}"
+  oninput={{action 'fieldChanged' 'description'}}
+  onchange={{action 'fieldChanged' 'description'}}>
+</div>
+
+<footer class="row right">
+  {{ui/icon-button
+    class='cancel'
+    type='clear'
+    label='Cancel'
+    flat=true
+    color=white
+    backgroundColor=colors.DARK_GREY
+    size=1.5
+    padding=1
+    click=cancel}}
+
+  {{ui/icon-button
+    label='Create item'
+    class='submit'
+    type='add'
+    flat=true
+    backgroundColor=colors.SKY_BLUE
+    size=1.5
+    padding=1
+    click=(action 'submitForm')}}
+</footer>

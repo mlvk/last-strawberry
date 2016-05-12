@@ -6,6 +6,7 @@ export default Model.extend({
   name:             attr('string'),
   description:      attr('string'),
   code:             attr('string'),
+  unitOfMeasure:    attr('string'),
   position:         attr('number'),
   tag:              attr('string'),
   isPurchased:      attr('boolean'),

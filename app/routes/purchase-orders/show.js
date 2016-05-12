@@ -29,6 +29,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   }.on('deactivate'),
 
 	actions: {
+		async createNewItem({company, name, code, unitOfMeasure, defaultPrice}) {
+			const record = await this.store
+				.createRecord('item', {company, name, code, unitOfMeasure, defaultPrice, tag:'ingredient'})
+				.save();
+
+				return record;
+		},
+
 		async createOrderItem(item) {
 			const order = this.modelFor('purchase-orders.show');
 			const company = await order.get('location.company');

@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   pdfGenerator:     Ember.inject.service(),
 
   // hasMissingItems:  notEmpty('missingItems'),
-
+  company:          alias('model.location.company'),
   isSalesOrder:     alias('model.isSalesOrder'),
   isPurchaseOrder:  not('isSalesOrder'),
 
@@ -19,6 +19,11 @@ export default Ember.Component.extend({
   //   return items
   //     .filter(item => !orderItems.any(oi => oi.get('item.name') === item.get('name')));
   // },
+
+  @computed('itemSearchString')
+  noMatchesMessage(str) {
+    return `Create new item: ${str}`;
+  },
 
   actions: {
     printOrder() {
@@ -31,6 +36,27 @@ export default Ember.Component.extend({
     createOrderItem(item) {
       this.set('customAddItemResult', undefined);
       this.attrs.createOrderItem(item);
+    },
+
+    stashItemSearch(str) {
+      this.set('itemSearchString', str);
+    },
+
+    onItemSearchKeyDown(obj, keyboard) {
+      if(keyboard.code === 'Enter' && !obj.highlighted) {
+        this.set('showCreateItemModal', true);
+      }
+    },
+
+    cancelCreateNewItem() {
+      this.set('showCreateItemModal', false);
+    },
+
+    async requestCreateNewItem(formData) {
+      const newItem = await this.attrs.createNewItem(formData);
+
+      this.attrs.createOrderItem(newItem);
+      this.set('showCreateItemModal', false);
     }
   }
 });
