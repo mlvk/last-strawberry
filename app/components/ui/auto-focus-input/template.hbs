@@ -1,8 +1,4 @@
-<input
-  type='text'
-  name={{name}}
-  value={{value}}
-  oninput={{action onChange}}
-  onchange={{action onChange}}
-  onfocus={{action onFocus}}
-  onblur={{action onBlur}}>
+{{one-way-input value
+    onfocus=onfocus
+    onblur=onblur
+    update=update}}

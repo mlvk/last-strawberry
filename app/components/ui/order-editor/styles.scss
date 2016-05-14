@@ -1,0 +1,100 @@
+& {
+  padding: 1em;
+  background: $medium-grey;
+  min-width: 35em;
+}
+
+.toolbar {
+  justify-content: flex-end;
+}
+
+.company {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: $dark-grey;
+}
+
+.locationInfo {
+  font-size: 1.2em;
+  color: $dark-grey;
+}
+
+.orderInfo {
+  align-items: baseline;
+  margin: 2em 0 1em 0;
+}
+
+.notificationBox {
+  padding: 0.5em;
+  font-weight: 600;
+  margin: 0.25em 0;
+
+  &.notified {
+    background: rgba($light-green, 0.6);
+  }
+
+  &.awaiting_notification {
+    background: rgba($light-green, 0.6);
+  }
+
+  &.pending_notification {
+    background: rgba($hot-pink, 0.6);
+  }
+
+  &.pending_updated_notification {
+    background: rgba($hot-pink, 0.6);
+  }
+}
+
+.title {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: $dark-grey;
+  padding-right: 1em;
+  &::after {
+    content: ':';
+    font-weight: normal;
+  }
+}
+
+.orderNumber {
+  font-size: 1.2em;
+  color: $dark-grey;
+}
+
+.addOrderItemContainer {
+  border-top: 1px solid $light-grey;
+  padding-top: 2em;
+  margin-top: 2em;
+
+  .search {
+    max-width: 15em;
+  }
+}
+
+.orderTotals {
+  border-top: 2px solid $slate;
+  padding: 1em;
+
+  .content {
+    width: 15em;
+  }
+
+  .title {
+    font-size: 1em;
+  }
+
+  .quantity {
+
+  }
+
+  .price {
+
+  }
+
+  .value {
+    font-size: 1.2em;
+    font-weight: 600;
+
+  }
+}

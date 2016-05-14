@@ -20,7 +20,7 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
     this.set('saveOrderItem', () => {});
     this.set('deleteOrderItem', () => {});
 
-    this.render(hbs`{{sections/sales-orders/order-editor
+    this.render(hbs`{{ui/order-editor
           updateOrderItem=(action updateOrderItem)
           saveOrderItem=(action saveOrderItem)
           deleteOrderItem=(action deleteOrderItem)

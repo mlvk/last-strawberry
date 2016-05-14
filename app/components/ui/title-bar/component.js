@@ -4,7 +4,7 @@ import computed from 'ember-computed-decorators';
 const { computed: { notEmpty }} = Em;
 
 export default Em.Component.extend({
-  classNames: ['row', 'stretch'],
+  classNames: ['row'],
   hasAction: notEmpty('action'),
   hasIndex: notEmpty('index'),
 

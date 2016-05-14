@@ -1,7 +1,8 @@
 {{ui/icon-button
   class='trigger'
-  type='menu'
+  type=(or icon 'menu')
   size=1.4
+  padding=0
   flat=true
   color=colors.DARK_GREY
   backgroundColor=colors.BABY_BLUE
@@ -13,6 +14,8 @@
       attachment='top left'
       targetAttachment='right left'
       target=this}}
-    {{yield}}
+      <div class="content" style={{menuColors}}>
+        {{yield}}
+      </div>
   {{/tether-dialog}}
 {{/if}}

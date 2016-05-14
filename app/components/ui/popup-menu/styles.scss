@@ -2,6 +2,10 @@
   justify-content: flex-start;
 }
 
-i {
+.iconContainer {
   pointer-events: none;
+}
+
+.content {
+  background: $sky-blue;
 }

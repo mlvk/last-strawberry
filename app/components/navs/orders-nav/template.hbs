@@ -2,7 +2,7 @@
   {{ui/date-picker
     date=deliveryDate
     onSelected=onDateSelected
-    format='MM-DD-YYYY'}}
+    format='ddd MM-DD-YYYY'}}
 </div>
 
 <div class="row">
@@ -16,7 +16,6 @@
         {{ui/icon-button
           class='stubOrders'
           flat=true
-          color=colors.DARK_GREY
           label='Stub Orders'
           type='add'
           click=stubOrders}}
@@ -25,7 +24,6 @@
     {{ui/icon-button
       class='createOrder'
       flat=true
-      color=colors.DARK_GREY
       label='New Order'
       type='add'
       click=onRequestNewOrder}}

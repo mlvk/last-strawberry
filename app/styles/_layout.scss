@@ -45,8 +45,17 @@
   align-items: center;
 }
 
+.baseline {
+  align-items: baseline;
+}
+
 .left {
   justify-content: flex-start;
+}
+
+.top {
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .right {

@@ -1,0 +1,20 @@
+& {
+  margin: 0.5em;
+  width: 18em;
+  // height: 18em;
+  background: $light-green;
+  color: $dark-grey;
+}
+
+.chart {
+  // padding: 1em;
+}
+
+.itemRow {
+  // background: rgba(white, 0.3);
+  padding: 0.25em 1em;
+
+  &:nth-child(odd) {
+    background: rgba(white, 0.5);
+  }
+}

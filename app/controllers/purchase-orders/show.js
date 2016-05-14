@@ -8,9 +8,10 @@ export default Ember.Controller.extend({
 
   company: alias('model.location.company'),
 
-  filteredItems: filter('items', function(item) {
-    return item.get('company.id') === this.get('company.id');
-  }),
+  @computed('items', 'company.id')
+  filteredItems(items, companyId) {
+    return items.filter(item => item.get('company.id') === companyId);
+  },
 
   @computed('item.name', 'model.location.id')
   dataPath(name, id) {

@@ -1,4 +1,4 @@
-{{sections/sales-orders/order-editor
+{{ui/order-editor
     model=model
     items=filteredItems
     createOrderItem=(route-action 'createOrderItem')
@@ -8,11 +8,15 @@
     onOrderItemChange=(action 'onOrderItemChange')
     deleteOrder=(route-action 'deleteOrder' model)}}
 
-<div class="row wrap">
+<div class="row top wrap">
   {{charts/location-item-info
       item=item
       model=model
       dataPath=dataPath}}
 
   {{charts/item-location-sales-trend}}
+
+  {{charts/item-totals
+      title=(concat 'Item totals for: ' (moment-format model.deliveryDate 'ddd DD/MM/YY'))
+      orders=salesOrders}}
 </div>

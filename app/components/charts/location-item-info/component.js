@@ -3,7 +3,7 @@ import computed from 'ember-computed-decorators';
 const { notEmpty } = Ember.computed;
 
 export default Ember.Component.extend({
-  classNames: ['col', 'card-1'],
+  classNames: ['col', 'spaceBetween', 'card-1'],
 
   firebaseMgr:      Ember.inject.service(),
 

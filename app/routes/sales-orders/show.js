@@ -15,10 +15,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	setupController(controller, model) {
     this._super(controller, model);
 
-		controller.set('items', this.store.peekAll('item'));
-
 		const salesOrderController = this.controllerFor('sales-orders');
 		salesOrderController.set('currentSelectedOrder', model);
+
+		controller.set('items', this.store.peekAll('item'));
+		controller.set('salesOrders', salesOrderController.get('filteredSalesOrders'));
 	},
 
 	model(params){

@@ -10,13 +10,11 @@
 
   {{#if editingUnitPrice}}
     {{ui/auto-focus-input
-        type="text"
         class="unitPriceEditing"
-        name=(concat model.item.name '-unitPrice')
         value=model.unitPrice
-        onChange=(action 'update' 'unitPrice')
-        onFocus=(action 'onFocus')
-        onBlur=(action 'onBlurUnitPrice')}}
+        update=(action (mut model.unitPrice))
+        onfocus=(action 'onFocus')
+        onblur=(action 'onBlurUnitPrice')}}
   {{else}}
     <span class="unitPrice" {{action 'toggleUnitPriceEditing'}}>
       {{currency model.unitPrice}}
@@ -25,15 +23,11 @@
 
 </div>
 
-<input
-  type="text"
-  class="quantity"
-  name="{{model.item.name}}-qty"
-  value={{model.quantity}}
-  oninput={{action 'update' 'quantity'}}
-  onchange={{action 'update' 'quantity'}}
-  onfocus={{action 'onFocus'}}
-  onblur={{action 'onBlur'}}>
+{{one-way-input model.quantity
+    class='quantity'
+    onfocus=(action 'onFocus')
+    onblur=(action 'onBlur')
+    update=(action (mut model.quantity))}}
 
 {{ui/icon-button
   class='delete'

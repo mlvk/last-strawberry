@@ -1,0 +1,9 @@
+{{ui/title-bar title=title}}
+<div class="chart">
+  {{#each itemTotals as |itemTotal|}}
+    <div class="row stretch left spaceBetween itemRow">
+      <span class="name">{{itemTotal.name}}</span>
+      <span class="quantity">{{itemTotal.quantity}}</span>
+    </div>
+  {{/each}}
+</div>

@@ -1,7 +1,16 @@
 import Ember from 'ember';
+import style from 'last-strawberry/utils/styles';
+import colors from 'last-strawberry/constants/colors';
 
 export default Ember.Component.extend({
   classNames: ['row'],
+
+  @style('backgroundColor')
+  menuColors(colorScheme = {backgroundColor: colors.SKY_BLUE}) {
+    return {
+      'background-color': colorScheme.backgroundColor
+    };
+  },
 
   didInsertElement() {
     this.mouseUps = Rx.Observable.fromEvent(window, 'mouseup');

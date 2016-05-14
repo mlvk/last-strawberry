@@ -1,6 +1,8 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
 
+import { PENDING_NOTIFICATION, PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
+
 const INCLUDES = [
 	'order-items',
 	'order-items.item',
@@ -28,10 +30,36 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     purchaseOrderController.set('currentSelectedOrder', undefined);
   }.on('deactivate'),
 
+	markOrderTouched() {
+		const order = this.modelFor('purchase-orders.show');
+
+		switch (order.get('notificationState')) {
+			case AWAITING_NOTIFICATION:
+				order.set('notificationState', PENDING_UPDATED_NOTIFICATION);
+				break;
+			case NOTIFIED:
+				order.set('notificationState', PENDING_UPDATED_NOTIFICATION);
+				break;
+		}
+
+		if(order.get('hasDirtyAttributes')) {
+			return order.save();
+		} else {
+			return true;
+		}
+	},
+
 	actions: {
-		async createNewItem({company, name, code, unitOfMeasure, defaultPrice}) {
+
+		emailOrder() {
+			const order = this.modelFor('purchase-orders.show');
+			order.set('notificationState', AWAITING_NOTIFICATION);
+			return order.save();
+		},
+
+		async createNewItem({company, name, code, description, unitOfMeasure, defaultPrice}) {
 			const record = await this.store
-				.createRecord('item', {company, name, code, unitOfMeasure, defaultPrice, tag:'ingredient'})
+				.createRecord('item', {company, name, code, description, unitOfMeasure, defaultPrice, tag:'ingredient'})
 				.save();
 
 				return record;
@@ -50,15 +78,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			model.set(key, val);
 		},
 
-		saveOrderItem(model) {
-			if(model.get('hasDirtyAttributes')) {
-				return model
+		async saveOrderItem(orderItem) {
+			if(orderItem.get('hasDirtyAttributes')) {
+				await this.markOrderTouched();
+
+				return orderItem
 					.save()
-					.catch(() => model.rollbackAttributes());
+					.catch(() => orderItem.rollbackAttributes());
 			}
 		},
 
-		deleteOrderItem(model) {
+		async deleteOrderItem(model) {
+			await this.markOrderTouched();
+
 			model.destroyRecord();
 		},
 

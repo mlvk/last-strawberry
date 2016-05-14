@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import downloadFile from 'last-strawberry/utils/download-file';
 import computed from 'ember-computed-decorators';
+import { PENDING_NOTIFICATION, PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
 
-const { alias, not, notEmpty } = Ember.computed;
+const { alias, not, notEmpty, or } = Ember.computed;
 
 export default Ember.Component.extend({
   classNames:       ['section_sales-order_order-editor', 'col'],
@@ -13,6 +14,25 @@ export default Ember.Component.extend({
   company:          alias('model.location.company'),
   isSalesOrder:     alias('model.isSalesOrder'),
   isPurchaseOrder:  not('isSalesOrder'),
+
+  @computed('model.notificationState')
+  notificationAlert(state) {
+    let msg = "Order hasn't been sent yet";
+
+    switch (state) {
+      case AWAITING_NOTIFICATION:
+        msg = "Order has been sent"
+        break;
+      case NOTIFIED:
+        msg = "Order has been sent"
+        break;
+      case PENDING_UPDATED_NOTIFICATION:
+        msg = "Order changed since last sent"
+        break;
+    }
+
+    return msg;
+  },
 
   // @computed('model.orderItems.@each.{name}', 'items.@each.{name}')
   // missingItems(orderItems, items) {

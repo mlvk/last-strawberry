@@ -5,20 +5,20 @@
     {{link-to 'Purchases' 'purchase-orders'}}
     {{link-to 'Distribution' 'distribution'}}
 
-    {{#ui/popup-menu}}
+    {{#ui/popup-menu icon='arrow_drop_down'}}
       {{ui/icon-button
         class='stubOrders'
         flat=true
-        color=colors.DARK_GREY
         label='Items'
-        type='add'}}
+        size=1.4
+        padding=1.2}}
 
       {{ui/icon-button
         class='createOrder'
         flat=true
-        color=colors.DARK_GREY
         label='Customers'
-        type='add'}}
+        size=1.4
+        padding=1.2}}
     {{/ui/popup-menu}}
   </div>
 </div>
