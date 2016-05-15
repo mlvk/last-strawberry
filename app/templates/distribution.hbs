@@ -1,19 +1,26 @@
-<div class='row stretch'>
+<div class='col stretch'>
+  {{sections/distribution/tool-bar
+      date=date
+      canCreateRoutePlans=true
+      routePlans=routePlans
+      routePlanBlueprints=routePlanBlueprints
+      createRoutePlan=(route-action 'createRoutePlan')
+      onDateSelected=(action 'onDateSelected')
+      printFulfillmentDocuments=(action 'printFulfillmentDocuments')
+      publishRoutePlans=(route-action 'publishRoutePlans')
+      unPublishRoutePlans=(route-action 'unPublishRoutePlans')
+      applyTemplate=(route-action 'applyTemplate')}}
+
   {{sections/distribution/route-plan-canvas
       date=date
       routePlans=routePlans
-      routePlanBlueprints=routePlanBlueprints
       routeVisits=routeVisits
       saveRoutePlanBlueprint=(route-action 'saveRoutePlanBlueprint')
       destroyRoutePlan=(route-action 'destroyRoutePlan')
       onRouteVisitUpdate=(route-action 'onRouteVisitUpdate')
       removeRouteVisit=(route-action 'removeRouteVisit')
-      applyTemplate=(route-action 'applyTemplate')
-      createRoutePlan=(route-action 'createRoutePlan')
       updateRoutePlan=(route-action 'updateRoutePlan')
-      onDateSelected=(action 'onDateSelected')
       users=users}}
-
-  {{sections/distribution/visit-map
-      routeVisits=routeVisits}}
 </div>
+
+{{sections/distribution/visit-map routeVisits=routeVisits}}

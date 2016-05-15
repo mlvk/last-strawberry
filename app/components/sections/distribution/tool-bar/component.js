@@ -15,7 +15,16 @@ export default Ember.Component.extend({
   disabled: not('canCreateRoutePlans'),
   hasRoutePlanTemplates: notEmpty('routePlanBlueprints'),
 
+  @computed('routePlans.@each.{publishedState}')
+  allPublished(routePlans){
+    return routePlans.every(rp => rp.get('isPublished'));
+  },
+
   actions: {
+    // togglePublishRoutePlans() {
+    //   if(this.get('allPublished'))
+    // },
+
     handleCreateRoutePlan() {
       if(!this.get('disabled')){
         this.attrs.createRoutePlan();

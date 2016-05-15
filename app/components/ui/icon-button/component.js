@@ -11,19 +11,25 @@ export default Ember.Component.extend({
 
   hasLabel: notEmpty('label'),
 
-  loadingChanged: Ember.observer('loading', function() {
-    Ember.run.once(this, 'updateSpinState');
-  }),
-
-  updateSpinState() {
+  startSpin() {
     const targ = this.$('.iconContainer');
-    if(targ){
-      if(this.get('loading')) {
-        TweenMax.to(targ, 0.5, {rotation:360, repeat:-1});
-      } else {
-        TweenMax.to(targ, 0, {rotation:0});
-      }
+    this.spinTween = TweenMax.to(targ, 0.5, {rotation:360, repeat:-1});
+  },
+
+  stopSpin() {
+    this.clearTween();
+    const targ = this.$('.iconContainer');
+    TweenMax.to(targ, 0, {rotation:0});
+  },
+
+  clearTween() {
+    if(this.spinTween){
+      this.spinTween.kill();
     }
+  },
+
+  willDestroyElement() {
+    this.clearTween();
   },
 
   @computed('type', 'loading')
@@ -52,10 +58,20 @@ export default Ember.Component.extend({
   click() {
     if(!this.get('loading')){
       this.set('loading', true);
+      this.startSpin();
 
-      Ember.RSVP.allSettled([this.attrs.action()])
-        .then(() => this.set('loading', false))
-        .catch(() => this.set('loading', false));
+      const response = this.attrs.action();
+      const promise = response ? response : Ember.RSVP.resolve();
+
+      Ember.RSVP.allSettled([promise])
+        .then(() => {
+          this.set('loading', false);
+          this.stopSpin();
+        })
+        .catch(() => {
+          this.set('loading', false);
+          this.stopSpin();
+        });
     }
   }
 

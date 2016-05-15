@@ -5,7 +5,7 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 import computed from 'ember-computed-decorators';
 import colors from 'last-strawberry/constants/colors';
 
-const { sort } = Ember.computed;
+const { equal, sort } = Ember.computed;
 const { isNone, isEmpty } = Ember;
 
 const colorSchemes = [
@@ -16,6 +16,7 @@ const colorSchemes = [
 
 export default Model.extend({
   date:               attr('string'),
+  publishedState:     attr('string', {defaultValue:'draft'}),
 
   user:               belongsTo('user'),
   routeVisits:        hasMany('route-visit'),
@@ -33,5 +34,9 @@ export default Model.extend({
   @computed('date')
   formattedDate(date) {
     return moment(date, 'YYYY-MM-DD').format("dddd, MMM Do - YYYY");
-  }
+  },
+
+  isDraft: equal('publishedState', 'draft'),
+  isPublished: equal('publishedState', 'published'),
+  isCompleted: equal('publishedState', 'completed')
 });

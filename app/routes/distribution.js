@@ -44,7 +44,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     ]);
   },
 
+  setPublishedState(state) {
+    this.controller
+      .get('activeRoutePlans')
+      .forEach(rp => {
+        rp.set('publishedState', state);
+        rp.save();
+      });
+  },
+
   actions: {
+    publishRoutePlans() {
+      this.setPublishedState('published');
+    },
+
+    unPublishRoutePlans() {
+      this.setPublishedState('draft');
+    },
+
     async saveRoutePlanBlueprint(routePlan, name) {
       const routePlanBlueprint = await this.store
         .createRecord('route-plan-blueprint', {name})
