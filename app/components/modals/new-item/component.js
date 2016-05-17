@@ -3,8 +3,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['col'],
 
-  formData: Ember.Object.create(),
-
   didInsertElement() {
     this.$('.body .name').focus();
   },
@@ -12,7 +10,7 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     const name = this.get('name');
     const company = this.get('company');
-    this.get('formData').setProperties({name, company});
+    this.set('formData', Ember.Object.create({name, company}));
   },
 
   actions: {

@@ -7,9 +7,9 @@
       {{model.location.id}} - {{model.location.name}}
     </span>
 
-    <span class="notificationBox {{model.notificationState}}">
-      {{notificationAlert}}
-    </span>
+    {{#if model.isPurchaseOrder}}
+      {{ui/order-editor/notification-status status=model.notificationState}}
+    {{/if}}
 
     <div class="row orderInfo">
       <span class="title">
@@ -20,13 +20,16 @@
       </span>
       <div class="row stretch toolbar">
         <div class="row">
-          {{ui/icon-button
-              type='send'
-              class='send'
-              flat=true
-              color=colors.DARK_GREY
-              size=1.2
-              action=(route-action 'emailOrder')}}
+          {{#if model.isPurchaseOrder}}
+            {{ui/icon-button
+                type='send'
+                class='send'
+                flat=true
+                color=colors.DARK_GREY
+                size=1.2
+                action=emailOrder}}
+          {{/if}}
+
         </div>
         <div class="row">
           {{ui/icon-button
