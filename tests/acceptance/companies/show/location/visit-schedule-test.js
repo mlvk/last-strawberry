@@ -55,9 +55,9 @@ test('adds enabled class to enabled items', async function(assert) {
 test('clicking add visit window creates a new visit window', async function(assert) {
   await visitWithDefaults();
 
-  assert.equal(visitSchedulePO.visitWindows().count, 1);
+  assert.equal(visitSchedulePO.visitWindows().count, 0);
 
   await visitSchedulePO.createNewVisitWindow();
 
-  assert.equal(visitSchedulePO.visitWindows().count, 2);
+  assert.equal(visitSchedulePO.visitWindows().count, 1);
 });

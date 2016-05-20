@@ -7,6 +7,10 @@ FactoryGuy.define('address', {
     state: FactoryGuy.generate(num => `State ${num}`),
     zip: FactoryGuy.generate(num => `Zip ${num}`),
     lat: FactoryGuy.generate(num => Math.random() * num),
-    lng: FactoryGuy.generate(num => Math.random() * num)
+    lng: FactoryGuy.generate(num => Math.random() * num),
+
+    locations: FactoryGuy.hasMany('location'),
+    visitWindows: FactoryGuy.hasMany('visit-window'),
+    routeVisits: FactoryGuy.hasMany('route-visit')
   }
 });

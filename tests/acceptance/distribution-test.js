@@ -4,10 +4,14 @@ import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-
 import page from 'last-strawberry/tests/pages/distribution';
 
 import {
+  build,
   make,
   makeList,
+  mockUpdate,
   mockDelete,
-  mockFindAll
+  mockFind,
+  mockFindAll,
+  mockCreate
 } from 'ember-data-factory-guy';
 
 const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
@@ -16,49 +20,34 @@ moduleForAcceptance('Acceptance | distribution', {
   beforeEach() {
     authenticateSession(this.application);
     mockFindAll('user', 1);
+    mockFindAll('route-plan-blueprint');
   }
 });
 
 test('visiting distribution defaults to tomorrows date', async function(assert) {
-  const locations = makeList('location', 5);
-  const orders = locations.map(location => make('order', {location}));
-  const routePlan = make('route-plan');
-  orders.map(async order => {
-    const visitWindow = await order.get('location.defaultVisitWindow');
-    return make('route-visit', {visitWindow, routePlan});
-  });
-
-  mockFindAll('order').returns({models: orders});
-  mockFindAll('route-plan').returns({models: [routePlan]});
+  mockFindAll('order');
+  mockFindAll('route-plan');
+  mockFindAll('route-visit');
 
   await page.visit({date:tomorrow});
 
   assert.equal(currentURL(), `/distribution?date=${tomorrow}`);
 });
 
-test('orders display when there are valid orders', async function(assert) {
-  mockFindAll('order', 5, {deliveryDate:tomorrow});
+test('valid orphaned route-visits show up', async function(assert) {
+
   mockFindAll('route-plan');
+  mockFindAll('route-visit', 4);
 
   await page.visit();
 
-  assert.equal(page.orderGroups().count, 5);
+  assert.equal(page.openRouteVisits().count, 4);
 });
 
-test('cannot create route plans when no orders are present', async function(assert) {
-  mockFindAll('order');
+test('can create new route plans', async function(assert) {
   mockFindAll('route-plan');
-
-  await page
-    .visit()
-    .createRoutePlan();
-
-  assert.equal(page.routePlans().count, 0);
-});
-
-test('can create route plans when orders are present', async function(assert) {
-  mockFindAll('route-plan');
-  mockFindAll('order', 10);
+  mockFindAll('route-visit');
+  mockCreate('route-plan')
 
   await page
     .visit()
@@ -70,8 +59,9 @@ test('can create route plans when orders are present', async function(assert) {
 test('can delete route plans', async function(assert) {
   assert.expect(2);
 
-  mockFindAll('order');
   mockFindAll('route-plan', 1);
+  mockFindAll('route-visit');
+
   await page.visit();
 
   assert.equal(page.routePlans().count, 1);
@@ -82,19 +72,43 @@ test('can delete route plans', async function(assert) {
   assert.equal(page.routePlans().count, 0);
 });
 
-test('admins can delete individual route visit', async function(assert) {
-  const orders = makeList('order', 5);
-  const routePlan = make('route-plan');
-  orders.map(o => make('route-visit', {routePlan, visitWindow:o.get('location.defaultVisitWindow')}));
+test('can delete individual route visit', async function(assert) {
+  const routeVisit = make('route-visit', 1, 'with_route_plan');
 
-  mockFindAll('route-plan').returns({models: [routePlan]});
-  mockFindAll('order').returns({models: orders});
+  mockFindAll('route-visit').returns({models: [routeVisit]});
+  mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
+  mockUpdate(routeVisit);
+
+  debugger;
+
   await page.visit();
 
-  assert.equal(page.routePlans(0).routeVisits().count, 5);
+  debugger;
 
-  mockDelete('route-visit', 1);
+  assert.equal(page.routePlans(0).routeVisits().count, 1);
+
+  mockDelete(routeVisit);
   await page.routePlans(0).routeVisits(0).delete();
 
-  assert.equal(page.routePlans(0).routeVisits().count, 4);
+  assert.equal(page.routePlans(0).routeVisits().count, 0);
+});
+
+test('deleting handled route-visit moves it to open route-visit area', async function(assert) {
+  const routeVisit = make('route-visit', 1, 'with_route_plan');
+  mockFindAll('route-visit').returns({models: [routeVisit]});
+  mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
+  mockUpdate(routeVisit);
+
+  debugger;
+  
+  await page.visit();
+
+  debugger;
+
+  assert.equal(page.routePlans(0).openRouteVisits().count, 0);
+
+  mockDelete(routeVisit);
+  await page.routePlans(0).routeVisits(0).delete();
+
+  assert.equal(page.routePlans(0).openRouteVisits().count, 1);
 });

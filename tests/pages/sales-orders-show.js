@@ -13,10 +13,10 @@ const page = PO.create({
 });
 
 const orderEditorPO = PO.create({
-  scope: '.debug_sections_sales-orders_order-editor',
+  scope: '.debug_ui_order-editor',
   locationName: text('.locationInfo'),
   salesOrderItems: collection({
-    itemScope: '.debug_sections_sales-orders_order-item-editor',
+    itemScope: '.debug_ui_order-editor_order-item-editor',
 
     item: {
       name: text('.name'),

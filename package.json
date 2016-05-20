@@ -47,7 +47,7 @@
     "ember-component-css": "ebryn/ember-component-css",
     "ember-computed-decorators": "0.2.2",
     "ember-data": "github:emberjs/data#beta",
-    "ember-data-factory-guy": "2.4.4",
+    "ember-data-factory-guy": "2.6.0",
     "ember-export-application-global": "^1.0.5",
     "ember-leaflet": "2.2.2",
     "ember-load-initializers": "^0.5.1",

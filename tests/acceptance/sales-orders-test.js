@@ -5,6 +5,7 @@ import { page } from 'last-strawberry/tests/pages/sales-orders';
 
 import {
   make,
+  makeList,
   mockFind,
   mockFindAll
 } from 'ember-data-factory-guy';
@@ -29,23 +30,32 @@ test('navigates to correct url', async function(assert) {
 });
 
 test('should automatically show tomorrows orders', async function(assert) {
-  mockFindAll('order', 5, {deliveryDate: tomorrow});
+  mockFindAll('order', {deliveryDate: tomorrow});
 
   await page.visit({deliveryDate: tomorrow});
-  
-  assert.equal(page.locations().count, 5, 'Wrong number of locations rendered');
+
+  assert.equal(currentURL(), `/sales-orders?deliveryDate=${tomorrow}`);
+});
+
+test('should display correct number of sales orders', async function(assert) {
+  const salesOrders = makeList('sales_order', 5);
+  mockFindAll('order').returns({models: salesOrders});
+
+  await page.visit();
+
+  assert.equal(page.orders().count, 5, 'Wrong number of orders rendered');
 });
 
 test('should show sales order when location is clicked', async function(assert) {
-  const order = make('order', {deliveryDate: tomorrow});
+  const salesOrder = make('sales_order');
 
-  mockFindAll('order').returns({models: [order]});
-  mockFind('order').returns({model: order});
+  mockFindAll('order').returns({models: [salesOrder]});
+  mockFind('order').returns({model: salesOrder});
 
   await page
-    .visit({deliveryDate: tomorrow})
-    .locations(0)
+    .visit()
+    .orders(0)
     .click();
 
-  assert.equal(currentURL(), `/sales-orders/${order.get('id')}`, 'URL does not match expected');
+  assert.equal(currentURL(), `/sales-orders/${salesOrder.get('id')}`, 'URL does not match expected');
 });

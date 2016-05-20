@@ -14,8 +14,8 @@ export default PO.create({
   createRoutePlan: clickable('.debug_sections_distribution_tool-bar .add'),
   deleteLastRoutePlan: clickable('.debug_sections_distribution_route-plan:last-child .delete'),
 
-  orderGroups: collection({
-    itemScope: '.debug_sections_distribution_order-group',
+  openRouteVisits: collection({
+    itemScope: '.debug_sections_distribution_open-route-visits .debug_sections_distribution_route-visit',
 
     item: {
       title: text('.debug_passive_title-bar .span')
