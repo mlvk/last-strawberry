@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
-import { PENDING_NOTIFICATION, PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
+import { PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
 
 export default Ember.Component.extend({
   classNameBindings:['status'],
@@ -22,5 +22,5 @@ export default Ember.Component.extend({
     }
 
     return msg;
-  },
+  }
 });

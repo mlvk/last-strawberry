@@ -6,10 +6,8 @@ import decorateComponentClass from './decorate-component-class';
 export default function startApp(attrs) {
   let application;
 
-  let attributes = Ember.assign({}, config.APP);
-  attributes = Ember.assign(attributes, attrs); // use defaults, but you can override;
-
-  $.mockjaxSettings.logging = true;
+  let attributes = Ember.merge({}, config.APP);
+  attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
 
   Ember.run(() => {
     decorateComponentClass();

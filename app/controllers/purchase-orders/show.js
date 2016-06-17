@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 
-const { alias, filter, notEmpty } = Ember.computed;
+const { alias, notEmpty } = Ember.computed;
 
 export default Ember.Controller.extend({
   hasDataPath: notEmpty('dataPath'),

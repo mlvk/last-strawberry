@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import style from 'last-strawberry/utils/styles';
+import colors from 'last-strawberry/constants/colors';
 
 const DDCardAddressComponent = Ember.Component.extend({
   classNames: ['col'],
@@ -15,7 +16,7 @@ const DDCardAddressComponent = Ember.Component.extend({
 });
 
 DDCardAddressComponent.reopenClass({
-  positionalParams: ['address'],
+  positionalParams: ['address']
 });
 
 export default DDCardAddressComponent;

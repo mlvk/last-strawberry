@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
-const { notEmpty } = Ember.computed;
 
 const SCROLL_SPEED = 20;
 

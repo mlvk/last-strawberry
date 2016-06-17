@@ -1,6 +1,10 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
+
+  // $.mockjaxSettings.logging = 4;
+  
+
   var ENV = {
     modulePrefix: 'last-strawberry',
     environment: environment,
@@ -44,7 +48,7 @@ module.exports = function(environment) {
     'style-src': "'self' 'unsafe-inline' *.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
     'media-src': "'self'"
   };
-wss://s-usc1c-nss-102.firebaseio.com
+
   ENV['ember-simple-auth'] = {
     authenticationRoute: 'login',
     routeAfterAuthentication: 'orders',
@@ -60,6 +64,8 @@ wss://s-usc1c-nss-102.firebaseio.com
   }
 
   if (environment === 'test') {
+    ENV.apiHost = '';
+
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';

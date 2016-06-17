@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import style from 'last-strawberry/utils/styles';
 import computed from 'ember-computed-decorators';
 import colors from 'last-strawberry/constants/colors';
 

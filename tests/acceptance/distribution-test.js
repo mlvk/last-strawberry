@@ -3,15 +3,14 @@ import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-accept
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import page from 'last-strawberry/tests/pages/distribution';
 
-import {
-  build,
+import FactoryGuy, {
+  buildList,
   make,
-  makeList,
   mockUpdate,
   mockDelete,
-  mockFind,
   mockFindAll,
-  mockCreate
+  mockCreate,
+  mockQuery
 } from 'ember-data-factory-guy';
 
 const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
@@ -35,7 +34,6 @@ test('visiting distribution defaults to tomorrows date', async function(assert) 
 });
 
 test('valid orphaned route-visits show up', async function(assert) {
-
   mockFindAll('route-plan');
   mockFindAll('route-visit', 4);
 
@@ -59,8 +57,7 @@ test('can create new route plans', async function(assert) {
 test('can delete route plans', async function(assert) {
   assert.expect(2);
 
-  mockFindAll('route-plan', 1);
-  mockFindAll('route-visit');
+  mockFindAll('route-visit', 'with_route_plan');
 
   await page.visit();
 
@@ -73,42 +70,34 @@ test('can delete route plans', async function(assert) {
 });
 
 test('can delete individual route visit', async function(assert) {
-  const routeVisit = make('route-visit', 1, 'with_route_plan');
+  const routePlan = make('route-plan');
+  const routeVisits = buildList('route-visit', 2, {routePlan});
 
-  mockFindAll('route-visit').returns({models: [routeVisit]});
-  mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
-  mockUpdate(routeVisit);
-
-  debugger;
+  mockQuery('route-visit').returns({json:routeVisits});
 
   await page.visit();
+  assert.equal(page.routePlans(0).routeVisits().count, 2);
 
-  debugger;
+  mockUpdate('route-visit', 1);
 
-  assert.equal(page.routePlans(0).routeVisits().count, 1);
-
-  mockDelete(routeVisit);
   await page.routePlans(0).routeVisits(0).delete();
-
-  assert.equal(page.routePlans(0).routeVisits().count, 0);
+  assert.equal(page.routePlans(0).routeVisits().count, 1);
 });
 
 test('deleting handled route-visit moves it to open route-visit area', async function(assert) {
-  const routeVisit = make('route-visit', 1, 'with_route_plan');
-  mockFindAll('route-visit').returns({models: [routeVisit]});
-  mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
-  mockUpdate(routeVisit);
+  FactoryGuy.cacheOnlyMode();
+  const routeVisits = buildList('route-visit', 1, 'with_route_plan');
 
-  debugger;
-  
+  mockQuery('route-visit').returns({json: routeVisits});
+  // mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
+  mockUpdate('route-visit', 1);
+
   await page.visit();
 
-  debugger;
+  assert.equal(page.openRouteVisits().count, 0);
 
-  assert.equal(page.routePlans(0).openRouteVisits().count, 0);
-
-  mockDelete(routeVisit);
+  mockDelete('route-visit', 1);
   await page.routePlans(0).routeVisits(0).delete();
 
-  assert.equal(page.routePlans(0).openRouteVisits().count, 1);
+  assert.equal(page.openRouteVisits().count, 1);
 });

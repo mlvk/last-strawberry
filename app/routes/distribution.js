@@ -9,11 +9,6 @@ const ROUTE_VISIT_INCLUDES = [
   'address.locations.company'
 ];
 
-const ROUTE_PLAN_INCLUDES = [
-  'route-visits',
-  'user'
-];
-
 const ROUTE_PLAN_BLUEPRINT_INCLUDES = [
   'route-plan-blueprint-slots',
   'route-plan-blueprint-slots.address'
@@ -38,7 +33,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     this.store.unloadAll('route-visit');
     return Ember.RSVP.all([
       this.store.query('route-visit', {'filter[date]':params.date, include:ROUTE_VISIT_INCLUDES.join(',')}),
-      this.store.query('route-plan', {'filter[date]':params.date, include:ROUTE_PLAN_INCLUDES.join(',')}),
       this.store.query('route-plan-blueprint', {include:ROUTE_PLAN_BLUEPRINT_INCLUDES.join(',')}),
       this.store.findAll('user')
     ]);

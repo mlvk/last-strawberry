@@ -1,6 +1,5 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
-import config from 'last-strawberry/config/environment';
 
 const COMPANY_MODEL_INCLUDES = [
   'items',

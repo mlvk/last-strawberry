@@ -5,7 +5,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias, not, empty, notEmpty } = Ember.computed;
+const { alias, empty, notEmpty } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   date:             attr('date'),

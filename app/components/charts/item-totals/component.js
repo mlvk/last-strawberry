@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['col', 'card-1'],
 
   @computed('orders.@each.{totalQuantity}')
-  itemTotals(orders) {
+  itemTotals(orders = Ember.A()) {
     return _
       .chain(orders.toArray())
       .map(order => order.get('orderItems').toArray())

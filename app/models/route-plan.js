@@ -5,13 +5,12 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 import computed from 'ember-computed-decorators';
 import colors from 'last-strawberry/constants/colors';
 
-const { equal, sort } = Ember.computed;
-const { isNone, isEmpty } = Ember;
+const { equal } = Ember.computed;
 
 const colorSchemes = [
   {backgroundColor:colors.HOT_PINK, color:'white'},
   {backgroundColor:colors.DOPE_BLUE, color:'white'},
-  {backgroundColor:colors.DARK_GREEN, color:'white'},
+  {backgroundColor:colors.DARK_GREEN, color:'white'}
 ]
 
 export default Model.extend({

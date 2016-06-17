@@ -127,7 +127,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     async saveLocation() {
       const location = this.modelFor('companies.show.location');
-      this._saveRecord(location);
+      location.save();
     },
 
     switchAddress(address) {

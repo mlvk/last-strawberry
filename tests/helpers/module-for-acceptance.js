@@ -10,6 +10,9 @@ export default function(name, options = {}) {
 
       mockSetup();
 
+      // $.mockjaxSettings.logging = true;
+      // $.mockjaxSettings.logging = 4;
+
       if (options.beforeEach) {
         options.beforeEach.apply(this, arguments);
       }
@@ -19,7 +22,7 @@ export default function(name, options = {}) {
       destroyApp(this.application);
 
       mockTeardown();
-      
+
       if (options.afterEach) {
         options.afterEach.apply(this, arguments);
       }

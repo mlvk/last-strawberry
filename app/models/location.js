@@ -5,7 +5,7 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import computed from 'ember-computed-decorators';
 
-const { alias, bool } = Ember.computed;
+const { alias } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   name:                 attr('string'),

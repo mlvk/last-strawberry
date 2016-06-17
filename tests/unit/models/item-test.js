@@ -6,8 +6,9 @@ moduleForModel('item', 'Unit | Model | item', {
     'model:item-desire',
     'model:order-item',
     'model:item-price',
-    'model:item-desire', 
-    'model:item-credit-rate'
+    'model:item-desire',
+    'model:item-credit-rate',
+    'model:company'
   ]
 });
 

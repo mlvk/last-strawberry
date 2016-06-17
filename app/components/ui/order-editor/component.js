@@ -2,7 +2,7 @@ import Ember from 'ember';
 import downloadFile from 'last-strawberry/utils/download-file';
 import computed from 'ember-computed-decorators';
 
-const { alias, not, notEmpty, or } = Ember.computed;
+const { alias, not } = Ember.computed;
 
 export default Ember.Component.extend({
   classNames:       ['section_sales-order_order-editor', 'col'],

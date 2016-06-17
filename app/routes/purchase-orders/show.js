@@ -1,7 +1,7 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
 
-import { PENDING_NOTIFICATION, PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
+import { PENDING_UPDATED_NOTIFICATION, AWAITING_NOTIFICATION, NOTIFIED } from 'last-strawberry/models/order';
 
 const INCLUDES = [
 	'order-items',
