@@ -85,18 +85,15 @@ test('can delete individual route visit', async function(assert) {
 });
 
 test('deleting handled route-visit moves it to open route-visit area', async function(assert) {
-  FactoryGuy.cacheOnlyMode();
   const routeVisits = buildList('route-visit', 1, 'with_route_plan');
 
   mockQuery('route-visit').returns({json: routeVisits});
-  // mockFindAll('route-plan').returns({models: [routeVisit.get('routePlan')]});
   mockUpdate('route-visit', 1);
 
   await page.visit();
 
   assert.equal(page.openRouteVisits().count, 0);
 
-  mockDelete('route-visit', 1);
   await page.routePlans(0).routeVisits(0).delete();
 
   assert.equal(page.openRouteVisits().count, 1);
