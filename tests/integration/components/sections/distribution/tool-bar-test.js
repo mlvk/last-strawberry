@@ -13,31 +13,35 @@ moduleForComponent('sections/distribution/tool-bar', 'Integration | Component | 
 });
 
 test('does not render template select if there are no route-templates', function(assert) {
-  this.set('handleDateSelected', () => assert.ok(true));
-  this.set('handleNewRoutePlan', () => assert.ok(true));
-  this.set('handleSaveRoutePlans', () => assert.ok(true));
+  this.set('onDateSelected', () => assert.ok(true));
+  this.set('createRoutePlan', () => assert.ok(true));
+  this.set('applyTemplate', () => assert.ok(true));
+  this.set('printFulfillmentDocuments', () => assert.ok(true));
 
   this.render(hbs`{{sections/distribution/tool-bar
-    onDateSelected=(action handleDateSelected)
-    newRoutePlan=(action handleNewRoutePlan)
-    saveRoutePlans=(action handleSaveRoutePlans)
+    onDateSelected=(action onDateSelected)
+    createRoutePlan=(action createRoutePlan)
+    applyTemplate=(action applyTemplate)
+    printFulfillmentDocuments=(action printFulfillmentDocuments)
   }}`);
 
-  assert.equal(this.$('.debug_sections_distribution_tool-bar select').length, 0);
+  assert.equal(this.$('.debug_sections_distribution_tool-bar .templateSelect').length, 0);
 });
 
 test('renders route-plan templates select when template are present', function(assert) {
-  this.set('routePlanTemplates', makeList('route-plan', 5));
-  this.set('handleDateSelected', () => assert.ok(true));
-  this.set('handleNewRoutePlan', () => assert.ok(true));
-  this.set('handleSaveRoutePlans', () => assert.ok(true));
+  this.set('routePlanBlueprints', makeList('route-plan-blueprint', 5));
+  this.set('onDateSelected', () => assert.ok(true));
+  this.set('createRoutePlan', () => assert.ok(true));
+  this.set('applyTemplate', () => assert.ok(true));
+  this.set('printFulfillmentDocuments', () => assert.ok(true));
 
   this.render(hbs`{{sections/distribution/tool-bar
-    routePlanTemplates=routePlanTemplates
-    onDateSelected=(action handleDateSelected)
-    newRoutePlan=(action handleNewRoutePlan)
-    saveRoutePlans=(action handleSaveRoutePlans)
+    routePlanBlueprints=routePlanBlueprints
+    onDateSelected=(action onDateSelected)
+    createRoutePlan=(action createRoutePlan)
+    applyTemplate=(action applyTemplate)
+    printFulfillmentDocuments=(action printFulfillmentDocuments)
   }}`);
 
-  assert.equal(this.$('.debug_sections_distribution_tool-bar select').length, 1);
+  assert.equal(this.$('.debug_sections_distribution_tool-bar .templateSelect').length, 1);
 });

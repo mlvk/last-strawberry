@@ -3,7 +3,7 @@ import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-accept
 import { authenticateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 import page from 'last-strawberry/tests/pages/distribution';
 
-import FactoryGuy, {
+import {
   buildList,
   make,
   mockUpdate,

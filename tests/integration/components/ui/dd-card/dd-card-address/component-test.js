@@ -1,24 +1,29 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';
+
+import {
+  make,
+  manualSetup
+} from 'ember-data-factory-guy';
 
 moduleForComponent('ui/dd-card/dd-card-address', 'Integration | Component | ui/dd card/dd card address', {
-  integration: true
+  integration: true,
+
+  beforeEach: function () {
+    decorateComponentClass();
+    manualSetup(this.container);
+  }
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{ui/dd-card/dd-card-address}}`);
+  const address = make('address');
 
-  assert.equal(this.$().text().trim(), '');
+  this.set('address', address);
+  this.render(hbs`{{ui/dd-card/dd-card-address address}}`);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#ui/dd-card/dd-card-address}}
-      template block text
-    {{/ui/dd-card/dd-card-address}}
-  `);
+  assert.equal(this.$('.street').text().trim(), address.get('street'));
+  assert.equal(this.$('.city').text().trim(), address.get('city'));
 
-  assert.equal(this.$().text().trim(), 'template block text');
 });

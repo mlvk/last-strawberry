@@ -11,18 +11,6 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    // updateQuantity(e) {
-    //   const newVal = e.target.value;
-    //   this.set('localQuantity', newVal)
-    //   this.attrs.update(this.get('model'), 'quantity', newVal);
-    // },
-    //
-    // updatePrice(e) {
-    //   const newVal = e.target.value;
-    //   this.set('localPrice', newVal);
-    //   this.attrs.update(this.get('model'), 'unitPrice', newVal);
-    // },
-
     onFocus() {
       this.set('highlighted', true);
       this.attrs.onOrderItemChange(this.get('model.item'));
@@ -40,7 +28,7 @@ export default Ember.Component.extend({
       if(!this.get('model.unitPrice')){
         this.set('model.unitPrice', 0)
       }
-      
+
       this.set('editingUnitPrice', false);
       this._blur();
     },

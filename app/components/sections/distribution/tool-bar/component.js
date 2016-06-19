@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   hasRoutePlanTemplates: notEmpty('routePlanBlueprints'),
 
   @computed('routePlans.@each.{publishedState}')
-  allPublished(routePlans){
+  allPublished(routePlans = []){
     return routePlans.every(rp => rp.get('isPublished'));
   },
 
