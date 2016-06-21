@@ -1,7 +1,7 @@
 {
   "name": "last-strawberry",
   "dependencies": {
-    "ember": "beta",
+    "ember": "~2.6.0",
     "ember-cli-shims": "0.1.1",
     "ember-cli-test-loader": "0.2.2",
     "selectize": "~0.12.1",
@@ -21,12 +21,13 @@
     "gsap": "^1.18.4",
     "firebase": "^2.4.2",
     "chartjs": "1.0.2",
-    "jquery-mockjax": "2.2.0"
+    "jquery-mockjax": "2.2.0",
+    "google-fonts": "*",
+    "material-design-icons": "^2.2.3"
   },
   "resolutions": {
     "ember-qunit-notifications": "0.1.0",
     "ceibo": "1.1.0",
-    "ember": "beta",
     "chartjs": "1.0.2"
   }
 }

@@ -45,7 +45,39 @@ module.exports = function(defaults) {
   app.import('bower_components/numeral/min/numeral.min.js');
   app.import('bower_components/rxjs/dist/rx.all.min.js');
   app.import('bower_components/immutable/dist/immutable.min.js');
+  app.import('bower_components/gsap/src/minified/TweenMax.min.js');
+  app.import('bower_components/gsap/src/minified/easing/EasePack.min.js');
   app.import('bower_components/firebase/firebase.js');
+
+  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Bold.ttf', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Light.ttf', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Regular.ttf', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Regular.ttf', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2', {
+    destDir: 'assets'
+  });
+
+  app.import('bower_components/material-design-icons/iconfont/material-icons.css');
 
   return app.toTree();
 };
