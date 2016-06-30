@@ -21,6 +21,7 @@ export default Model.extend(LocationHashable, {
   orderType:                    attr('string', {defaultValue: SALES_ORDER}),
   deliveryDate:                 attr('string'),
   notificationState:            attr('string', {defaultValue: PENDING_NOTIFICATION}),
+  shipping:                     attr('number'),
 
   location:                     belongsTo('location'),
   orderItems:                   hasMany('order-item'),
@@ -47,8 +48,9 @@ export default Model.extend(LocationHashable, {
     return orderItems.reduce((acc, cur) => acc + Number(cur.get('quantity')), 0);
   },
 
-  @computed('orderItems.@each.{quantity,unitPrice}')
-  totalPrice(orderItems) {
-    return orderItems.reduce((acc, cur) => acc + Number(cur.get('quantity') * cur.get('unitPrice')), 0);
+  @computed('orderItems.@each.{quantity,unitPrice}', 'shipping')
+  totalPrice(orderItems, shipping) {
+    const orderItemsTotal = orderItems.reduce((acc, cur) => acc + Number(cur.get('quantity') * cur.get('unitPrice')), 0);
+    return orderItemsTotal + shipping;
   }
 });

@@ -4,14 +4,14 @@
       logout=(action 'logout')
       login=(action 'login')
       name=userName
+      navigateToRoute=(route-action 'navigateToRoute')
       authenticated=session.isAuthenticated}}
     {{navs/nav-bar}}
   </div>
 
   <div class='row stretch outerContainer'>
     <div class='row stretch appContainer'>
-
-        {{outlet}}
+      {{outlet}}
     </div>
   </div>
 

@@ -33,6 +33,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   }.on('deactivate'),
 
 	actions: {
+		updateShipping({target: { value }}) {
+			const cleaned = parseFloat(value) || 0;
+			const order = this.modelFor('sales-orders.show');
+			order.set('shipping', cleaned);
+		},
+
+		saveOrder() {
+			const order = this.modelFor('sales-orders.show');
+			order.save();
+		},
+
 		async createOrderItem(item) {
 			const order = this.modelFor('sales-orders.show');
 			const company = await order.get('location.company');

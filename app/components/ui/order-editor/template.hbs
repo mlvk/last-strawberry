@@ -65,7 +65,19 @@
 {{/each}}
 
 <div class="col right orderTotals">
+
+
+
   <div class="col content">
+    <span class="title">Shipping</span>
+    <input
+      type="text"
+      name="name"
+      placeholder="Shipping rate"
+      value="{{model.shipping}}"
+      oninput={{action updateShipping}}
+      onchange={{action updateShipping}}
+      onblur={{action saveOrder}}>
     <span class="title">Totals</span>
     <span class="row spaceBetween baseline totalQuantity">
       <span>Total quantity: </span>

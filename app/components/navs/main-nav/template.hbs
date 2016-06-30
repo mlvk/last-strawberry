@@ -7,18 +7,20 @@
 
     {{#ui/popup-menu icon='arrow_drop_down'}}
       {{ui/icon-button
-        class='stubOrders'
+        class='items'
         flat=true
         label='Items'
         size=1.4
-        padding=1.2}}
+        padding=1.2
+        action=(action navigateToRoute 'items')}}
 
       {{ui/icon-button
-        class='createOrder'
+        class='customers'
         flat=true
         label='Customers'
         size=1.4
-        padding=1.2}}
+        padding=1.2
+        action=(action navigateToRoute 'companies')}}
     {{/ui/popup-menu}}
   </div>
 </div>
