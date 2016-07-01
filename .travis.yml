@@ -24,5 +24,5 @@ script:
   - npm test
 
 after_success:
-  ember build --environment production
-  firebase deploy --token ${FIREBASE_TOKEN}
+  - ember build --environment production
+  - firebase deploy --token ${FIREBASE_TOKEN}
