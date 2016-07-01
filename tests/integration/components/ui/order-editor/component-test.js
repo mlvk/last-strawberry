@@ -16,11 +16,15 @@ moduleForComponent('sections/sales-order/order-editor', 'Integration | Component
 
     this.set('model', model);
     this.set('items', []);
+    this.set('saveOrder', () => {});
+    this.set('updateShipping', () => {});
     this.set('updateOrderItem', () => {});
     this.set('saveOrderItem', () => {});
     this.set('deleteOrderItem', () => {});
 
     this.render(hbs`{{ui/order-editor
+          saveOrder=(action saveOrder)
+          updateShipping=(action updateShipping)
           updateOrderItem=(action updateOrderItem)
           saveOrderItem=(action saveOrderItem)
           deleteOrderItem=(action deleteOrderItem)
