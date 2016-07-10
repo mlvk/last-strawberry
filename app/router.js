@@ -24,6 +24,9 @@ Router.map(function() {
 
   this.route('distribution');
 
+  this.route('products', function() {
+    this.route('show', {path:':item_id'});
+  });
 });
 
 export default Router;

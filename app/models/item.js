@@ -1,6 +1,9 @@
+import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
+
+const { alias } = Ember.computed;
 
 export default Model.extend({
   name:             attr('string'),
@@ -17,5 +20,7 @@ export default Model.extend({
   itemDesires:      hasMany('item-desire'),
   itemCreditRates:  hasMany('item-credit-rate'),
   itemPrices:       hasMany('item-price'),
-  orderItems:       hasMany('order-item')
+  orderItems:       hasMany('order-item'),
+
+  text:             alias('name')
 });

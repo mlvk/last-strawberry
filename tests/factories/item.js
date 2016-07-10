@@ -6,5 +6,9 @@ FactoryGuy.define('item', {
     description: FactoryGuy.generate(num => `Description ${num}`),
     position: FactoryGuy.generate(num => num),
     itemDesires: FactoryGuy.hasMany('item-desire')
+  },
+
+  product: {
+    tag: 'product'
   }
 });
