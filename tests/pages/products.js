@@ -7,7 +7,7 @@ const {
   text
 } = PO;
 
-export default PO.create({
+const defaultPage = PO.create({
   visit: visitable('/products'),
 
   products: collection({
@@ -19,3 +19,9 @@ export default PO.create({
     }
   })
 });
+
+const showPage = PO.create({
+  visit: visitable('/products/:id')
+});
+
+export { defaultPage, showPage };

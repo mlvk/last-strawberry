@@ -3,7 +3,7 @@
 module.exports = function(environment) {
 
   // $.mockjaxSettings.logging = 4;
-  
+
 
   var ENV = {
     modulePrefix: 'last-strawberry',
