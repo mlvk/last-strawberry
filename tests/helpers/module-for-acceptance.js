@@ -10,6 +10,7 @@ export default function(name, options = {}) {
 
       mockSetup();
 
+      // Enable for mockjax logging
       // $.mockjaxSettings.logging = true;
       // $.mockjaxSettings.logging = 4;
 

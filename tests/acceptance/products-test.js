@@ -1,11 +1,10 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
-import { defaultPage, showPage } from 'last-strawberry/tests/pages/products';
+import { defaultPage } from 'last-strawberry/tests/pages/products';
 import { authenticateSession, invalidateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 
 import {
   make,
-  build,
   buildList,
   mockFind,
   mockQuery
@@ -13,8 +12,6 @@ import {
 
 moduleForAcceptance('Acceptance | products', {
   beforeEach() {
-    // $.mockjaxSettings.logging = true;
-    // $.mockjaxSettings.logging = 4;
     authenticateSession(this.application);
   }
 });
