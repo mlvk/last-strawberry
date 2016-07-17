@@ -22,8 +22,7 @@
     "firebase": "^2.4.2",
     "chartjs": "1.0.2",
     "jquery-mockjax": "2.2.0",
-    "google-fonts": "*",
-    "material-design-icons": "^2.2.3"
+    "mlvk-google-fonts": "brancusi/mlvk-google-fonts"
   },
   "resolutions": {
     "ember-qunit-notifications": "0.1.0",

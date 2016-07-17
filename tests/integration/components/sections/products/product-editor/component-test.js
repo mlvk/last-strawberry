@@ -1,24 +1,32 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { make, manualSetup } from 'ember-data-factory-guy';
 
 moduleForComponent('sections/products/product-editor', 'Integration | Component | sections/products/product editor', {
-  integration: true
+  integration: true,
+
+  beforeEach: function () {
+    manualSetup(this.container);
+  }
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it renders all fields', function(assert) {
 
-  this.render(hbs`{{sections/products/product-editor}}`);
+  const model = make('product');
 
-  assert.equal(this.$().text().trim(), '');
+  this.set('model', model);
+  this.set('validateProperty', () => {});
+  this.set('save', () => {});
+  this.set('reset', () => {});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#sections/products/product-editor}}
-      template block text
-    {{/sections/products/product-editor}}
-  `);
+  this.render(hbs`{{sections/products/product-editor
+      model=model
+      validateProperty=validateProperty
+      save=save
+      reset=reset
+    }}`);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.name input').val().trim(), model.get('name'));
+  assert.equal(this.$('.description input').val().trim(), model.get('description'));
+  assert.equal(this.$('.code input').val().trim(), model.get('code'));
 });

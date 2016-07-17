@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   session:     Ember.inject.service(),
 
   @computed('session')
-  validations(session) {  
+  validations(session) {
     return ProductValidations(session);
   }
 });

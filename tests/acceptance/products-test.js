@@ -66,5 +66,5 @@ test('displays the product information', async function(assert) {
 
   await showPage.visit({id:product.get('id')});
 
-  assert.equal(showPage.name, product.get('name'));
+  assert.equal(showPage.nameValue, product.get('name'));
 });

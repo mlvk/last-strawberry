@@ -49,35 +49,31 @@ module.exports = function(defaults) {
   app.import('bower_components/gsap/src/minified/easing/EasePack.min.js');
   app.import('bower_components/firebase/firebase.js');
 
-  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Bold.ttf', {
+  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Bold.ttf', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Light.ttf', {
+  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Light.ttf', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Regular.ttf', {
+  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Regular.ttf', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/google-fonts/apache/opensans/OpenSans-Regular.ttf', {
+  app.import('bower_components/mlvk-google-fonts/iconfont/MaterialIcons-Regular.ttf', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf', {
+  app.import('bower_components/mlvk-google-fonts/iconfont/MaterialIcons-Regular.woff', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff', {
+  app.import('bower_components/mlvk-google-fonts/iconfont/MaterialIcons-Regular.woff2', {
     destDir: 'assets'
   });
 
-  app.import('bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2', {
-    destDir: 'assets'
-  });
-
-  app.import('bower_components/material-design-icons/iconfont/material-icons.css');
+  app.import('bower_components/mlvk-google-fonts/iconfont/material-icons.css');
 
   return app.toTree();
 };

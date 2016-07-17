@@ -4,7 +4,8 @@ const {
   clickable,
   collection,
   visitable,
-  text
+  text,
+  value
 } = PO;
 
 const defaultPage = PO.create({
@@ -23,7 +24,7 @@ const defaultPage = PO.create({
 const showPage = PO.create({
   visit: visitable('/products/:id'),
 
-  name: text()
+  nameValue: value('.debug_sections_products_product-editor .name input')
 });
 
 export { defaultPage, showPage };
