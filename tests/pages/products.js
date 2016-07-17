@@ -21,7 +21,9 @@ const defaultPage = PO.create({
 });
 
 const showPage = PO.create({
-  visit: visitable('/products/:id')
+  visit: visitable('/products/:id'),
+
+  name: text()
 });
 
 export { defaultPage, showPage };

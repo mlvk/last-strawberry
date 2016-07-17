@@ -1,10 +1,11 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'last-strawberry/tests/helpers/module-for-acceptance';
-import { defaultPage } from 'last-strawberry/tests/pages/products';
+import { defaultPage, showPage } from 'last-strawberry/tests/pages/products';
 import { authenticateSession, invalidateSession } from 'last-strawberry/tests/helpers/ember-simple-auth';
 
 import {
   make,
+  build,
   buildList,
   mockFind,
   mockQuery
@@ -55,4 +56,15 @@ test('selecting a product shows the detail of the product', async function(asser
     .click();
 
   assert.equal(currentURL(), `/products/${product.get('id')}`);
+});
+
+test('displays the product information', async function(assert) {
+  const product = build('product');
+
+  mockQuery('item');
+  mockFind('item').returns({json:product});
+
+  await showPage.visit({id:product.get('id')});
+
+  assert.equal(showPage.name, product.get('name'));
 });
