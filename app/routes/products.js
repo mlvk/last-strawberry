@@ -18,8 +18,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     async createNewProduct(name) {
       const item = this.store.createRecord('item', {name, tag:'product'});
-      await item.save();
-      this.transitionTo('products.show', item);
+      await item
+        .save()
+        .then(() => this.transitionTo('products.show', item))
+        .catch((e) => {
+          // @TODO: Should alert the user that something went wrong
+          this.store.unloadRecord(item)
+        });
+      ;
     }
   }
 });

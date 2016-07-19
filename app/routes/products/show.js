@@ -10,6 +10,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     save(changeset) {
+      console.log(changeset);
       return changeset
         .validate()
         .then(() => {
@@ -19,7 +20,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return item.save();
           }
         }).catch((error) => {
-          throw new Error(error);
+          console.log(error);
+          // throw new Error(error);
         });
     },
 

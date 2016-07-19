@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
+import ItemType from 'last-strawberry/constants/item-types';
 
 const { alias } = Ember.computed;
 
@@ -11,10 +12,10 @@ export default Model.extend({
   code:             attr('string'),
   unitOfMeasure:    attr('string'),
   position:         attr('number'),
-  tag:              attr('string'),
-  isPurchased:      attr('boolean'),
-  isSold:           attr('boolean'),
-  defaultPrice:     attr('number'),
+  tag:              attr('string', {defaultValue: ItemType.INGREDIENT}),
+  isPurchased:      attr('boolean', {defaultValue: true}),
+  isSold:           attr('boolean', {defaultValue: false}),
+  defaultPrice:     attr('number', {defaultValue: 0.0}),
 
   company:          belongsTo('company'),
   itemDesires:      hasMany('item-desire'),
