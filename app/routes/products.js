@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     async createNewProduct(name) {
-      const item = this.store.createRecord('item', {name, tag:'product'});
+      const item = this.store.createRecord('item', {name, tag:'product', isSold:true, isPurchased:false});
       await item
         .save()
         .then(() => this.transitionTo('products.show', item))

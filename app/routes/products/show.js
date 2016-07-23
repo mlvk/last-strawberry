@@ -10,7 +10,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     save(changeset) {
-      console.log(changeset);
       return changeset
         .validate()
         .then(() => {
@@ -21,8 +20,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           }
         }).catch((error) => {
           console.log(error);
-          // throw new Error(error);
         });
+    },
+
+    destroyProduct() {
+      this.modelFor('products.show')
+        .destroyRecord()
+        .then(() => this.transitionTo('products'));
     },
 
     reset(changeset) {
