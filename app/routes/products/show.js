@@ -18,8 +18,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             const item = this.modelFor('products.show');
             return item.save();
           }
-        }).catch((error) => {
-          console.log(error);
+        }).catch(() => {
+          // console.log(error);
         });
     },
 

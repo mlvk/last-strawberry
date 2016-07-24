@@ -11,9 +11,9 @@ export default Ember.Component.extend({
   @computed('orders', 'query')
   filterOrders(orders, query){
     return orders
-      .filter(so => {
+      .filter(order => {
         const reg = new RegExp(query, 'i');
-        return reg.test(so.get('location.company.name'));
+        return reg.test(order.get('location.company.name'));
       });
   },
 

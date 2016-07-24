@@ -18,12 +18,14 @@ test('it renders all fields', function(assert) {
   this.set('validateProperty', () => {});
   this.set('save', () => {});
   this.set('reset', () => {});
+  this.set('destroyProduct', () => {});
 
   this.render(hbs`{{sections/products/product-editor
       model=model
       validateProperty=validateProperty
       save=save
       reset=reset
+      destroyProduct=destroyProduct
     }}`);
 
   assert.equal(this.$('.name input').val().trim(), model.get('name'));

@@ -42,7 +42,7 @@ const visitDaysPO = PO.create({
 
     item: {
       label: text('.label'),
-      enabled: hasClass('enabled')
+      enabled: hasClass('selected')
     }
   })
 });

@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import uniqueFieldValidator from 'last-strawberry/validations/unique-field-validator';
 
 import {

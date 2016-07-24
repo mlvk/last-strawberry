@@ -16,6 +16,7 @@ export default Model.extend({
   isPurchased:      attr('boolean', {defaultValue: true}),
   isSold:           attr('boolean', {defaultValue: false}),
   defaultPrice:     attr('number', {defaultValue: 0.0}),
+  active:           attr('boolean', {defaultValue: true}),
 
   company:          belongsTo('company'),
   itemDesires:      hasMany('item-desire'),

@@ -1,24 +1,50 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { makeList, manualSetup } from 'ember-data-factory-guy';
+import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';
 
-moduleForComponent('sections/items/item-table', 'Integration | Component | sections/items/item table', {
-  integration: true
+moduleForComponent('sections/distribution/tool-bar', 'Integration | Component | sections/items/item table', {
+  integration: true,
+
+  beforeEach: function () {
+    decorateComponentClass();
+    manualSetup(this.container);
+  }
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it renders active items by default', function(assert) {
+  const items = makeList('item', 10);
 
-  this.render(hbs`{{sections/items/item-table}}`);
+  this.set('items', items);
+  this.set('archiveItem', () => {});
+  this.render(hbs`{{sections/items/item-table
+    archiveItem=archiveItem
+    items=items}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal($('.debug_sections_items_item-table_table-row').length, 10);
+});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#sections/items/item-table}}
-      template block text
-    {{/sections/items/item-table}}
-  `);
+test('it does not render inactive items by default', function(assert) {
+  const items = makeList('item', 10, {active:false});
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.set('items', items);
+  this.set('archiveItem', () => {});
+  this.render(hbs`{{sections/items/item-table
+    archiveItem=archiveItem
+    items=items}}`);
+
+  assert.equal($('.debug_sections_items_item-table_table-row').length, 0);
+});
+
+test('it renders inactive items when requested', function(assert) {
+  const items = makeList('item', 10, {active:false});
+
+  this.set('items', items);
+  this.set('archiveItem', () => {});
+  this.render(hbs`{{sections/items/item-table
+    showInactive=true
+    archiveItem=archiveItem
+    items=items}}`);
+
+  assert.equal($('.debug_sections_items_item-table_table-row').length, 10);
 });

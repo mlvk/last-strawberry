@@ -1,0 +1,24 @@
+<div class="col-2 codeContainer">
+  {{model.code}}
+</div>
+<div class="col-3 companyContainer">
+  {{model.company.name}}
+</div>
+<div class="col-2 nameContainer">
+  {{model.name}}
+</div>
+<div class="col-5 descriptionContainer">
+  {{model.description}}
+</div>
+
+<div class="col-2">
+  {{currency model.defaultPrice}}
+</div>
+<div class="uiContainer">
+  {{ui/icon-button
+    class='archiveItemButton right'
+    flat=true
+    color=colors.DARK_GREY
+    type='close'
+    click=(action archiveItem model)}}
+</div>

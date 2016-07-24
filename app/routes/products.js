@@ -21,11 +21,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       await item
         .save()
         .then(() => this.transitionTo('products.show', item))
-        .catch((e) => {
+        .catch(() => {
           // @TODO: Should alert the user that something went wrong
           this.store.unloadRecord(item)
         });
-      ;
     }
   }
 });

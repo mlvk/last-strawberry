@@ -48,6 +48,7 @@
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-component-css": "ebryn/ember-component-css",
+    "ember-composable-helpers": "1.0.0",
     "ember-computed-decorators": "0.2.2",
     "ember-data": "^2.6.0",
     "ember-data-factory-guy": "2.7.0-beta.11",

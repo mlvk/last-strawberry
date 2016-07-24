@@ -1,5 +1,20 @@
-<ul>
+{{one-way-input filterTerm
+    placeholder='Filter ingredients'
+    class='filterTermInput'
+    update=(action (mut filterTerm))}}
+
+{{forms/elements/label-checkbox
+    label="Show inactive"
+    class="showInactiveCheckbox"
+    selected=showInactive
+    update=(action (mut showInactive))}}
+
+{{sections/items/item-table/table-header}}
+
+<div>
   {{#each filteredItems as |item|}}
-    <li>{{item.name}}</li>
+    {{sections/items/item-table/table-row
+        model=item
+        archiveItem=archiveItem}}
   {{/each}}
-</ul>
+</div>

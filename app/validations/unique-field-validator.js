@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import config from 'last-strawberry/config/environment';
 
 export default function(options) {
