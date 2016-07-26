@@ -10,7 +10,7 @@
 
 {{#if showCreateSalesOrderModal}}
   {{#tether-dialog close=(action 'closeCreateSalesOrder')}}
-    {{modals/item-selector
+    {{ui/item-selector
         title='Create new sales order'
         placeholder='Search for location'
         model=unfulfilledLocations

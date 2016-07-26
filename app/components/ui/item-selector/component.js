@@ -14,11 +14,6 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    foo() {
-      this.attrs.close();
-      console.log('called');
-    },
-
     onItemSelected(item) {
       this.attrs.onSubmit(item);
       this.attrs.close();

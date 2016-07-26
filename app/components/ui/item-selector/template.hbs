@@ -1,11 +1,13 @@
 <div class="row center spaceBetween uiContainer">
-  {{title}}
+  <span class="title">
+    {{title}}
+  </span>
   {{ui/icon-button
     class='cancel'
     flat=true
     color=colors.DARK_GREY
     type='close'
-    click=(action 'foo')}}
+    click=close}}
 </div>
 {{#power-select
     selected=currentItem

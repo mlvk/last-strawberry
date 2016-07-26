@@ -3,11 +3,11 @@ import PO from 'last-strawberry/tests/page-object';
 const {
   collection,
   text,
-  visitable
+  visitable,
+  clickable
 } = PO;
 
 const page = PO.create({
-
   visit: visitable('/sales-orders'),
 
   orders: collection({
@@ -24,7 +24,15 @@ const page = PO.create({
     item: {
       label: text('.label')
     }
-  })
+  }),
+
+  openQuickMenu: clickable('.debug_navs_orders-nav .debug_ui_popup-menu .trigger'),
+
+  // These should only be called after calling openQuickMenu.
+  // @TODO: This needs to be updated to reset the testContainer to the body
+  // items will not be found in current state
+  stubOrders: clickable('.stubOrders'),
+  createOrder: clickable('.createOrder')
 
 });
 

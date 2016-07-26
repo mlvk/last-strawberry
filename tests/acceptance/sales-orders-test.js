@@ -57,5 +57,25 @@ test('should show sales order when location is clicked', async function(assert) 
     .orders(0)
     .click();
 
+
+
   assert.equal(currentURL(), `/sales-orders/${salesOrder.get('id')}`, 'URL does not match expected');
 });
+
+// @TODO: Not able to select the popup menu items since they are placed in the body
+
+// test('show be able to create a new sales order from the quick menu', async function() {
+//   const salesOrders = makeList('sales_order', 5);
+//   mockFindAll('order').returns({models: salesOrders});
+//
+//   await page
+//     .visit()
+//     .openQuickMenu();
+//
+//   debugger;
+// 
+//   await page
+//     .createOrder();
+//
+//
+// });
