@@ -1,29 +1,19 @@
-{{title}}
-{{body}}
+<div class="row center spaceBetween uiContainer">
+  {{title}}
+  {{ui/icon-button
+    class='cancel'
+    flat=true
+    color=colors.DARK_GREY
+    type='close'
+    click=(action 'foo')}}
+</div>
 {{#power-select
     selected=currentItem
     options=model
     placeholder=placeholder
     searchEnabled=true
     searchField='label'
-    onchange=(action 'stashSelection')
+    onchange=(action 'onItemSelected')
     as |location|}}
   {{location.label}}
 {{/power-select}}
-
-{{ui/icon-button
-  class='cancel'
-  flat=true
-  color=colors.DARK_GREY
-  label='Cancel'
-  type='close'
-  click=close}}
-
-{{ui/icon-button
-  class='submit'
-  flat=true
-  color=colors.DARK_GREY
-  label='Submit'
-  type='add'
-  disabled=notReady
-  click=(action 'onSubmit')}}

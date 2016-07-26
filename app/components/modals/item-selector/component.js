@@ -1,18 +1,26 @@
 import Ember from 'ember';
 
-const { empty } = Ember.computed;
-
 export default Ember.Component.extend({
+  classNames: ['card-1'],
 
-  notReady: empty('currentItem'),
+  triggerOpen(powerSelect) {
+    const event = new window.Event('mousedown', { bubbles: true, cancelable: true, view: window });
+    powerSelect.dispatchEvent(event);
+  },
+
+  didRender() {
+    const elm = this.$('.ember-power-select-trigger')[0];
+    this.triggerOpen(elm);
+  },
 
   actions: {
-    stashSelection(item) {
-      this.set('currentItem', item);
+    foo() {
+      this.attrs.close();
+      console.log('called');
     },
 
-    onSubmit() {
-      this.attrs.onSubmit(this.get('currentItem'));
+    onItemSelected(item) {
+      this.attrs.onSubmit(item);
       this.attrs.close();
     }
   }

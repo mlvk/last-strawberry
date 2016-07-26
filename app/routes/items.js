@@ -28,6 +28,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			this.store.createRecord('item');
 		},
 
+		updateItemField(model, key, value) {
+			model.set(key, value);
+		},
+
+		saveItem(model) {
+			if(model.get('hasDirtyAttributes')) {
+				model.save();
+			}
+		},
+
 		archiveItem(item) {
 			item.set('active', false);
 			item.save();

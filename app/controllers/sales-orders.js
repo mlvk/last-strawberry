@@ -14,8 +14,15 @@ export default Ember.Controller.extend({
     });
   },
 
+  @computed('filteredSalesOrders.[]')
+  unfulfilledLocations(salesOrders) {
+    const fulfilledLocations = salesOrders.map(o => o.get('location').content);
+    const allLocations = this.get('locations').toArray();
+    
+    return _.difference(allLocations, fulfilledLocations);
+  },
+
   filteredItems: filterBy('items', 'isSold', true),
-  customerLocations: filterBy('locations', 'isCustomer', true),
 
   actions: {
     onRequestNewOrder() {

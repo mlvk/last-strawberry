@@ -14,6 +14,9 @@
 .codeContainer {
   font-size: 0.8em;
   font-style: italic;
+  input {
+    width: 4em;
+  }
 }
 
 .companyContainer {
@@ -23,9 +26,21 @@
 
 .nameContainer {
   font-weight: 600;
+  input {
+    width: 10em;
+  }
 }
 
 .descriptionContainer {
   font-style: italic;
   font-weight: 400;
+  input {
+    width: 15em;
+  }
+}
+
+.priceContainer {
+  input {
+    width: 5em;
+  }
 }

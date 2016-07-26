@@ -1,18 +1,26 @@
 <div class="col-2 codeContainer">
-  {{model.code}}
+  {{one-way-input model.code
+      onblur=(action saveItem model)
+      update=(action updateItemField model 'code')}}
 </div>
 <div class="col-3 companyContainer">
   {{model.company.name}}
 </div>
 <div class="col-2 nameContainer">
-  {{model.name}}
+  {{one-way-input model.name
+      onblur=(action saveItem model)
+      update=(action updateItemField model 'name')}}
 </div>
 <div class="col-5 descriptionContainer">
-  {{model.description}}
+  {{one-way-input model.description
+      onblur=(action saveItem model)
+      update=(action updateItemField model 'description')}}
 </div>
 
-<div class="col-2">
-  {{currency model.defaultPrice}}
+<div class="col-2 priceContainer">
+  {{one-way-input model.defaultPrice
+      onblur=(action saveItem model)
+      update=(action updateItemField model 'defaultPrice')}}
 </div>
 <div class="uiContainer">
   {{ui/icon-button

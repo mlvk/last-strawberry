@@ -3,7 +3,8 @@ import Ember from 'ember';
 import config from 'last-strawberry/config/environment';
 
 const BEFORE_MODEL_INCLUDES = [
-  'locations'
+  'locations',
+  'locations.company'
 ];
 
 const MODEL_INCLUDES = [
@@ -57,6 +58,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     async createSalesOrder(location) {
       const deliveryDate = this.paramsFor('sales-orders').deliveryDate;
+
       const order = await this.store
         .createRecord('order', {location, deliveryDate})
         .save();
