@@ -1,0 +1,20 @@
+<div class="row stretch">
+
+  <div class="col">
+    {{lists/filterable-label-list
+        model=model
+        itemClicked=(route-action 'showPriceTier')}}
+
+    <div class="row">
+      {{ui/input-action-bar
+        class='create-new-price-tier'
+        type='add'
+        placeholder='Create new price tier...'
+        submit=(route-action 'createNewPriceTier')}}
+    </div>
+  </div>
+
+  <div class="col-5">
+    {{outlet}}
+  </div>
+</div>

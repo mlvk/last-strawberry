@@ -57,8 +57,6 @@ test('should show sales order when location is clicked', async function(assert) 
     .orders(0)
     .click();
 
-
-
   assert.equal(currentURL(), `/sales-orders/${salesOrder.get('id')}`, 'URL does not match expected');
 });
 
@@ -73,7 +71,7 @@ test('should show sales order when location is clicked', async function(assert) 
 //     .openQuickMenu();
 //
 //   debugger;
-// 
+//
 //   await page
 //     .createOrder();
 //

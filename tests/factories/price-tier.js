@@ -6,5 +6,4 @@ FactoryGuy.define('price-tier', {
     companies: FactoryGuy.hasMany('company'),
     itemPrices: FactoryGuy.hasMany('item-price')
   }
-  
 });
