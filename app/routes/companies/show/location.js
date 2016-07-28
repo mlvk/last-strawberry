@@ -22,7 +22,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   model(params){
-    return this.store.findRecord('location', params.location_id, {include:INCLUDES.join(',')});
+    return this.store.findRecord('location', params.location_id, { reload:true, include:INCLUDES.join(',')});
   },
 
   afterModel(model) {

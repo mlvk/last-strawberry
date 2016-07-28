@@ -19,12 +19,38 @@ const index = PO.create({
   })
 });
 
-
 const show = PO.create({
   scope: '.priceTierContainer',
   visit: visitable('/price-tiers/:id'),
-  name: text('.name')
-});
+  name: text('.priceTierName'),
 
+  openPriceRows: collection({
+    itemScope: '.openItemPricesContainer .debug_ui_price-row',
+
+    item: {
+      itemName: text('.name'),
+      price: text('.price')
+    }
+  }),
+
+  fulfilledPriceRows: collection({
+    itemScope: '.fulfilledItemPricesContainer .debug_ui_price-row',
+
+    item: {
+      itemName: text('.name'),
+      price: text('.price')
+    }
+  }),
+
+  priceRows: collection({
+    itemScope: '.debug_ui_price-row',
+
+    item: {
+      itemName: text('.name'),
+      price: text('.price')
+    }
+  })
+
+});
 
 export { index, show };

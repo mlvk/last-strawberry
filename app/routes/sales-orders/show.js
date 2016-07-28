@@ -23,7 +23,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 
 	model(params){
-    return this.store.findRecord('order', params.id, {include:INCLUDES.join(',')});
+    return this.store.findRecord('order', params.id, { reload:true, include:INCLUDES.join(',')});
 	},
 
 	clearSalesOrderController: function(){

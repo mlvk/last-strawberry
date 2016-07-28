@@ -16,7 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   model(params){
-    return this.store.findRecord('company', params.company_id, {include:INCLUDES.join(',')});
+    return this.store.findRecord('company', params.company_id, { reload:true, include:INCLUDES.join(',')});
   },
 
   actions: {

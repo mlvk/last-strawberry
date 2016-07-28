@@ -1,0 +1,22 @@
+<div class="priceTierContainer">
+  <div class="priceTierName">
+    {{model.name}}
+  </div>
+
+  <span>New items</span>
+  <div class="openItemPricesContainer">
+    {{#each openItemPrices as |ip|}}
+      {{ui/price-row model=ip
+          price=ip.price
+          name=ip.item.name}}
+    {{/each}}
+  </div>
+
+  <div class="fulfilledItemPricesContainer">
+    {{#each fulfilledItemPrices as |ip|}}
+      {{ui/price-row model=ip
+          price=ip.price
+          name=ip.item.name}}
+    {{/each}}
+  </div>
+</div>

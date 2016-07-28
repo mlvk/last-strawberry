@@ -10,7 +10,7 @@ import {
   mockFindAll
 } from 'ember-data-factory-guy';
 
-moduleForAcceptance('Acceptance | price tiers', {
+moduleForAcceptance('Acceptance | price tiers - index', {
   beforeEach() {
     authenticateSession(this.application);
   }
@@ -35,6 +35,7 @@ test('shows list of price tiers', async function(assert) {
 test('selecting an item navigates to the price-tier show route for that item', async function(assert) {
   const priceTier = make('price-tier');
 
+  mockFindAll('item');
   mockFindAll('price-tier').returns({models: [priceTier]})
   mockFind('price-tier').returns({model:priceTier});
 
