@@ -1,1 +1,4 @@
-{{sections/price-tiers/price-tier-editor model=model}}
+{{sections/price-tiers/price-tier-editor
+    model=model
+    updateModelField=(route-action 'updateModelField')
+    saveModelIfDirty=(route-action 'saveModelIfDirty')}}

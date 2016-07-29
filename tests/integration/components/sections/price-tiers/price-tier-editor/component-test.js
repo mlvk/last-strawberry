@@ -17,8 +17,13 @@ test('it shows the price tiers name', function(assert) {
   const priceTier = make('price-tier');
 
   this.set('model', priceTier)
+  this.set('updateModelField', () => {});
+  this.set('saveModelIfDirty', () => {});
   this.render(hbs`{{sections/price-tiers/price-tier-editor
-    model=model}}`);
+    model=model
+    updateModelField=updateModelField
+    saveModelIfDirty=saveModelIfDirty
+    }}`);
 
-  assert.equal(this.$('.priceTierName').text().trim(), priceTier.get('name'));
+  assert.equal(this.$('.priceTierName input').val().trim(), priceTier.get('name'));
 });

@@ -24,7 +24,7 @@ test('Shows the name of the price tier', async function(assert) {
   mockFind('price-tier').returns({model:priceTier});
 
   await page.visit({id:1});
-
+  
   assert.equal(page.name, priceTier.get('name'));
 });
 

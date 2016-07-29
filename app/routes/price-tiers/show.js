@@ -1,5 +1,6 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
+import { updateModelField, saveModelIfDirty } from 'last-strawberry/actions/model-actions';
 
 const MODEL_INCLUDES = [
   'item-prices',
@@ -9,7 +10,6 @@ const MODEL_INCLUDES = [
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-
   setupController(controller, priceTier) {
     const fulfilledItems = priceTier.get('itemPrices')
       .map(ip => ip.get('item').content);
@@ -30,5 +30,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     .then(() => {
       return this.store.findRecord('price-tier', params.id, { reload: true, include:MODEL_INCLUDES.join(',') });
     });
+  },
+
+  actions: {
+    updateModelField,
+    saveModelIfDirty
   }
 });

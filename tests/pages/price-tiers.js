@@ -3,6 +3,7 @@ import PO from 'last-strawberry/tests/page-object';
 const {
   collection,
   text,
+  value,
   visitable
 } = PO;
 
@@ -22,7 +23,7 @@ const index = PO.create({
 const show = PO.create({
   scope: '.priceTierContainer',
   visit: visitable('/price-tiers/:id'),
-  name: text('.priceTierName'),
+  name: value('.priceTierName input'),
 
   openPriceRows: collection({
     itemScope: '.openItemPricesContainer .debug_ui_price-row',

@@ -1,22 +1,28 @@
 <div class="priceTierContainer">
   <div class="priceTierName">
-    {{model.name}}
+    {{one-way-input model.name
+        update=(action updateModelField model "name")
+        onblur=(action saveModelIfDirty model)}}
   </div>
 
   <span>New items</span>
   <div class="openItemPricesContainer">
     {{#each openItemPrices as |ip|}}
-      {{ui/price-row model=ip
-          price=ip.price
-          name=ip.item.name}}
+      {{ui/price-row
+          model=ip
+          name=ip.item.name
+          updateModelField=updateModelField
+          saveModelIfDirty=saveModelIfDirty}}
     {{/each}}
   </div>
 
   <div class="fulfilledItemPricesContainer">
     {{#each fulfilledItemPrices as |ip|}}
-      {{ui/price-row model=ip
-          price=ip.price
-          name=ip.item.name}}
+      {{ui/price-row
+          model=ip
+          name=ip.item.name
+          updateModelField=updateModelField
+          saveModelIfDirty=saveModelIfDirty}}
     {{/each}}
   </div>
 </div>
