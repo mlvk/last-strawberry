@@ -21,7 +21,6 @@
   "devDependencies": {
     "babel-eslint": "^6.0.3",
     "broccoli-asset-rev": "^2.4.2",
-    "co": "^4.6.0",
     "ember-ajax": "^2.0.1",
     "ember-browserify": "1.1.9",
     "ember-changeset": "0.13.0",
@@ -69,7 +68,8 @@
     "ember-welcome-page": "^1.0.1",
     "eslint-config-ember": "0.3.0",
     "moment": "2.11.2",
-    "moment-timezone": "0.5.0"
+    "moment-timezone": "0.5.0",
+    "node-sass": "^3.8.0"
   },
   "dependencies": {
     "ember-git-version": "^0.1.0",
