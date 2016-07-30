@@ -1,6 +1,6 @@
 // import co from "npm:co";
-import Ember from 'ember';
-import ENV from "last-strawberry/config/environment";
+// import Ember from 'ember';
+// import ENV from "last-strawberry/config/environment";
 
 export function optimizeRoutePlan(/* routePlan */) {
   // const structure = {network:{}, visits:{}, solution:{vehicle:[]}};
