@@ -1,7 +1,7 @@
 build:
   image: danlynn/ember-cli
   commands:
-    - bower install
+    - bower install --allow-root
     - npm install
     - ember test
 
