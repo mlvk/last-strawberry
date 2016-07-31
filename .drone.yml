@@ -1,0 +1,4 @@
+build:
+  image: danlynn/ember-cli
+  commands:
+    - ember test
