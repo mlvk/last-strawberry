@@ -1,6 +1,12 @@
 build:
   image: danlynn/ember-cli
   commands:
-    - npm install
     - bower install
+    - npm install
     - ember test
+
+cache:
+  mount:
+    - node_modules
+    - bower_components
+    - .git
