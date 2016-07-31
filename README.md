@@ -53,5 +53,5 @@ Specify what it takes to deploy your app.
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
 
-[travis-badge]: https://travis-ci.org/brancusi/last-strawberry.svg?branch=master
-[travis-badge-url]: https://travis-ci.org/brancusi/last-strawberry
+[travis-badge]: https://travis-ci.org/mlvk/last-strawberry.svg?branch=master
+[travis-badge-url]: https://travis-ci.org/mlvk/last-strawberry
