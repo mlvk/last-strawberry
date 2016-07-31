@@ -1,13 +1,14 @@
 ---
 language: node_js
 node_js:
-  - "4"
+  - "6"
 
 sudo: false
 
 cache:
   directories:
     - node_modules
+    - bower_components
 
 before_install:
   - npm config set spin false
@@ -21,8 +22,9 @@ install:
   - npm install -g ember-cli
 
 script:
-  - npm test
+  - ember test
 
 after_success:
-  - ember build --environment production
-  - firebase deploy --token ${FIREBASE_TOKEN}
+  if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]); then
+    ember build --environment production && firebase deploy --token ${FIREBASE_TOKEN}
+  fi
