@@ -68,7 +68,7 @@ test('redirects to distribution page when clicking on Distribution item', async 
 
   assert.equal(currentURL(), '/distribution');
 });
-//
+
 // test('redirects to products page when clicking on Products item', async function(assert) {
 //
 //   // mockFindAll('route-visit', 10);
