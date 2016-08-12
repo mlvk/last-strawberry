@@ -2,10 +2,6 @@
 [![Build Status][travis-badge]][travis-badge-url]
 [![Code Climate](https://codeclimate.com/github/brancusi/last-strawberry/badges/gpa.svg)](https://codeclimate.com/github/brancusi/last-strawberry)
 
-a
-b
-c
-d
 ## Welcome to The Last Strawberry. What is your intention? What would you like???
 
 ## Prerequisites
@@ -50,7 +46,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Deploy to firebase
 
 ## Further Reading / Useful Links
 
