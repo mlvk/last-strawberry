@@ -5,6 +5,29 @@
 
   {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
 
+  {{#each routePlans as |rp i|}}
+    {{#if rp.polyline}}
+      {{geojson-layer
+          geoJSON=rp.polyline
+          color=rp.colorScheme.backgroundColor}}
+
+    {{/if}}
+  {{/each}}
+
+  {{#marker-layer lat=34.1693137 lng=-118.317191 icon=(rp-icon "" "red")}}
+    <div class="col">
+      <span class="company">
+        Headquarters
+      </span>
+      <span class="street">
+        435 South Main Street
+      </span>
+      <span class="addressSecond">
+        Burbank CA 91506
+      </span>
+    </div>
+  {{/marker-layer}}
+
   {{#each openRouteVisits as |rv|}}
     {{sections/distribution/map-pin model=rv}}
   {{/each}}

@@ -1,6 +1,7 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
 import { timeToMinutes } from 'last-strawberry/utils/time';
+import { decodePolyline } from 'last-strawberry/utils/maps';
 
 const ROUTE_VISIT_INCLUDES = [
   'route-plan',
@@ -30,6 +31,7 @@ const ROUTE_PLAN_INCLUDES = [
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   requestGenerator: Ember.inject.service(),
+  session: Ember.inject.service(),
 
   queryParams: {
     date: {
@@ -43,6 +45,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('routePlanBlueprints', this.store.peekAll('route-plan-blueprint'));
     controller.set('routeVisits', this.store.peekAll('route-visit'));
     controller.set('users', this.store.peekAll('user'));
+
+    const routePlans = this.store.peekAll('route-plan');
+    routePlans.forEach(rp => {
+      // Set default value for not showing error
+      rp.set("polyline", decodePolyline(""));
+
+      this.setPolyline(rp);
+    });
   },
 
   model (params) {
@@ -80,6 +90,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
 
+  async setPolyline(routePlan){
+    const hq = [[-118.317191, 34.1693137]];
+    const routeVisits = await routePlan.get('routeVisits');
+    const coordinates = routeVisits
+      .map(rv => [rv.get('lng'), rv.get('lat')]);
+
+    const total = _.merge(coordinates, hq);
+    const radiuses = _.fill(Array(total.length + 1), 10000).join(';');
+
+    const query = total.reduce((acc, cur) => `${acc};${cur.join(',')}`, hq.join(','));
+
+    const apiToken = this.get('session.data.authenticated.mapbox_api_token');
+
+    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${query}?radiuses=${radiuses}&geometries=polyline&access_token=${apiToken}`;
+
+    const payload = { url, type:'GET' };
+
+    const result = await Ember.$.ajax(payload);
+
+    routePlan.set("polyline", decodePolyline(result.routes[0].geometry));
+  },
+
   actions: {
     publishRoutePlans() {
       this.setPublishedState('published');
@@ -111,6 +143,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     async onRouteVisitUpdate(routeVisit, routePlan, position) {
       routeVisit.setProperties({routePlan, position});
       await routeVisit.save();
+
+      this.setPolyline(routePlan);
       // this.optimizeRoutePlan(routePlan);
     },
 

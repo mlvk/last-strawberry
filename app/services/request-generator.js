@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import config from 'last-strawberry/config/environment'; 
+import config from 'last-strawberry/config/environment';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
