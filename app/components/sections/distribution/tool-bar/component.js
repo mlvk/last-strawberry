@@ -20,6 +20,11 @@ export default Ember.Component.extend({
     return routePlans.every(rp => rp.get('isPublished'));
   },
 
+  @computed('routePlans.@each.{isValid}')
+  allPlansValid(routePlans = []){
+    return routePlans.every(rp => rp.get('isValid'));
+  },
+
   actions: {
     // togglePublishRoutePlans() {
     //   if(this.get('allPublished'))
