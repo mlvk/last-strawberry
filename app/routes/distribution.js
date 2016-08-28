@@ -5,6 +5,7 @@ import { decodePolyline } from 'last-strawberry/utils/maps';
 
 const ROUTE_VISIT_INCLUDES = [
   'route-plan',
+  'fulfillments',
   'route-plan.user',
   'address',
   'address.visit-windows',
@@ -21,6 +22,7 @@ const ROUTE_PLAN_BLUEPRINT_INCLUDES = [
 const ROUTE_PLAN_INCLUDES = [
   'user',
   'route-visits',
+  'route-visits.fulfillments',
   'route-visits.route-plan',
   'route-visits.address',
   'route-visits.address.visit-windows',
@@ -146,7 +148,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       routeVisit.setProperties({routePlan, position});
       await routeVisit.save();
 
-      this.setPolyline(routePlan);
+      // this.setPolyline(routePlan);
       // this.optimizeRoutePlan(routePlan);
     },
 

@@ -1,11 +1,10 @@
 import Ember from 'ember';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
-import computed from 'ember-computed-decorators';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias, empty, notEmpty } = Ember.computed;
+const { alias, not, notEmpty, or } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
   date:             attr('date'),
@@ -18,7 +17,6 @@ export default Model.extend(LocationHashable, {
 
   fulfillments:     hasMany('fulfillment'),
   routePlan:        belongsTo('route-plan'),
-
   address:          belongsTo('address'),
 
   isValid:          notEmpty('fulfillments'),
@@ -27,15 +25,7 @@ export default Model.extend(LocationHashable, {
   lat:              alias('address.lat'),
   lng:              alias('address.lng'),
 
-  isOrphan:         empty('routePlan.id'),
-
-  @computed('routePlan.colorScheme.{color}')
-  color(val) {
-    return val;
-  },
-
-  @computed('routePlan.colorScheme.{backgroundColor}')
-  backgroundColor(val) {
-    return val;
-  }
+  hasRoutePlan:     notEmpty('routePlan.id'),
+  noRoutePlan:      not('hasRoutePlan'),
+  isOrphan:         or('noRoutePlan', 'routePlan.isDeleted')
 });
