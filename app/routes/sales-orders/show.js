@@ -1,7 +1,7 @@
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import Ember from "ember";
-import NotificationState from 'last-strawberry/constants/notification-states';
-import NotificationRenderer from 'last-strawberry/constants/notification-renderers';
+import NotificationState from "last-strawberry/constants/notification-states";
+import NotificationRenderer from "last-strawberry/constants/notification-renderers";
 import OrderState from "last-strawberry/constants/order-states";
 
 const INCLUDES = [

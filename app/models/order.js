@@ -9,7 +9,11 @@ import {
 } from "ember-data/relationships";
 import OrderState from "last-strawberry/constants/order-states";
 
-const { equal, alias } = Ember.computed;
+const {
+  equal,
+  alias,
+  gt
+} = Ember.computed;
 
 const SALES_ORDER = "sales-order";
 const PURCHASE_ORDER = "purchase-order";
@@ -46,6 +50,8 @@ export default Model.extend(LocationHashable, {
 
   isDraft:                      equal("orderState", OrderState.DRAFT),
   isApproved:                   equal("orderState", OrderState.APPROVED),
+
+  isValid: gt("orderItems.length", 0),
 
   @computed("orderItems.@each.{quantity}")
   empty(orderItems) {
