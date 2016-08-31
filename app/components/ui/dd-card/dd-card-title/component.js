@@ -8,7 +8,7 @@ const {
 export default Em.Component.extend({
   classNames: ["row"],
   hasIndex: notEmpty("index"),
-  hasAction: notEmpty('action'),
+  hasAction: notEmpty("action"),
 
   @computed("index")
   indexFormatted(index) {
