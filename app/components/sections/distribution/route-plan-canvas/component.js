@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     this._setupDragula();
   },
 
-  orphanRouteVisits: filterBy('routeVisits', 'isOrphan', true),
+  orphanRouteVisits: filterBy('routeVisits', 'isOpen', true),
 
   _routeVisitWithId(id) {
     return this.get('routeVisits').find(rv => rv.get('id') === `${id}`);
