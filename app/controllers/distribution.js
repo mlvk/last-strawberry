@@ -18,6 +18,7 @@ export default Ember.Controller.extend({
   },
 
   activeRouteVisits: filterBy("routeVisits", "isValid", true),
+  openRouteVisits: filterBy("activeRouteVisits", "isOpen", true),
 
   actions: {
     async printFulfillmentDocuments() {

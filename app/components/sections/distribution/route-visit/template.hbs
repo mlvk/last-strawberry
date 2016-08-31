@@ -7,7 +7,7 @@
           subTitle=company.name
           index=index
           actionIcon="clear"
-          action=(if (not model.isOrphan) (action "removeRouteVisit"))}}
+          action=(if (not model.isOpen) (action "removeRouteVisit"))}}
 
       {{card.body
           content=location.name

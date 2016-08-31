@@ -139,7 +139,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .save();
 
       const orphanedRouteVisits = this.store.peekAll("route-visit")
-        .filter(rv => rv.get("isOrphan"));
+        .filter(rv => rv.get("isOpen"));
 
       routePlanBlueprint.get("routePlanBlueprintSlots")
         .forEach(slot => {

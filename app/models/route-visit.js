@@ -28,7 +28,7 @@ export default Model.extend(LocationHashable, {
 
   hasRoutePlan:     notEmpty('routePlan.id'),
   noRoutePlan:      not('hasRoutePlan'),
-  isOrphan:         or('noRoutePlan', 'routePlan.isDeleted'),
+  isOpen:         or('noRoutePlan', 'routePlan.isDeleted'),
 
   @computed('id', 'position')
   key(id, position) {
