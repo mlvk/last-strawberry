@@ -23,12 +23,12 @@ export default Ember.Controller.extend({
     this.cleanup();
   },
 
-  @computed("items.@each.{isSold}", "model.orderItems.[]")
+  @computed("items.@each.{isSold,active}", "model.orderItems.[]")
   filteredItems(items, orderItems) {
     return items.filter(item => {
       const matchingOrderItem = orderItems.any(oi => oi.get("item.id") === item.get("id"));
 
-      return item.get("isSold") && !matchingOrderItem
+      return item.get("isSold") && item.get("active") && !matchingOrderItem;
     });
   },
 
