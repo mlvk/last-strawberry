@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   @computed('debouncedData.@each.{previous_ending,ending,returns,sold,starting,ts}')
   chartData(salesData = []){
     return {
-      labels: salesData.map(sd => moment(sd.ts).format("MM-DD")),
+      labels: salesData.map(sd => moment.unix(sd.ts).format("MM-DD")),
       datasets: [
         {
           label: "Sold",
