@@ -38,6 +38,7 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('bower_components/ramda/dist/ramda.min.js');
   app.import('bower_components/lodash/dist/lodash.min.js');
   app.import('bower_components/dragula.js/dist/dragula.min.js');
   app.import('bower_components/dragula.js/dist/dragula.min.css');
@@ -48,18 +49,20 @@ module.exports = function(defaults) {
   app.import('bower_components/gsap/src/minified/TweenMax.min.js');
   app.import('bower_components/gsap/src/minified/easing/EasePack.min.js');
   app.import('bower_components/firebase/firebase.js');
+  app.import('bower_components/ramda/dist/ramda.min.js');
+  app.import('bower_components/polyline/src/polyline.js');
 
-  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Bold.ttf', {
-    destDir: 'assets'
-  });
-
-  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Light.ttf', {
-    destDir: 'assets'
-  });
-
-  app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Regular.ttf', {
-    destDir: 'assets'
-  });
+  // app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Bold.ttf', {
+  //   destDir: 'assets'
+  // });
+  //
+  // app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Light.ttf', {
+  //   destDir: 'assets'
+  // });
+  //
+  // app.import('bower_components/mlvk-google-fonts/opensans/OpenSans-Regular.ttf', {
+  //   destDir: 'assets'
+  // });
 
   app.import('bower_components/mlvk-google-fonts/iconfont/MaterialIcons-Regular.ttf', {
     destDir: 'assets'

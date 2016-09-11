@@ -1,43 +1,23 @@
-<div class="row headerContainer">
-  {{#power-select
-      selected=model.user
-      options=users
-      placeholder="Select a driver"
-      searchEnabled=false
-      onchange=(action updateRoutePlan model 'user')
-      as |user|}}
-    {{user.name}}
-  {{/power-select}}
+{{sections/distribution/route-plan/route-plan-header
+    updateRoutePlan=(action updateRoutePlan model "user")
+    users=users
+    routePlan=model
+    selectedUser=model.user
+    delete=(action "delete")
+    saveRoutePlanBlueprint=(action "saveRoutePlanBlueprint")
+    colorScheme=colorScheme}}
 
-  <div class="col uiContainer">
-    {{ui/icon-button
-      class='delete'
-      type='clear'
-      flat=true
-      color=colors.DARK_GREY
-      padding=0.5
-      click=(action 'delete')}}
-
-    {{ui/icon-button
-      type='save'
-      class='saveRoutePlanBlueprint'
-      flat=true
-      color=colors.DARK_GREY
-      padding=0.5
-      click=(action 'saveRoutePlanBlueprint')}}
-
-  </div>
-</div>
-
-{{#layouts/scroll-container class='routeVisitsContainer'}}
+{{#layouts/scroll-container class="routeVisitsContainer"}}
   {{#layouts/dd-container registerContainer=registerDropContainer registerId=(action registerRoutePlan model)}}
-    {{#each model.sortedRouteVisits as |rv i|}}
+    {{#each model.sortedRouteVisits key="key" as |rv i|}}
       {{sections/distribution/route-visit
-        colorScheme=model.colorScheme
-        model=rv
-        index=i
-        removeRouteVisit=removeRouteVisit
-        data-location-hash=rv.id}}
+          model=rv
+          index=i
+          colorScheme=colorScheme
+          selectedRouteVisit=selectedRouteVisit
+          removeRouteVisit=removeRouteVisit
+          selectRouteVisit=selectRouteVisit
+          data-location-hash=rv.id}}
     {{/each}}
   {{/layouts/dd-container}}
 {{/layouts/scroll-container}}

@@ -20,7 +20,7 @@ moduleForAcceptance('Acceptance | sales orders/show', {
 });
 
 test('navigates to correct url', async function(assert) {
-  const order = make('order');
+  const order = make('sales_order');
   mockFindAll('order').returns({models: [order]});
   mockFind('order').returns({model: order});
 
@@ -37,7 +37,7 @@ test('displays the correct sales order', async function(assert) {
 
   await page.visit({id:order.get('id')});
 
-  assert.equal(orderEditorPO.locationName, `${location.get('id')} - ${location.get('name')}`, 'sales order location name did not match expected');
+  assert.equal(orderEditorPO.locationName, `${location.get('code')} - ${location.get('name')}`, 'sales order location name did not match expected');
 });
 
 test('can delete sales order', async function(assert) {

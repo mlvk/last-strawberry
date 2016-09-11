@@ -29,6 +29,8 @@
       "Linear": true,
       "TweenMax": true,
       "numeral": true,
-      "Firebase": true
+      "Firebase": true,
+      "R": true,
+      "polyline": true
     }
 }

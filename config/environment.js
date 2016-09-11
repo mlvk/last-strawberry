@@ -8,7 +8,6 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'last-strawberry',
     environment: environment,
-    baseURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -24,17 +23,15 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    googleApi: {
-      accessToken: process.env.GOOGLE_API_KEY,
-    },
-
     routificApi: {
       accessToken: process.env.ROUTIFIC_API_KEY,
-    },
+    }
+  };
 
-    browserify: {
-       tests: true
-     },
+  ENV['place-autocomplete'] = {
+    exclude: true,
+    key: process.env.GOOGLE_API_KEY,
+    client: process.env.GOOGLE_CLIENT_ID
   };
 
   ENV.apiHost = 'http://localhost:3000';
@@ -43,8 +40,8 @@ module.exports = function(environment) {
     'default-src': "'none'",
     'script-src': "'self' 'unsafe-eval' http://laststrawberry.dev:* http://admin.dev:* https://cdn.mxpnl.com  *.googleapis.com *.cloudflare.com", // Allow scripts from https://cdn.mxpnl.com
     'font-src': "'self' *.gstatic.com *.googleapis.com", // Allow fonts to be loaded from http://fonts.gstatic.com
-    'connect-src': "'self' wss://s-usc1c-nss-102.firebaseio.com ws://laststrawberry.dev:* ws://admin.dev:* http://localhost:3000 https://routific.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-    'img-src': "'self' data: *.basemaps.cartocdn.com",
+    'connect-src': "'self' wss://s-usc1c-nss-102.firebaseio.com ws://laststrawberry.dev:* ws://admin.dev:* http://localhost:3000 https://routific.com *.googleapis.com *.mapbox.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+    'img-src': "'self' data: *.basemaps.cartocdn.com *.gstatic.com",
     'style-src': "'self' 'unsafe-inline' *.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
     'media-src': "'self'"
   };
@@ -67,7 +64,6 @@ module.exports = function(environment) {
     ENV.apiHost = '';
 
     // Testem prefers this...
-    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter

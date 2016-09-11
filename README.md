@@ -2,8 +2,7 @@
 [![Build Status][travis-badge]][travis-badge-url]
 [![Code Climate](https://codeclimate.com/github/brancusi/last-strawberry/badges/gpa.svg)](https://codeclimate.com/github/brancusi/last-strawberry)
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## Welcome to The Last Strawberry. What is your intention? What would you like???
 
 ## Prerequisites
 
@@ -31,6 +30,10 @@ You will need the following things properly installed on your computer.
 
 Make use of the many generators for code, try `ember help generate` for more details
 
+### Running backend
+
+* Rails is used on the server.
+
 ### Running Tests
 
 * `ember test`
@@ -43,7 +46,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Deploy to firebase
 
 ## Further Reading / Useful Links
 

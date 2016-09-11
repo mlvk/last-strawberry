@@ -1,0 +1,16 @@
+<span class="title">
+  Notifications
+</span>
+{{#each notifications as |notification|}}
+  <div class="row notificationRow">
+    <div class="col-2 id">
+      {{notification.id}}
+    </div>
+    <div class="col-4 renderer">
+      {{notification.renderer}}
+    </div>
+    <div class="col-3 notificationState">
+      {{notification.notificationState}}
+    </div>
+  </div>
+{{/each}}

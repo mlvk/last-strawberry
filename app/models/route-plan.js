@@ -1,41 +1,36 @@
-import Ember from 'ember';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { belongsTo, hasMany } from 'ember-data/relationships';
-import computed from 'ember-computed-decorators';
-import colors from 'last-strawberry/constants/colors';
+import Ember from "ember";
+import Model from "ember-data/model";
+import attr from "ember-data/attr";
+import {
+  belongsTo,
+  hasMany
+} from "ember-data/relationships";
+import computed from "ember-computed-decorators";
+import PublishedState from "last-strawberry/constants/route-plan-states"
 
-const { equal } = Ember.computed;
-
-const colorSchemes = [
-  {backgroundColor:colors.HOT_PINK, color:'white'},
-  {backgroundColor:colors.DOPE_BLUE, color:'white'},
-  {backgroundColor:colors.DARK_GREEN, color:'white'}
-]
+const {
+  and,
+  notEmpty
+} = Ember.computed;
 
 export default Model.extend({
-  date:               attr('string'),
-  publishedState:     attr('string', {defaultValue:'draft'}),
+  date:               attr("string"),
+  publishedState:     attr("string", {defaultValue: PublishedState.PENDING}),
 
-  user:               belongsTo('user'),
-  routeVisits:        hasMany('route-visit'),
+  user:               belongsTo("user"),
+  routeVisits:        hasMany("route-visit"),
 
-  @computed('routeVisits.@each.{position}')
+  @computed("routeVisits.@each.{position}")
   sortedRouteVisits(routeVisits) {
-    return routeVisits.sortBy('position');
+    return routeVisits.sortBy("position");
   },
 
-  @computed('index')
-  colorScheme(index) {
-    return colorSchemes[index];
-  },
-
-  @computed('date')
+  @computed("date")
   formattedDate(date) {
-    return moment(date, 'YYYY-MM-DD').format("dddd, MMM Do - YYYY");
+    return moment(date, "YYYY-MM-DD").format("dddd, MMM Do - YYYY");
   },
 
-  isDraft: equal('publishedState', 'draft'),
-  isPublished: equal('publishedState', 'published'),
-  isCompleted: equal('publishedState', 'completed')
+  hasUser: notEmpty("user.id"),
+  hasRouteVisits: notEmpty("routeVisits"),
+  isValid: and("hasUser", "hasRouteVisits")
 });

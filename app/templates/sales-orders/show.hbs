@@ -1,24 +1,27 @@
 {{ui/order-editor
     model=model
     items=filteredItems
-    updateShipping=(route-action 'updateShipping')
-    saveOrder=(route-action 'saveOrder')
-    createOrderItem=(route-action 'createOrderItem')
-    updateOrderItem=(route-action 'updateOrderItem')
-    saveOrderItem=(route-action 'saveOrderItem')
-    deleteOrderItem=(route-action 'deleteOrderItem')
-    onOrderItemChange=(action 'onOrderItemChange')
-    deleteOrder=(route-action 'deleteOrder' model)}}
+    updateShipping=(route-action "updateShipping")
+    saveOrder=(route-action "saveOrder")
+    createOrderItem=(route-action "createOrderItem")
+    updateOrderItem=(route-action "updateOrderItem")
+    saveOrderItem=(route-action "saveOrderItem")
+    deleteOrderItem=(route-action "deleteOrderItem")
+    onOrderItemChange=(action "onOrderItemChange")
+    emailOrder=(route-action "emailOrder" model)
+    deleteOrder=(route-action "deleteOrder" model)
+    toggleOrderState=(route-action "toggleOrderState" model)}}
 
 <div class="row top wrap">
   {{charts/location-item-info
       item=item
-      model=model
-      dataPath=dataPath}}
+      location=model.location
+      salesData=salesData.lastObject}}
 
-  {{charts/item-location-sales-trend}}
+  {{charts/item-location-sales-trend
+      salesData=salesData}}
 
   {{charts/item-totals
-      title=(concat 'Item totals for: ' (moment-format model.deliveryDate 'ddd DD/MM/YY'))
+      title=(concat "Item totals for: " (moment-format model.deliveryDate "ddd DD/MM/YY"))
       orders=salesOrders}}
 </div>

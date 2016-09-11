@@ -5,9 +5,10 @@
 @import 'utils';
 @import 'material';
 @import 'pod-styles';
-@import 'modal';
 
 @import "ember-modal-dialog/ember-modal-structure";
+@import 'modal';
 
 @import "components/application";
+@import "components/spinner";
 @import "ember-power-select";

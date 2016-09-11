@@ -1,30 +1,38 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
-import downloadFile from 'last-strawberry/utils/download-file';
+import Ember from "ember";
+import computed from "ember-computed-decorators";
+import downloadFile from "last-strawberry/utils/download-file";
+
+const { filterBy } = Ember.computed;
 
 export default Ember.Controller.extend({
-  store:          Ember.inject.service(),
   pdfGenerator:   Ember.inject.service(),
 
-  queryParams:    ['date'],
-  date:           moment().add(1, 'days').format('YYYY-MM-DD'),
+  queryParams:    ["date"],
+  date:           moment().add(1, "days").format("YYYY-MM-DD"),
 
-  @computed('routePlans.@each.{date}', 'date')
+  @computed("routePlans.@each.{date,isDeleted}", "date")
   activeRoutePlans(routePlans, date) {
-    return routePlans.filter(rp => rp.get('date') === date);
+    return routePlans
+      .filter(rp => rp.get("date") === date)
+      .filter(rp => !rp.get("isDeleted"));
   },
 
+  activeRouteVisits: filterBy("routeVisits", "isValid", true),
+  openRouteVisits: filterBy("activeRouteVisits", "isOpen", true),
+
   actions: {
-    printFulfillmentDocuments() {
-      return this.get('pdfGenerator')
-        .printFulfillmentDocuments(this.get('activeRoutePlans'))
-        .then(pdfData => downloadFile(pdfData.url, `ya.pdf`))
-        .catch(err => err);
+    async printFulfillmentDocuments() {
+      const { url, key } = await this.get("pdfGenerator")
+        .printFulfillmentDocuments(this.get("activeRoutePlans"));
+      return downloadFile(url, key);
     },
 
     onDateSelected(date) {
-      this.set('date', moment(date).format('YYYY-MM-DD'));
-    }
+      this.set("date", moment(date).format("YYYY-MM-DD"));
+    },
 
+    selectRouteVisit(routeVisit) {
+      this.set("selectedRouteVisit", routeVisit);
+    }
   }
 });

@@ -1,21 +1,15 @@
-{{#ui/dd-card colorScheme=colorScheme as |card|}}
-  {{card.title-bar
-      title=title
-      index=index
-      actionIcon='clear'
-      action=(if (not model.isOrphan) (action 'removeRouteVisit'))}}
+{{#ui/dd-card
+    colorScheme=colorScheme
+    isSelected=isSelected
+    as |card|}}
+      {{card.title-bar
+          title=location.code
+          subTitle=company.name
+          index=index
+          actionIcon="clear"
+          action=(if (not model.isOpen) (action "removeRouteVisit"))}}
 
-  {{card.address model.address}}
-
-  {{#card.footer}}
-    <div class="row spaceBetween">
-      <div class="visitWindow">
-        {{minutes-to-time validVisitWindow.min}} - {{minutes-to-time validVisitWindow.max}}
-      </div>
-      <div class="estimatedArrival">
-        6:43am
-      </div>
-    </div>
-  {{/card.footer}}
-
+      {{card.body
+          content=location.name
+          infoIcons=infoIcons}}
 {{/ui/dd-card}}

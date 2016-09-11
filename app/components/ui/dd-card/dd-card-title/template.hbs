@@ -1,0 +1,20 @@
+{{#if hasIndex}}
+  <span class="index">
+    {{indexFormatted}}.
+  </span>
+{{/if}}
+<div class="title">
+  {{title}} -
+</div>
+<span class="subTitle">
+  {{subTitle}}
+</span>
+{{#if hasAction}}
+  {{ui/icon-button
+    class="col-1 action"
+    flat=true
+    padding=0.5
+    color=colors.DARK_GREY
+    type=actionIcon
+    click=action}}
+{{/if}}

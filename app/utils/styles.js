@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const { computed, expandProperties, get } = Ember;
 
-export default function style(...params) {
+const style = function(...params) {
   // determine if user called as @style('blah', 'blah') or @style
   if (isDescriptor(params[params.length - 1])) {
     return handleDescriptor(...arguments);
@@ -11,6 +11,27 @@ export default function style(...params) {
       return handleDescriptor(...arguments, params);
     };
   }
+}
+
+const rgba = function(hex, alpha = 1) {
+  if(hex === undefined) {
+    return "";
+  }
+
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+  });
+
+  var regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result  = {
+      r: parseInt(regex[1], 16),
+      g: parseInt(regex[2], 16),
+      b: parseInt(regex[3], 16)
+  };
+
+  return `rgba(${result.r}, ${result.g}, ${result.b}, ${alpha})`;
 }
 
 function handleDescriptor(target, key, desc, params = []) {
@@ -72,4 +93,9 @@ function isDescriptor(item) {
     'writable' in item &&
     'enumerable' in item &&
     'configurable' in item;
+}
+
+export {
+  style,
+  rgba
 }

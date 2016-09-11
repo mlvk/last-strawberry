@@ -1,0 +1,17 @@
+<div class="col section">
+  <div class="row card-1 section">
+    {{sections/companies/company-settings
+        model=model
+        priceTiers=priceTiers
+        updatePriceTier=(route-action "updatePriceTier")
+        save=(route-action "saveCompany")}}
+
+    {{sections/companies/location-manager
+        locations=model.activeLocations
+        showLocation=(route-action "showLocation")
+        createNewLocation=(route-action "createNewLocation")}}
+  </div>
+  <div class="section">
+    {{outlet}}
+  </div>
+</div>

@@ -1,36 +1,52 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Ember from "ember";
+import computed from "ember-computed-decorators";
 
 const { filterBy } = Ember.computed;
+const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
 
 export default Ember.Controller.extend({
-  deliveryDate: moment().add(1, 'days').format('YYYY-MM-DD'),
+  deliveryDate: tomorrow,
 
-  @computed('salesOrders.@each.{deliveryDate}', 'deliveryDate')
+  @computed("salesOrders.@each.{deliveryDate,isSalesOrder}", "deliveryDate")
   filteredSalesOrders(salesOrders, deliveryDate) {
     return salesOrders.filter(order => {
-      const matchesDate = order.get('deliveryDate') === deliveryDate;
-      return matchesDate && order.get('isSalesOrder')
+      const matchesDate = order.get("deliveryDate") === deliveryDate;
+      return matchesDate && order.get("isSalesOrder");
     });
   },
 
-  @computed('filteredSalesOrders.[]')
-  unfulfilledLocations(salesOrders) {
-    const fulfilledLocations = salesOrders.map(o => o.get('location').content);
-    const allLocations = this.get('locations').toArray();
-    
+  @computed("locations.@each.{active,isCustomer}", "filteredSalesOrders.[]")
+  unfulfilledLocations(locations, salesOrders) {
+    const fulfilledLocations = salesOrders.map(o => o.get("location").content);
+    const allLocations = locations
+      .filter(l => l.get("active") && l.get("isCustomer"))
+      .toArray();
+
     return _.difference(allLocations, fulfilledLocations);
   },
 
-  filteredItems: filterBy('items', 'isSold', true),
+  @computed("deliveryDate")
+  isOldDate(deliveryDate) {
+    return moment(deliveryDate).isBefore(tomorrow);
+  },
+
+  filteredItems: filterBy("items", "isSold", true),
 
   actions: {
     onRequestNewOrder() {
-      this.set('showCreateSalesOrderModal', true);
+      this.set("showCreateSalesOrderModal", true);
+    },
+
+    onRequestDuplicateOrders() {
+      this.set("showDuplicateOrdersModal", true);
     },
 
     closeCreateSalesOrder() {
-      this.set('showCreateSalesOrderModal', false);
+      this.set("showCreateSalesOrderModal", false);
+    },
+
+    closeDuplicateOrders() {
+      this.set("showDuplicateOrdersModal", false);
     }
   }
 });
