@@ -56,6 +56,7 @@
     "ember-load-initializers": "^0.5.1",
     "ember-modal-dialog": "0.8.8",
     "ember-moment": "6.1.0",
+    "ember-netlify": "0.0.0",
     "ember-one-way-controls": "1.1.0",
     "ember-pikaday": "brancusi/ember-pikaday",
     "ember-place-autocomplete": "0.0.15",
