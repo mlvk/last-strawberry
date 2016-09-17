@@ -1,0 +1,45 @@
+<div class="row filtering">
+  <div class="col-5">
+    {{one-way-input filterTerm
+      placeholder="Filter name or email"
+      class="filterTermInput"
+      update=(action (mut filterTerm))
+    }}
+  </div>
+
+  <div class="col">
+    {{ui/icon-button
+      type="add"
+      label="New User"
+      size=1.5
+      flat=true
+      backgroundColor=colors.DARK_GREY
+      padding=1
+      click=(action "onRequestNewUser")
+    }}
+  </div>
+</div>
+
+{{sections/users/user-table/table-header}}
+
+{{#each filteredUsers as |user index|}}
+  {{sections/users/user-table/table-row
+    changeset=(changeset user validators)
+    index=index
+    roles=roles
+    validators=validators
+    saveUser=saveUser
+    deleteUser=(action deleteUser user)
+  }}
+{{/each}}
+
+{{#if showNewUserModal}}
+  {{#tether-dialog close=(action "closeNewUser")}}
+    {{modals/new-user
+      roles=roles
+      changeset=(changeset stashedNewUserData validators)
+      close=(action "closeNewUser")
+      submit=(action "createNewUser")
+    }}
+  {{/tether-dialog}}
+{{/if}}
