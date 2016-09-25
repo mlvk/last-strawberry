@@ -3,7 +3,7 @@
     cancelLabel="Cancel"
     cancel=(action cancel)
     submitLabel="Create"
-    isValid=changeset.isValid
+    isValid=isValid
     submit=(action "submitForm")}}
     <input
       type="text"
@@ -11,8 +11,8 @@
       class="name"
       placeholder="Template name"
       value="{{changeset.name}}"
-      oninput={{action "fieldChanged" "name"}}
-      onchange={{action "fieldChanged" "name"}}>
+      oninput={{action "nameChanged"}}
+      onchange={{action "nameChanged"}}>
 
     {{#power-select
         selected=changeset.user
@@ -29,5 +29,9 @@
       {{#each changeset.errors as |error|}}
         <div class="row">{{error.key}}:{{error.validation}}</div>
       {{/each}}
+
+      {{#if (not nameValidator.isValid)}}
+        <div class="row">Another template is using that name</div>
+      {{/if}}
     </div>
 {{/modals/base-modal}}

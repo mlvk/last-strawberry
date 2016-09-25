@@ -1,38 +1,56 @@
 import Ember from "ember";
 import config from "last-strawberry/config/environment";
-import { toUnderscore } from "last-strawberry/utils/string";
 
-export default function(options) {
-  const { session, type } = options;
-  return function uniqueValidator(key, value, oldValue) {
+export default Ember.Object.extend({
+  debounce: 500,
+  isValid: true,
+  whitelist: [],
 
-    if(value === oldValue) {
-      return true;
+  init() {
+    this.subject = new Rx.Subject();
+
+    this.subscription = this.subject
+      .filter(value => !!value)
+      .filter(value => this.get("whitelist").every(item => item !== value))
+      .do(() => this.set("isValid", false))
+      .debounce(this.get("debounce"))
+      .flatMap(value => this.sendRequest(value))
+      .subscribe(isValid => this.set("isValid", isValid));
+  },
+
+  destroy() {
+    this.subscription.dispose();
+    this.subject = undefined;
+  },
+
+  sendRequest(value){
+    const data = {
+      type: this.get("type"),
+      key: this.get("key"),
+      value
     }
+    return Rx.Observable.defer(() => {
+      return new Ember.RSVP.Promise(res => {
+        this.get("session").authorize("authorizer:devise", (headerName, headerValue) => {
+          const headers = {};
+          headers[headerName] = headerValue;
+          const payload = {
+            url:`${config.apiHost}/custom/unique_check`,
+            data,
+            headers,
+            type:"POST"
+          };
 
-    key = toUnderscore(key);
-
-    return new Ember.RSVP.Promise(res => {
-      session.authorize("authorizer:devise", (headerName, headerValue) => {
-        const headers = {};
-        headers[headerName] = headerValue;
-        const payload = {
-          url:`${config.apiHost}/custom/unique_check`,
-          data:{type, key, value},
-          headers,
-          type:"POST"
-        };
-
-        Ember.$.ajax(payload)
-          .always(response => {
-            if(response.unique) {
-              res(response.unique);
-            } else {
-              const { errorMsg = `${key}: ${value} is already in use by another ${type}` } = options;
-              res(errorMsg);
-            }
+          Ember.$
+            .ajax(payload)
+            .always(response => res(response.unique === "true" || response.unique === true));
         });
       });
     });
+  },
+
+  validate(value, whitelist = []){
+    this.set("whitelist", whitelist);
+    this.subject.onNext(value);
   }
-}
+})
