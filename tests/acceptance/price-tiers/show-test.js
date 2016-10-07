@@ -8,19 +8,20 @@ import {
   makeList,
   mockFind,
   mockFindAll,
-  mockDelete
+  mockDelete,
+  mockUpdate
 } from "ember-data-factory-guy";
 
 moduleForAcceptance("Acceptance | price tiers - show", {
   beforeEach() {
     authenticateSession(this.application);
-    mockFindAll("price-tier");
   }
 });
 
 test("Shows the name of the price tier", async function(assert) {
   const priceTier = make("price-tier");
 
+  mockFindAll("price-tier");
   mockFindAll("item");
   mockFind("price-tier").returns({model:priceTier});
 
@@ -34,6 +35,7 @@ test("Only shows rows for products", async function(assert) {
   const products = makeList("product", 10);
   const priceTier = make("price-tier");
 
+  mockFindAll("price-tier");
   mockFind("price-tier").returns({ model: priceTier });
   mockFindAll("item").returns({ models: products});
 
@@ -51,6 +53,7 @@ test("Shows a price row for all products", async function(assert) {
 
   const priceTier = make("price-tier", { itemPrices });
 
+  mockFindAll("price-tier");
   mockFind("price-tier").returns({ model: priceTier });
   mockFindAll("item").returns({ models: items});
 
@@ -69,6 +72,7 @@ test("Shows item prices for items that are not in the price tier yet", async fun
 
   const priceTier = make("price-tier", { itemPrices });
 
+  mockFindAll("price-tier");
   mockFind("price-tier").returns({ model: priceTier });
   mockFindAll("item").returns({ models: items });
 
@@ -78,16 +82,64 @@ test("Shows item prices for items that are not in the price tier yet", async fun
   assert.equal(page.fulfilledPriceRows().count, fulfilledItems.length);
 });
 
-test("Can delete the current price tier item", async function(assert) {
-  const priceTier = make("price-tier");
+test("Shows company list when deleting a price tier which has many companies", async function(assert) {
+  const items = makeList("product", 10);
 
-  mockFindAll("item");
-  mockFind("price-tier").returns({model:priceTier});
-  mockDelete(priceTier);
+  const priceTiers = makeList("price-tier", 3);
+
+  const priceTier = priceTiers.get("firstObject");
+  const companies = makeList("company", 2, { priceTier });
+
+  mockFind("price-tier").returns({ model: priceTier });
+  mockFindAll("item").returns({ models: items });
+  mockFindAll("price-tier").returns({ models: priceTiers});
 
   await page
-    .visit({id:1})
-    .submitDeletePriceTier();
+    .visit({ id: 1 })
+    .clickDeleteButton();
 
-  assert.equal(currentURL(), "/price-tiers");
+  assert.equal(page.companyRows().count, companies.length);
+});
+
+test("Does not show company list when deleting a price tier which has not company", async function(assert) {
+  const items = makeList("product", 10);
+
+  const priceTiers = makeList("price-tier", 3);
+  const priceTier = priceTiers.get("firstObject");
+
+  mockFind("price-tier").returns({ model: priceTier });
+  mockFindAll("item").returns({ models: items });
+  mockFindAll("price-tier").returns({ models: priceTiers});
+
+  await page
+    .visit({ id: 1 })
+    .clickDeleteButton();
+
+  assert.equal(page.companyRows().count, 0);
+});
+
+test("Remaps price tier when deleting a price tier which has many companies", async function(assert) {
+  const items = makeList("product", 10);
+
+  const priceTiers = makeList("price-tier", 3);
+
+  const priceTier = priceTiers.get("firstObject");
+  const company = make("company", { priceTier });
+
+  const swichingPriceTier = priceTiers[2];
+
+  mockFind("price-tier").returns({ model: priceTier });
+  mockFindAll("item").returns({ models: items });
+  mockFindAll("price-tier").returns({ models: priceTiers});
+  mockDelete(priceTier);
+  mockUpdate(company);
+
+  await page
+    .visit({ id: 1 })
+    .clickDeleteButton()
+    .selectPriceTier(swichingPriceTier);
+
+  await page.submitDeletePriceTier();
+
+  assert.equal(company.get("priceTier.id"), swichingPriceTier.id);
 });
