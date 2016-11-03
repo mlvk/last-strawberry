@@ -5,7 +5,11 @@ const { filterBy } = Ember.computed;
 const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
 
 export default Ember.Controller.extend({
+  queryParams: ["deliveryDate", "includeApproved", "includeDraft"],
+
   deliveryDate: tomorrow,
+  includeApproved: true,
+  includeDraft: true,
 
   @computed("salesOrders.@each.{deliveryDate,isSalesOrder}", "deliveryDate")
   filteredSalesOrders(salesOrders, deliveryDate) {

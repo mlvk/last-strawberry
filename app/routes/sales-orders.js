@@ -23,20 +23,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   queryParams: {
     deliveryDate: {
       refreshModel: true
+    },
+    includeApproved: {
+      refreshModel: false
+    },
+    includeDraft: {
+      refreshModel: false
     }
   },
 
 	setupController(controller, model) {
-    this._super(controller, model);
-
 		controller.set("salesOrders", this.store.peekAll("order"));
 		controller.set("companies", this.store.peekAll("company"));
     controller.set("locations", this.store.peekAll("location"));
+
+    this._super(controller, model);
 	},
 
 	model(params){
-    this.params = params;
-
     return Ember.RSVP.all([
       this.store.query("item", {"filter[is_sold]":true}),
       this.store.query("company", {include:COMPANY_INCLUDES.join(",")}),
