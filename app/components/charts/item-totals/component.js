@@ -3,6 +3,7 @@ import computed from 'ember-computed-decorators';
 
 export default Ember.Component.extend({
   classNames: ['col', 'card-1'],
+  isHidden:true,
 
   @computed('orders.@each.{totalQuantity}')
   itemTotals(orders = Ember.A()) {
