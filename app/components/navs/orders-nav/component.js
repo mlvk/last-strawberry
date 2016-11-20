@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     return val === "true" || val === true;
   },
 
-  @computed("orders.@each.{orderState,isDeleted}", "query", "includeApprovedBool", "includeDraftBool")
+  @computed("orders.@each.{orderState,isDeleted,isVoided}", "query", "includeApprovedBool", "includeDraftBool")
   filterOrders(orders, query, includeApprovedBool, includeDraftBool){
     return orders
       .filter(order => {
@@ -35,10 +35,11 @@ export default Ember.Component.extend({
         const reg = new RegExp(query, "i"),
               nameMatch = reg.test(order.get("location.company.name")),
               notDeleted = !order.get('isDeleted'),
+              notVoided = !order.get('isVoided'),
               showApproved = includeApprovedBool && order.get("isApproved"),
               showDraft = includeDraftBool && order.get("isDraft");
 
-        return nameMatch && notDeleted && (showApproved || showDraft);
+        return nameMatch && notDeleted && notVoided && (showApproved || showDraft);
       });
   },
 
