@@ -1,4 +1,4 @@
-import PO from 'last-strawberry/tests/page-object';
+import PO from "last-strawberry/tests/page-object";
 
 const {
   clickable,
@@ -10,36 +10,37 @@ const {
 } = PO;
 
 const page = PO.create({
-  visit: visitable('/vendors/:id/locations/:location_id')
+  visit: visitable("/vendors/:id/locations/:location_id")
 });
 
 const visitSchedulePO = PO.create({
   visitWindows: collection({
-    itemScope: '.debug_sections_locations_visit-window'
+    itemScope: ".debug_sections_locations_visit-window"
   }),
 
-  createNewVisitWindow: clickable('.createVisitWindow')
+  createNewVisitWindow: clickable(".createVisitWindow"),
+  deleteVisitWindow: clickable(".deleteVisitWindow")
 });
 
 const visitDaysPO = PO.create({
   dayOptions: collection({
-    itemScope: '.debug_sections_locations_visit-schedule .debug_ui_label-checkbox',
+    itemScope: ".debug_sections_locations_visit-schedule .debug_ui_label-checkbox",
 
     item: {
-      label: text('.label'),
-      enabled: hasClass('selected')
+      label: text(".label"),
+      enabled: hasClass("selected")
     }
   })
 });
 
 const addressPO = PO.create({
-  scope: '.debug_sections_locations_address-manager',
+  scope: ".debug_sections_locations_address-manager",
 
-  fillSearchAddress: fillable('input'),
+  fillSearchAddress: fillable("input"),
 
-  updateAddress: clickable('.submit'),
+  updateAddress: clickable(".submit"),
 
-  fullAddress: text('.fullAddress')
+  fullAddress: text(".fullAddress")
 });
 
 export {

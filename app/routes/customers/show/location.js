@@ -159,6 +159,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     deleteNotification(notification){
       notification.destroyRecord();
+    },
+
+    deleteVisitWindow(visitWindow){
+      visitWindow.destroyRecord();
     }
   }
 });

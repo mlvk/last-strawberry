@@ -94,6 +94,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
       location.set("active", false);
       location.save();
+    },
+
+    deleteVisitWindow(visitWindow){
+      visitWindow.destroyRecord();
     }
   }
 });

@@ -42,7 +42,8 @@ const visitSchedulePO = PO.create({
     itemScope: ".debug_sections_locations_visit-window"
   }),
 
-  createNewVisitWindow: clickable(".createVisitWindow")
+  createNewVisitWindow: clickable(".createVisitWindow"),
+  deleteVisitWindow: clickable(".deleteVisitWindow")
 });
 
 const visitDaysPO = PO.create({

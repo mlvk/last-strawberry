@@ -12,7 +12,7 @@
         type="text"
         name="min"
         value="{{minutes-to-time model.min}}"
-        onblur={{action 'timeChanged' 'min'}}>
+        onblur={{action "timeChanged" "min"}}>
       <span class="instruction">Earliest arv.</span>
     </div>
 
@@ -21,7 +21,7 @@
         type="text"
         name="max"
         value="{{minutes-to-time model.max}}"
-        onblur={{action 'timeChanged' 'max'}}>
+        onblur={{action "timeChanged" "max"}}>
       <span class="instruction">Latest arv.</span>
     </div>
 
@@ -30,9 +30,17 @@
         type="text"
         name="service"
         value="{{model.service}}"
-        onblur={{action 'serviceChanged'}}>
+        onblur={{action "serviceChanged"}}>
       <span class="instruction">Service time</span>
     </div>
+  </div>
 
+  <div class="row">
+    {{ui/icon-button
+      flat=true
+      type="clear"
+      class="deleteVisitWindow"
+      click=(action deleteVisitWindow model)
+    }}
   </div>
 </div>
