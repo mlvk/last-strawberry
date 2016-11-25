@@ -19,11 +19,15 @@
       item=item
       location=model.location
       itemTotals=itemTotals
-      salesData=salesData.lastObject}}
+      salesData=salesData.lastObject
+      isLoading=loadingFbData
+    }}
 
     {{charts/item-location-sales-trend
       item=item
-      salesData=salesData}}
+      salesData=salesData
+      isLoading=loadingFbData
+    }}
 
     {{charts/item-totals
       orders=salesOrders}}
