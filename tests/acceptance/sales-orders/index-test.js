@@ -142,73 +142,54 @@ test("shows filterd items base on query string includedItems", async function(as
   assert.equal(page.orders().count, 1, "Number of orders do not match expected");
 });
 
-test("should not display draft orders after uncheck Draft checkbox", async function(assert) {
-  const draftOrders = makeList("sales_order", 2, "draft");
-  const approvedOrders = makeList("sales_order", 3, "approved");
+test("should not display unpublished orders after uncheck Draft checkbox", async function(assert) {
+  const unpublishedOrders = makeList("sales_order", 2);
+  const publishedOrders = makeList("sales_order", 3, "published");
 
-  mockFindAll("order").returns({models: _.concat(draftOrders, approvedOrders)});
+  mockFindAll("order").returns({models: _.concat(unpublishedOrders, publishedOrders)});
 
   await page
     .visit()
     .toggleFilterOptions()
     .toggleIncludeDraft();
 
-  assert.equal(page.orders().count, approvedOrders.length, "Wrong number of orders filtered");
+  assert.equal(page.orders().count, publishedOrders.length, "Wrong number of orders filtered");
 });
 
-test("should not display draft orders if query string value is includeDraft=false", async function(assert) {
-  const draftOrders = makeList("sales_order", 2, "draft");
-  const approvedOrders = makeList("sales_order", 3, "approved");
+test("should not display unpublished orders if query string value is includeUnpublished=false", async function(assert) {
+  const unpublishedOrders = makeList("sales_order", 2);
+  const publishedOrders = makeList("sales_order", 3, "published");
 
-  mockFindAll("order").returns({models: _.concat(draftOrders, approvedOrders)});
+  mockFindAll("order").returns({models: _.concat(unpublishedOrders, publishedOrders)});
 
   await page
-    .visit({includeDraft:false});
+    .visit({includeUnpublished:false});
 
-  assert.equal(page.orders().count, approvedOrders.length, "Wrong number of orders filtered");
+  assert.equal(page.orders().count, publishedOrders.length, "Wrong number of orders filtered");
 });
 
-test("should not display approved orders after uncheck Approved checkbox", async function(assert) {
-  const draftOrders = makeList("sales_order", 2, "draft");
-  const approvedOrders = makeList("sales_order", 3, "approved");
+test("should not display published orders after uncheck Approved checkbox", async function(assert) {
+  const unpublishedOrders = makeList("sales_order", 2);
+  const publishedOrders = makeList("sales_order", 3, "published");
 
-  mockFindAll("order").returns({models: _.concat(draftOrders, approvedOrders)});
+  mockFindAll("order").returns({models: _.concat(unpublishedOrders, publishedOrders)});
 
   await page
     .visit()
     .toggleFilterOptions()
-    .toggleIncludeApproved();
+    .toggleIncludePublished();
 
-  assert.equal(page.orders().count, draftOrders.length, "Wrong number of orders filtered");
+  assert.equal(page.orders().count, unpublishedOrders.length, "Wrong number of orders filtered");
 });
 
-test("should not display approved orders if query string value is includeApproved=false", async function(assert) {
-  const draftOrders = makeList("sales_order", 2, "draft");
-  const approvedOrders = makeList("sales_order", 3, "approved");
+test("should not display published orders if query string value is includePublished=false", async function(assert) {
+  const unpublishedOrders = makeList("sales_order", 2);
+  const publishedOrders = makeList("sales_order", 3, "published");
 
-  mockFindAll("order").returns({models: _.concat(draftOrders, approvedOrders)});
+  mockFindAll("order").returns({models: _.concat(unpublishedOrders, publishedOrders)});
 
   await page
-    .visit({includeApproved:false});
+    .visit({includePublished:false});
 
-  assert.equal(page.orders().count, draftOrders.length, "Wrong number of orders filtered");
+  assert.equal(page.orders().count, unpublishedOrders.length, "Wrong number of orders filtered");
 });
-
-// test("filters companies by name", async function(assert) {
-//   const firstCompany = make("company", {name:"first company"});
-//   const firstLocation = make("location", {company:firstCompany});
-//   const firstOrder = make("sales_order", {location:firstLocation});
-//
-//   const secondCompany = make("company", {name:"second company"});
-//   const secondLocation = make("location", {company:secondCompany});
-//   const secondOrder = make("sales_order", {location:secondLocation});
-//
-//   mockFindAll("order").returns({models: [firstOrder, secondOrder]});
-//
-//   await page
-//     .visit()
-//     .toggleFilterOptions()
-//     .inputFilterQuery("first");
-//
-//   assert.equal(page.orders().count, 1, "Number of orders do not match expected");
-// });

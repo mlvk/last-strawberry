@@ -41,8 +41,8 @@ const page = PO.create({
   },
 
   toggleFilterOptions: clickable(".titleBar .action"),
-  toggleIncludeDraft: clickable(".includeDraft input"),
-  toggleIncludeApproved: clickable(".includeApproved input"),
+  toggleIncludeDraft: clickable(".includeUnpublished input"),
+  toggleIncludePublished: clickable(".includePublished input"),
   inputFilterQuery: value(".filterQuery input"),
   selectFilterItem(item) {
     return selectChoose(".itemFilterContainer", item.get("name"));

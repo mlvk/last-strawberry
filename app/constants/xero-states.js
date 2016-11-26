@@ -1,6 +1,9 @@
 export default {
-  PENDING: "pending",
+  DRAFT: "draft",
   SUBMITTED: "submitted",
-  SYNCED: "synced",
-  VOIDED: "voided"
+  AUTHORIZED: "authorized",
+  PAID: "paid",
+  BILLED: "billed",
+  VOIDED: "voided",
+  DELETED: "deleted"
 }

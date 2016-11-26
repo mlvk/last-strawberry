@@ -1,7 +1,7 @@
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import Ember from "ember";
 import NotificationRenderer from "last-strawberry/constants/notification-renderers";
-import OrderState from "last-strawberry/constants/order-states";
+import PublishedStates from "last-strawberry/constants/published-states";
 import { formatDate } from "last-strawberry/utils/date";
 
 const ORDER_INCLUDES = [
@@ -96,8 +96,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		},
 
 		toggleOrderState(model) {
-			const updatedState = model.get("isDraft")? OrderState.APPROVED: OrderState.DRAFT;
-			model.set("orderState", updatedState);
+			const updatedState = model.get("isUnpublished") ? PublishedStates.PUBLISHED : PublishedStates.UNPUBLISHED;
+			model.set("publishedState", updatedState);
 
 			model.save()
 		},

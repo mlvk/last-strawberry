@@ -10,16 +10,16 @@
 
   {{forms/elements/label-checkbox
     label="Drafts"
-    selected=includeDraft
-    update=(action (mut includeDraft))
-    class="includeDraft"
+    selected=includeUnpublished
+    update=(action (mut includeUnpublished))
+    class="includeUnpublished"
   }}
 
   {{forms/elements/label-checkbox
     label="Approved"
-    selected=includeApproved
-    update=(action (mut includeApproved))
-    class="includeApproved"
+    selected=includePublished
+    update=(action (mut includePublished))
+    class="includePublished"
   }}
 
   <div class="filterQuery">

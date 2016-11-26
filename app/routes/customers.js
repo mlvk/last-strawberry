@@ -1,6 +1,8 @@
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import Ember from "ember";
 
+import activeState from "last-strawberry/constants/active-states";
+
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController(controller) {
     controller.set("companies", this.store.peekAll("company"));
@@ -11,7 +13,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return Ember.RSVP.all([
       this.store.findAll("item"),
       this.store.findAll("price-tier"),
-      this.store.findAll("company")
+      this.store.query("company", {"filter[active_state]":activeState.ACTIVE})
     ]);
 	},
 

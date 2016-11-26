@@ -1,6 +1,8 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
+import activeState from "last-strawberry/constants/active-states";
+
 const INCLUDES = [
   "locations",
 	"locations.address"
@@ -18,6 +20,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+    archiveCompany(model) {
+      model.set("activeState", activeState.ARCHIVED)
+      model.save();
+
+      this.transitionTo("customers");
+    },
+
     updatePriceTier(priceTier) {
       const company = this.modelFor("customers.show");
 

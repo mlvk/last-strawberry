@@ -6,8 +6,8 @@
     onRequestDuplicateOrders=(action "onRequestDuplicateOrders")
     onRequestNewOrder=(action "onRequestNewOrder")
     onOrderSelected=(route-action "onOrderSelected")
-    includeDraft=includeDraft
-    includeApproved=includeApproved
+    includeUnpublished=includeUnpublished
+    includePublished=includePublished
     orders=filteredSalesOrders
     items=allItems
     companyQuery=companyQuery
@@ -22,7 +22,7 @@
     {{/ui/alert-banner }}
   {{/if}}
 
-  <div class="row">
+  <div class="row stretch">
     {{outlet}}
   </div>
 </div>

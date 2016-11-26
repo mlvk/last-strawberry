@@ -10,6 +10,20 @@
         locations=model.activeLocations
         showLocation=(route-action "showLocation")
         createNewLocation=(route-action "createNewLocation")}}
+
+    <div class="col settingMenu">
+      {{#ui/popup-menu icon='menu'}}
+        {{ui/icon-button
+            class="archive"
+            type="delete"
+            label="Archive"
+            size="1"
+            color=white
+            flat=true
+            backgroundColor=colors.SKY_BLUE
+            action=(route-action "archiveCompany" model)}}
+      {{/ui/popup-menu}}
+    </div>
   </div>
   <div class="section">
     {{outlet}}

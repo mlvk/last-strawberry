@@ -14,6 +14,12 @@ export default Ember.Component.extend({
       .groupBy(orderItem => orderItem.get('item.name'))
       .mapValues(orderItems => orderItems.reduce((acc, cur) => acc + Number(cur.get('quantity')), 0))
       .map((quantity, name) => ({name, quantity}))
+      .filter(row => row.quantity > 0)
       .value();
+  },
+
+  @computed('orders.@each.{totalQuantity}')
+  totalUnits(orders = Ember.A()) {
+    return orders.reduce((acc, cur) => acc + cur.get("totalQuantity"), 0);
   }
 });

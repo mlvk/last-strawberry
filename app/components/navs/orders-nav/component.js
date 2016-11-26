@@ -27,9 +27,8 @@ export default Ember.Component.extend({
     return selected;
   },
 
-  @computed("orders.@each.{isDeleted,orderItems,isVoided}", "includeDraft", "includeApproved", "companyQuery", "selectedItems")
-  filterOrders(orders, includeDraft, includeApproved, query, selectedItems) {
-
+  @computed("orders.@each.{isDeleted,orderItems,xeroFinancialRecordState,publishedState}", "includeUnpublished", "includePublished", "companyQuery", "selectedItems")
+  filterOrders(orders, includeUnpublished, includePublished, query, selectedItems) {
      return orders
        .filter(order => {
 
@@ -37,13 +36,13 @@ export default Ember.Component.extend({
                nameMatch = reg.test(order.get("location.company.name")),
                notDeleted = !order.get('isDeleted'),
                notVoided = !order.get('isVoided'),
-               showApproved = includeApproved && order.get('isApproved'),
-               showDraft = includeDraft && order.get('isDraft');
+               showPublished = includePublished && order.get('isPublished'),
+               showUnpublished = includeUnpublished && order.get('isUnpublished');
 
         const includedItem = Ember.isEmpty(selectedItems) ||
           selectedItems.reduce((sum,item) => sum || order.get("orderItems").isAny("item.id", item.get("id")), false);
 
-        return nameMatch && notDeleted && notVoided && (showApproved || showDraft) && includedItem;
+        return nameMatch && notDeleted && notVoided && (showPublished || showUnpublished) && includedItem;
        });
    },
 

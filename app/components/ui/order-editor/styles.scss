@@ -1,5 +1,5 @@
 & {
-  padding: 1em;
+  // padding: 1em;
   background: $medium-grey;
   min-width: 35em;
   max-width: 35em;
@@ -11,6 +11,24 @@ a {
 
 .toolbar {
   justify-content: flex-end;
+}
+
+.contentContainer {
+  padding: 1em;
+}
+
+.syncedMessage {
+  background: $dark-grey;
+  padding: 0.5em;
+  color: $off-white;
+
+  a {
+    color: $off-white;
+  }
+}
+
+.syncedTitle {
+  margin-right: 0.5em;
 }
 
 .company {
@@ -30,7 +48,7 @@ a {
 }
 
 .title {
-  font-size: 1.7em;
+  font-size: 1.4em;
   font-weight: bold;
   color: $dark-grey;
   padding-right: 1em;

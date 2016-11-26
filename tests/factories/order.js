@@ -1,5 +1,5 @@
 import FactoryGuy from "ember-data-factory-guy";
-import OrderState from "last-strawberry/constants/order-states";
+import PublishedStates from "last-strawberry/constants/published-states";
 
 FactoryGuy.define("order", {
   default: {
@@ -10,12 +10,8 @@ FactoryGuy.define("order", {
   },
 
   traits: {
-    draft: {
-      orderState: OrderState.DRAFT
-    },
-
-    approved: {
-      orderState: OrderState.APPROVED
+    published: {
+      publishedState: PublishedStates.PUBLISHED
     }
   },
 
