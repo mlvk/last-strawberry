@@ -29,7 +29,8 @@ export default Ember.Component.extend({
   @computed("model.orderItems.@each.{isDeleted}")
   validOrderItems(orderItems) {
     return orderItems
-      .filter(o => !o.get("isDeleted"));
+      .filter(o => !o.get("isDeleted"))
+      .sortBy("item.position");
   },
 
   actions: {

@@ -12,9 +12,13 @@ export default Ember.Component.extend({
       .map(order => order.get('orderItems').toArray())
       .flatten()
       .groupBy(orderItem => orderItem.get('item.name'))
-      .mapValues(orderItems => orderItems.reduce((acc, cur) => acc + Number(cur.get('quantity')), 0))
-      .map((quantity, name) => ({name, quantity}))
+      .mapValues(orderItems =>
+        orderItems.reduce((acc, cur) =>
+          ({p:cur.get("item.position"), q:acc["q"] + Number(cur.get('quantity'))}), {p:0, q:0}))
+
+      .map(({p, q}, name) => ({name, quantity:q, position:p}))
       .filter(row => row.quantity > 0)
+      .sortBy(["position"])
       .value();
   },
 
