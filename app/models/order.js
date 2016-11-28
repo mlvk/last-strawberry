@@ -59,7 +59,7 @@ export default Model.extend(LocationHashable, {
 
   hasXeroId:                    notEmpty("xeroId"),
 
-  isValid:                      and("hasQuantity", "notVoided", "isDeleted"),
+  isValid:                      and("hasQuantity", "notVoided", "notDeleted"),
 
   @computed("orderItems.@each.{hasDirtyAttributes}", "hasDirtyAttributes")
   notifiable(orderItems) {

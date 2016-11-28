@@ -6,7 +6,8 @@ const {
   collection,
   text,
   visitable,
-  value
+  value,
+  hasClass
 } = PO;
 
 const page = PO.create({
@@ -36,7 +37,10 @@ const orderEditorPO = PO.create({
     openDatepicker($("input.deliveryDate")).selectDate(date);
   },
 
-  deleteOrder: clickable(".toolbar .delete")
+  deleteOrder: clickable(".toolbar .delete"),
+
+  printDisabled: hasClass("disabled", ".print"),
+  sendDisabled: hasClass("disabled", ".send")
 });
 
 const notificationsPO = PO.create({

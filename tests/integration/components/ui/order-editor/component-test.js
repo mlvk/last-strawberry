@@ -3,6 +3,11 @@ import hbs from "htmlbars-inline-precompile";
 import { make, manualSetup } from "ember-data-factory-guy";
 import decorateComponentClass from "last-strawberry/tests/helpers/decorate-component-class";
 import { formatFullDate } from "last-strawberry/utils/date";
+import { orderEditorPO } from "last-strawberry/tests/pages/sales-orders-show";
+
+import {
+  buildValidSalesOrder
+} from "last-strawberry/tests/factories/order";
 
 let model;
 
@@ -12,6 +17,8 @@ moduleForComponent("sections/sales-order/order-editor", "Integration | Component
   beforeEach: function () {
     decorateComponentClass();
     manualSetup(this.container);
+
+    orderEditorPO.setContext(this);
 
     model = make("order");
 
@@ -28,6 +35,10 @@ moduleForComponent("sections/sales-order/order-editor", "Integration | Component
           items=items
           model=model
           updateDeliveryDate=(action handler)}}`);
+  },
+
+  afterEach() {
+    orderEditorPO.removeContext();
   }
 });
 
@@ -45,4 +56,22 @@ test("it displays note of order", function(assert) {
 
 test("it displays delivery date", function(assert) {
   assert.equal(this.$(".deliveryDate").val(), formatFullDate(model.get("deliveryDate")));
+});
+
+test("it should enable print button when order isValid", function(assert) {
+  this.set("model", buildValidSalesOrder());
+  assert.ok(!orderEditorPO.printDisabled);
+});
+
+test("it should enable send button when order isValid", function(assert) {
+  this.set("model", buildValidSalesOrder());
+  assert.ok(!orderEditorPO.sendDisabled);
+});
+
+test("it should disable print button when order is not valid", function(assert) {
+  assert.ok(orderEditorPO.printDisabled);
+});
+
+test("it should disable send button when order is not valid", function(assert) {
+  assert.ok(orderEditorPO.sendDisabled);
 });

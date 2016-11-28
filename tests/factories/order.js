@@ -1,5 +1,9 @@
 import FactoryGuy from "ember-data-factory-guy";
 import PublishedStates from "last-strawberry/constants/published-states";
+import {
+  make,
+  makeList
+} from 'ember-data-factory-guy';
 
 FactoryGuy.define("order", {
   default: {
@@ -23,3 +27,15 @@ FactoryGuy.define("order", {
     orderType: "purchase-order"
   }
 });
+
+const buildValidSalesOrder = () => {
+  const order = make("order", "sales-order");
+
+  makeList("order-item", 5, {order, quantity:5, unitPrice:5});
+
+  return order;
+}
+
+export {
+  buildValidSalesOrder
+}
