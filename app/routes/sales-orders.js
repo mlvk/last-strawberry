@@ -90,6 +90,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     stubOrders () {
       const deliveryDate = this.paramsFor("sales-orders").deliveryDate;
 
+      this.controllerFor("sales-orders").set("isStubbing", true);
+
       this.get("session").authorize("authorizer:devise", async (headerName, headerValue) => {
 
         const headers = {};
@@ -103,6 +105,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         const newOrders = await Ember.$.ajax(payload);
         this.store.pushPayload(newOrders);
+
+        this.controllerFor("sales-orders").set("isStubbing", false);
+
       });
     },
 

@@ -15,17 +15,25 @@
     updateIncludedItems=(action "updateIncludedItems")
   }}
 
-<div class="col stretch">
-  {{#if isOldDate}}
-    {{#ui/alert-banner type="warning"}}
-      You are working with a past date. Please manage these orders through xero
-    {{/ui/alert-banner }}
-  {{/if}}
-
-  <div class="row stretch">
-    {{outlet}}
+{{#if isStubbing}}
+  <div class="col stretch center loading">
+    <div class="row stretch center">
+      {{passive/loading-indicator}}
+    </div>
   </div>
-</div>
+{{else}}
+  <div class="col stretch">
+    {{#if isOldDate}}
+      {{#ui/alert-banner type="warning"}}
+        You are working with a past date. Please manage these orders through xero
+      {{/ui/alert-banner }}
+    {{/if}}
+
+    <div class="row stretch">
+      {{outlet}}
+    </div>
+  </div>
+{{/if}}
 
 {{#if showCreateSalesOrderModal}}
   {{#tether-dialog close=(action "closeCreateSalesOrder")}}
