@@ -37,6 +37,21 @@
   flex: 5;
 }
 
+.col-6 {
+  @extend .col;
+  flex: 6;
+}
+
+.col-7 {
+  @extend .col;
+  flex: 7;
+}
+
+.col-8 {
+  @extend .col;
+  flex: 8;
+}
+
 .row {
   display: flex;
 }

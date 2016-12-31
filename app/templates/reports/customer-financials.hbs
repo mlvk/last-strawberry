@@ -1,0 +1,8 @@
+<div class="col stretch center">
+  {{ui/date-range-picker
+      startDate=startDate
+      endDate=endDate
+      onDatesConfirmed=(route-action "onDatesConfirmed")}}
+
+  {{reports/companies-financials sortedFilteredCompaniesFinancials startDate=startDate endDate=endDate}}
+</div>

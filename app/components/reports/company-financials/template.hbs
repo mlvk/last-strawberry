@@ -1,0 +1,32 @@
+<div class="row stretch header">
+  <div class="col-4">
+    <span>
+      {{model.name}}
+    </span>
+  </div>
+  <div class="col-2">
+    <span class="row right">
+      {{currency model.total_sales_revenue}}
+    </span>
+  </div>
+  <div class="col-2">
+    <span class="row right">
+      {{currency model.total_dist_revenue}}
+    </span>
+  </div>
+  <div class="col-2">
+    <span class="row right">
+      {{currency model.total_spoilage}}
+    </span>
+  </div>
+
+  {{#tooltip-on-element}}
+    {{reports/financial-ratios model
+        totalSales=totalSales}}
+  {{/tooltip-on-element}}
+</div>
+
+{{#each sortedFilteredLocationsFinancials as |locationData|}}
+  {{reports/location-financials locationData
+      totalSales=totalSales}}
+{{/each}}

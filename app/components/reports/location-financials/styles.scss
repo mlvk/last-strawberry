@@ -1,0 +1,16 @@
+&{
+  cursor: pointer;
+  padding: 0 1em;
+}
+
+&:hover, &:nth-child(odd):hover {
+  background-color: rgba($hot-pink, 0.1);
+}
+
+&:nth-child(odd) {
+  background-color: rgba($light-blue, 1);
+}
+
+.name {
+  padding-left: 1em;
+}

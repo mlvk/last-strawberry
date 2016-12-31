@@ -1,0 +1,25 @@
+<div class="col-4">
+  <span class="name">
+    {{model.name}}
+  </span>
+</div>
+<div class="col-2">
+  <span class="row right">
+    {{currency model.total_sales_revenue}}
+  </span>
+</div>
+<div class="col-2">
+  <span class="row right">
+    {{currency model.total_dist_revenue}}
+  </span>
+</div>
+<div class="col-2">
+  <span class="row right">
+    {{currency model.total_spoilage}}
+  </span>
+</div>
+
+{{#tooltip-on-component}}
+  {{reports/financial-ratios model
+      totalSales=totalSales}}
+{{/tooltip-on-component}}

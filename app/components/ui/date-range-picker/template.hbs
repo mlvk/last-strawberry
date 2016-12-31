@@ -1,0 +1,24 @@
+<div class="col startDate">
+  {{ui/date-picker
+    date=startDate
+    onSelected=(action "onStartDateSelected")
+    format="ddd MM-DD-YYYY"}}
+</div>
+
+<div class="col endDate">
+  {{ui/date-picker
+      date=endDate
+      onSelected=(action "onEndDateSelected")
+      format="ddd MM-DD-YYYY"}}
+</div>
+
+{{ui/icon-button
+    class='homeLink'
+    flat=true
+    label="Generate"
+    color="white"
+    backgroundColor=colors.DARK_GREY
+    iconName="redo"
+    size=2
+    padding=0.6
+    action=(action "generateReport")}}

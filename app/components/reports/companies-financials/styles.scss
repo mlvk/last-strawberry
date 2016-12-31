@@ -1,0 +1,21 @@
+&{
+  margin: 1em;
+  margin-left: 1em;
+}
+
+.reportWrapper {
+  min-width: 50em;
+  max-width: 70em;
+}
+
+&.companies-financials {
+  .header {
+    padding: 1em;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
+
+.summary {
+  padding-left: 1em;
+}

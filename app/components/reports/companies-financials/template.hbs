@@ -1,0 +1,53 @@
+<div class="col reportWrapper">
+  <div class="row header">
+    Company Financials Report: {{startDate}} - {{endDate}}
+  </div>
+  <div class="row summary">
+    <div class="col-1">
+      <span>
+        Total Visits: {{totalVisits}}
+      </span>
+      <span>
+        Total Sales Rev: {{currency totalSales}}
+      </span>
+      <span>
+        Total Dist Rev: {{currency totalDist}}
+      </span>
+      <span>
+        Total Spoilage: {{currency totalSpoilage}}
+      </span>
+    </div>
+    <div class="col-1">
+      <span>
+        Ave sale per visit: {{currency aveSalePerVisit}}
+      </span>
+      <span>
+        Spoilage ratio: {{percentage spoilageSalesRatio}}
+      </span>
+    </div>
+  </div>
+  <div class="row stretch header">
+    <div class="col-4">
+    </div>
+    <div class="col-2">
+      <span class="row right">
+        Sales Rev
+      </span>
+    </div>
+    <div class="col-2">
+      <span class="row right">
+        Dist Rev
+      </span>
+    </div>
+    <div class="col-2">
+      <span class="row right">
+        Spoilage
+      </span>
+    </div>
+  </div>
+  {{#each model as |companyData|}}
+    {{reports/company-financials companyData
+        totalSales=totalSales
+        totalSpoilage=totalSpoilage}}
+  {{/each}}
+</div>
