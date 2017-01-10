@@ -1,7 +1,4 @@
-{{ui/title-bar
-  title=(if isHidden "Item totals +" "Item totals -")
-  click=(toggle "isHidden" this)}}
-<div class={{if isHidden "chart hidden" "chart"}}>
+{{#ui/persistent-collapsable-container settingsKey="itemTotalsIsClosed" title="Item totals"}}
   {{#each itemTotals as |itemTotal|}}
     <div class="row stretch left spaceBetween itemRow">
       <span class="name">{{itemTotal.name}}</span>
@@ -15,4 +12,4 @@
     <span class="name">Total Units:</span>
     <span class="quantity">{{totalUnits}}</span>
   </div>
-</div>
+{{/ui/persistent-collapsable-container}}

@@ -23,7 +23,8 @@
     "jquery-mockjax": "2.2.1",
     "mlvk-google-fonts": "brancusi/mlvk-google-fonts",
     "ramda": "^0.22.0",
-    "polyline": "^0.2.0"
+    "polyline": "^0.2.0",
+    "localforage": "^1.4.3"
   },
   "resolutions": {
     "ember": "v2.7.0",

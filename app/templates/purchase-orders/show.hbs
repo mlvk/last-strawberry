@@ -18,6 +18,7 @@
       <div class="row top wrap">
         {{sections/locations/location-note
           locationNote=model.location.note
+          page="purchase_orders"
           save=(route-action "saveLocationNote" model.location)}}
       </div>
     {{/sticky-container}}

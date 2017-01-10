@@ -1,39 +1,35 @@
 {{#ui/loading-panel isLoading=isLoading}}
-  <header class="col">
-    <span class="itemName">
-      {{item.name}}
-    </span>
-  </header>
-
-  <div class="col mainContentContainer">
-    {{#if hasData}}
-    <span>
-      <span class="value">{{salesData.previous_ending}}</span> <span class="copy">previous ending</span>
-    </span>
-    <span>
-      <span class="value">{{salesData.returns}}</span> <span class="copy">returned</span>
-    </span>
-    <span>
-      <span class="value">{{salesData.sold}}</span> <span class="copy">sold</span>
-    </span>
-    <span>
-      <span class="value">{{salesData.ending}}</span> <span class="copy">current ending</span>
-    </span>
-    {{else}}
-    <span class="noDataMessage">No sales data for this item.</span>
-    {{/if}}
-
-    <span class="productionInfoContainer">
-      <span class="value">{{get itemTotals item.id}}</span> <span class="copy">Total for production</span>
-    </span>
-  </div>
-
-  <div class="row footer">
-    {{#if hasLastUpdated}}
-    <span class="updatedAt">Last updated {{moment-from-now lastUpdated interval=1000}}</span>
-    {{ui/simple-spinner
-      size=1
-      enabled=loading}}
+  {{#ui/persistent-collapsable-container settingsKey="locationItemInfoIsClosed" title=item.name}}
+    <div class="col mainContentContainer">
+      {{#if hasData}}
+        <span>
+          <span class="value">{{salesData.previous_ending}}</span> <span class="copy">previous ending</span>
+        </span>
+        <span>
+          <span class="value">{{salesData.returns}}</span> <span class="copy">returned</span>
+        </span>
+        <span>
+          <span class="value">{{salesData.sold}}</span> <span class="copy">sold</span>
+        </span>
+        <span>
+          <span class="value">{{salesData.ending}}</span> <span class="copy">current ending</span>
+        </span>
+      {{else}}
+        <span class="noDataMessage">No sales data for this item.</span>
       {{/if}}
+
+      <span class="productionInfoContainer">
+        <span class="value">{{get itemTotals item.id}}</span> <span class="copy">Total for production</span>
+      </span>
     </div>
+
+    <div class="row footer">
+      {{#if hasLastUpdated}}
+      <span class="updatedAt">Last updated {{moment-from-now lastUpdated interval=1000}}</span>
+      {{ui/simple-spinner
+        size=1
+        enabled=loading}}
+        {{/if}}
+    </div>
+  {{/ui/persistent-collapsable-container}}
 {{/ui/loading-panel}}

@@ -1,0 +1,7 @@
+{{ui/title-bar
+  title=(concat title (if isClosed " +" " -"))
+  click=toggle
+}}
+<div class={{if isClosed "chart hidden" "chart"}}>
+  {{yield}}
+</div>

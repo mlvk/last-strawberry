@@ -1,7 +1,4 @@
-{{ui/title-bar
-  title=(if isHidden "Location note +" "Location note -")
-  click=(toggle "isHidden" this)}}
-<div class={{if isHidden "chart hidden" "chart"}}>
+{{#ui/persistent-collapsable-container settingsKey="locationNoteIsClosed" title="Location note"}}
   <textarea
   rows="15"
   cols="100"
@@ -11,4 +8,4 @@
   onchange={{action "noteChanged"}}
   onblur={{action save locationNote}}>
   </textarea>
-</div>
+{{/ui/persistent-collapsable-container}}

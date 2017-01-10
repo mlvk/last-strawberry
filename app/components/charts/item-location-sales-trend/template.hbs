@@ -1,11 +1,11 @@
 {{#ui/loading-panel isLoading=isLoading}}
-  {{ui/title-bar title="Sales trends"}}
-  <div class="chart">
+  {{#ui/persistent-collapsable-container settingsKey="itemLocationSalesTrendIsClosed" title="Sales trends"}}
     {{ember-chart
         type="Line"
         legend=true
         data=chartData
         width=250
-        height=200}}
-  </div>
+        height=200
+      }}
+  {{/ui/persistent-collapsable-container}}
 {{/ui/loading-panel}}
