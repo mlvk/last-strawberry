@@ -1,0 +1,10 @@
+<div class="col reportWrapper">
+  <h4>Product Financial Report</h4>
+  {{#each model as |productData index|}}
+    {{reports/product-financials/product-row
+        index=index
+        model=productData
+        totalSales=totalSales
+        totalSpoilage=totalSpoilage}}
+  {{/each}}
+</div>

@@ -38,8 +38,9 @@ Router.map(function() {
   });
   this.route("route-plan-blueprints");
   this.route("users");
-  this.route('reports', function() {
-    this.route('customer-financials');
+  this.route("reports", function() {
+    this.route("customer-financials");
+    this.route('product-financials');
   });
 });
 
