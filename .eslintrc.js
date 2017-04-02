@@ -1,11 +1,17 @@
-{
-  "parser": "babel-eslint",
-  "env": {
-    "es6": true,
-    "browser": true
+module.exports = {
+  root: true,
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module'
   },
-  "extends": "eslint:recommended",
-  "globals": {
+  extends: 'eslint:recommended',
+  env: {
+    browser: true
+  },
+  rules: {
+  },
+  globals: {
       "document": true,
       "window": true,
       "moment": true,
@@ -42,6 +48,8 @@
       "Firebase": true,
       "polyline": true,
       "selectChoose": true,
-      "selectSearch": true
+      "selectSearch": true,
+      "R": true,
+      "localforage": true
     }
-}
+};

@@ -8,8 +8,8 @@
   {{#each routePlans as |rp i|}}
     {{#if rp.polyline}}
       {{geojson-layer
-          geoJSON=rp.polyline
-          color=(get COLOR_SCHEMES (concat i ".backgroundColor"))}}
+            geoJSON=rp.polyline
+            color=(get COLOR_SCHEMES (concat i ".backgroundColor"))}}
     {{/if}}
   {{/each}}
 
@@ -38,7 +38,7 @@
   {{/each}}
 
   {{#each routePlans as |rp i|}}
-    {{#each rp.sortedRouteVisits key="key" as |rv j|}}
+    {{#each rp.sortedActiveRouteVisits key="key" as |rv j|}}
       {{sections/distribution/map-pin
           model=rv
           index=j

@@ -19,9 +19,9 @@
       <div class="row baseline deliveryDateContainer">
         <span class="instruction">Delivery date:</span>
         {{pikaday-input
-          value=model.deliveryDate
+          value=(date model.deliveryDate)
           format="ddd MM-DD-YYYY"
-          onSelected=updateDeliveryDate
+          onSelection=updateDeliveryDate
           class="deliveryDate"}}
       </div>
 
@@ -29,6 +29,7 @@
         <span class="title">
           {{if isSalesOrder "Invoice" "Purchase Order"}}
         </span>
+
         <span class="salesOrderNumber">
           {{model.orderNumber}}
         </span>
@@ -49,7 +50,7 @@
               size=1.2
               action=emailOrder
               disabled=(or (not model.isValid) (not model.notifiable))}}
-          
+
           {{ui/icon-button
               type="local_printshop"
               class="print"
@@ -123,21 +124,20 @@
     </span>
   </div>
 
-  <div class="col block">
-    <div class="title">Internal notes</div>
-    <div class="row">
-      <textarea
-        rows="3"
-        cols="100"
-        name="note"
-        class="note"
-        value="{{model.note}}"
-        oninput={{action "noteChanged"}}
-        onchange={{action "noteChanged"}}
-        onblur={{action saveOrder}}>
-      </textarea>
-    </div>
-  </div>
+
+  {{#ui/persistent-collapsable-container
+      settingsKey="orderNotes"
+      title="Notes (Visible to customer)"}}
+    <textarea
+      name="comment"
+      class="comment"
+      value="{{model.comment}}"
+      oninput={{action "propChanged" "comment"}}
+      onchange={{action "propChanged" "comment"}}
+      onblur={{action saveOrder}}>
+    </textarea>
+  {{/ui/persistent-collapsable-container}}
+
 </div>
 {{#if model.notifications.length}}
   {{ui/order-editor/notifications

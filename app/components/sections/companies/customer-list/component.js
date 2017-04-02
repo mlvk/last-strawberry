@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     },
 
     createNewCustomer(changeset){
-      this.attrs.createNewCustomer(changeset);
+      this.get("createNewCustomer")(changeset);
       this.set("showNewCustomerModal", false);
     }
   }

@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   actions:{
     saveNotification(changeset){
       if(changeset.get("isValid")){
-        this.attrs.saveNotification(changeset);
+        this.get("saveNotification")(changeset);
       }
     }
   }

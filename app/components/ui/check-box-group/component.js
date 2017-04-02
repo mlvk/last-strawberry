@@ -17,7 +17,7 @@ export default Ember.Component.extend({
         .filter(el => el.selected)
         .map(el => el.index);
 
-      this.attrs.onUpdate(newSelections);
+      this.get("onUpdate")(newSelections);
     }
   }
 });

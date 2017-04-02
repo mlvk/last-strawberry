@@ -63,7 +63,7 @@ export default Ember.Component.extend({
         const user = this.get("users").find(u => u.id === changeset.get("user.id"));
         changeset.set("user", user);
 
-        this.attrs.submit(changeset);
+        this.get("submit")(changeset);
       }
     }
   }

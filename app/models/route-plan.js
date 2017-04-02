@@ -25,6 +25,14 @@ export default Model.extend({
     return routeVisits.sortBy("position");
   },
 
+  @computed("routeVisits.@each.{position,isValid,routePlanId}")
+  sortedActiveRouteVisits(routeVisits) {
+    return routeVisits
+      .filter(rv => rv.get("routePlanId") === this.get("id"))
+      .sortBy("position")
+      .filter(rv => rv.get("isValid"));
+  },
+
   @computed("date")
   formattedDate(date) {
     return moment(date, "YYYY-MM-DD").format("dddd, MMM Do - YYYY");

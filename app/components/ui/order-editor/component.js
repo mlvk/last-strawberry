@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 
     createOrderItem(item) {
       this.set("customAddItemResult", undefined);
-      this.attrs.createOrderItem(item);
+      this.get("createOrderItem")(item);
     },
 
     stashItemSearch(str) {
@@ -67,14 +67,14 @@ export default Ember.Component.extend({
     },
 
     async requestCreateNewItem(changeset) {
-      const newItem = await this.attrs.createNewItem(changeset);
+      const newItem = await this.get("createNewItem")(changeset);
 
-      this.attrs.createOrderItem(newItem);
+      this.get("createOrderItem")(newItem);
       this.set("showCreateItemModal", false);
     },
 
-    noteChanged(e) {
-      this.get("model").set("note", e.target.value);
+    propChanged(key, e) {
+      this.get("model").set(key, e.target.value);
     }
   }
 });

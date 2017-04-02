@@ -36,7 +36,7 @@ export default Ember.Component.extend({
 
     saveItem(changeset) {
       if(changeset.get("isValid") && changeset.get("isDirty") && this.get("codeValidator.isValid")){
-        this.attrs.saveItem(changeset);
+        this.get("saveItem")(changeset);
       }
     }
   }

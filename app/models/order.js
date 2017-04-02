@@ -33,7 +33,8 @@ export default Model.extend(LocationHashable, {
   xeroFinancialRecordState:     attr("string", {defaultValue: XeroStates.DRAFT}),
   syncState:                    attr("string", {defaultValue: SyncStates.PENDING}),
   publishedState:               attr("string", {defaultValue: PublishedState.UNPUBLISHED}),
-  note:                         attr("string"),
+  internalNote:                 attr("string"),
+  comment:                      attr("string"),
 
   location:                     belongsTo("location"),
   orderItems:                   hasMany("order-item"),

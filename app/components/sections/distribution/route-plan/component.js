@@ -18,11 +18,11 @@ export default Em.Component.extend({
 
   actions: {
     delete() {
-      this.attrs.destroyRoutePlan(this.get('model'));
+      this.get("destroyRoutePlan")(this.get('model'));
     },
 
     saveRoutePlanBlueprint() {
-      this.attrs.saveRoutePlanBlueprint(this.get('model'), this.$('.saveRoutePlanBlueprint'));
+      this.get("saveRoutePlanBlueprint")(this.get('model'), this.$('.saveRoutePlanBlueprint'));
     }
   }
 });

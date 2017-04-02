@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     },
 
     generateReport() {
-      this.attrs.onDatesConfirmed(this.get("stashedStartDate"), this.get("stashedEndDate"));
+      this.get("onDatesConfirmed")(this.get("stashedStartDate"), this.get("stashedEndDate"));
     }
   }
 });

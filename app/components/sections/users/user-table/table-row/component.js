@@ -25,7 +25,7 @@ export default Ember.Component.extend({
 
   checkAndSaveUser(changeset){
     if(changeset.get("isValid") && changeset.get("isDirty") && this.get("emailValidator.isValid")){
-      this.attrs.saveUser(changeset);
+      this.get("saveUser")(changeset);
     }
   },
 

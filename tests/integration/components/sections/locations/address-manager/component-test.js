@@ -14,11 +14,9 @@ import {
   mockSetup
 } from 'ember-data-factory-guy';
 import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';
+import GoogleMock from 'last-strawberry/tests/mocks/google-places-autocomplete';
 
 L.Icon.Default.imagePath = 'some-path';
-
-let tile;
-tile;
 
 moduleForComponent('sections/locations/address-manager', 'Integration | Component | sections/locations/address manager', {
   integration: true,
@@ -30,10 +28,11 @@ moduleForComponent('sections/locations/address-manager', 'Integration | Componen
     page.setContext(this);
     manualSetup(this.container);
 
+    window.google = GoogleMock.create();
+
     this.register('component:tile-layer', TileLayerComponent.extend({
       init() {
         this._super(...arguments);
-        tile = this;
       }
     }));
   },
@@ -61,35 +60,3 @@ test('it shows an address when present', function(assert) {
 
   assert.equal(page.fullAddress, changeset.get('full'));
 });
-
-// TODO: Check back on: https://github.com/danielspaniel/ember-data-factory-guy/issues/230
-// test('it triggers saveAddress when on search>save', function(assert) {
-//   const addresses = makeList('address', 5);
-//   const address = make('address');
-//
-//   this.set('address', address);
-//   this.set('addresses', addresses);
-//   this.set('saveAddress', () => {
-//     console.log('!!!!!');
-//   });
-//   this.set('switchAddress', () => {});
-//
-//   // debugger;
-//   Ember.$.mockjax(function(settings){
-//     console.log({settings});
-//   });
-//
-//   const instance = page.render(hbs`{{sections/locations/address-manager
-//     saveAddresss=saveAddresss
-//     switchAddress=switchAddress
-//     addresses=addresses
-//     value=address}}`)
-//
-//   instance
-//     .fillSearchAddress('foo')
-//     .testClick()
-//     // .blurSearchAddress()
-//
-//
-//   assert.equal(page.fullAddress, address.get('full'));
-// });

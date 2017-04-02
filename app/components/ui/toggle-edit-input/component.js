@@ -8,8 +8,8 @@ export default Ember.Component.extend({
 
     onBlur() {
       this.set('editing', false);
-      if(_.isFunction(this.attrs.onblur)){
-        this.attrs.onblur();
+      if(_.isFunction(this.get("onblur"))){
+        this.get("onblur")();
       }
     }
   }

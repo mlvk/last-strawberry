@@ -18,9 +18,9 @@
       <div class="row baseline">
         <span class="instruction">To date:</span>
         {{pikaday-input
-          value=toDate
+          value=(date toDate)
           placeholder="Select date"
-          onSelected=(action "onToDateSelected")
+          onSelection=(action "onToDateSelected")
           format="ddd MM-DD-YYYY"}}
       </div>
     </div>

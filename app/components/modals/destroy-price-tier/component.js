@@ -32,8 +32,8 @@ export default Ember.Component.extend({
 
   actions: {
     submitDestroyPriceTier() {
-      this.attrs.submit(this.get("switchingPriceTier"));
-      this.attrs.close();
+      this.get("submit")(this.get("switchingPriceTier"));
+      this.get("close")();
     }
   }
 });

@@ -13,7 +13,11 @@ export default PO.create({
   clickPurchasesItem: clickable(".purchaseOrders"),
   clickDistributionItem: clickable(".distribution"),
   showPopUpMenu: clickable(".trigger"),
-  clickItem(itemClass){
-    $(itemClass).click();
-  }
+  clickProducts: clickable(".products"),
+  clickItems: clickable(".items"),
+  clickCustomers: clickable(".customers"),
+  clickVendors: clickable(".vendors"),
+  clickPriceTiers: clickable(".priceTiers"),
+  clickRoutePlanBlueprints: clickable(".routePlanBlueprints"),
+  clickUsers: clickable(".users")
 });

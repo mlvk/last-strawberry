@@ -10,7 +10,8 @@ FactoryGuy.define("order", {
     deliveryDate: moment().add(1, "days").format("YYYY-MM-DD"),
     location: FactoryGuy.belongsTo("location"),
     orderItems: FactoryGuy.hasMany("order-item"),
-    note: "sample note content"
+    internalNote: "sample internal note",
+    comment: "sample comment"
   },
 
   traits: {
@@ -29,7 +30,7 @@ FactoryGuy.define("order", {
 });
 
 const buildValidSalesOrder = () => {
-  const order = make("order", "sales-order");
+  const order = make("sales_order");
 
   makeList("order-item", 5, {order, quantity:5, unitPrice:5});
 

@@ -2,6 +2,7 @@ import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
 import page from "last-strawberry/tests/pages/distribution";
+
 import {
   buildRouteVisits,
   buildRouteVisitsWithSharedRoutePlan
@@ -83,18 +84,19 @@ test("can delete route plans", async function(assert) {
 });
 
 test("can delete individual route visit", async function(assert) {
-  const routeVisits = buildRouteVisitsWithSharedRoutePlan(2);
+  const routeVisits = buildRouteVisitsWithSharedRoutePlan(1);
 
   mockFindAll("route-plan");
   mockQuery("route-visit").returns({json:routeVisits});
 
   await page.visit();
-  assert.equal(page.routePlans(0).routeVisits().count, 2);
+  assert.equal(page.routePlans(0).routeVisits().count, 1);
 
   mockUpdate("route-visit", 1);
 
   await page.routePlans(0).routeVisits(0).delete();
-  assert.equal(page.routePlans(0).routeVisits().count, 1);
+
+  assert.equal(page.routePlans(0).routeVisits().count, 0);
 });
 
 test("deleting handled route-visit moves it to open route-visit area", async function(assert) {

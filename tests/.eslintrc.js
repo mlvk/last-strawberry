@@ -1,11 +1,9 @@
-{
-  "parser": "babel-eslint",
-  "env": {
-    "es6": true,
-    "browser": true
+module.exports = {
+  parser: 'babel-eslint',
+  env: {
+    embertest: true
   },
-  "extends": "eslint:recommended",
-  "globals": {
+  globals: {
       "document": true,
       "window": true,
       "moment": true,
@@ -18,20 +16,32 @@
       "$": true,
       "google": true,
       "Hammer": true,
-      "L": true,
+      "console": true,
+      "visit": true,
+      "exists": true,
+      "fillIn": true,
+      "click": true,
+      "keyEvent": true,
+      "triggerEvent": true,
+      "find": true,
+      "findWithAssert": true,
+      "wait": true,
+      "DS": true,
       "andThen": true,
       "currentURL": true,
       "currentPath": true,
       "currentRouteName": true,
       "pauseTest": true,
-      "visit": true,
       "server": true,
-      "Linear": true,
       "TweenMax": true,
+      "Linear": true,
+      "L": true,
       "numeral": true,
       "Firebase": true,
-      "R": true,
       "polyline": true,
+      "selectChoose": true,
+      "selectSearch": true,
+      "R": true,
       "localforage": true
     }
-}
+};

@@ -6,7 +6,10 @@ export default function decorateComponentClass() {
       this._super(arguments);
       const debugName = this.constructor.toString().split(':')[1]
       const cssName = debugName.split('/').join('_');
-      this.classNames.pushObject(`debug_${cssName}`);
+      const newName = `debug_${cssName}`;
+      if(!this.classNames.includes(newName)) {
+        this.classNames = this.classNames.concat(newName);
+      }
     }
   });
 }

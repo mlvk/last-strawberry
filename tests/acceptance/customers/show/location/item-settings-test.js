@@ -15,6 +15,7 @@ import {
 let items,
     priceTier,
     company,
+    address,
     location;
 
 moduleForAcceptance("Acceptance | customers/show/location/item-settings", {
@@ -24,13 +25,16 @@ moduleForAcceptance("Acceptance | customers/show/location/item-settings", {
     items = makeList("product", 3);
     priceTier = make("price-tier");
     company = make("company", {priceTier});
-    location = make("location", {company});
+    address = make("address"),
+    location = make("location", {address, company});
 
     mockFindRecord("location").returns({model: location});
     mockFindRecord("company").returns({model: company});
     mockFindAll("item").returns({models: items});
     mockFindAll("company").returns({models: [company]});
     mockFindAll("priceTier").returns({models: [priceTier]});
+
+    mockUpdate("address", 1);
   }
 });
 

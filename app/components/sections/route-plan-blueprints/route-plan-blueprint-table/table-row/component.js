@@ -39,7 +39,7 @@ export default Ember.Component.extend({
       const id = changeset.get("id");
       const name = changeset.get("name");
       const driver = this.get("users").find(u => u.id === changeset.get("user.id"));
-      this.attrs.saveRoutePlanBlueprint(id, name, driver);
+      this.get("saveRoutePlanBlueprint")(id, name, driver);
     }
   },
 

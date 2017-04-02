@@ -3,6 +3,7 @@ import hbs from "htmlbars-inline-precompile";
 import preferencesMock from "last-strawberry/tests/mocks/preferences-service";
 import Ember from "ember";
 
+
 moduleForComponent("ui/persistent-collapsable-container", "Integration | Component | ui/persistent collapsable container", {
   integration: true,
   beforeEach: function () {

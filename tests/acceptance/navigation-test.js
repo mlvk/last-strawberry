@@ -64,29 +64,21 @@ test("redirects to distribution page when clicking on Distribution item", async 
 });
 
 test("redirects to products page when clicking on Products item", async function(assert) {
-
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickProducts();
 
-  await page.clickItem(".products");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/products");
-  });
+  assert.equal(currentURL(), "/products");
 });
 
 test("redirects to items page when clicking on Items item", async function(assert) {
-
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickItems();
 
-  await page.clickItem(".items");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/items");
-  });
+  assert.equal(currentURL(), "/items");
 });
 
 test("redirects to customers page when clicking on Customers item", async function(assert) {
@@ -94,26 +86,19 @@ test("redirects to customers page when clicking on Customers item", async functi
 
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickCustomers();
 
-  await page.clickItem(".customers");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/customers");
-  });
+  assert.equal(currentURL(), "/customers");
 });
 
 test("redirects to vendors page when clicking on Vendors item", async function(assert) {
-
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickVendors();
 
-  await page.clickItem(".vendors");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/vendors");
-  });
+  assert.equal(currentURL(), "/vendors");
 });
 
 test("redirects to price tiers page when clicking on Price Tiers item", async function(assert) {
@@ -121,13 +106,10 @@ test("redirects to price tiers page when clicking on Price Tiers item", async fu
 
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickPriceTiers();
 
-  await page.clickItem(".priceTiers");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/price-tiers");
-  });
+  assert.equal(currentURL(), "/price-tiers");
 });
 
 test("redirects to Route plan blueprints page when clicking on Route plan blueprints item", async function(assert) {
@@ -136,13 +118,10 @@ test("redirects to Route plan blueprints page when clicking on Route plan bluepr
 
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickRoutePlanBlueprints();
 
-  await page.clickItem(".routePlanBlueprints");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/route-plan-blueprints");
-  });
+  assert.equal(currentURL(), "/route-plan-blueprints");
 });
 
 test("redirects to users page when clicking on Users item", async function(assert) {
@@ -150,11 +129,8 @@ test("redirects to users page when clicking on Users item", async function(asser
 
   await page
     .visitIndex()
-    .showPopUpMenu();
+    .showPopUpMenu()
+    .clickUsers();
 
-  await page.clickItem(".users");
-
-  Ember.run.next(function(){
-    assert.equal(currentURL(), "/users");
-  });
+  assert.equal(currentURL(), "/users");
 });

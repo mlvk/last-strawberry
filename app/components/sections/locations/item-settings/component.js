@@ -8,14 +8,14 @@ export default Ember.Component.extend({
 
   actions:{
     massApplyCreditRate(){
-      this.attrs.massApplyCreditRate(toPercentage(this.get("massCreditRate")));
+      this.get("massApplyCreditRate")(toPercentage(this.get("massCreditRate")));
       this.set("massCreditRate", "");
     },
 
     massApplyDesire() {
       const massDesire = !this.get("massDesire");
       this.set("massDesire", massDesire);
-      this.attrs.massApplyDesire(massDesire);
+      this.get("massApplyDesire")(massDesire);
     }
   }
 });

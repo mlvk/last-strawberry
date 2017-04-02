@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     },
 
     destroyPriceTier(switchingPriceTier){
-      this.attrs.destroyPriceTier(this.get("model"), switchingPriceTier);
+      this.get("destroyPriceTier")(this.get("model"), switchingPriceTier);
       this.set("showDestroyPriceTierModal", false);
     }
   }

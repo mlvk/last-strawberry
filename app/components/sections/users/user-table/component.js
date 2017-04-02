@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     },
 
     createNewUser(changeset){
-      this.attrs.createNewUser(changeset);
+      this.get("createNewUser")(changeset);
       this.set("showNewUserModal", false);
     }
   }

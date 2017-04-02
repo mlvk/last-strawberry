@@ -28,7 +28,7 @@ export default Ember.Component.extend({
       const changeset = this.get('changeset');
       changeset.setProperties(placeToObject(place));
       if(changeset.get('isValid')){
-        this.attrs.saveAddress(changeset);
+        this.get("saveAddress")(changeset);
       }
     },
     onBlur() {

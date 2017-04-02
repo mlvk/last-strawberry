@@ -35,7 +35,7 @@ export default Ember.Component.extend({
       const changeset = this.get("changeset");
       changeset.validate();
       if(this.get("isValid")){
-        this.attrs.submit(changeset);
+        this.get("submit")(changeset);
       }
     }
   }

@@ -39,7 +39,7 @@ export default Ember.Component.extend({
 
     save(changeset){
       if(changeset.get("isValid") && this.get("codeValidator.isValid")){
-        this.attrs.save(changeset);
+        this.get("save")(changeset);
       }
     }
   }

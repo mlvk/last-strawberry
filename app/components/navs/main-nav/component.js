@@ -37,7 +37,7 @@ export default Ember.Component.extend({
   actions: {
     navigateToRoute(route) {
       this.updateCurrentSelectedPath(route);
-      this.attrs.navigateToRoute(route);
+      this.get("navigateToRoute")(route);
     }
   }
 });

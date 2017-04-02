@@ -11,7 +11,7 @@ export default Ember.Component.extend({
       this.set("loading", true);
       this.set("error", undefined);
 
-      this.attrs.authenticate(this.get("identification"), this.get("password"))
+      this.get("authenticate")(this.get("identification"), this.get("password"))
         .then(() => {
           this.set("loading", false);
         })

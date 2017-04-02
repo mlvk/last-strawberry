@@ -54,13 +54,13 @@ export default Ember.Component.extend({
   },
 
   click() {
-    this.attrs.selectRouteVisit(this.get("model"));
+    this.get("selectRouteVisit")(this.get("model"));
   },
 
   actions: {
     removeRouteVisit() {
-      if(this.attrs.removeRouteVisit) {
-        this.attrs.removeRouteVisit(this.get("model"));
+      if(this.get("removeRouteVisit")) {
+        this.get("removeRouteVisit")(this.get("model"), this.get("model.routePlan"));
       }
     }
   }

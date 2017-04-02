@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Service.extend({
-  async init() {
+  async startUp() {
     const data = await localforage.getItem("prefs");
     this.set("preferencesData", data || {});
   },

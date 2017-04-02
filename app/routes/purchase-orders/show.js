@@ -3,7 +3,6 @@ import Ember from "ember";
 import ItemTypes from "last-strawberry/constants/item-types";
 import NotificationRenderer from "last-strawberry/constants/notification-renderers";
 import PublishedStates from "last-strawberry/constants/published-states";
-import { formatDate } from "last-strawberry/utils/date";
 
 const ORDER_INCLUDES = [
 	"order-items",
@@ -122,11 +121,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			locationModel.save();
 		},
 
-		updateDeliveryDate(order, deliveryDate) {
-			const formatedDate = formatDate(deliveryDate);
+		updateDeliveryDate(order, newDate) {
+			const formattedDate = moment(newDate).format("YYYY-MM-DD");
 
-			if(order.get("deliveryDate") !== formatedDate){
-				order.set("deliveryDate", formatedDate);
+			if(order.get("deliveryDate") !== formattedDate){
+				order.set("deliveryDate", formattedDate);
 				order.save();
 			}
 		}

@@ -13,9 +13,9 @@ export default Ember.Component.extend({
     },
 
     submitDuplicateOrders() {
-      return this.attrs
-        .submit(this.get("fromDate"), this.get("toDate"))
-        .then(this.attrs.close);
+      return this
+        .get("submit")(this.get("fromDate"), this.get("toDate"))
+        .then(this.get("close"));
     }
   }
 });

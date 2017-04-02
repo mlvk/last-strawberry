@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       const text = this.$("input").val();
 
       if(!Ember.isBlank(text)){
-        this.attrs.submit(text.trim());
+        this.get("submit")(text.trim());
         this.$("input").val("");
       }
     }

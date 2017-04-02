@@ -39,7 +39,8 @@ module.exports = function(environment) {
   ENV['place-autocomplete'] = {
     exclude: true,
     key: process.env.GOOGLE_API_KEY,
-    client: process.env.GOOGLE_CLIENT_ID
+    client: process.env.GOOGLE_CLIENT_ID,
+    restrictions: {country: 'us'}
   };
 
   ENV['ember-simple-auth'] = {

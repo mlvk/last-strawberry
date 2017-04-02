@@ -7,11 +7,6 @@ export default Ember.Component.extend({
   classNames: ["row"],
   currentSelectedRoutePlanTemplate: undefined,
 
-  @computed("date")
-  formattedDate(date) {
-    return moment(date).format("YYYY-MM-DD");
-  },
-
   @computed("routePlans.@each.{isValid}")
   allPlansValid(routePlans = []){
     return routePlans.every(rp => rp.get("isValid"));
@@ -24,13 +19,13 @@ export default Ember.Component.extend({
   actions: {
     handleCreateRoutePlan() {
       if(!this.get("disabled")){
-        this.attrs.createRoutePlan();
+        this.get("createRoutePlan")();
       }
     },
 
     selectRouteTemplate(template) {
       this.set("currentSelectedRoutePlanTemplate", undefined);
-      this.attrs.applyTemplate(template);
+      this.get("applyTemplate")(template);
     }
   }
 });

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   actions: {
     fieldChanged(field, value) {
-      this.attrs.fieldChanged(this.get('model'), field, value);
+      this.get("fieldChanged")(this.get('model'), field, value);
     }
   }
 });

@@ -5,7 +5,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     babel: {
-      optional: ['es7.decorators', 'es7.functionBind'],
+      optional: ['es7.decorators', 'es7.functionBind']
+    },
+    'ember-cli-babel': {
       includePolyfill: true
     },
     dotEnv: {

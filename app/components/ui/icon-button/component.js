@@ -75,7 +75,7 @@ export default Ember.Component.extend({
 
       this.startSpin();
 
-      const response = this.attrs.action();
+      const response = this.get("action")();
       const promise = response ? response : Ember.RSVP.resolve();
 
       promise

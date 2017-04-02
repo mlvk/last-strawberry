@@ -2,6 +2,7 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import Ember from "ember";
 import { timeToMinutes } from "last-strawberry/utils/time";
 import { decodePolyline } from "last-strawberry/utils/maps";
+const { run } = Ember;
 
 const ROUTE_VISIT_INCLUDES = [
   "route-plan",
@@ -50,12 +51,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set("users", this.store.peekAll("user"));
 
     const routePlans = this.store.peekAll("route-plan");
-    routePlans.forEach(rp => {
-      // Set default value for not showing error
-      rp.set("polyline", decodePolyline(""));
-
-      this.setPolyline(rp);
-    });
+    routePlans.forEach(rp => this.setPolyline(rp));
   },
 
   model (params) {
@@ -85,19 +81,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   async setPolyline(routePlan){
-    const hq = "-118.317191,34.1693137";
-    const routeVisits = await routePlan.get("routeVisits");
-    const coordinates = routeVisits
-      .map(rv => [rv.get("lng"), rv.get("lat")])
-      .map(coords => coords.join(","));
-    const query = R.flatten([hq, coordinates, hq]).join(";");
+    if(Ember.isEmpty(routePlan.get("routeVisits"))) {
+      run(() => routePlan.set("polyline", ""));
+    } else {
+      const hq = "-118.317191,34.1693137";
+      const routeVisits = await routePlan.get("routeVisits");
+      const coordinates = routeVisits
+        .map(rv => [rv.get("lng"), rv.get("lat")])
+        .map(coords => coords.join(","));
+      const query = R.flatten([hq, coordinates, hq]).join(";");
 
-    const apiToken = this.get("session.data.authenticated.mapbox_api_token");
-    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${query}?geometries=polyline&access_token=${apiToken}`;
-    const result = await Ember.$.ajax({ url, type:"GET" });
+      const apiToken = this.get("session.data.authenticated.mapbox_api_token");
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${query}?geometries=polyline&access_token=${apiToken}`;
+      const result = await Ember.$.ajax({ url, type:"GET" });
 
-    if(Ember.isPresent(result.routes)){
-      routePlan.set("polyline", decodePolyline(result.routes[0].geometry));
+      if(Ember.isPresent(result.routes)){
+        run(() => routePlan.set("polyline", decodePolyline(result.routes[0].geometry)));
+      } else {
+        run(() => routePlan.set("polyline", ""));
+      }
     }
   },
 
@@ -122,17 +124,26 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       routePlan.destroyRecord();
     },
 
-    async onRouteVisitUpdate(routeVisit, routePlan, position) {
-      routeVisit.setProperties({routePlan, position});
+    async onRouteVisitUpdate(ot) {
+      const { routeVisit, fromRoutePlan, toRoutePlan, position } = ot;
+
+      routeVisit.setProperties({routePlan: toRoutePlan, position});
       await routeVisit.save();
 
-      this.setPolyline(routePlan);
-      // this.optimizeRoutePlan(routePlan);
+      if(Ember.isPresent(fromRoutePlan)) {
+        this.setPolyline(fromRoutePlan);
+      }
+
+      if(Ember.isPresent(toRoutePlan)) {
+        this.setPolyline(toRoutePlan);
+      }
     },
 
-    removeRouteVisit(routeVisit) {
-      routeVisit.set("routePlan", null);
+    removeRouteVisit(routeVisit, routePlanPromise) {
+      routeVisit.set("routePlan", undefined);
       routeVisit.save();
+
+      run(() => routePlanPromise.then(rp => this.setPolyline(rp)));
     },
 
     async applyTemplate(routePlanBlueprint) {

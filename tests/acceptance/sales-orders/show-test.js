@@ -9,11 +9,6 @@ import {
 import { page as orderPO } from "last-strawberry/tests/pages/sales-orders";
 
 import {
-  formatDate,
-  formatFullDate
-} from "last-strawberry/utils/date";
-
-import {
   make,
   makeList,
   mockCreate,
@@ -45,8 +40,8 @@ test("navigates to correct url", async function(assert) {
 test("displays the correct sales order", async function(assert) {
   const location = make("location");
   const company = location.get("company");
-  const deliveryDate = new Date();
-  const order = make("order", {location,deliveryDate});
+  const deliveryDate = moment().add(1,"days");
+  const order = make("order", { location, deliveryDate: deliveryDate.format("YYYY-MM-DD") });
 
   mockFindAll("order").returns({models: [order]});
   mockFindRecord("order").returns({model: order});
@@ -56,7 +51,7 @@ test("displays the correct sales order", async function(assert) {
 
   assert.equal(orderEditorPO.companyName, company.get("name"), "sales order company name did not match expected");
   assert.equal(orderEditorPO.locationName, `${location.get("code")} - ${location.get("name")}`, "sales order location name did not match expected");
-  assert.equal(orderEditorPO.deliveryDate, formatFullDate(order.get("deliveryDate")), "sales order delivery date did not match expected");
+  assert.equal(orderEditorPO.deliveryDate, deliveryDate.format("ddd MM-DD-YYYY"), "sales order delivery date did not match expected");
 });
 
 test("can delete sales order", async function(assert) {
@@ -120,7 +115,7 @@ test("adding an item manually still uses price-tier price", async function(asser
 
 test("can update delivery date", async function(assert) {
   const location = make("location");
-  const deliveryDate = moment().add(1,"days").toDate();
+  const deliveryDate = moment().add(1,"days").format("YYYY-MM-DD");
   const order = make("order", {location,deliveryDate});
 
   mockFindAll("order").returns({models: [order]});
@@ -128,14 +123,14 @@ test("can update delivery date", async function(assert) {
   mockUpdate(order);
 
   await page.visit({id:order.get("id")});
+
   assert.equal(orderPO.orders().count, 1, "show the selected order on the list");
 
   // Update delivery date
-  const newDate = new Date(2016, 3, 28);
-  await orderEditorPO.changeDeliveryDate(newDate)
+  const newDate = moment("2016-03-01");
+  await orderEditorPO.changeDeliveryDate(newDate.toDate());
 
   assert.equal(orderPO.orders().count, 0, "hide the selected order on the list");
 
-  assert.equal(order.get("deliveryDate"), formatDate(newDate), "sales order delivery date did not match expected");
-  assert.equal(orderEditorPO.deliveryDate, formatFullDate(newDate), "sales order delivery date did not show as expected");
+  assert.equal(orderEditorPO.deliveryDate, newDate.format("ddd MM-DD-YYYY"), "sales order delivery date did not show as expected");
 });

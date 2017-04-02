@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 
   actions: {
     onDayClick(target) {
-      this.attrs.change(target.id, !target.enabled);
+      this.get("change")(target.id, !target.enabled);
     }
   }
 });

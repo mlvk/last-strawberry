@@ -15,7 +15,7 @@ export default Ember.Component.extend({
       const changeset = this.get("changeset");
       changeset.set(key, value);
 
-      this.attrs.saveNotification(changeset);
+      this.get("saveNotification")(changeset);
     }
   }
 });

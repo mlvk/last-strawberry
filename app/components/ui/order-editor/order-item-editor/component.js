@@ -7,13 +7,13 @@ export default Ember.Component.extend({
 
   _blur() {
     this.set('highlighted', false);
-    this.attrs.save(this.get('model'));
+    this.get("save")(this.get('model'));
   },
 
   actions: {
     onFocus() {
       this.set('highlighted', true);
-      this.attrs.onOrderItemChange(this.get('model.item'));
+      this.get("onOrderItemChange")(this.get('model.item'));
     },
 
     onBlur() {

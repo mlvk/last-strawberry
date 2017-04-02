@@ -15,12 +15,12 @@ export default Ember.Component.extend({
   didInsertElement () {
     this.set('containerId', guid());
 
-    if(this.attrs.registerContainer) {
-      this.attrs.registerContainer(this.element);
+    if(this.get("registerContainer")) {
+      this.get("registerContainer")(this.element);
     }
 
-    if(this.attrs.registerId) {
-      this.attrs.registerId(this.get('containerId'));
+    if(this.get("registerId")) {
+      this.get("registerId")(this.get('containerId'));
     }
   }
 });

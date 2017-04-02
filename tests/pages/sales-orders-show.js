@@ -1,5 +1,6 @@
 import PO from "last-strawberry/tests/page-object";
 import { openDatepicker } from "ember-pikaday/helpers/pikaday";
+import Ember from "ember";
 
 const {
   clickable,
@@ -34,7 +35,7 @@ const orderEditorPO = PO.create({
   },
 
   changeDeliveryDate(date) {
-    openDatepicker($("input.deliveryDate")).selectDate(date);
+    openDatepicker(Ember.$("input.deliveryDate")).selectDate(date);
   },
 
   deleteOrder: clickable(".toolbar .delete"),

@@ -17,7 +17,7 @@ export default Ember.Route.extend({
     const startDate = this.paramsFor("reports.customer-financials").startDate;
     const endDate = this.paramsFor("reports.customer-financials").endDate;
 
-    return new Promise(res => {
+    return new Ember.RSVP.Promise(res => {
       this.get("session").authorize("authorizer:devise", (headerName, headerValue) => {
         const headers = {};
         headers[headerName] = headerValue;
