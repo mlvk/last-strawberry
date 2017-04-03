@@ -1,6 +1,7 @@
 <div class="col stretch content">
   <div class="addressAutoComplete">
     {{place-autocomplete-field
+        restrictions=(hash country="us")
         value=changeset.full
         disable=false
         handlerController=this

@@ -4,7 +4,6 @@ import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 import { mockSetup, mockTeardown } from 'ember-data-factory-guy';
 import preferencesMock from '../mocks/preferences-service';
-import GoogleMock from '../mocks/google-places-autocomplete';
 
 const { RSVP: { Promise } } = Ember;
 
@@ -17,9 +16,6 @@ export default function(name, options = {}) {
       // Mock preferencesService
       this.application.register('service:mockPreferences', preferencesMock);
       this.application.inject('component', 'preferencesService', 'service:mockPreferences');
-
-      // Mock google place auto complete
-      window.google = GoogleMock.create();
 
       Ember.$.mockjax({ url: "https://andruxnet-random-famous-quotes.p.mashape.com*", responseText: '{"quote":"Houston, we have a problem.","author":"Apollo 13","category":"Movies"}', type: 'POST' });
 

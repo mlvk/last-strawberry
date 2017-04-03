@@ -14,7 +14,6 @@ import {
   mockSetup
 } from 'ember-data-factory-guy';
 import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';
-import GoogleMock from 'last-strawberry/tests/mocks/google-places-autocomplete';
 
 L.Icon.Default.imagePath = 'some-path';
 
@@ -27,8 +26,6 @@ moduleForComponent('sections/locations/address-manager', 'Integration | Componen
     decorateComponentClass();
     page.setContext(this);
     manualSetup(this.container);
-
-    window.google = GoogleMock.create();
 
     this.register('component:tile-layer', TileLayerComponent.extend({
       init() {
