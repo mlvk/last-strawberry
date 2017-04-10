@@ -8,11 +8,11 @@
 <div class="contentContainer">
   <div class="row">
     <div class="col stretch">
-      {{#link-to (if model.location.company.isCustomer "customers.show" "vendors.show") model.location.company class="company"}}
+      {{#link-to (if model.location.company.isCustomer "customers.show" "vendors.show") model.location.company.id class="company"}}
         {{model.location.company.name}}
       {{/link-to}}
 
-      {{#link-to (if model.location.company.isCustomer "customers.show.location" "vendors.show.location") model.location.company model.location class="locationInfo"}}
+      {{#link-to (if model.location.company.isCustomer "customers.show.location" "vendors.show.location") model.location.company.id model.location.id class="locationInfo"}}
         {{model.location.code}} - {{model.location.name}}
       {{/link-to}}
 

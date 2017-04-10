@@ -1,6 +1,8 @@
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import Ember from "ember";
 
+const { run } = Ember;
+
 const COMPANY_INCLUDES = [
   "items",
   "items.company",
@@ -69,12 +71,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     async createOrder(location) {
-      const deliveryDate = this.paramsFor("purchase-orders").deliveryDate;
-      const order = await this.store
-        .createRecord("order", {location, deliveryDate, orderType:"purchase-order"})
-        .save();
+      const that = this;
+      return run(async function() {
+        const deliveryDate = that.paramsFor("purchase-orders").deliveryDate;
+        const order = await that.store
+          .createRecord("order", {location, deliveryDate, orderType:"purchase-order"})
+          .save();
 
-      this.showOrder(order);
+        await that.showOrder(order);
+      });
     },
 
     onDateSelected(date) {
