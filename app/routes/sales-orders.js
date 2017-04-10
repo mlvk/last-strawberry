@@ -2,6 +2,8 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import Ember from "ember";
 import config from "last-strawberry/config/environment";
 
+const { run } = Ember;
+
 const COMPANY_INCLUDES = [
   "locations",
   "locations.company",
@@ -79,12 +81,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     async createSalesOrder(location) {
-      const deliveryDate = this.paramsFor("sales-orders").deliveryDate;
-      const order = await this.store
-        .createRecord("order", {location, deliveryDate})
-        .save();
+      const that = this;
+      return run(async function() {
+        const deliveryDate = that.paramsFor("sales-orders").deliveryDate;
+        const order = await that.store
+          .createRecord("order", {location, deliveryDate})
+          .save();
 
-      this.showSalesOrder(order);
+        await that.showSalesOrder(order);
+      });
     },
 
     stubOrders () {

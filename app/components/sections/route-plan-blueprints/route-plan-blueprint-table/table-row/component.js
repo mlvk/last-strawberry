@@ -7,13 +7,9 @@ export default Ember.Component.extend({
 
   classNames: ["tableRow", "row"],
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.set("nameValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"routePlanBlueprint",
-      key:"name"}));
+  @computed("session")
+  nameValidator(session) {
+    return UniqueFieldValidator.create({type:"routePlanBlueprint", key:"name", session});
   },
 
   willDestroyElement() {

@@ -10,19 +10,18 @@ export default Ember.Component.extend({
     return validName && validChangeset;
   },
 
+  @computed("session")
+  nameValidator(session) {
+    return UniqueFieldValidator.create({type:"routePlanBlueprint", key:"name", session});
+  },
+
   didInsertElement() {
     this._super(...arguments);
-
     this.$(".name").focus();
-    this.set("nameValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"routePlanBlueprint",
-      key:"name"}));
   },
 
   willDestroyElement() {
     this._super(...arguments);
-
     this.get("nameValidator").destroy();
   },
 

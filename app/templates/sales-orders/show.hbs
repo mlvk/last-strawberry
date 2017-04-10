@@ -16,24 +16,22 @@
 {{#sticky-container}}
   <div class="row top wrap">
     {{charts/location-item-info
-      item=item
-      location=model.location
-      itemTotals=itemTotals
-      salesData=salesData.lastObject
-      isLoading=loadingFbData
-    }}
+        item=item
+        location=model.location
+        itemTotals=itemTotals
+        salesData=salesData.lastObject
+        isLoading=loadingFbData}}
 
     {{sections/locations/location-note
-      locationNote=model.location.note
-      save=(route-action "saveLocationNote" model.location)}}
+        locationNote=model.location.note
+        save=(route-action "saveLocationNote" model.location)}}
 
     {{charts/item-location-sales-trend
-      item=item
-      salesData=salesData
-      isLoading=loadingFbData
-    }}
+        item=item
+        salesData=salesData
+        isLoading=loadingFbData}}
 
     {{charts/item-totals
-      orders=salesOrders}}
+        orders=salesOrders}}
   </div>
 {{/sticky-container}}

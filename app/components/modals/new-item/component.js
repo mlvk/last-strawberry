@@ -12,14 +12,14 @@ export default Ember.Component.extend({
     return validCode && validChangeset;
   },
 
+  @computed("session")
+  codeValidator(session) {
+    return UniqueFieldValidator.create({type:"item", key:"code", session});
+  },
+
   didInsertElement() {
     this._super(...arguments);
-
     this.$(".body .name").focus();
-    this.set("codeValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"item",
-      key:"code"}));
   },
 
   willDestroyElement() {

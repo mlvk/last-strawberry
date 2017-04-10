@@ -5,16 +5,14 @@ import computed from "ember-computed-decorators";
 export default Ember.Component.extend({
   session:     Ember.inject.service(),
 
+  @computed("session")
+  codeValidator(session) {
+    return UniqueFieldValidator.create({type:"company", key:"location_code_prefix", session});
+  },
+
   @computed("codeValidator.isValid", "changeset.isValid")
   isValid(validCode, validChangeset) {
     return validCode && validChangeset;
-  },
-
-  didInsertElement() {
-    this.set("codeValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"company",
-      key:"location_code_prefix"}));
   },
 
   willDestroyElement() {

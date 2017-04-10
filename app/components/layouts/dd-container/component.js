@@ -7,14 +7,13 @@ export default Ember.Component.extend({
   classNameBindings: ['disableDrop'],
 
 
-  // init() {
-  //   this._super(...arguments)
-  //
-  // },
+  init() {
+    this._super(...arguments)
+    this.set("containerId", guid());
+  },
 
   didInsertElement () {
-    this.set('containerId', guid());
-
+    this._super(...arguments);
     if(this.get("registerContainer")) {
       this.get("registerContainer")(this.element);
     }

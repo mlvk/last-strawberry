@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNames: ["row", "ui_input-action-bar"],
 
   didInsertElement() {
+    this._super(...arguments);
     if(this.get("autoFocus")){
       this.$("input").focus();
     }

@@ -8,7 +8,8 @@ export default Ember.Component.extend({
     powerSelect.dispatchEvent(event);
   },
 
-  didRender() {
+  didInsertElement() {
+    this._super(...arguments);
     const elm = this.$('.ember-power-select-trigger')[0];
     this.triggerOpen(elm);
   },

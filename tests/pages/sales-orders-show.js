@@ -17,6 +17,7 @@ const page = PO.create({
 
 const orderEditorPO = PO.create({
   scope: ".debug_ui_order-editor",
+  orderNumber: text(".orderNumber"),
   locationName: text(".locationInfo"),
   companyName: text(".company"),
   deliveryDate: value(".deliveryDate"),

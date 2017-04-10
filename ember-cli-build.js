@@ -81,5 +81,9 @@ module.exports = function(defaults) {
 
   app.import('bower_components/mlvk-google-fonts/iconfont/material-icons.css');
 
+  // if (app.env === 'test') {
+  //   app.import('bower_components/fetch-mock/src/server.js');
+  // }
+
   return app.toTree();
 };

@@ -6,6 +6,8 @@ const {
   notEmpty
 } = Ember.computed;
 
+const { run } = Ember;
+
 export default Ember.Component.extend({
   classNames: ["col", "card-1"],
   classNameBindings: ["shouldDisplay::hidden"],
@@ -18,11 +20,9 @@ export default Ember.Component.extend({
 
     this.salesDataStreamSubscription = this.salesDataStream
       .debounce(500)
-      .subscribe(salesData => {
-        this.set("debouncedData", salesData);
-      });
+      .subscribe(salesData => run(() => this.set("debouncedData", salesData)));
 
-      this._super();
+      this._super(...arguments);
   },
 
   didReceiveAttrs() {

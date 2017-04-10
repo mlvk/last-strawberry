@@ -1,6 +1,7 @@
 import Ember from "ember";
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
 import LocationValidations from "last-strawberry/validators/location";
+import computed from "ember-computed-decorators";
 
 export default Ember.Component.extend({
   session:     Ember.inject.service(),
@@ -9,13 +10,9 @@ export default Ember.Component.extend({
 
   validators: LocationValidations,
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.set("codeValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"location",
-      key:"code"}));
+  @computed("session")
+  codeValidator(session) {
+    return UniqueFieldValidator.create({type:"location", key:"code", session});
   },
 
   willDestroyElement() {

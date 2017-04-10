@@ -7,6 +7,7 @@ import {
 
 FactoryGuy.define("order", {
   default: {
+    orderNumber: (f)=> `OrderID${f.id}`,
     deliveryDate: moment().add(1, "days").format("YYYY-MM-DD"),
     location: FactoryGuy.belongsTo("location"),
     orderItems: FactoryGuy.hasMany("order-item"),

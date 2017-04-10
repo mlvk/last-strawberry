@@ -13,7 +13,10 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
 
-      LOG_STACKTRACE_ON_DEPRECATION: false
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
+      }
     },
 
     APP: {
@@ -41,9 +44,7 @@ module.exports = function(environment) {
   };
 
   ENV['ember-simple-auth'] = {
-    authenticationRoute: 'login',
-    routeAfterAuthentication: 'sales-orders',
-    routeIfAlreadyAuthenticated: 'sales-orders'
+    authenticationRoute: 'login'
   };
 
   ENV.contentSecurityPolicy = {
@@ -76,13 +77,17 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     // This breaks clicks on elements rendered via ember wormhole in testing
-    // ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.rootElement = '#ember-testing';
 
     ENV.apiHost = '';
 
     ENV["firebase"] = {
       host: "https://last-strawberry-testing.firebaseio.com/"
-    }
+    };
+
+    ENV['ember-tether'] = {
+      bodyElementId: 'ember-testing'
+    };
   }
 
   if (environment === 'production') {

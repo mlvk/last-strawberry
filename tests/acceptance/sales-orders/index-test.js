@@ -2,10 +2,11 @@ import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
 import { page } from "last-strawberry/tests/pages/sales-orders";
+import { page as showPage } from "last-strawberry/tests/pages/sales-orders-show";
+import Ember from "ember";
 
 import {
   build,
-  buildList,
   make,
   mockCreate,
   makeList,
@@ -75,27 +76,31 @@ test("should display warning banner when deliveryDate param <= today", async fun
 });
 
 test("show be able to create a new sales order from the quick menu", async function(assert) {
-  const salesOrderCount = 10;
-  const locations = makeList("location", 1);
-  const salesOrders = buildList("sales_order", salesOrderCount);
-  const salesOrder = build("sales_order", {id: 50});
-  const orderId = salesOrder.get().id;
+  await Ember.run(async function() {
 
-  mockFindAll("order").returns({json: salesOrders});
-  mockCreate("order").returns({id:orderId});
-  mockFindRecord("order").returns({json:salesOrder});
+    const location = make("location");
+    const salesOrder = build("sales_order", {location});
+    const { id, orderNumber } = salesOrder.get();
 
-  await page
-    .visit()
-    .openQuickMenu();
+    mockCreate('order').returns({attrs:{id, location}});
+    mockFindRecord('order').returns({json:salesOrder});
 
-  assert.equal(page.orders().count, salesOrderCount, "Wrong number of orders rendered");
+    mockFindAll("order");
 
-  await page.createOrder();
+    await page
+      .visit()
+      .openQuickMenu();
 
-  await page.selectLocation(locations.get("firstObject"));
+    assert.equal(0, page.orders().count, "Wrong number of orders rendered");
 
-  assert.equal(page.orders().count, salesOrderCount + 1, "Wrong number of orders rendered");
+    await page
+      .createOrder()
+      .selectLocation(location);
+
+    assert.equal(1, page.orders().count, "Wrong number of orders rendered");
+
+    assert.equal(orderNumber, showPage.orderNumber, "Wrong orderNumber rendered");
+  });
 });
 
 test("shows filterd items only after filtered items", async function(assert) {

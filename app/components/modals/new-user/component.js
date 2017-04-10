@@ -10,13 +10,9 @@ export default Ember.Component.extend({
     return validEmail && validChangeset;
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.set("emailValidator", UniqueFieldValidator.create({
-      session:this.get("session"),
-      type:"user",
-      key:"email"}));
+  @computed("session")
+  emailValidator(session) {
+    return UniqueFieldValidator.create({type:"user", key:"email", session});
   },
 
   willDestroyElement() {

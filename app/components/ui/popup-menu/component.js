@@ -12,7 +12,8 @@ export default Ember.Component.extend({
     };
   },
 
-  didInsertElement() {
+  init() {
+    this._super(...arguments);
     this.mouseUps = Rx.Observable.fromEvent(window, 'mouseup');
     this.toggles = new Rx.Subject();
 

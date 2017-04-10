@@ -31,10 +31,11 @@ const page = PO.create({
   openQuickMenu: clickable(".debug_navs_orders-nav .debug_ui_popup-menu .trigger"),
 
   stubOrders: clickable(".stubOrders"),
+  createOrder: clickable(".createOrder"),
 
-  createOrder(){
-    $(".createOrder").click();
-  },
+  // createOrder(){
+  //   $(".createOrder").click();
+  // },
 
   selectLocation(location) {
     return selectChoose(".locationContainer", location.get("label"));
