@@ -1,0 +1,20 @@
+& {
+  cursor: pointer;
+  padding: 1em;
+  align-items: baseline;
+}
+
+&:nth-child(odd) {
+  background: $light-blue;
+}
+
+&.selected {
+  background: $sky-blue;
+  color: white;
+}
+
+.index {
+  margin-right: 0.6em;
+  font-size: 1.2em;
+  font-weight: bold;
+}

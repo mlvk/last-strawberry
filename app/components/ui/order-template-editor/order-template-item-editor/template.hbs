@@ -1,0 +1,20 @@
+<span class="index">
+  {{formattedIndex}}
+</span>
+
+<span class="name">
+  {{model.item.name}}
+</span>
+
+{{one-way-input model.quantity
+    class='quantity'
+    onblur=(action save model)
+    update=(action (mut model.quantity))}}
+
+{{ui/icon-button
+  class='delete'
+  type='close'
+  flat=true
+  color=colors.DARK_GREY
+  padding=0.5
+  click=(action delete model)}}

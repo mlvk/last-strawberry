@@ -123,23 +123,26 @@ test("Remaps price tier when deleting a price tier which has many companies", as
 
   const priceTiers = makeList("price-tier", 3);
 
-  const priceTier = priceTiers.get("firstObject");
+  const priceTier = priceTiers[0];
+  const priceTierId = priceTier.get('id');
+
   const company = make("company", { priceTier });
 
-  const swichingPriceTier = priceTiers[2];
+  const switchingPriceTier = priceTiers[2];
+  const targetPriceTierId = switchingPriceTier.get('id');
 
   mockFindRecord("price-tier").returns({ model: priceTier });
   mockFindAll("item").returns({ models: items });
   mockFindAll("price-tier").returns({ models: priceTiers});
   mockDelete(priceTier);
-  mockUpdate(company);
+  mockUpdate('company', 1).returns({attrs: { priceTier:switchingPriceTier}});
 
   await page
-    .visit({ id: 1 })
+    .visit({ id: priceTierId })
     .clickDeleteButton()
-    .selectPriceTier(swichingPriceTier);
+    .selectPriceTier(switchingPriceTier);
 
   await page.submitDeletePriceTier();
 
-  assert.equal(company.get("priceTier.id"), swichingPriceTier.id);
+  assert.equal(company.get("priceTier.id"), targetPriceTierId);
 });

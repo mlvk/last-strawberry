@@ -10,6 +10,7 @@ moduleForModel("location", "Unit | Model | location", {
     "model:visit-window",
     "model:price-tier",
     "model:order",
+    "model:order-template",
     "model:item-credit-rate",
     "model:notification-rule"
   ]

@@ -1,0 +1,25 @@
+& {
+  // padding: 1em
+}
+
+.navContainer {
+  background: $dark-orange;
+  padding: 1em;
+  justify-content: space-between;
+}
+
+.company {
+  font-size: 1.2em;
+}
+
+.location {
+  font-size: 1.2em;
+}
+
+.spacer {
+  margin: 0 0.5em;
+}
+
+.orderList {
+  margin-top: 1em;
+}

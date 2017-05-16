@@ -1,0 +1,27 @@
+<div class="navContainer row">
+  <div class="row baseline">
+    <span class="company">{{model.company.name}}</span>
+    <span class="spacer">-</span>
+    <span class="location">{{model.name}}</span>
+  </div>
+  {{ui/icon-button
+      class="create"
+      label="Create repeating order"
+      type="add"
+      size="1"
+      color=white
+      flat=true
+      backgroundColor=colors.SKY_BLUE
+      action=(route-action "createOrderTemplate")}}
+</div>
+
+<div class="row">
+  <div class="orderList col stretch">
+    {{lists/order-templates-list
+        currentOrderTemplate=currentOrderTemplate
+        selectOrderTemplate=selectOrderTemplate
+        model=model.orderTemplates}}
+  </div>
+
+  {{outlet}}
+</div>

@@ -50,8 +50,8 @@ export default Ember.Component.extend({
   groupedOrders(orders) {
     return _
       .chain(orders)
-      .sortBy(item => item.get("location.company.name"))
-      .groupBy(item => item.get("location.company.name"))
+      .sortBy(order => order.get("location.company.name"))
+      .groupBy(order => order.get("location.company.name"))
       .value();
   }
 });

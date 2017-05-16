@@ -1,0 +1,18 @@
+<div class="locationsContainer col">
+  <div class="filterQuery">
+    {{ui/filter-bar
+        placeholder=(concat "Filter companies..." )
+        onChange=(action (mut companyQuery))
+        value=companyQuery}}
+  </div>
+  <div class="row stretch">
+    {{lists/grouped-list
+        childKey='name'
+        highlightedItem=currentLocation
+        itemClicked=selectLocation
+        model=groupedLocations}}
+  </div>
+</div>
+<div class="col stretch">
+  {{outlet}}
+</div>

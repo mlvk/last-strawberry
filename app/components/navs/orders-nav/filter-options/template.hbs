@@ -1,48 +1,43 @@
 {{ui/title-bar
-  title=title
-  hasAction=true
-  actionIcon=(if isHidden "add" "remove")
-  click=(toggle "isHidden" this)
-  class="titleBar"
-}}
+    title=title
+    hasAction=true
+    actionIcon=(if isHidden "add" "remove")
+    click=(toggle "isHidden" this)
+    class="titleBar"}}
 
 <div class="filterContainer col {{if isHidden 'hidden' ''}}">
 
   {{forms/elements/label-checkbox
-    label="Drafts"
-    selected=includeUnpublished
-    update=(action (mut includeUnpublished))
-    class="includeUnpublished"
-  }}
+      label="Drafts"
+      selected=includeUnpublished
+      update=(action (mut includeUnpublished))
+      class="includeUnpublished"}}
 
   {{forms/elements/label-checkbox
-    label="Approved"
-    selected=includePublished
-    update=(action (mut includePublished))
-    class="includePublished"
-  }}
+      label="Approved"
+      selected=includePublished
+      update=(action (mut includePublished))
+      class="includePublished"}}
 
   <div class="filterQuery">
     <span class="searchTitle">Filter companies</span>
     {{ui/filter-bar
-      placeholder=(concat "Filter companies..." )
-      onChange=(action (mut query))
-      value=query
-    }}
+        placeholder=(concat "Filter companies..." )
+        onChange=(action (mut query))
+        value=query}}
   </div>
 
   <div class="filterItem">
     <span class="searchTitle">Filter items</span>
     <div class="itemFilterContainer">
       {{#power-select-multiple
-        options=items
-        selected=selectedItems
-        searchField="name"
-        placeholder="Filter items..."
-        onchange=itemSelected
-        as |item|
-      }}
-        {{item.name}}
+          options=items
+          selected=selectedItems
+          searchField="name"
+          placeholder="Filter items..."
+          onchange=itemSelected
+          as |item|}}
+            {{item.name}}
       {{/power-select-multiple}}
     </div>
   </div>

@@ -1,0 +1,9 @@
+{{ui/order-template-editor
+    model=model
+    items=items
+    onDaysChanged=(route-action 'onDaysChanged')
+    dateSelected=(route-action 'dateSelected' model)
+    saveModel=(route-action 'saveModel')
+    deleteOrderTemplate=(route-action 'deleteOrderTemplate' model)
+    deleteLineItem=(route-action 'deleteLineItem')
+    createLineItem=(route-action 'createLineItem' model)}}

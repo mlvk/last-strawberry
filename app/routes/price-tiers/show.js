@@ -42,14 +42,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     updateModelField,
     saveModelIfDirty,
 
-    async destroyPriceTier(model, switchingPriceTier) {
-      // Switching companies to a new price tier
-      model.get("companies").toArray().forEach(async company => {
-        company.set("priceTier", switchingPriceTier);
-        await company.save();
-      });
+    destroyPriceTier(model, switchingPriceTier) {
+      model.destroyRecord();
 
-      await model.destroyRecord();
+      model.get("companies")
+        .forEach(company => {
+          company.set("priceTier", switchingPriceTier);
+          company.save();
+        });
+
       this.transitionTo("price-tiers");
     }
   }

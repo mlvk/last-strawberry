@@ -5,7 +5,8 @@ export default Ember.Component.extend({
 
   routing: Ember.inject.service('-routing'),
 
-  popupItems: [
+  settingMenuItems: [
+    {route:"standing-orders", label:"Standing Orders"},
     {route:"reports.customer-financials", label:"Customer Report"},
     {route:"reports.product-financials", label:"Product Report"},
     {route:"products", label:"Products"},

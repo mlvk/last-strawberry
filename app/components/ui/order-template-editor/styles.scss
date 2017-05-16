@@ -1,0 +1,52 @@
+& {
+  background: $light-blue;
+  min-width: 30em;
+}
+
+.contentContainer {
+  padding: 2em;
+}
+
+.startDateContainer {
+  margin: 0.5em 0;
+  align-items: baseline;
+
+  .info {
+    margin-right: 1em;
+  }
+
+  input.datePicker {
+    border: none;
+    font-weight: 400;
+    text-decoration: underline;
+  }
+}
+
+.frequencyContainer {
+  margin-bottom: 1em;
+  align-items: baseline;
+
+  .quantity {
+    margin: 0 1em;
+    width: 2em;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px dashed;
+    font-weight: 400;
+    text-align: center;
+  }
+}
+
+.lineItemsContainer {
+  max-width: 60em;
+  margin-top: 2em;
+}
+
+.addOrderItemContainer {
+  margin-top: 2em;
+}
+
+.bottomUIContainer {
+  padding: 2em;
+}

@@ -22,6 +22,7 @@ export default Model.extend(LocationHashable, {
   itemDesires:          hasMany("item-desire"),
   itemCreditRates:      hasMany("item-credit-rate"),
   orders:               hasMany("order"),
+  orderTemplates:       hasMany("order-template"),
   visitDays:            hasMany("visit-day"),
   notificationRules:    hasMany("notification-rule"),
 

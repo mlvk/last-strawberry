@@ -32,8 +32,8 @@
       padding=1.2
       action=(action "navigateToRoute" "distribution")}}
 
-    {{#ui/popup-menu icon='arrow_drop_down'}}
-      {{#each popupItems as |item|}}
+    {{#ui/popup-menu label="Settings" icon='arrow_drop_down'}}
+      {{#each settingMenuItems as |item|}}
         {{ui/icon-button
           class=(camelize item.route)
           iconName="check"

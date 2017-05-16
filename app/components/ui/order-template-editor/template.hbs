@@ -1,0 +1,75 @@
+<div class="contentContainer">
+  <div class="row">
+    <div class="col">
+      <div class="startDateContainer row">
+        <div class="info">
+          Starting date:
+        </div>
+        <div class="row">
+          {{pikaday-input
+              class="datePicker"
+              value=(date model.startDate)
+              format="ddd MM-DD-YYYY"
+              onSelection=dateSelected}}
+        </div>
+      </div>
+
+      <div class="frequencyContainer row">
+        <div class="info">
+          Repeat every
+        </div>
+        <div class="row">
+          {{one-way-input model.frequency
+              class='quantity'
+              onblur=(action saveModel model)
+              update=(action (mut model.frequency))}}
+        </div>
+        <div class="info">
+          week(s).
+        </div>
+      </div>
+
+      <div class="dayOfWeekContainer">
+        {{ui/day-of-week-selector
+            class="visitDays"
+            model=model.orderTemplateDays
+            change=(action onDaysChanged model)}}
+      </div>
+    </div>
+  </div>
+
+  <div class="lineItemsContainer">
+    <div class="col">
+      {{#each sortedValidLineItems as |lineItem index|}}
+        {{ui/order-template-editor/order-template-item-editor
+            model=lineItem
+            save=saveModel
+            delete=deleteLineItem
+            index=index}}
+      {{/each}}
+    </div>
+
+    <div class="addOrderItemContainer">
+      {{#power-select
+          placeholder="Add item"
+          searchField="name"
+          options=activeProducts
+          onchange=createLineItem
+          as |item|}}
+            {{item.name}}
+      {{/power-select}}
+    </div>
+  </div>
+</div>
+
+<div class="bottomUIContainer">
+  {{ui/icon-button
+      class="delete"
+      label="Delete Repeating order"
+      type="close"
+      size="1.4"
+      color=white
+      flat=true
+      backgroundColor="red"
+      action=deleteOrderTemplate}}
+</div>
