@@ -16,7 +16,7 @@ export default Ember.Route.extend({
 
   model() {
     return Ember.RSVP.all([
-			this.store.query("company", { "filter[active_state]":activeState.ACTIVE, include:MODEL_INCLUDES.join(",")}),
+			this.store.query("company", { "filter[active_state]":activeState.ACTIVE, "filter[is_customer]":true, include:MODEL_INCLUDES.join(",")}),
 			this.store.query("item", {"filter[is_sold]":true})
 		]);
   },

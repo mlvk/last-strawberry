@@ -30,7 +30,9 @@
   align-items: center;
 }
 .navLinksContainer {
+
   .ui_icon-button {
+    justify-content: flex-start;
     &:hover{
       background-color: $baby-blue;
       .label {
