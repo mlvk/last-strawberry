@@ -1,5 +1,10 @@
 {{#with (changeset model validators) as |changeset|}}
+
+  <div class="section card-1">
+
+  <h4>Location Details</h4>
   <div class="row">
+
     <input
       type="text"
       name="name"
@@ -32,19 +37,6 @@
     {{/unless}}
   </div>
 
-  <div class="row schetch rowData">
-    <textarea
-    rows="6"
-    cols="100"
-    name="note"
-    class="note"
-    value="{{changeset.note}}"
-    oninput={{action "fieldChanged" changeset "note"}}
-    onchange={{action "fieldChanged" changeset "note"}}
-    onblur={{action "save" changeset}}>
-    </textarea>
-  </div>
-
   <div class="errorMessageContainer">
     {{#each changeset.errors as |error|}}
       <div class="row">{{error.key}}:{{error.validation}}</div>
@@ -53,5 +45,37 @@
     {{#if (not codeValidator.isValid)}}
       <div class="row">Another location is using that code</div>
     {{/if}}
+  </div>
+
+
+
+    <h4>Location Notes (NOT visible to customer):</h4>
+    <div class="row schetch rowData">
+      <textarea
+      rows="6"
+      cols="100"
+      name="note"
+      class="note"
+      value="{{changeset.note}}"
+      oninput={{action "fieldChanged" changeset "note"}}
+      onchange={{action "fieldChanged" changeset "note"}}
+      onblur={{action "save" changeset}}>
+      </textarea>
+    </div>
+
+    <h4>Delivery Notes (Visible ONLY to driver):</h4>
+    <div class="row schetch rowData">
+      <textarea
+      rows="6"
+      cols="100"
+      name="note"
+      class="note"
+      value="{{changeset.deliveryNote}}"
+      oninput={{action "fieldChanged" changeset "deliveryNote"}}
+      onchange={{action "fieldChanged" changeset "deliveryNote"}}
+      onblur={{action "save" changeset}}>
+      </textarea>
+    </div>
+
   </div>
 {{/with}}

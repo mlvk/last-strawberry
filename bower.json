@@ -1,31 +1,32 @@
 {
   "name": "last-strawberry",
   "dependencies": {
-    "selectize": "~0.12.1",
-    "pikaday": "^1.5.1",
+    "selectize": "0.12.1",
+    "pikaday": "1.5.1",
     "moment": ">= 2.8.0",
     "moment-timezone": ">= 0.1.0",
     "dragula.js": "3.7.2",
-    "string": "~3.3.1",
+    "string": "3.3.1",
     "ceibo": "1.1.0",
-    "Faker": "~3.0.0",
-    "tether": "^1.0.3",
-    "lodash": "^4.9.0",
-    "numeral": "^1.5.3",
-    "immutable": "^3.8.1",
-    "rxjs": "^4.1.0",
-    "gsap": "^1.18.4",
-    "firebase": "^2.4.2",
+    "Faker": "3.0.0",
+    "tether": "1.0.3",
+    "lodash": "4.9.0",
+    "numeral": "1.5.3",
+    "immutable": "3.8.1",
+    "rxjs": "4.1.0",
+    "gsap": "1.18.4",
+    "firebase": "2.4.2",
     "chartjs": "1.0.2",
     "jquery-mockjax": "2.2.1",
     "mlvk-google-fonts": "brancusi/mlvk-google-fonts",
-    "ramda": "^0.22.0",
-    "polyline": "^0.2.0",
-    "localforage": "^1.4.3",
+    "ramda": "0.22.0",
+    "polyline": "0.2.0",
+    "localforage": "1.4.3",
     "ember": "v2.10",
-    "leaflet": "^1.0.0"
+    "leaflet": "1.0.0"
   },
   "resolutions": {
-    "ember": "v2.10"
+    "ember": "v2.10",
+    "sifter": "0.4.x"
   }
 }

@@ -16,6 +16,7 @@ export default Model.extend(LocationHashable, {
   active:               attr("boolean", { defaultValue: true }),
   code:                 attr("string"),
   note:                 attr("string"),
+  deliveryNote:         attr("string"),
 
   address:              belongsTo("address"),
   company:              belongsTo("company"),
