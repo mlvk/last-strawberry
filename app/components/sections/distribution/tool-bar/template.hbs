@@ -31,6 +31,16 @@
       action=printFulfillmentDocuments}}
 
   {{ui/icon-button
+      type="insert_chart"
+      class="print"
+      flat=true
+      size=1.5
+      disabled=(not canPrintDistributionDocuments)
+      backgroundColor=colors.LIGHT_GREEN
+      color=colors.DARK_GREY
+      action=generateRoutePlanCSV}}
+
+  {{ui/icon-button
       class="add"
       type="add"
       disabled=(not canCreateRoutePlans)

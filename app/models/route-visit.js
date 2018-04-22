@@ -26,6 +26,9 @@ export default Model.extend(LocationHashable, {
   lat:              alias('address.lat'),
   lng:              alias('address.lng'),
 
+  location:         alias('address.locations.firstObject'),
+  company:         alias('location.company'),
+
   hasRoutePlan:     notEmpty('routePlan.id'),
   routePlanId:      alias('routePlan.id'),
   noRoutePlan:      not('hasRoutePlan'),

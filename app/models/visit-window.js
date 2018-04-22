@@ -4,7 +4,15 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
+import computed from "ember-computed-decorators";
+
 const { alias } = Ember.computed;
+
+const toTime = val => {
+	const hours = Math.floor(val/60);
+	const minutes = val%60;
+	return `${hours}:${minutes}`;
+};
 
 export default Model.extend(LocationHashable, {
 	min: 							attr('number', {defaultValue: 480}),
@@ -16,6 +24,16 @@ export default Model.extend(LocationHashable, {
 
 	lat: 							alias('location.address.lat'),
   lng: 							alias('location.address.lng'),
+
+	@computed("min")
+  minFormatted(val) {
+		return toTime(val);
+  },
+
+	@computed("max")
+  maxFormatted(val) {
+		return toTime(val);
+  },
 
 	validForDate(date) {
 		const dayOfWeek = moment(date).day();
