@@ -9,7 +9,8 @@ import {
 FactoryGuy.define('route-visit', {
   default: {
     fulfillments: FactoryGuy.hasMany('fulfillment'),
-    address: FactoryGuy.belongsTo('address')
+    address: FactoryGuy.belongsTo('address'),
+    date: moment().add(1, "days").format("YYYY-MM-DD")
   },
 
   traits: {

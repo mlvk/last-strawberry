@@ -8,7 +8,7 @@ import computed from "ember-computed-decorators";
 const { alias, not, notEmpty, or } = Ember.computed;
 
 export default Model.extend(LocationHashable, {
-  date:             attr('date'),
+  date:             attr('string'),
   position:         attr('number'),
   arriveAt:         attr('number'),
   departAt:         attr('number'),

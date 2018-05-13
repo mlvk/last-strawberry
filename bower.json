@@ -22,11 +22,10 @@
     "ramda": "0.22.0",
     "polyline": "0.2.0",
     "localforage": "1.4.3",
-    "ember": "v2.10",
+    "ember": "v2.12",
     "leaflet": "1.0.0"
   },
   "resolutions": {
-    "ember": "v2.10",
     "sifter": "0.4.x"
   }
 }

@@ -44,24 +44,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController (controller, model) {
-    this._super(controller, model);
-    controller.set("routePlans", this.store.peekAll("route-plan"));
-    controller.set("routePlanBlueprints", this.store.peekAll("route-plan-blueprint"));
-    controller.set("routeVisits", this.store.peekAll("route-visit"));
-    controller.set("users", this.store.peekAll("user"));
+    const routeVisits = this.store.peekAll('route-visit');
+    const routePlans = this.store.peekAll('route-plan');
+    const routePlanBlueprints = this.store.peekAll('route-plan-blueprint');
+    const users = this.store.peekAll('user');
 
-    const routePlans = this.store.peekAll("route-plan");
+    controller.set("routePlans", routePlans);
+    controller.set("routePlanBlueprints", routePlanBlueprints);
+    controller.set("routeVisits", routeVisits);
+    controller.set("users", users);
+
     routePlans.forEach(rp => this.setPolyline(rp));
+
+    this._super(controller, model);
   },
 
-  model (params) {
-    this.store.unloadAll("route-visit");
-    return Ember.RSVP.all([
+  async model (params) {
+    await Ember.RSVP.all([
       this.store.query("route-plan", {"filter[date]":params.date, include:ROUTE_PLAN_INCLUDES.join(",")}),
       this.store.query("route-visit", {"filter[date]":params.date, "filter[has_route_plan]":false, include:ROUTE_VISIT_INCLUDES.join(",")}),
       this.store.query("route-plan-blueprint", {include:ROUTE_PLAN_BLUEPRINT_INCLUDES.join(",")}),
       this.store.findAll("user")
     ]);
+
+    return {};
   },
 
   async optimizeRoutePlan(routePlan){

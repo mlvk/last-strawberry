@@ -17,7 +17,13 @@ export default Ember.Controller.extend({
       .filter(rp => !rp.get("isDeleted"));
   },
 
-  activeRouteVisits: filterBy("routeVisits", "isValid", true),
+  @computed("routeVisits.@each.{date}", "date")
+  activeRouteVisits(routeVisits, date) {
+    return routeVisits
+      .filter(rv => rv.get("date") === date)
+      .filter(rv => rv.get("isValid"))
+  },
+
   openRouteVisits: filterBy("activeRouteVisits", "isOpen", true),
 
   drivers: filterBy("users", "isDriver", true),
@@ -30,7 +36,7 @@ export default Ember.Controller.extend({
     },
 
     generateRoutePlanCSV() {
-      const headers = ["", "Position", "Store Code", "Store Name", "Address", "State", "Zip", "Lat", "Lon", "In Time (mins)", "Out Time (mins)", "In Time", "Out Time", "Service Time"];
+      const headers = ["", "Position", "Store Code", "Store Name", "Address", "City", "State", "Zip", "Lat", "Lon", "In Time (mins)", "Out Time (mins)", "In Time", "Out Time", "Service Time"];
       const emptyArr = Array(headers.length).fill('');
 
       const data =
@@ -45,6 +51,7 @@ export default Ember.Controller.extend({
                 const code = rv.get('location.code'),
                       name = rv.get('company.name'),
                       street = rv.get('address.street'),
+                      city = rv.get('address.city'),
                       state = rv.get('address.state'),
                       zip = rv.get('address.zip'),
                       lat = rv.get('lat'),
@@ -55,7 +62,7 @@ export default Ember.Controller.extend({
                       maxFormatted = rv.get('visitWindow.maxFormatted'),
                       service = rv.get('visitWindow.service');
 
-                return ["", i + 1, code, name, street, state, zip, lat, lng, min, max, minFormatted, maxFormatted, service]
+                return ["", i + 1, code, name, street, city, state, zip, lat, lng, min, max, minFormatted, maxFormatted, service]
               });
 
             return R.concat(
