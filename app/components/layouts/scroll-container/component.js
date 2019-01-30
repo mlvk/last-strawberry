@@ -1,8 +1,8 @@
 /*
 Remember, the outer container wrapping this component should have flex stretch on it
 */
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['col', 'stretch']
 });

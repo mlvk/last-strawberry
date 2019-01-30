@@ -1,9 +1,10 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
 
-export default Ember.Component.extend({
-  session:     Ember.inject.service(),
+export default Component.extend({
+  session:     service(),
 
   @computed("nameValidator.isValid", "changeset.isValid")
   isValid(validName, validChangeset) {

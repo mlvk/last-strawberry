@@ -1,10 +1,10 @@
-/* jshint node: true */
+'use strict';
 
 module.exports = function(environment) {
 
-  var ENV = {
+  let ENV = {
     modulePrefix: 'last-strawberry',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -78,6 +78,7 @@ module.exports = function(environment) {
 
     // This breaks clicks on elements rendered via ember wormhole in testing
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
 
     ENV.apiHost = '';
 

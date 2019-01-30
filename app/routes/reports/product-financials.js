@@ -1,8 +1,11 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { Promise } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import config from 'last-strawberry/config/environment';
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
+export default Route.extend({
+  session: service(),
 
   queryParams: {
     startDate: {
@@ -17,7 +20,7 @@ export default Ember.Route.extend({
     const startDate = this.paramsFor("reports.product-financials").startDate;
     const endDate = this.paramsFor("reports.product-financials").endDate;
 
-    return new Ember.RSVP.Promise(res => {
+    return new Promise(res => {
       this.get("session").authorize("authorizer:devise", (headerName, headerValue) => {
         const headers = {};
         headers[headerName] = headerValue;
@@ -28,7 +31,7 @@ export default Ember.Route.extend({
           type:"POST"
         };
 
-        Ember.$
+        $
           .ajax(payload)
           .then(data => res(data));
       });

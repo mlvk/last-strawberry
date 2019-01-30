@@ -1,11 +1,9 @@
-import Ember from 'ember';
+import { or, notEmpty, not, alias } from '@ember/object/computed';
 import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-import computed from "ember-computed-decorators";
-
-const { alias, not, notEmpty, or } = Ember.computed;
+import { computed } from 'ember-decorators/object';
 
 export default Model.extend(LocationHashable, {
   date:             attr('string'),

@@ -1,7 +1,7 @@
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 
 export default Model.extend({
   price:      attr("number", {defaultValue: 0}),

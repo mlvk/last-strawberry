@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { Promise } from 'rsvp';
+import Service, { inject as service } from '@ember/service';
 import config from 'last-strawberry/config/environment';
 
-export default Ember.Service.extend({
-  session: Ember.inject.service(),
+export default Service.extend({
+  session: service(),
 
   send(type, url, data, headers = {}){
-    return new Ember.RSVP.Promise((res, rej) => {
+    return new Promise((res, rej) => {
       this.get('session').authorize('authorizer:devise', (headerName, headerValue) => {
 
         const mergedHeaders = _.merge(headers, {[headerName]: headerValue });
@@ -16,7 +18,7 @@ export default Ember.Service.extend({
           type
         };
 
-        Ember.$.ajax(options)
+        $.ajax(options)
           .fail(rej)
           .always(res);
       });

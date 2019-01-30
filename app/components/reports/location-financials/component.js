@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-const LocationFinancials = Ember.Component.extend({
+const LocationFinancials = Component.extend({
   classNames: ["row", "stretch"]
 });
 

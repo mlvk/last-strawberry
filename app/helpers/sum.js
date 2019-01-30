@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function sum(params) {
   let result = 0;
@@ -9,4 +9,4 @@ export function sum(params) {
   return result;
 }
 
-export default Ember.Helper.helper(sum);
+export default buildHelper(sum);

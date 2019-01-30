@@ -1,11 +1,11 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
+import { filterBy } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 import downloadFile from "last-strawberry/utils/download-file";
 
-const { filterBy } = Ember.computed;
-
-export default Ember.Controller.extend({
-  pdfGenerator:   Ember.inject.service(),
+export default Controller.extend({
+  pdfGenerator:   service(),
 
   queryParams:    ["date"],
   date:           moment().add(1, "days").format("YYYY-MM-DD"),

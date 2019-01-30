@@ -1,7 +1,7 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 
-const CompaniesFinancials = Ember.Component.extend({
+const CompaniesFinancials = Component.extend({
   classNames: ["row", "stretch", "card-1", "product-financials"],
 
   @computed("model.@each.{total_sales}")

@@ -1,9 +1,9 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Controller from '@ember/controller';
+import { computed } from 'ember-decorators/object';
 
 const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ["deliveryDate", "includePublished", "includeUnpublished", "companyQuery", "includedItems"],
 
   deliveryDate: tomorrow,

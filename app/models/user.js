@@ -1,14 +1,9 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { equal, alias } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";
 import Roles from "last-strawberry/constants/roles";
-
-const {
-  alias,
-  equal
-} = Ember.computed;
 
 export default Model.extend({
   firstName:    attr("string"),

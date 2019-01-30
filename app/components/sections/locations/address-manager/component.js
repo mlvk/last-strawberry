@@ -1,10 +1,10 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 import {
   placeToObject
 } from 'last-strawberry/utils/google-place-utils';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['section_location_address-manager', 'col', 'stretch'],
 
   willRender(){

@@ -1,3 +1,4 @@
+import { run } from '@ember/runloop';
 import {
   index as indexPage,
   show as showPage
@@ -7,15 +8,11 @@ import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
 
-import Ember from "ember";
-
 import {
   makeList,
   mockCreate,
   mockFindAll
 } from "ember-data-factory-guy";
-
-const { run } = Ember;
 
 let vendors;
 

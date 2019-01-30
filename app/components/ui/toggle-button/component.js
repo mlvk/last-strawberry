@@ -1,15 +1,9 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
+import { notEmpty } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  notEmpty
-} = Ember.computed;
-
-const {
-  isPresent
-} = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['row', 'center'],
   classNameBindings: ['isSelected:selected'],
 

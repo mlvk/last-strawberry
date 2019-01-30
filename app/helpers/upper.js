@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function upper(strs) {
   return strs.map(str => str.toUpperCase());
 }
 
-export default Ember.Helper.helper(upper);
+export default buildHelper(upper);

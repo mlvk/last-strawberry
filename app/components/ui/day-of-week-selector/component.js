@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 
 const DAYS_OF_WEEK = ["m", "t", "w", "th", "f", "s", "su"];
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['ui_day-of-week-selector', 'row'],
 
   @computed('model.@each.{enabled}')

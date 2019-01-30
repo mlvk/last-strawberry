@@ -1,6 +1,7 @@
-import Ember from "ember";
+import { set } from '@ember/object';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
+export default Service.extend({
   async startUp() {
     const data = await localforage.getItem("prefs");
     this.set("preferencesData", data || {});
@@ -8,7 +9,7 @@ export default Ember.Service.extend({
 
   async setPreference(key, value){
     const prefs = this.get("preferencesData");
-    Ember.set(prefs, key, value);
+    set(prefs, key, value);
     await localforage.setItem("prefs", prefs);
   }
 });

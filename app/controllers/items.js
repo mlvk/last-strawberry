@@ -1,8 +1,7 @@
-import Ember from "ember";
+import Controller from '@ember/controller';
+import { filterBy } from '@ember/object/computed';
 import ItemTypes from "last-strawberry/constants/item-types";
 
-const { filterBy } = Ember.computed;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   ingredients: filterBy("items", "tag", ItemTypes.INGREDIENT)
 });

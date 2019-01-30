@@ -1,9 +1,8 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { filter, gt, alias } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const { alias, gt, filter } = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["card-1"],
   classNameBindings: ["isSelected:selected"],
   attributeBindings: ["data-location-hash"],
@@ -32,8 +31,11 @@ export default Ember.Component.extend({
     return hasMultiple ? `${companyName} - Multiple` : `${companyName} - ${locationId}`;
   },
 
-  @computed("model.address", "model.date")
-  visitWindow(address, date) {
+  @computed("model.{address,date}")
+  visitWindow() {
+    let address = this.get("model.address");
+    let date = this.get("model.date");
+
     return address.content.visitWindowForDate(date);
   },
 

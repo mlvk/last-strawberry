@@ -1,5 +1,6 @@
+import { isEmpty } from '@ember/utils';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 import ItemTypes from "last-strawberry/constants/item-types";
 import NotificationRenderer from "last-strawberry/constants/notification-renderers";
 import PublishedStates from "last-strawberry/constants/published-states";
@@ -13,7 +14,7 @@ const ORDER_INCLUDES = [
 	"notifications"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
 
 	setupController(controller, model) {
     this._super(controller, model);
@@ -28,10 +29,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return this.store.findRecord("order", params.id, { reload:true, include:ORDER_INCLUDES.join(",")});
 	},
 
-	clearPurchaseOrderController: function(){
-		const purchaseOrderController = this.controllerFor("purchase-orders");
+  deactivate() {
+    const purchaseOrderController = this.controllerFor("purchase-orders");
     purchaseOrderController.set("currentSelectedOrder", undefined);
-  }.on("deactivate"),
+  },
 
 	actions: {
 		updateShipping(value) {
@@ -48,7 +49,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		emailOrder(model) {
 			const notificationRules = model.get("location.notificationRules");
 			const notifications = model.get('notifications');
-			const renderer = Ember.isEmpty(notifications) ? NotificationRenderer.PURCHASE_ORDER : NotificationRenderer.UPDATED_PURCHASE_ORDER
+			const renderer = isEmpty(notifications) ? NotificationRenderer.PURCHASE_ORDER : NotificationRenderer.UPDATED_PURCHASE_ORDER
 
 			notificationRules.forEach(nr => {
 				const notification = this.store.createRecord("notification", {

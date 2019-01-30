@@ -1,7 +1,7 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row"],
 
   @computed("model.total_sales", "totalSales")
@@ -13,5 +13,5 @@ export default Ember.Component.extend({
   spoilageRatio(local, total) {
     return Number(local) / total;
   }
-  
+
 });

@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import { updateModelField } from "last-strawberry/actions/model-actions";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row", "stretch", "notificationRow"],
 
   willRender(){

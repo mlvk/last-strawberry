@@ -1,8 +1,12 @@
-import Ember from "ember";
+import Component from '@ember/component';
+import { alias } from '@ember/object/computed';
 
-const { alias } = Ember.computed;
+export default Component.extend({
+  companyName: alias("model.address.locations.firstObject.company.name"),
 
-export default Ember.Component.extend({
-  defaultIcon: new L.Icon.Default(),
-  companyName: alias("model.address.locations.firstObject.company.name")
+  init() {
+    this._super(...arguments);
+
+    this.defaultIcon = new L.Icon.Default()
+  }
 });

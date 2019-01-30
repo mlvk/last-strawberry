@@ -1,8 +1,10 @@
+import $ from 'jquery';
+import { all, Promise } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { run } from '@ember/runloop';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 import config from "last-strawberry/config/environment";
-
-const { run } = Ember;
 
 const COMPANY_INCLUDES = [
   "locations",
@@ -19,8 +21,8 @@ const ORDER_INCLUDES = [
   "location.company"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  session: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  session: service(),
 
   queryParams: {
     deliveryDate: {
@@ -50,7 +52,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 
 	model(params){
-    return Ember.RSVP.all([
+    return all([
       this.store.query("item", {"filter[is_sold]":true}),
       this.store.query("company", {include:COMPANY_INCLUDES.join(",")}),
       this.store.query("order", {
@@ -108,7 +110,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           type:"POST"
         };
 
-        const newOrders = await Ember.$.ajax(payload);
+        const newOrders = await $.ajax(payload);
         this.store.pushPayload(newOrders);
 
         this.controllerFor("sales-orders").set("isStubbing", false);
@@ -117,7 +119,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     duplicateOrders(fromDate, toDate) {
-      return new Ember.RSVP.Promise((res, rej) => {
+      return new Promise((res, rej) => {
         this.get("session").authorize("authorizer:devise", (headerName, headerValue) => {
 
           const headers = {};
@@ -129,7 +131,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             type:"POST"
           };
 
-          Ember.$.ajax(payload)
+          $.ajax(payload)
             .always(response => {
               if(response.status) {
                 res();

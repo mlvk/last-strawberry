@@ -1,6 +1,6 @@
-import Ember from 'ember';
-
-const { computed, expandProperties, get } = Ember;
+import { htmlSafe } from '@ember/template';
+import { expandProperties } from '@ember/object/computed';
+import { get, computed } from '@ember/object';
 
 const style = function(...params) {
   // determine if user called as @style('blah', 'blah') or @style
@@ -71,7 +71,7 @@ function expandPropertyList(propertyList) {
 
 function buildStyles(data) {
   const str = Object.keys(data).reduce((acc, cur) => `${acc}${cur}:${data[cur]};`, '');
-  return new Ember.String.htmlSafe(str);
+  return new htmlSafe(str);
 }
 
 function callUserSuppliedGet(params, func) {

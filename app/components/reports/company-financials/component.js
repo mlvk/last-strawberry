@@ -1,11 +1,8 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { gt } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  gt
-} = Ember.computed;
-
-const CompanyFinancials = Ember.Component.extend({
+const CompanyFinancials = Component.extend({
   classNames: ["company-financials"],
   @computed('model.raw_data.@each.{total_sales_revenue}')
   filteredLocationsFinancials(data) {

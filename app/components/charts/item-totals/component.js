@@ -1,11 +1,12 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { A } from '@ember/array';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "card-1"],
 
   @computed("orders.@each.{totalQuantity}")
-  itemTotals(orders = Ember.A()) {
+  itemTotals(orders = A()) {
     return _
       .chain(orders.toArray())
       .map(order => order.get("orderItems").toArray())
@@ -22,7 +23,7 @@ export default Ember.Component.extend({
   },
 
   @computed("orders.@each.{totalQuantity}")
-  totalUnits(orders = Ember.A()) {
+  totalUnits(orders = A()) {
     return orders.reduce((acc, cur) => acc + cur.get("totalQuantity"), 0);
   }
 });

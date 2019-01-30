@@ -1,9 +1,10 @@
-import Ember from "ember";
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Component.extend({
-  session:     Ember.inject.service(),
+export default Component.extend({
+  session:     service(),
 
   classNames: ["col"],
 

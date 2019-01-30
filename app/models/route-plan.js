@@ -1,17 +1,12 @@
-import Ember from "ember";
+import { notEmpty, and } from '@ember/object/computed';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import {
   belongsTo,
   hasMany
 } from "ember-data/relationships";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 import PublishedState from "last-strawberry/constants/route-plan-states"
-
-const {
-  and,
-  notEmpty
-} = Ember.computed;
 
 export default Model.extend({
   date:               attr("string"),

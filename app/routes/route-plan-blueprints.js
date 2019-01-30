@@ -1,7 +1,8 @@
+import { all } from 'rsvp';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
 	setupController(controller, model) {
     this._super(controller, model);
 
@@ -10,7 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 
 	model(){
-		return Ember.RSVP.all([
+		return all([
 			this.store.findAll("user"),
       this.store.findAll("route-plan-blueprint")
 		]);

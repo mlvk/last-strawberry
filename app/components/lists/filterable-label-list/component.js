@@ -1,17 +1,10 @@
-import Ember from 'ember';
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { sort } from '@ember/object/computed';
+import { get } from '@ember/object';
+import { computed } from 'ember-decorators/object';
 
-const {
-  get
-} = Ember;
-
-const {
-  sort
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['list-filterable-label-list', 'col', 'stretch'],
-  sortName: ["text"],
   items: sort("model", "sortName"),
 
   @computed("items.@each.{text}", "query")
@@ -22,6 +15,12 @@ export default Ember.Component.extend({
         const reg = new RegExp(query, "i");
         return reg.test(get(item, "text"));
       });
+  },
+
+  init() {
+    this._super(...arguments);
+
+    this.sortName = ["text"];
   },
 
   actions: {

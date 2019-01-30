@@ -1,8 +1,8 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
-const { notEmpty } = Ember.computed;
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "spaceBetween", "card-1"],
   classNameBindings: ["hasItem::hidden"],
   hasData:        notEmpty("salesData"),

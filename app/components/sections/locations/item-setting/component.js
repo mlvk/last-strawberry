@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import Component from '@ember/component';
+import { alias } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 import { toPercentage } from 'last-strawberry/utils/math';
-const { alias } = Ember.computed;
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['row', 'stretch'],
   classNameBindings: ['model.itemDesire.enabled:enabled:disabled'],
 

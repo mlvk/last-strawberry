@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { merge } from '@ember/polyfills';
 import FactoryGuy from 'ember-data-factory-guy';
 import {
   buildList,
@@ -28,7 +28,7 @@ const buildRouteVisit = (options = {}) => {
 
   make("location", {company, address});
 
-  return Ember.merge({
+  return merge({
     address,
     fulfillments,
     routePlan

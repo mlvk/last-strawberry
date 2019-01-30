@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import COLOR_SCHEMES from "last-strawberry/constants/color-schemes";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames:["row", "stretch"],
 
   COLOR_SCHEMES,

@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import { equal, bool } from '@ember/object/computed';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
-
-const { bool, equal } = Ember.computed;
 
 export default Model.extend({
   deliveryState:      attr('string', {defaultValue:'pending'}),

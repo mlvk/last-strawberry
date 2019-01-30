@@ -1,10 +1,10 @@
-import Ember from "ember";
+import { resolve } from 'rsvp';
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
 import { style } from "last-strawberry/utils/styles";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 
-const { notEmpty } = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row", "ui_icon-button", "btn"],
   classNameBindings: ["disabled:disabled", "flat:flat:card-1", "hasError:error", "loading:loading"],
   attributeBindings:["componentStyles:style"],
@@ -76,7 +76,7 @@ export default Ember.Component.extend({
       this.startSpin();
 
       const response = this.get("action")();
-      const promise = response ? response : Ember.RSVP.resolve();
+      const promise = response ? response : resolve();
 
       promise
         .then(() => {

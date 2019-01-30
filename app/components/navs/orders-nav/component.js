@@ -1,11 +1,9 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { isEmpty } from '@ember/utils';
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "stretch"],
 
   hasStubAction: notEmpty("stubOrders"),
@@ -39,7 +37,7 @@ export default Ember.Component.extend({
                showPublished = includePublished && order.get('isPublished'),
                showUnpublished = includeUnpublished && order.get('isUnpublished');
 
-        const includedItem = Ember.isEmpty(selectedItems) ||
+        const includedItem = isEmpty(selectedItems) ||
           selectedItems.reduce((sum,item) => sum || order.get("orderItems").isAny("item.id", item.get("id")), false);
 
         return nameMatch && notDeleted && notVoided && (showPublished || showUnpublished) && includedItem;

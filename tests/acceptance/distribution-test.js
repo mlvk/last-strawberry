@@ -1,13 +1,13 @@
+import $ from 'jquery';
 import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
-import page from "last-strawberry/tests/pages/distribution";
 
+import page from "last-strawberry/tests/pages/distribution";
 import {
   buildRouteVisits,
   buildRouteVisitsWithSharedRoutePlan
 } from "last-strawberry/tests/factories/route-visit";
-import Ember from 'ember';
 
 import {
   mockUpdate,
@@ -25,7 +25,7 @@ moduleForAcceptance("Acceptance | distribution", {
     authenticateSession(this.application);
     mockFindAll("user", 1);
     mockFindAll("route-plan-blueprint");
-    Ember.$.mockjax({ url: `https://api.mapbox.com*`, responseText: {}, type: 'GET' });
+    $.mockjax({ url: `https://api.mapbox.com*`, responseText: {}, type: 'GET' });
   }
 });
 

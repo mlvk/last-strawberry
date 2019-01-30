@@ -1,8 +1,12 @@
+import $ from 'jquery';
+import { isEmpty, isPresent } from '@ember/utils';
+import { all } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { run } from '@ember/runloop';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 import { timeToMinutes } from "last-strawberry/utils/time";
 import { decodePolyline } from "last-strawberry/utils/maps";
-const { run } = Ember;
 
 const ROUTE_VISIT_INCLUDES = [
   "route-plan",
@@ -33,9 +37,9 @@ const ROUTE_PLAN_INCLUDES = [
   "route-visits.address.locations.company"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  requestGenerator: Ember.inject.service(),
-  session: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  requestGenerator: service(),
+  session: service(),
 
   queryParams: {
     date: {
@@ -60,7 +64,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   async model (params) {
-    await Ember.RSVP.all([
+    await all([
       this.store.query("route-plan", {"filter[date]":params.date, include:ROUTE_PLAN_INCLUDES.join(",")}),
       this.store.query("route-visit", {"filter[date]":params.date, "filter[has_route_plan]":false, include:ROUTE_VISIT_INCLUDES.join(",")}),
       this.store.query("route-plan-blueprint", {include:ROUTE_PLAN_BLUEPRINT_INCLUDES.join(",")}),
@@ -87,7 +91,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   async setPolyline(routePlan){
-    if(Ember.isEmpty(routePlan.get("routeVisits"))) {
+    if(isEmpty(routePlan.get("routeVisits"))) {
       run(() => routePlan.set("polyline", ""));
     } else {
       const hq = "-118.317191,34.1693137";
@@ -99,9 +103,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
       const apiToken = this.get("session.data.authenticated.mapbox_api_token");
       const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${query}?geometries=polyline&access_token=${apiToken}`;
-      const result = await Ember.$.ajax({ url, type:"GET" });
+      const result = await $.ajax({ url, type:"GET" });
 
-      if(Ember.isPresent(result.routes)){
+      if(isPresent(result.routes)){
         run(() => routePlan.set("polyline", decodePolyline(result.routes[0].geometry)));
       } else {
         run(() => routePlan.set("polyline", ""));
@@ -136,11 +140,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       routeVisit.setProperties({routePlan: toRoutePlan, position});
       await routeVisit.save();
 
-      if(Ember.isPresent(fromRoutePlan)) {
+      if(isPresent(fromRoutePlan)) {
         this.setPolyline(fromRoutePlan);
       }
 
-      if(Ember.isPresent(toRoutePlan)) {
+      if(isPresent(toRoutePlan)) {
         this.setPolyline(toRoutePlan);
       }
     },

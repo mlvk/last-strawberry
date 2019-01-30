@@ -1,14 +1,9 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { run } from '@ember/runloop';
+import { notEmpty, and } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  and,
-  notEmpty
-} = Ember.computed;
-
-const { run } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "card-1"],
   classNameBindings: ["shouldDisplay::hidden"],
   hasData:       notEmpty("salesData"),

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function cap(strs) {
   return strs
@@ -9,4 +9,4 @@ export function cap(strs) {
         .join(' '));
 }
 
-export default Ember.Helper.helper(cap);
+export default buildHelper(cap);

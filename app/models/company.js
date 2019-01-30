@@ -1,4 +1,5 @@
-import Ember from "ember";
+import { isPresent } from '@ember/utils';
+import { not, filterBy, equal, alias } from '@ember/object/computed';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import {
@@ -7,13 +8,6 @@ import {
 } from "ember-data/relationships";
 
 import activeState from "last-strawberry/constants/active-states";
-
-const {
-  alias,
-  equal,
-  filterBy,
-  not
-} = Ember.computed;
 
 export default Model.extend({
   name:                attr("string"),
@@ -36,7 +30,7 @@ export default Model.extend({
   async priceForItem(item) {
     const priceTier = await this.get("priceTier");
 
-    if(Ember.isPresent(priceTier)) {
+    if(isPresent(priceTier)) {
       return priceTier.priceForItem(item);
     } else {
       return item.get("defaultPrice");

@@ -1,7 +1,6 @@
-import Ember from "ember";
+import Controller from '@ember/controller';
+import { filterBy } from '@ember/object/computed';
 
-const { filterBy } = Ember.computed;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   vendors: filterBy("companies", "isVendor", true)
 });

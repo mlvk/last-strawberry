@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import guid from 'last-strawberry/utils/guid';
 
-export default Ember.Component.extend({
+export default Component.extend({
   attributeBindings: ['containerId:data-drop-zone-id'],
   classNames: ['col', 'stretch'],
   classNameBindings: ['disableDrop'],

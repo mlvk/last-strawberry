@@ -1,8 +1,8 @@
+import $ from 'jquery';
 import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
 import page from "last-strawberry/tests/pages/navigation";
-import Ember from "ember";
 
 import {
   mockFindAll
@@ -16,7 +16,7 @@ moduleForAcceptance("Acceptance | navigation", {
     mockFindAll("item");
     mockFindAll("order");
 
-    Ember.$.mockjax({ url: `https://api.mapbox.com*`, responseText: {}, type: "GET" });
+    $.mockjax({ url: `https://api.mapbox.com*`, responseText: {}, type: "GET" });
   }
 });
 

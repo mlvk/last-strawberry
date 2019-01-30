@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import decorateComponentClass from 'last-strawberry/tests/helpers/decorate-component-class';

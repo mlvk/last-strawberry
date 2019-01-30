@@ -1,8 +1,9 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
+export default Controller.extend({
+  session: service(),
 
   @computed('session.data.authenticated.{first_name,last_name}')
   userName(first = "", last = "") {

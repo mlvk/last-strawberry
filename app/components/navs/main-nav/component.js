@@ -1,30 +1,32 @@
-import Ember from "ember";
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row"],
 
-  routing: Ember.inject.service('-routing'),
-
-  settingMenuItems: [
-    {route:"standing-orders", label:"Standing Orders"},
-    {route:"reports.customer-financials", label:"Customer Report"},
-    {route:"reports.product-financials", label:"Product Report"},
-    {route:"products", label:"Products"},
-    {route:"items", label:"Ingredients"},
-    {route:"customers", label:"Customers"},
-    {route:"vendors", label:"Vendors"},
-    {route:"price-tiers", label:"Price Tiers", icon:"attach_money"},
-    {route:"route-plan-blueprints", label:"Route Blueprints", icon:"list"},
-    {route:"users", label:"Users", icon:"supervisor_account"}
-  ],
+  routing: service('-routing'),
 
   init() {
-    this._super();
+    this._super(...arguments);
+
+    this.settingMenuItems = [
+      {route:"standing-orders", label:"Standing Orders"},
+      {route:"reports.customer-financials", label:"Customer Report"},
+      {route:"reports.product-financials", label:"Product Report"},
+      {route:"products", label:"Products"},
+      {route:"items", label:"Ingredients"},
+      {route:"customers", label:"Customers"},
+      {route:"vendors", label:"Vendors"},
+      {route:"price-tiers", label:"Price Tiers", icon:"attach_money"},
+      {route:"route-plan-blueprints", label:"Route Blueprints", icon:"list"},
+      {route:"users", label:"Users", icon:"supervisor_account"}
+    ];
+
     this.addListener();
   },
 
   addListener() {
-    this.get('routing.router').on('didTransition', ::this.handleDidTransition);
+    this.get('routing.router').on('didTransition', this.handleDidTransition.bind(this));
   },
 
   updateCurrentSelectedPath(route) {

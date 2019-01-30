@@ -1,7 +1,8 @@
+import { all } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { run } from '@ember/runloop';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
-
-const { run } = Ember;
 
 const COMPANY_INCLUDES = [
   "items",
@@ -17,8 +18,8 @@ const ORDER_INCLUDES = [
   "location.company"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  session: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  session: service(),
 
   queryParams: {
     deliveryDate: {
@@ -50,7 +51,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	model(params){
     this.params = params;
 
-    return Ember.RSVP.all([
+    return all([
       this.store.query("item", {"filter[is_purchased]":true}),
       this.store.query("company", {"filter[is_vendor]":true, include:COMPANY_INCLUDES.join(",")}),
       this.store.query("order", {

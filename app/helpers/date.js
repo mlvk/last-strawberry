@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function date(params) {
   if(params[0]){
@@ -8,4 +8,4 @@ export function date(params) {
   }
 }
 
-export default Ember.Helper.helper(date);
+export default buildHelper(date);

@@ -1,10 +1,11 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 import UserValidations from "last-strawberry/validators/user";
 import Roles from "last-strawberry/constants/roles";
 
-export default Ember.Component.extend({
-  session: Ember.inject.service(),
+export default Component.extend({
+  session: service(),
 
   classNames: "col stretch",
 

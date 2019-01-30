@@ -1,9 +1,13 @@
-import Ember from "ember";
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
-  preferencesData:{},
+export default Service.extend({
   startUp(){},
   setPreference(key, value){
     this.set(`preferencesData.${key}`, value);
+  },
+  init() {
+    this._super(...arguments);
+
+    this.preferencesData = {};
   }
 });

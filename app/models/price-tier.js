@@ -1,13 +1,8 @@
-import Ember from "ember";
+import { notEmpty, alias } from '@ember/object/computed';
+import { isPresent } from '@ember/utils';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";
-
-const { isPresent } = Ember;
-const {
-  alias,
-  notEmpty
-} = Ember.computed;
 
 export default Model.extend({
   name:         attr("string"),

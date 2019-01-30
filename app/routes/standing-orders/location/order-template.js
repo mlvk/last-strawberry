@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { isBlank } = Ember;
+import Route from '@ember/routing/route';
+import { isBlank } from '@ember/utils';
 
 const MODEL_INCLUDES = [
 	"order-template-items",
@@ -10,7 +9,7 @@ const MODEL_INCLUDES = [
   "location.company"
 ];
 
-export default Ember.Route.extend({
+export default Route.extend({
   setupController(controller, model) {
     controller.set("items", this.store.peekAll("item"));
 

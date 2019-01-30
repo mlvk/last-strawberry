@@ -1,4 +1,5 @@
-import Ember from "ember";
+import { isNone } from '@ember/utils';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 const INCLUDES = [
@@ -9,14 +10,14 @@ const INCLUDES = [
   "notification-rules"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   model(params){
     return this.store.findRecord("location", params.location_id, { reload:true, include:INCLUDES.join(",")});
   },
 
   async afterModel(model) {
     let address = await model.get("address");
-    if(Ember.isNone(address)) {
+    if(isNone(address)) {
       address = this.store.createRecord("address");
     }
     model.set("address", address);

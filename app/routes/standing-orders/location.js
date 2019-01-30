@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
 const MODEL_INCLUDES = [
 	"company",
@@ -8,7 +8,7 @@ const MODEL_INCLUDES = [
   "order-templates.order-template-days"
 ];
 
-export default Ember.Route.extend({
+export default Route.extend({
 	setupController(controller, model) {
 		this.controllerFor('standing-orders').set("currentLocation", model);
 		this.controllerFor('standing-orders.location').set("currentOrderTemplate", undefined);

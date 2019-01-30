@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import CustomerValidations from "last-strawberry/validators/customer";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col"],
 
   validators: CustomerValidations,

@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
 import { belongsTo } from 'ember-data/relationships';
 import DS from 'ember-data';
 
 const { attr } = DS;
-const { alias } = Ember.computed;
 
 export default DS.Model.extend({
 

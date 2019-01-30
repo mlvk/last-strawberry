@@ -1,8 +1,8 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import { style } from "last-strawberry/utils/styles";
 import Colors from "last-strawberry/constants/colors";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row"],
   attributeBindings:["componentStyles:style"],
 

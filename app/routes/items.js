@@ -1,12 +1,12 @@
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 import ItemTypes from "last-strawberry/constants/item-types";
 
 const MODEL_INCLUDES = [
 	"company"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
 	setupController(controller, model) {
     this._super(controller, model);
 		controller.set("items", this.store.peekAll("item"));

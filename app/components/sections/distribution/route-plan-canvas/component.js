@@ -1,10 +1,11 @@
-import Ember from "ember";
+import Component from '@ember/component';
+import { filterBy } from '@ember/object/computed';
 import TemplateValidations from "last-strawberry/validators/route-plan-blueprint";
+import $ from 'jquery';
 
-const { filterBy } = Ember.computed;
 const SCROLL_SPEED = 20;
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "stretch"],
 
   validators: TemplateValidations,

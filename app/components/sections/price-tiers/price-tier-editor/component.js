@@ -1,7 +1,7 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { computed } from 'ember-decorators/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   @computed("model.itemPrices.@each.{isPending}")
   openItemPrices(itemPrices = []) {
     return itemPrices.filter(ip => ip.get("isPending"));

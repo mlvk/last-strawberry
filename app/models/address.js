@@ -1,5 +1,5 @@
 import LocationHashable from "last-strawberry/mixins/location-hashable";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";

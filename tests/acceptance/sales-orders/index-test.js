@@ -1,9 +1,9 @@
+import { run } from '@ember/runloop';
 import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
 import { page } from "last-strawberry/tests/pages/sales-orders";
 import { page as showPage } from "last-strawberry/tests/pages/sales-orders-show";
-import Ember from "ember";
 
 import {
   build,
@@ -76,7 +76,7 @@ test("should display warning banner when deliveryDate param <= today", async fun
 });
 
 test("show be able to create a new sales order from the quick menu", async function(assert) {
-  await Ember.run(async function() {
+  await run(async function() {
 
     const location = make("location");
     const salesOrder = build("sales_order", {location});

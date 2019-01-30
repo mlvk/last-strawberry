@@ -1,9 +1,8 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { notEmpty, and } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const { and, notEmpty } = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row"],
   currentSelectedRoutePlanTemplate: undefined,
 

@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { notEmpty, bool } from '@ember/object/computed';
 
-const { bool, notEmpty } = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   hasError: notEmpty("error"),
   isLoading: bool("loading"),
 

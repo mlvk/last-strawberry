@@ -1,12 +1,8 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Controller from '@ember/controller';
+import { notEmpty, alias } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  alias,
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   hasDataPath: notEmpty("dataPath"),
 
   company: alias("model.location.company"),

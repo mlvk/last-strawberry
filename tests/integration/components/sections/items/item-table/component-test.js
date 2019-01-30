@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { makeList, manualSetup } from 'ember-data-factory-guy';

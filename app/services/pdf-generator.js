@@ -1,16 +1,17 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { Promise, reject } from 'rsvp';
+import Service, { inject as service } from '@ember/service';
+import { isPresent } from '@ember/utils';
 import config from 'last-strawberry/config/environment';
 
-const { isPresent } = Ember;
-
-export default Ember.Service.extend({
-  session: Ember.inject.service(),
+export default Service.extend({
+  session: service(),
 
   generateInvoices(orders = []) {
     const orderNumbers = orders.map(order => order.get('orderNumber'));
 
     if(isPresent(orderNumbers)) {
-      return new Ember.RSVP.Promise((res, rej) => {
+      return new Promise((res, rej) => {
         this.get('session').authorize('authorizer:devise', (headerName, headerValue) => {
           const headers = {};
           headers[headerName] = headerValue;
@@ -21,13 +22,13 @@ export default Ember.Service.extend({
             type:'POST'
           };
 
-          Ember.$.ajax(payload)
+          $.ajax(payload)
             .done(res)
             .fail(rej)
         });
       });
     } else {
-      return Ember.RSVP.reject('No invoices were supplied');
+      return reject('No invoices were supplied');
     }
   },
 
@@ -35,7 +36,7 @@ export default Ember.Service.extend({
     const routePlanIds = routePlans.map(routePlan => routePlan.get('id'));
 
     if(isPresent(routePlanIds)) {
-      return new Ember.RSVP.Promise((res, rej) => {
+      return new Promise((res, rej) => {
         this.get('session').authorize('authorizer:devise', (headerName, headerValue) => {
           const headers = {};
           headers[headerName] = headerValue;
@@ -46,13 +47,13 @@ export default Ember.Service.extend({
             type:'POST'
           };
 
-          Ember.$.ajax(payload)
+          $.ajax(payload)
             .done(res)
             .fail(rej)
         });
       });
     } else {
-      return Ember.RSVP.reject('No route plans were supplied');
+      return reject('No route plans were supplied');
     }
   }
 });

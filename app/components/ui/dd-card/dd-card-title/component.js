@@ -1,11 +1,8 @@
-import Em from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
+import { computed } from 'ember-decorators/object';
 
-const {
-  computed: { notEmpty }
-} = Em;
-
-export default Em.Component.extend({
+export default Component.extend({
   classNames: ["row"],
   hasIndex: notEmpty("index"),
   hasAction: notEmpty("action"),

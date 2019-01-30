@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 import { minutesToTime } from 'last-strawberry/utils/time';
 
 export function helper(params) {
   return params.map(minutesToTime);
 }
 
-export default Ember.Helper.helper(helper);
+export default buildHelper(helper);

@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
 export default function decorateComponentClass() {
-  Ember.Component.reopen({
+  Component.reopen({
     init() {
       this._super(arguments);
-      const debugName = this.constructor.toString().split(':')[1]
+      const debugName = this.toString().split(':')[1]
       const cssName = debugName.split('/').join('_');
       const newName = `debug_${cssName}`;
       if(!this.classNames.includes(newName)) {

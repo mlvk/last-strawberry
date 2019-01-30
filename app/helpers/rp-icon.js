@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
 import COLORS from 'last-strawberry/constants/colors';
 
 function buildStyles(data) {
   const str = Object.keys(data).reduce((acc, cur) => `${acc}${cur}:${data[cur]};`, '');
-  return new Ember.String.htmlSafe(str);
+  return new htmlSafe(str);
 }
 
 export function rpIcon(params) {
@@ -43,4 +44,4 @@ export function rpIcon(params) {
   })
 }
 
-export default Ember.Helper.helper(rpIcon);
+export default buildHelper(rpIcon);

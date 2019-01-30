@@ -1,7 +1,9 @@
-import Ember from 'ember';
-export default Ember.Mixin.create({
-  enums: Ember.computed(function() {
-    return Ember.Object.create();
+import { hash } from 'rsvp';
+import EmberObject, { computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
+export default Mixin.create({
+  enums: computed(function() {
+    return EmberObject.create();
   }),
 
   getEnumModels() {
@@ -15,7 +17,7 @@ export default Ember.Mixin.create({
   },
 
   afterModel(model) {
-    return Ember.RSVP.hash(this.getEnumModels(model)).then(r => {
+    return hash(this.getEnumModels(model)).then(r => {
       this.get('enums').setProperties(r);
     });
   },

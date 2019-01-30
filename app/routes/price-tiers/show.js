@@ -1,5 +1,6 @@
+import { all } from 'rsvp';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 import { updateModelField, saveModelIfDirty } from "last-strawberry/actions/model-actions";
 import { PRODUCT } from "last-strawberry/constants/item-types";
 
@@ -10,7 +11,7 @@ const MODEL_INCLUDES = [
   "item-prices.item.item-prices"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   setupController(controller, priceTier) {
     const fulfilledItems = priceTier.get("itemPrices")
       .map(ip => ip.get("item").content);
@@ -30,7 +31,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   model(params) {
-    return Ember.RSVP.all([
+    return all([
       this.store.query("item", {"filter[tag]":PRODUCT})
     ])
     .then(() => {

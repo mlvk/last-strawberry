@@ -1,18 +1,14 @@
-import Ember from "ember";
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { notEmpty, not, alias } from '@ember/object/computed';
 import downloadFile from "last-strawberry/utils/download-file";
-import computed from "ember-computed-decorators";
+import { computed } from 'ember-decorators/object';
 import ItemValidations from "last-strawberry/validators/item";
 
-const {
-  alias,
-  not,
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames:       ["section_sales-order_order-editor", "col"],
 
-  pdfGenerator:     Ember.inject.service(),
+  pdfGenerator:     service(),
 
   company:          alias("model.location.company"),
   isSalesOrder:     alias("model.isSalesOrder"),

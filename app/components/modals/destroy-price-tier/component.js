@@ -1,9 +1,8 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
+import { computed } from 'ember-decorators/object';
 
-const { isPresent } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   @computed("model.name")
   title(name) {
     return `Deleting a price tier: ${name}`;

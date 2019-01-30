@@ -1,6 +1,7 @@
-import Ember from "ember";
+import { isBlank } from '@ember/utils';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row", "ui_input-action-bar"],
 
   didInsertElement() {
@@ -14,7 +15,7 @@ export default Ember.Component.extend({
     submit() {
       const text = this.$("input").val();
 
-      if(!Ember.isBlank(text)){
+      if(!isBlank(text)){
         this.get("submit")(text.trim());
         this.$("input").val("");
       }

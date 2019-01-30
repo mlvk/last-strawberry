@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import { toPercentage } from "last-strawberry/utils/math";
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["item-desires", "col", "wrap"],
   massCreditRate: "",
   massDesire: false,
