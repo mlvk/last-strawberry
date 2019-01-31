@@ -25,5 +25,5 @@ script:
 
 after_success:
   if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ -n "${TRAVIS_TAG}" ]; then
-    npm install -g netlify-cli typescript && npm run build && netlify deploy -a ${PRODUCTION_NETLIFY_TOKEN} -s ${PRODUCTION_NETLIFY_SITE_ID} -d dist --prod;
+    npm install -g netlify-cli typescript && npm run build && netlify deploy --prod --dir=dist;
   fi
