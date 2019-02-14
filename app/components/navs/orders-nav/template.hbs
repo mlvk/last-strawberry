@@ -4,7 +4,6 @@
     onSelected=onDateSelected
     format="ddd MM-DD-YYYY"
   }}
-
   {{#ui/popup-menu}}
     {{#if hasStubAction}}
       {{ui/icon-button
@@ -15,7 +14,6 @@
         click=stubOrders
       }}
     {{/if}}
-
     {{ui/icon-button
       class="createOrder"
       flat=true
@@ -23,7 +21,6 @@
       type="add"
       click=onRequestNewOrder
     }}
-
     {{#if hasDuplicateAction}}
       {{ui/icon-button
         class="duplicateOrders"
@@ -34,10 +31,8 @@
         click=onRequestDuplicateOrders
       }}
     {{/if}}
-
   {{/ui/popup-menu}}
 </div>
-
 {{navs/orders-nav/filter-options
   includePublished=includePublished
   includeUnpublished=includeUnpublished
@@ -46,9 +41,8 @@
   selectedItems=selectedItems
   itemSelected=updateIncludedItems
 }}
-
 {{lists/grouped-list
-    childKey='location.name'
+    childKey="location.name"
     highlightedItem=currentSelectedOrder
     itemClicked=onOrderSelected
     model=groupedOrders}}

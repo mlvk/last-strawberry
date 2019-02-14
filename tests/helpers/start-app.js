@@ -3,7 +3,7 @@ import config from '../../config/environment';
 import { merge } from '@ember/polyfills';
 import { run } from '@ember/runloop';
 import decorateComponentClass from './decorate-component-class';
-import registerPowerSelectHelpers from '../../tests/helpers/ember-power-select';
+import registerPowerSelectHelpers from 'ember-power-select/test-support/helpers';
 
 registerPowerSelectHelpers();
 

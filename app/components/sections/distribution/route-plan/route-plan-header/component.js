@@ -1,17 +1,17 @@
 import Component from '@ember/component';
 import {
-  style,
-  rgba
+  rgba,
+  buildStyles
 } from "last-strawberry/utils/styles";
+import { computed } from '@ember/object';
 
 export default Component.extend({
     classNames: ['row'],
     attributeBindings:["componentStyles:style"],
 
-    @style("colorScheme.backgroundColor")
-    componentStyles(backgroundColor) {
-      return {
-        "background-color": rgba(backgroundColor, 0.5)
-      };
-    }
+    componentStyles: computed("colorScheme.backgroundColor", function() {
+      const backgroundColor = this.get('colorScheme.backgroundColor');
+
+      return buildStyles({'background-color': rgba(backgroundColor, 0.5)});
+    })
 });

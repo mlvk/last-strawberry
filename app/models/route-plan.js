@@ -5,7 +5,7 @@ import {
   belongsTo,
   hasMany
 } from "ember-data/relationships";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import PublishedState from "last-strawberry/constants/route-plan-states"
 
 export default Model.extend({
@@ -15,23 +15,23 @@ export default Model.extend({
   user:               belongsTo("user"),
   routeVisits:        hasMany("route-visit"),
 
-  @computed("routeVisits.@each.{position}")
-  sortedRouteVisits(routeVisits) {
+  sortedRouteVisits: computed("routeVisits.@each.{position}", function() {
+    const routeVisits = this.get("routeVisits");
     return routeVisits.sortBy("position");
-  },
+  }),
 
-  @computed("routeVisits.@each.{position,isValid,routePlanId}")
-  sortedActiveRouteVisits(routeVisits) {
+  sortedActiveRouteVisits: computed("routeVisits.@each.{position,isValid,routePlanId}", function() {
+    const routeVisits = this.get("routeVisits");
     return routeVisits
       .filter(rv => rv.get("routePlanId") === this.get("id"))
       .sortBy("position")
       .filter(rv => rv.get("isValid"));
-  },
+  }),
 
-  @computed("date")
-  formattedDate(date) {
+  formattedDate: computed("date", function() {
+    const date = this.get("date");
     return moment(date, "YYYY-MM-DD").format("dddd, MMM Do - YYYY");
-  },
+  }),
 
   hasUser: notEmpty("user.id"),
   hasRouteVisits: notEmpty("routeVisits"),

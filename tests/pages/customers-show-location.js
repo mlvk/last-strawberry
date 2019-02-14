@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import PO from "last-strawberry/tests/page-object";
 
-const {
+import {
+  create,
   clickable,
   fillable,
   visitable,
@@ -9,14 +9,13 @@ const {
   value,
   hasClass,
   collection,
-  is
-} = PO;
+  is } from "ember-cli-page-object";
 
-const page = PO.create({
+const page = create({
   visit: visitable("/customers/:company_id/locations/:location_id")
 });
 
-const itemSettingsPO = PO.create({
+const itemSettingsPO = create({
   itemSettings: collection({
     itemScope: ".debug_sections_locations_item-setting",
 
@@ -38,7 +37,7 @@ const itemSettingsPO = PO.create({
   })
 });
 
-const visitSchedulePO = PO.create({
+const visitSchedulePO = create({
   visitWindows: collection({
     itemScope: ".debug_sections_locations_visit-window"
   }),
@@ -47,7 +46,7 @@ const visitSchedulePO = PO.create({
   deleteVisitWindow: clickable(".deleteVisitWindow")
 });
 
-const visitDaysPO = PO.create({
+const visitDaysPO = create({
   dayOptions: collection({
     itemScope: ".debug_sections_locations_visit-schedule .debug_ui_label-checkbox",
 
@@ -58,7 +57,7 @@ const visitDaysPO = PO.create({
   })
 });
 
-const addressPO = PO.create({
+const addressPO = create({
   scope: ".debug_sections_locations_address-manager",
 
   fillSearchAddress: fillable("input"),
@@ -68,7 +67,7 @@ const addressPO = PO.create({
   fullAddress: value("input")
 });
 
-const notificationPO = PO.create({
+const notificationPO = create({
   firstName: value(".firstName"),
   fillFirstName: fillable(".firstName"),
   blurFirstName: () => $(".firstName").blur(),
@@ -83,7 +82,7 @@ const notificationPO = PO.create({
   delete: clickable(".deleteButton")
 });
 
-const notificationListPO = PO.create({
+const notificationListPO = create({
   addNotification: clickable(".createNotification"),
 
   notifications: collection({

@@ -4,7 +4,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 const toTime = val => {
 	const hours = Math.floor(val/60);
@@ -23,15 +23,15 @@ export default Model.extend(LocationHashable, {
 	lat: 							alias('location.address.lat'),
   lng: 							alias('location.address.lng'),
 
-	@computed("min")
-  minFormatted(val) {
+  minFormatted: computed("min", function() {
+    const val = this.get("min");
 		return toTime(val);
-  },
+  }),
 
-	@computed("max")
-  maxFormatted(val) {
+  maxFormatted: computed("max", function() {
+    const val = this.get("max");
 		return toTime(val);
-  },
+  }),
 
 	validForDate(date) {
 		const dayOfWeek = moment(date).day();

@@ -1,6 +1,6 @@
 {{#each collection as |item|}}
   {{ui/label-checkbox
-      click=(action 'onDayClick' item)
+      click=(action "onDayClick" item)
       selected=item.enabled
       label=item.text}}
 {{/each}}

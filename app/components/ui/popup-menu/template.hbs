@@ -1,22 +1,21 @@
 {{ui/icon-button
-  class='trigger'
+  class="trigger"
   label=label
-  type=(or icon 'menu')
+  type=(or icon "menu")
   size=(if size size 1.4)
   padding=(if padding padding 1.4)
   flat=true
   color=colors.DARK_GREY
   backgroundColor=(if backgroundColor backgroundColor colors.BABY_BLUE)
-  click=(action 'toggle')}}
-
+  click=(action "toggle")}}
 {{#if showMenu}}
   {{#tether-dialog
       hasOverlay=false
-      attachment='top left'
-      targetAttachment='right left'
+      attachment="top left"
+      targetAttachment="right left"
       target=this}}
-      <div class="content" style={{menuColors}}>
-        {{yield}}
-      </div>
+    <div class="content" style={{menuColors}}>
+      {{yield}}
+    </div>
   {{/tether-dialog}}
 {{/if}}

@@ -1,11 +1,5 @@
 {{#ui/persistent-collapsable-container settingsKey="locationNoteIsClosed" title="Location note"}}
-  <textarea
-  rows="15"
-  cols="100"
-  name="note"
-  value="{{locationNote}}"
-  oninput={{action "noteChanged"}}
-  onchange={{action "noteChanged"}}
-  onblur={{action save locationNote}}>
+  <textarea rows="15" cols="100" name="note" value={{locationNote}} oninput={{action "noteChanged"}}
+    onchange={{action "noteChanged"}} onblur={{action save locationNote}}>
   </textarea>
 {{/ui/persistent-collapsable-container}}

@@ -1,12 +1,11 @@
 <div class="row center">
   {{ui/icon-button
-    class='homeLink'
+    class="homeLink"
     flat=true
     label="MLVK"
     size=2
     padding=0.6
     action=(action "navigateToRoute" "sales-orders.index")}}
-
   <div class="row navLinksContainer">
     {{ui/icon-button
       class=(if (eq "sales-orders" nextRoute) "salesOrders active" "salesOrders")
@@ -15,7 +14,6 @@
       size=1.4
       padding=1.2
       action=(action "navigateToRoute" "sales-orders.index")}}
-
     {{ui/icon-button
       class=(if (eq "purchase-orders" nextRoute) "purchaseOrders active" "purchaseOrders")
       flat=true
@@ -23,7 +21,6 @@
       size=1.4
       padding=1.2
       action=(action "navigateToRoute" "purchase-orders.index")}}
-
     {{ui/icon-button
       class=(if (eq "distribution" nextRoute) "distribution active" "distribution")
       flat=true
@@ -31,23 +28,20 @@
       size=1.4
       padding=1.2
       action=(action "navigateToRoute" "distribution")}}
-
-    {{#ui/popup-menu label="Settings" icon='arrow_drop_down'}}
+    {{#ui/popup-menu label="Settings" icon="arrow_drop_down"}}
       {{#each settingMenuItems as |item|}}
         {{ui/icon-button
           class=(camelize item.route)
-          iconName="check"
           flat=true
           label=item.label
           size=1.4
           padding=1.2
-          iconName=item.icon
+          iconName= (if item.icon item.icon "check")
           action=(action navigateToRoute item.route)}}
       {{/each}}
     {{/ui/popup-menu}}
   </div>
 </div>
-
 <div class="row">
   {{#if authenticated}}
     <span class="row baseline">

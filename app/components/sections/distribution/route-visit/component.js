@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { filter, gt, alias } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ["card-1"],
@@ -19,28 +19,31 @@ export default Component.extend({
     return vw.validForDate(this.get("date"));
   }),
 
-  @computed("selectedRouteVisit.id", "model.id")
-  isSelected(a, b) {
+  isSelected: computed("selectedRouteVisit.id", "model.id", function() {
+    const a = this.get("selectedRouteVisit.id");
+    const b = this.get("model.id");
     return a === b;
-  },
+  }),
 
   validVisitWindow: alias("validVisitWindows.firstObject"),
 
-  @computed("company.name", "locations.firstObject.id", "addressHasMultipleLocations")
-  title(companyName, locationId, hasMultiple) {
+  title: computed("company.name", "locations.firstObject.id", "addressHasMultipleLocations", function() {
+    const companyName = this.get("company.name");
+    const locationId = this.get("locations.firstObject.id");
+    const hasMultiple = this.get("addressHasMultipleLocations");
     return hasMultiple ? `${companyName} - Multiple` : `${companyName} - ${locationId}`;
-  },
+  }),
 
-  @computed("model.{address,date}")
-  visitWindow() {
+  visitWindow: computed("model.{address,date}", function() {
     let address = this.get("model.address");
     let date = this.get("model.date");
 
     return address.content.visitWindowForDate(date);
-  },
+  }),
 
-  @computed("model.fulfillments.[]", "company")
-  infoIcons(fulfillments, company) {
+  infoIcons: computed("model.fulfillments.[]", "company", function() {
+    const fulfillments = this.get("model.fulfillments");
+    const company = this.get("company");
     const icons = [];
 
     const hasMultipleFulfillments = fulfillments.get("length") > 1;
@@ -53,7 +56,7 @@ export default Component.extend({
     }
 
     return icons;
-  },
+  }),
 
   click() {
     this.get("selectRouteVisit")(this.get("model"));

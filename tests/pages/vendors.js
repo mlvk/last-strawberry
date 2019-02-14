@@ -1,15 +1,13 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   clickable,
   collection,
   fillable,
   text,
   visitable,
-  value
-} = PO;
+  value } from "ember-cli-page-object";
 
-const index = PO.create({
+const index = create({
   visit: visitable("/vendors"),
 
   fillNewVendor: fillable(".create-new-vendor.ui_input-action-bar input"),
@@ -24,7 +22,7 @@ const index = PO.create({
   })
 });
 
-const show = PO.create({
+const show = create({
   visit: visitable("/vendors/:id"),
   name: value('.debug_sections_companies_company-settings .name')
 });

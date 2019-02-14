@@ -5,35 +5,31 @@
         value=changeset.full
         disable=false
         handlerController=this
-        inputClass= 'place-autocomplete--input'
-        focusOutCallback=(action 'onBlur')
-        placeChangedCallback=(action 'update')}}
+        inputClass= "place-autocomplete--input"
+        focusOutCallback=(action "onBlur")
+        placeChangedCallback=(action "update")}}
   </div>
-
   <div class="errorMessageContainer">
     {{#each changeset.errors as |error|}}
       <div class="row">{{error.key}}:{{error.validation}}</div>
     {{/each}}
   </div>
-
   {{#leaflet-map
       scrollWheelZoom=false
       lat=lat
       lng=lng
       zoom=zoom as |layers|}}
-
     {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"}}
-      {{#if changeset.isValid}}
-        {{#layers.marker lat=changeset.lat lng=changeset.lng}}
-          <strong>{{changeset.street}}</strong>
-          <br>
-          <span>{{changeset.city}}, {{changeset.state}} {{changeset.zip}}</span>
-        {{/layers.marker}}
-      {{/if}}
+    {{#if changeset.isValid}}
+      {{#layers.marker lat=changeset.lat lng=changeset.lng}}
+        <strong>{{changeset.street}}</strong>
+        <br>
+        <span>{{changeset.city}}, {{changeset.state}} {{changeset.zip}}</span>
+      {{/layers.marker}}
+    {{/if}}
   {{/leaflet-map}}
-
   {{#power-select
-      class='addressSelect'
+      class="addressSelect"
       options=addresses
       placeholder="Choose existing address"
       searchField="full"

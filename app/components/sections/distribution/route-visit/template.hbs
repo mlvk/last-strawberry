@@ -2,14 +2,13 @@
     colorScheme=colorScheme
     isSelected=isSelected
     as |card|}}
-      {{card.title-bar
+  {{card.title-bar
           title=location.code
           subTitle=company.name
           index=index
           actionIcon="clear"
           action=(if (not model.isOpen) (action "removeRouteVisit"))}}
-
-      {{card.body
+  {{card.body
           content=location.name
           infoIcons=infoIcons}}
 {{/ui/dd-card}}

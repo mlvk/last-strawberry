@@ -1,15 +1,13 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   clickable,
   collection,
   visitable,
   text,
   value,
-  fillable
-} = PO;
+  fillable } from "ember-cli-page-object";
 
-const defaultPage = PO.create({
+const defaultPage = create({
   visit: visitable("/products"),
 
   products: collection({
@@ -27,7 +25,7 @@ const defaultPage = PO.create({
   submitNewProduct: clickable(".create-new-product .submit")
 });
 
-const showPage = PO.create({
+const showPage = create({
   visit: visitable("/products/:id"),
 
   nameValue: value(".debug_sections_products_product-editor .name input")

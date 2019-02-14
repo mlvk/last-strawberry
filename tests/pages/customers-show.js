@@ -1,8 +1,6 @@
-import PO from 'last-strawberry/tests/page-object';
+import { create, visitable, count, value } from "ember-cli-page-object";
 
-const { visitable, count, value } = PO;
-
-export default PO.create({
+export default create({
   visit: visitable('/customers/:id'),
 
   locationCount: count('.location'),

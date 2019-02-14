@@ -6,7 +6,7 @@ import {
   belongsTo,
   hasMany
 } from "ember-data/relationships";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Model.extend(LocationHashable, {
   name:                 attr("string"),
@@ -32,8 +32,10 @@ export default Model.extend(LocationHashable, {
   isCustomer:           alias("company.isCustomer"),
   isVendor:             alias("company.isVendor"),
 
-  @computed("name", "id", "company.name")
-  label(name, id, companyName) {
+  label: computed("name", "id", "company.name", function() {
+    const name = this.get("name");
+    const id = this.get("id");
+    const companyName = this.get("company.name");
     return `${companyName} - ${name} - ${id}`
-  }
+  })
 });

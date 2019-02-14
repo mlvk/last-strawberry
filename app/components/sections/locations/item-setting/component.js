@@ -1,16 +1,16 @@
 import Component from '@ember/component';
 import { alias } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import { toPercentage } from 'last-strawberry/utils/math';
 
 export default Component.extend({
   classNames: ['row', 'stretch'],
   classNameBindings: ['model.itemDesire.enabled:enabled:disabled'],
 
-  @computed('index')
-  indexFormatted(index){
+  indexFormatted: computed('index', function(){
+    const index = this.get("index");
     return index + 1;
-  },
+  }),
 
   creditRate: alias('model.itemCreditRate.rate'),
 

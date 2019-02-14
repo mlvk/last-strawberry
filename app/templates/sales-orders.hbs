@@ -13,7 +13,6 @@
     companyQuery=companyQuery
     includedItems=includedItems
     updateIncludedItems=(action "updateIncludedItems")}}
-
 {{#if isStubbing}}
   <div class="col stretch center loading">
     <div class="row stretch center">
@@ -25,15 +24,13 @@
     {{#if isOldDate}}
       {{#ui/alert-banner type="warning"}}
         You are working with a past date. Please manage these orders through xero
-      {{/ui/alert-banner }}
+      {{/ui/alert-banner}}
     {{/if}}
-
     <div class="row stretch">
       {{outlet}}
     </div>
   </div>
 {{/if}}
-
 {{#if showCreateSalesOrderModal}}
   {{#tether-dialog close=(action "closeCreateSalesOrder")}}
     {{ui/item-selector
@@ -44,7 +41,6 @@
         onSubmit=(route-action "createSalesOrder")}}
   {{/tether-dialog}}
 {{/if}}
-
 {{#if showDuplicateOrdersModal}}
   {{#tether-dialog close=(action "closeDuplicateOrders")}}
     {{modals/duplicate-orders

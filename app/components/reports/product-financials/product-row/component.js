@@ -1,17 +1,19 @@
 import Component from '@ember/component';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ["row"],
 
-  @computed("model.total_sales", "totalSales")
-  salesRatio(local, total) {
+  salesRatio: computed("model.total_sales", "totalSales", function() {
+    const local = this.get("model.total_sales");
+    const total = this.get("totalSales");
     return Number(local) / total;
-  },
+  }),
 
-  @computed("model.total_spoilage", "totalSpoilage")
-  spoilageRatio(local, total) {
+  spoilageRatio: computed("model.total_spoilage", "totalSpoilage", function() {
+    const local = this.get("model.total_spoilage");
+    const total = this.get("totalSpoilage");
     return Number(local) / total;
-  }
+  })
 
 });

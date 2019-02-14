@@ -1,15 +1,13 @@
-import PO from 'last-strawberry/tests/page-object';
-
-const {
+import {
+  create,
   collection,
   text,
   value,
   visitable,
   clickable,
-  fillable
-} = PO;
+  fillable } from "ember-cli-page-object";
 
-const index = PO.create({
+const index = create({
 
   visit: visitable('/price-tiers'),
 
@@ -26,7 +24,7 @@ const index = PO.create({
   submitNewPriceTier: clickable('.debug_ui_input-action-bar .debug_ui_icon-button')
 });
 
-const show = PO.create({
+const show = create({
   scope: '.priceTierContainer',
   visit: visitable('/price-tiers/:id'),
   name: value('.priceTierName input'),

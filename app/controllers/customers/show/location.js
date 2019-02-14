@@ -1,15 +1,14 @@
 import Controller from '@ember/controller';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import AddressValidations from "last-strawberry/validators/address";
 
 export default Controller.extend({
   AddressValidations,
 
-  @computed("items.@each.{isProduct,active}", "model.{itemDesires.[],itemCreditRates.[]}")
-  itemSettings() {
-    let items = this.get('items');
-    let itemDesires = this.get('model.itemDesires');
-    let itemCreditRates = this.get('model.itemCreditRates');
+  itemSettings: computed("items.@each.{isProduct,active}", "model.{itemDesires.[],itemCreditRates.[]}", function() {
+    const items = this.get('items');
+    const itemDesires = this.get('model.itemDesires');
+    const itemCreditRates = this.get('model.itemCreditRates');
     return items
       .filter(i => i.get("isProduct") && i.get("active"))
       .map(item => {
@@ -22,10 +21,10 @@ export default Controller.extend({
           itemCreditRate
         };
       });
-  },
+  }),
 
-  @computed("model.company.activeLocations.@each.{locationHash}")
-  addresses(locations) {
+  addresses: computed("model.company.activeLocations.@each.{locationHash}", function() {
+    const locations = this.get("model.company.activeLocations");
     return locations.map(location => location.get("address"));
-  }
+  })
 });

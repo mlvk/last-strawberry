@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: "col stretch",
@@ -7,8 +7,10 @@ export default Component.extend({
   showInactive: false,
   filterTerm: "",
 
-  @computed("items.@each.{active,name,code,position}", "filterTerm", "showInactive")
-  filteredItems(items, query, showInactive){
+  filteredItems: computed("items.@each.{active,name,code,position}", "filterTerm", "showInactive", function(){
+    const items = this.get("items");
+    const query = this.get("filterTerm");
+    const showInactive = this.get("showInactive");
     return items
       .sortBy("position")
       .filter(item => item.get("active") || showInactive)
@@ -17,5 +19,5 @@ export default Component.extend({
         const reg = new RegExp(query, "i");
         return reg.test(item.get("name")) || reg.test(item.get("code")) || reg.test(item.get("company.name"));
       });
-  }
+  })
 });

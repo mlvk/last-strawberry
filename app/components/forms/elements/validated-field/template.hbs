@@ -1,15 +1,11 @@
 <label>{{cap property}}</label>
-
-<input
-  type="text"
-  value={{get changeset property}}
+<input type="text" value={{get changeset property}}
   oninput={{action (mut (get changeset property)) value="target.value"}}
   onblur={{action validateProperty changeset property (get changeset property)}}>
-
 {{#if (get changeset.error property)}}
   <div class="errors">
-  	{{#each (get (get changeset.error property) "validation") as |message|}}
-  		<small>{{message}}</small>
-  	{{/each}}
+    {{#each (get (get changeset.error property) "validation") as |message|}}
+      <small>{{message}}</small>
+    {{/each}}
   </div>
 {{/if}}

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { test } from "qunit";
 import moduleForAcceptance from "last-strawberry/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "last-strawberry/tests/helpers/ember-simple-auth";
@@ -15,8 +14,6 @@ moduleForAcceptance("Acceptance | navigation", {
     mockFindAll("company");
     mockFindAll("item");
     mockFindAll("order");
-
-    $.mockjax({ url: `https://api.mapbox.com*`, responseText: {}, type: "GET" });
   }
 });
 

@@ -1,11 +1,9 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   clickable,
-  visitable
-} = PO;
+  visitable } from "ember-cli-page-object";
 
-export default PO.create({
+export default create({
   visitIndex: visitable("/"),
   visitOrders: visitable("/sales-orders"),
   clickHomeLink: clickable(".homeLink"),

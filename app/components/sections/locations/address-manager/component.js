@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import {
   placeToObject
 } from 'last-strawberry/utils/google-place-utils';
@@ -11,15 +11,15 @@ export default Component.extend({
     this.get('changeset').validate();
   },
 
-  @computed('changeset.lat')
-  lat(val) {
+  lat: computed('changeset.lat', function() {
+    const val = this.get("changeset.lat");
     return val || 33.89891688437142
-  },
+  }),
 
-  @computed('changeset.lng')
-  lng(val) {
+  lng: computed('changeset.lng', function() {
+    const val = this.get("changeset.lng");
     return val || -117.90527343750001
-  },
+  }),
 
   zoom: 13,
 

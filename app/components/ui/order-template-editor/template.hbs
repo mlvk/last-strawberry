@@ -13,14 +13,13 @@
               onSelection=dateSelected}}
         </div>
       </div>
-
       <div class="frequencyContainer row">
         <div class="info">
           Repeat every
         </div>
         <div class="row">
           {{one-way-input model.frequency
-              class='quantity'
+              class="quantity"
               onblur=(action saveModel model)
               update=(action (mut model.frequency))}}
         </div>
@@ -28,7 +27,6 @@
           week(s).
         </div>
       </div>
-
       <div class="dayOfWeekContainer">
         {{ui/day-of-week-selector
             class="visitDays"
@@ -37,7 +35,6 @@
       </div>
     </div>
   </div>
-
   <div class="lineItemsContainer">
     <div class="col">
       {{#each sortedValidLineItems as |lineItem index|}}
@@ -48,7 +45,6 @@
             index=index}}
       {{/each}}
     </div>
-
     <div class="addOrderItemContainer">
       {{#power-select
           placeholder="Add item"
@@ -56,12 +52,11 @@
           options=activeProducts
           onchange=createLineItem
           as |item|}}
-            {{item.name}}
+        {{item.name}}
       {{/power-select}}
     </div>
   </div>
 </div>
-
 <div class="bottomUIContainer">
   {{ui/icon-button
       class="delete"

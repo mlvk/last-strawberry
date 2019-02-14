@@ -1,51 +1,55 @@
 import Component from '@ember/component';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 const CompaniesFinancials = Component.extend({
   classNames: ["row", "stretch", "card-1", "companies-financials"],
 
-  @computed("model")
-  totalVisits(rawData) {
+  totalVisits: computed("model", function() {
+    const rawData = this.get("model");
     return _
       .flattenDeep(rawData
         .map(c => c.raw_data
           .map(l => l.raw_data)))
       .length;
-  },
+  }),
 
-  @computed("model")
-  totalSales(rawData) {
+  totalSales: computed("model", function() {
+    const rawData = this.get("model");
     return rawData
       .reduce((acc, cur) => {
         return acc + Number(cur.total_sales_revenue);
       }, 0);
-  },
+  }),
 
-  @computed("model")
-  totalDist(rawData) {
+  totalDist: computed("model", function() {
+    const rawData = this.get("model");
     return rawData
       .reduce((acc, cur) => {
         return acc + Number(cur.total_dist_revenue);
       }, 0);
-  },
+  }),
 
-  @computed("model")
-  totalSpoilage(rawData) {
+  totalSpoilage: computed("model", function() {
+    const rawData = this.get("model");
     return rawData
       .reduce((acc, cur) => {
         return acc + Number(cur.total_spoilage);
       }, 0);
-  },
+  }),
 
-  @computed("totalSales", "totalDist", "totalSpoilage", "totalVisits")
-  aveSalePerVisit(totalSales, totalDist, totalSpoilage, totalVisits) {
+  aveSalePerVisit: computed("totalSales", "totalDist", "totalSpoilage", "totalVisits", function() {
+    const totalSales = this.get("totalSales");
+    const totalDist = this.get("totalDist");
+    const totalSpoilage = this.get("totalSpoilage");
+    const totalVisits = this.get("totalVisits");
     return ((totalSales + totalDist) - totalSpoilage) / totalVisits;
-  },
+  }),
 
-  @computed("totalSales", "totalSpoilage")
-  spoilageSalesRatio(totalSales, totalSpoilage) {
+  spoilageSalesRatio: computed("totalSales", "totalSpoilage", function() {
+    const totalSales = this.get("totalSales");
+    const totalSpoilage = this.get("totalSpoilage");
     return totalSpoilage / totalSales;
-  }
+  })
 });
 
 export default CompaniesFinancials.reopenClass({

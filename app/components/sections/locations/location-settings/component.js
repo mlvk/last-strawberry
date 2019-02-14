@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
 import LocationValidations from "last-strawberry/validators/location";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   session:     service(),
@@ -11,10 +11,10 @@ export default Component.extend({
 
   validators: LocationValidations,
 
-  @computed("session")
-  codeValidator(session) {
+  codeValidator: computed("session", function() {
+    const session = this.get("session");
     return UniqueFieldValidator.create({type:"location", key:"code", session});
-  },
+  }),
 
   willDestroyElement() {
     this._super(...arguments);

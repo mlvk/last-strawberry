@@ -1,5 +1,5 @@
 import { equal, alias } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";
@@ -20,8 +20,9 @@ export default Model.extend({
 
   isDriver: equal("role", Roles.DRIVER),
 
-  @computed("firstName", "lastName")
-  name(first, last) {
+  name: computed("firstName", "lastName", function() {
+    const first = this.get("firstName");
+    const last = this.get("lastName");
     return `${first} ${last}`
-  }
+  })
 });

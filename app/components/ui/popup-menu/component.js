@@ -1,16 +1,15 @@
 import Component from '@ember/component';
-import { style } from 'last-strawberry/utils/styles';
 import colors from 'last-strawberry/constants/colors';
+import { computed } from '@ember/object';
+import { buildStyles } from "last-strawberry/utils/styles";
 
 export default Component.extend({
   classNames: ['row'],
 
-  @style('backgroundColor')
-  menuColors(colorScheme = {backgroundColor: colors.SKY_BLUE}) {
-    return {
-      'background-color': colorScheme.backgroundColor
-    };
-  },
+  menuColors: computed('backgroundColor', function() {
+    const colorScheme = this.get('backgroundColor') || {backgroundColor: colors.SKY_BLUE};
+    return buildStyles({'background-color': colorScheme.backgroundColor});
+  }),
 
   init() {
     this._super(...arguments);
@@ -32,6 +31,8 @@ export default Component.extend({
     this.mouseUpsSub = this.mouseUps
       .filter(({target}) => target !== this.$(".trigger")[0])
       .filter(() => this.get('showMenu'))
+      // @FIXME: All the events of sub menu items will be canceled if it is not showed
+      .delay(100)
       .subscribe(() => this.set('showMenu', false));
   },
 

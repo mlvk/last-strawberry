@@ -1,81 +1,39 @@
 {{#with (changeset model validators) as |changeset|}}
-
   <div class="section card-1">
-
-  <h4>Location Details</h4>
-  <div class="row">
-
-    <input
-      type="text"
-      name="name"
-      class="col-5 name"
-      placeholder="Location nickname"
-      value="{{changeset.name}}"
-      oninput={{action "fieldChanged" changeset "name"}}
-      onchange={{action "fieldChanged" changeset "name"}}
-      onblur={{action "save" changeset}}>
-
-      <input
-        type="text"
-        name="code"
-        class="col-2 code"
-        placeholder="Code"
-        value="{{changeset.code}}"
-        oninput={{action "codeChanged" changeset}}
+    <h4>Location Details</h4>
+    <div class="row">
+      <input type="text" name="name" class="col-5 name" placeholder="Location nickname" value={{changeset.name}}
+        oninput={{action "fieldChanged" changeset "name"}} onchange={{action "fieldChanged" changeset "name"}}
         onblur={{action "save" changeset}}>
-    {{#unless isVendor}}
-      <input
-      type="text"
-      name="deliveryRate"
-      class="col-2 deliveryRate"
-      maxlength="7"
-      placeholder="Delivery rate"
-      value="{{changeset.deliveryRate}}"
-      oninput={{action "fieldChanged" changeset "deliveryRate"}}
-      onchange={{action "fieldChanged" changeset "deliveryRate"}}
-      onblur={{action "save" changeset}}>
-    {{/unless}}
-  </div>
-
-  <div class="errorMessageContainer">
-    {{#each changeset.errors as |error|}}
-      <div class="row">{{error.key}}:{{error.validation}}</div>
-    {{/each}}
-
-    {{#if (not codeValidator.isValid)}}
-      <div class="row">Another location is using that code</div>
-    {{/if}}
-  </div>
-
-
-
+      <input type="text" name="code" class="col-2 code" placeholder="Code" value={{changeset.code}}
+        oninput={{action "codeChanged" changeset}} onblur={{action "save" changeset}}>
+      {{#unless isVendor}}
+        <input type="text" name="deliveryRate" class="col-2 deliveryRate" maxlength="7" placeholder="Delivery rate"
+          value={{changeset.deliveryRate}} oninput={{action "fieldChanged" changeset "deliveryRate"}}
+          onchange={{action "fieldChanged" changeset "deliveryRate"}} onblur={{action "save" changeset}}>
+      {{/unless}}
+    </div>
+    <div class="errorMessageContainer">
+      {{#each changeset.errors as |error|}}
+        <div class="row">{{error.key}}:{{error.validation}}</div>
+      {{/each}}
+      {{#if (not codeValidator.isValid)}}
+        <div class="row">Another location is using that code</div>
+      {{/if}}
+    </div>
     <h4>Location Notes (NOT visible to customer):</h4>
     <div class="row schetch rowData">
-      <textarea
-      rows="6"
-      cols="100"
-      name="note"
-      class="note"
-      value="{{changeset.note}}"
-      oninput={{action "fieldChanged" changeset "note"}}
-      onchange={{action "fieldChanged" changeset "note"}}
-      onblur={{action "save" changeset}}>
+      <textarea rows="6" cols="100" name="note" class="note" value={{changeset.note}}
+        oninput={{action "fieldChanged" changeset "note"}} onchange={{action "fieldChanged" changeset "note"}}
+        onblur={{action "save" changeset}}>
       </textarea>
     </div>
-
     <h4>Delivery Notes (Visible ONLY to driver):</h4>
     <div class="row schetch rowData">
-      <textarea
-      rows="6"
-      cols="100"
-      name="note"
-      class="note"
-      value="{{changeset.deliveryNote}}"
-      oninput={{action "fieldChanged" changeset "deliveryNote"}}
-      onchange={{action "fieldChanged" changeset "deliveryNote"}}
-      onblur={{action "save" changeset}}>
+      <textarea rows="6" cols="100" name="note" class="note" value={{changeset.deliveryNote}}
+        oninput={{action "fieldChanged" changeset "deliveryNote"}}
+        onchange={{action "fieldChanged" changeset "deliveryNote"}} onblur={{action "save" changeset}}>
       </textarea>
     </div>
-
   </div>
 {{/with}}

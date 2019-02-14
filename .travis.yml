@@ -21,6 +21,8 @@ install:
   - bower install
 
 script:
+  - npm run lint:hbs
+  - npm run lint:js
   - npm test
 
 after_success:

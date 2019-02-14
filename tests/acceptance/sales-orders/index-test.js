@@ -87,15 +87,13 @@ test("show be able to create a new sales order from the quick menu", async funct
 
     mockFindAll("order");
 
-    await page
-      .visit()
-      .openQuickMenu();
+    await page.visit();
+    await page.openQuickMenu();
 
     assert.equal(0, page.orders().count, "Wrong number of orders rendered");
 
-    await page
-      .createOrder()
-      .selectLocation(location);
+    await page.createOrder();
+    await page.selectLocation(location);
 
     assert.equal(1, page.orders().count, "Wrong number of orders rendered");
 

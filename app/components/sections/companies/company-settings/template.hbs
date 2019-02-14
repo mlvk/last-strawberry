@@ -1,49 +1,26 @@
 <div class="col">
   {{#with (changeset model validators) as |changeset|}}
-    <input
-      type="text"
-      name="name"
-      class="name"
-      placeholder="name"
-      value="{{changeset.name}}"
-      oninput={{action "fieldChanged" changeset "name"}}
-      onchange={{action "fieldChanged" changeset "name"}}
+    <input type="text" name="name" class="name" placeholder="name" value={{changeset.name}}
+      oninput={{action "fieldChanged" changeset "name"}} onchange={{action "fieldChanged" changeset "name"}}
       onblur={{action "save" changeset}}>
-
     <div class="row">
-      <input
-        type="text"
-        name="locationCodePrefix"
-        class="locationCodePrefix"
-        placeholder="Prefix"
-        value="{{changeset.locationCodePrefix}}"
-        oninput={{action "codeChanged" changeset}}
-        maxlength="4"
+      <input type="text" name="locationCodePrefix" class="locationCodePrefix" placeholder="Prefix"
+        value={{changeset.locationCodePrefix}} oninput={{action "codeChanged" changeset}} maxlength="4"
         onblur={{action "save" changeset}}>
-
       {{#unless isVendor}}
-        <input
-          type="text"
-          name="terms"
-          class="terms"
-          placeholder="terms"
-          value="{{changeset.terms}}"
-          oninput={{action "fieldChanged" changeset "terms"}}
-          onchange={{action "fieldChanged" changeset "terms"}}
+        <input type="text" name="terms" class="terms" placeholder="terms" value={{changeset.terms}}
+          oninput={{action "fieldChanged" changeset "terms"}} onchange={{action "fieldChanged" changeset "terms"}}
           onblur={{action "save" changeset}}>
       {{/unless}}
     </div>
-
     <div class="errorMessageContainer">
       {{#each changeset.errors as |error|}}
         <div class="row">{{error.key}}:{{error.validation}}</div>
       {{/each}}
-
       {{#if (not codeValidator.isValid)}}
         <div class="row">Another company is using that code</div>
       {{/if}}
     </div>
-
     {{#unless isVendor}}
       {{#power-select
           class="priceTiers"
@@ -54,7 +31,7 @@
           onchange=(action updatePriceTier)
           as |priceTier|}}
         {{priceTier.name}}
-    {{/power-select}}
+      {{/power-select}}
     {{/unless}}
   {{/with}}
 </div>

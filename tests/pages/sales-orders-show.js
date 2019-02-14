@@ -1,21 +1,20 @@
 import $ from 'jquery';
-import PO from "last-strawberry/tests/page-object";
 import { openDatepicker } from "ember-pikaday/helpers/pikaday";
 
-const {
+import {
+  create,
   clickable,
   collection,
   text,
   visitable,
   value,
-  hasClass
-} = PO;
+  hasClass } from "ember-cli-page-object";
 
-const page = PO.create({
+const page = create({
   visit: visitable("/sales-orders/:id")
 });
 
-const orderEditorPO = PO.create({
+const orderEditorPO = create({
   scope: ".debug_ui_order-editor",
   orderNumber: text(".orderNumber"),
   locationName: text(".locationInfo"),
@@ -45,7 +44,7 @@ const orderEditorPO = PO.create({
   sendDisabled: hasClass("disabled", ".send")
 });
 
-const notificationsPO = PO.create({
+const notificationsPO = create({
   notifications: collection({
     itemScope: ".notificationRow",
     item: {

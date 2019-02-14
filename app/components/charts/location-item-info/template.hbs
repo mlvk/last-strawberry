@@ -17,19 +17,17 @@
       {{else}}
         <span class="noDataMessage">No sales data for this item.</span>
       {{/if}}
-
       <span class="productionInfoContainer">
         <span class="value">{{get itemTotals item.id}}</span> <span class="copy">Total for production</span>
       </span>
     </div>
-
     <div class="row footer">
       {{#if hasLastUpdated}}
-      <span class="updatedAt">Last updated {{moment-from-now lastUpdated interval=1000}}</span>
-      {{ui/simple-spinner
-        size=1
-        enabled=loading}}
-        {{/if}}
+        <span class="updatedAt">Last updated {{moment-from-now lastUpdated interval=1000}}</span>
+        {{ui/simple-spinner
+          size=1
+          enabled=loading}}
+      {{/if}}
     </div>
   {{/ui/persistent-collapsable-container}}
 {{/ui/loading-panel}}

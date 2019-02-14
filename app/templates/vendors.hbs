@@ -3,14 +3,14 @@
   <div class="col">
     {{lists/filterable-label-list
         model=vendors
-        itemClicked=(route-action 'showVendor')}}
+        itemClicked=(route-action "showVendor")}}
 
     <div class="row">
       {{ui/input-action-bar
-        class='create-new-vendor'
-        type='add'
-        placeholder='Create new vendor...'
-        submit=(route-action 'createNewVendor')}}
+        class="create-new-vendor"
+        type="add"
+        placeholder="Create new vendor..."
+        submit=(route-action "createNewVendor")}}
     </div>
   </div>
 

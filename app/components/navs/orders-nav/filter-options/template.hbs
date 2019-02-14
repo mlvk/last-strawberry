@@ -4,21 +4,17 @@
     actionIcon=(if isHidden "add" "remove")
     click=(toggle "isHidden" this)
     class="titleBar"}}
-
-<div class="filterContainer col {{if isHidden 'hidden' ''}}">
-
+<div class="filterContainer col {{if isHidden "hidden" ""}}">
   {{forms/elements/label-checkbox
       label="Drafts"
       selected=includeUnpublished
       update=(action (mut includeUnpublished))
       class="includeUnpublished"}}
-
   {{forms/elements/label-checkbox
       label="Approved"
       selected=includePublished
       update=(action (mut includePublished))
       class="includePublished"}}
-
   <div class="filterQuery">
     <span class="searchTitle">Filter companies</span>
     {{ui/filter-bar
@@ -26,7 +22,6 @@
         onChange=(action (mut query))
         value=query}}
   </div>
-
   <div class="filterItem">
     <span class="searchTitle">Filter items</span>
     <div class="itemFilterContainer">
@@ -37,7 +32,7 @@
           placeholder="Filter items..."
           onchange=itemSelected
           as |item|}}
-            {{item.name}}
+        {{item.name}}
       {{/power-select-multiple}}
     </div>
   </div>

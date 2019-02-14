@@ -1,7 +1,7 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { filterBy } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import downloadFile from "last-strawberry/utils/download-file";
 
 export default Controller.extend({
@@ -10,19 +10,21 @@ export default Controller.extend({
   queryParams:    ["date"],
   date:           moment().add(1, "days").format("YYYY-MM-DD"),
 
-  @computed("routePlans.@each.{date,isDeleted}", "date")
-  activeRoutePlans(routePlans, date) {
+  activeRoutePlans: computed("routePlans.@each.{date,isDeleted}", "date", function() {
+    const routePlans = this.get("routePlans");
+    const date = this.get("date");
     return routePlans
       .filter(rp => rp.get("date") === date)
       .filter(rp => !rp.get("isDeleted"));
-  },
+  }),
 
-  @computed("routeVisits.@each.{date}", "date")
-  activeRouteVisits(routeVisits, date) {
+  activeRouteVisits: computed("routeVisits.@each.{date}", "date", function() {
+    const routeVisits = this.get("routeVisits");
+    const date = this.get("date");
     return routeVisits
       .filter(rv => rv.get("date") === date)
       .filter(rv => rv.get("isValid"))
-  },
+  }),
 
   openRouteVisits: filterBy("activeRouteVisits", "isOpen", true),
 

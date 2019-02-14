@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { notEmpty, not, alias } from '@ember/object/computed';
 import downloadFile from "last-strawberry/utils/download-file";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import ItemValidations from "last-strawberry/validators/item";
 
 export default Component.extend({
@@ -17,17 +17,17 @@ export default Component.extend({
 
   validators: ItemValidations,
 
-  @computed("itemSearchString")
-  noMatchesMessage(str = "") {
+  noMatchesMessage: computed("itemSearchString", function() {
+    const str = this.get("itemSearchString") || "";
     return this.get("isPurchaseOrder")? `Create new item: ${str}`: `Item not found: ${str}`;
-  },
+  }),
 
-  @computed("model.orderItems.@each.{isDeleted}")
-  validOrderItems(orderItems) {
+  validOrderItems: computed("model.orderItems.@each.{isDeleted}", function() {
+    const orderItems = this.get("model.orderItems");
     return orderItems
       .filter(o => !o.get("isDeleted"))
       .sortBy("item.position");
-  },
+  }),
 
   actions: {
     async printOrder() {

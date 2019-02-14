@@ -1,14 +1,12 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   collection,
   value,
   visitable,
   fillable,
-  clickable
-} = PO;
+  clickable } from "ember-cli-page-object";
 
-export default PO.create({
+export default create({
   visit: visitable("/route-plan-blueprints"),
 
   routePlanBlueprints: collection({

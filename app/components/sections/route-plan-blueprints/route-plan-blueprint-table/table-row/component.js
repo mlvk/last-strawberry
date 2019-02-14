@@ -1,17 +1,17 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   session:     service(),
 
   classNames: ["tableRow", "row"],
 
-  @computed("session")
-  nameValidator(session) {
+  nameValidator: computed("session", function() {
+    const session = this.get("session");
     return UniqueFieldValidator.create({type:"routePlanBlueprint", key:"name", session});
-  },
+  }),
 
   willDestroyElement() {
     this._super(...arguments);
@@ -19,8 +19,8 @@ export default Component.extend({
     this.get("nameValidator").destroy();
   },
 
-  @computed("users.@each.{name}")
-  drivers(users) {
+  drivers: computed("users.@each.{name}", function() {
+    const users = this.get("users");
     const drivers = users.map(u => {
       return {name: u.get("name"), id: u.get("id")};
     });
@@ -28,7 +28,7 @@ export default Component.extend({
     // Add blank row
     drivers.unshiftObject({name: "Unselect driver"});
     return drivers;
-  },
+  }),
 
   checkAndSaveRoutePlanBlueprint(changeset){
     if(changeset.get("isValid") && changeset.get("isDirty") && this.get("nameValidator.isValid")){

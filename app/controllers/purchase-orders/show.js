@@ -1,15 +1,15 @@
 import Controller from '@ember/controller';
 import { notEmpty, alias } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   hasDataPath: notEmpty("dataPath"),
 
   company: alias("model.location.company"),
 
-  @computed("items.@each.{active}", "company.id")
-  filteredItems(items, companyId) {
-
+  filteredItems: computed("items.@each.{active}", "company.id", function() {
+    const items = this.get("items");
+    const companyId = this.get("company.id");
     return items
       .filter(item => {
         const isTheSameCompany = item.get("company.id") === companyId;
@@ -17,16 +17,17 @@ export default Controller.extend({
         return item.get("active") && isTheSameCompany;
       })
       .sortBy("name");
-  },
+  }),
 
-  @computed("item.name", "model.location.id")
-  dataPath(name, id) {
+  dataPath: computed("item.name", "model.location.id", function() {
+    const name = this.get("item.name");
+    const id = this.get("model.location.id");
     if(name) {
       return `locations/${id}/${name}`;
     } else {
       return undefined;
     }
-  },
+  }),
 
   actions: {
     onOrderItemChange(item) {

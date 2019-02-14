@@ -1,14 +1,12 @@
 import $ from 'jquery';
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   clickable,
   collection,
   text,
-  visitable
-} = PO;
+  visitable } from "ember-cli-page-object";
 
-export default PO.create({
+export default create({
   visit: visitable("/distribution"),
 
   createRoutePlan: clickable(".debug_sections_distribution_tool-bar .add"),

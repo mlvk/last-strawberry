@@ -1,11 +1,9 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   visitable,
-  isVisible
-} = PO;
+  isVisible } from "ember-cli-page-object";
 
-const page = PO.create({
+const page = create({
   visit: visitable("/purchase-orders"),
 
   bannerIsVisible: isVisible(".debug_ui_alert-banner")

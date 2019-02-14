@@ -97,5 +97,6 @@ function isDescriptor(item) {
 
 export {
   style,
-  rgba
+  rgba,
+  buildStyles
 }

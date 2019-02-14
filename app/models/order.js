@@ -7,7 +7,7 @@ import {
   equal
 } from '@ember/object/computed';
 import LocationHashable from "last-strawberry/mixins/location-hashable";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import {
@@ -60,24 +60,25 @@ export default Model.extend(LocationHashable, {
 
   isValid:                      and("hasQuantity", "notVoided", "notDeleted"),
 
-  @computed("orderItems.@each.{hasDirtyAttributes}", "hasDirtyAttributes")
-  notifiable(orderItems) {
+  notifiable: computed("orderItems.@each.{hasDirtyAttributes}", "hasDirtyAttributes", function() {
+    const orderItems = this.get("orderItems");
     return !orderItems.any(oi => oi.get("hasDirtyAttributes")) && !this.get('hasDirtyAttributes');
-  },
+  }),
 
-  @computed("orderItems.@each.{quantity}")
-  empty(orderItems) {
+  empty: computed("orderItems.@each.{quantity}", function() {
+    const orderItems = this.get("orderItems");
     return orderItems.every(oi => oi.get("empty"));
-  },
+  }),
 
-  @computed("orderItems.@each.{quantity}")
-  totalQuantity(orderItems) {
+  totalQuantity: computed("orderItems.@each.{quantity}", function() {
+    const orderItems = this.get("orderItems");
     return orderItems.reduce((acc, cur) => acc + Number(cur.get("quantity")), 0);
-  },
+  }),
 
-  @computed("orderItems.@each.{quantity,unitPrice}", "shipping")
-  totalPrice(orderItems, shipping) {
+  totalPrice: computed("orderItems.@each.{quantity,unitPrice}", "shipping", function() {
+    const orderItems = this.get("orderItems");
+    const shipping = this.get("shipping");
     const orderItemsTotal = orderItems.reduce((acc, cur) => acc + Number(cur.get("quantity") * cur.get("unitPrice")), 0);
     return orderItemsTotal + shipping;
-  }
+  })
 });

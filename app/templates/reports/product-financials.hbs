@@ -1,9 +1,7 @@
-{{log sortedProductFinancials}}
 <div class="col stretch center">
   {{ui/date-range-picker
       startDate=startDate
       endDate=endDate
       onDatesConfirmed=(route-action "onDatesConfirmed")}}
-
   {{reports/product-financials sortedProductFinancials}}
 </div>

@@ -1,22 +1,23 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import UniqueFieldValidator from "last-strawberry/validators/unique-field-validator";
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   session:     service(),
 
   classNames: ["col"],
 
-  @computed("codeValidator.isValid", "changeset.isValid")
-  isValid(validCode, validChangeset) {
+  isValid: computed("codeValidator.isValid", "changeset.isValid", function() {
+    const validCode = this.get("codeValidator.isValid");
+    const validChangeset = this.get("changeset.isValid");
     return validCode && validChangeset;
-  },
+  }),
 
-  @computed("session")
-  codeValidator(session) {
+  codeValidator: computed("session", function() {
+    const session = this.get("session");
     return UniqueFieldValidator.create({type:"item", key:"code", session});
-  },
+  }),
 
   didInsertElement() {
     this._super(...arguments);

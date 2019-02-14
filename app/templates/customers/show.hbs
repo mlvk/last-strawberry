@@ -5,14 +5,12 @@
         priceTiers=priceTiers
         updatePriceTier=(route-action "updatePriceTier")
         save=(route-action "saveCompany")}}
-
     {{sections/companies/location-manager
         locations=model.activeLocations
         showLocation=(route-action "showLocation")
         createNewLocation=(route-action "createNewLocation")}}
-
     <div class="col settingMenu">
-      {{#ui/popup-menu icon='menu'}}
+      {{#ui/popup-menu icon="menu"}}
         {{ui/icon-button
             class="archive"
             type="delete"

@@ -1,7 +1,7 @@
 import { isEmpty } from '@ember/utils';
 import Component from '@ember/component';
 import { notEmpty } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ["col", "stretch"],
@@ -10,8 +10,8 @@ export default Component.extend({
   hasDuplicateAction: notEmpty("onRequestDuplicateOrders"),
   hasOrders: notEmpty("filterOrders"),
 
-  @computed("includedItems")
-  selectedItems(includedItems) {
+  selectedItems: computed("includedItems", function() {
+    const includedItems = this.get("includedItems");
     const selected = [];
 
     const itemIdArr = includedItems.split(",");
@@ -23,10 +23,14 @@ export default Component.extend({
     });
 
     return selected;
-  },
+  }),
 
-  @computed("orders.@each.{isDeleted,orderItems,xeroFinancialRecordState,publishedState}", "includeUnpublished", "includePublished", "companyQuery", "selectedItems")
-  filterOrders(orders, includeUnpublished, includePublished, query, selectedItems) {
+  filterOrders: computed("orders.@each.{isDeleted,orderItems,xeroFinancialRecordState,publishedState}", "includeUnpublished", "includePublished", "companyQuery", "selectedItems", function() {
+    const orders = this.get("orders");
+    const includeUnpublished = this.get("includeUnpublished");
+    const includePublished = this.get("includePublished");
+    const query = this.get("companyQuery");
+    const selectedItems = this.get("selectedItems");
      return orders
        .filter(order => {
 
@@ -42,14 +46,14 @@ export default Component.extend({
 
         return nameMatch && notDeleted && notVoided && (showPublished || showUnpublished) && includedItem;
        });
-   },
+   }),
 
-  @computed("filterOrders")
-  groupedOrders(orders) {
+  groupedOrders: computed("filterOrders", function() {
+    const orders = this.get("filterOrders");
     return _
       .chain(orders)
       .sortBy(order => order.get("location.company.name"))
       .groupBy(order => order.get("location.company.name"))
       .value();
-  }
+  })
 });

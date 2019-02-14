@@ -1,20 +1,20 @@
 import Component from '@ember/component';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import COLOR_SCHEMES from 'last-strawberry/constants/color-schemes';
 
 export default Component.extend({
   classNames: ['col'],
   classNameBindings: ['indexStyle'],
 
-  @computed('model.id')
-  saveRoutePlanBlueprintDomId(id) {
+  saveRoutePlanBlueprintDomId: computed('model.id', function() {
+    const id = this.get("model.id");
     return `saveRoutePlanBlueprint-${id}`
-  },
+  }),
 
-  @computed("index")
-  colorScheme(index = 0) {
+  colorScheme: computed("index", function() {
+    const index = this.get("index") || 0;
     return COLOR_SCHEMES[index];
-  },
+  }),
 
   actions: {
     delete() {

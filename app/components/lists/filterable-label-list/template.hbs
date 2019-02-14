@@ -6,8 +6,8 @@
 {{#layouts/scroll-container}}
   <div class="col">
     {{#each filteredItems as |item|}}
-      <div class="listRow" {{action itemClicked item.id}}>
-        <span class="name" >{{item.text}}</span>
+      <div role="button" class="listRow" {{action itemClicked item.id}}>
+        <span class="name">{{item.text}}</span>
       </div>
     {{/each}}
   </div>

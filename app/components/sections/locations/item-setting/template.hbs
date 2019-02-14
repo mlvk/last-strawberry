@@ -1,19 +1,12 @@
 <span class="productName">
   {{indexFormatted}}. {{model.item.name}}
 </span>
-
 <div class="row formFields">
-  <input
-    type="text"
-    name="creditRate"
-    class="creditRate"
-    value="{{percentage creditRate}}"
-    onblur={{action 'creditRateChanged'}}
-    placeholder="Credit %">
-
+  <input type="text" name="creditRate" class="creditRate" value={{percentage creditRate}}
+    onblur={{action "creditRateChanged"}} placeholder="Credit %">
   {{ui/toggle-button
-      class='desiredToggle'
-      click=(action 'toggle')
+      class="desiredToggle"
+      click=(action "toggle")
       selected=model.itemDesire.enabled
-      label=(if model.itemDesire.enabled 'Y' 'N')}}
+      label=(if model.itemDesire.enabled "Y" "N")}}
 </div>

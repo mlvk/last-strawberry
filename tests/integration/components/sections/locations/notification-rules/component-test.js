@@ -22,7 +22,7 @@ moduleForComponent("sections/locations/notification-rules", "Integration | Compo
 
 test("it shows notification list when present", function(assert) {
   let location = make("location");
-  location.notificationRules = makeList("notification-rule", 3);
+  location.set("notificationRules", makeList("notification-rule", 3));
 
   this.set("model", location);
   this.set("handler", () => {});

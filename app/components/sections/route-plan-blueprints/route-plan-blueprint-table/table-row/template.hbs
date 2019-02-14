@@ -1,5 +1,4 @@
 <div class="col-1 no">{{sum index 1}}</div>
-
 <div class="col-2 nameContainer">
   {{one-way-input changeset.name
     update=(action "nameChanged")
@@ -12,12 +11,10 @@
       {{/each}}
     </div>
   {{/if}}
-
   {{#if (not nameValidator.isValid)}}
     <div class="row">Another template is using that name</div>
   {{/if}}
 </div>
-
 <div class="col-3 driverContainer">
   {{#power-select
     selected=changeset.user
@@ -27,14 +24,14 @@
     onchange=(action "setSelectedDriver")
     as |user|}}
     {{user.name}}
-    {{/power-select}}
-  </div>
-  <div class="uiContainer">
-    {{ui/icon-button
+  {{/power-select}}
+</div>
+<div class="uiContainer">
+  {{ui/icon-button
       class="delete right"
       flat=true
       color=colors.DARK_GREY
       type="close"
       click=deleteRoutePlanBlueprint
     }}
-  </div>
+</div>

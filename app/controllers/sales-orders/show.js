@@ -1,7 +1,7 @@
 import { A } from '@ember/array';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   firebaseMgr: service(),
@@ -23,15 +23,15 @@ export default Controller.extend({
     this.cleanup();
   },
 
-  @computed("items.@each.{isSold,active}")
-  filteredItems(items) {
+  filteredItems: computed("items.@each.{isSold,active}", function() {
+    const items = this.get("items");
     return items
       .filter(item => item.get("isSold") && item.get("active"))
       .sortBy("name");
-  },
+  }),
 
-  @computed("salesOrders.@each.{totalQuantity}")
-  itemTotals(orders = A()) {
+  itemTotals: computed("salesOrders.@each.{totalQuantity}", function() {
+    const orders = this.get("salesOrders") || A();
     return _
       .chain(orders.toArray())
       .map(order => order.get("orderItems").toArray())
@@ -44,12 +44,12 @@ export default Controller.extend({
         return acc;
       }, {})
       .value();
-  },
+  }),
 
-  @computed("rawSalesData.@each.{ts}")
-  salesData(dataPoints = []) {
+  salesData: computed("rawSalesData.@each.{ts}", function() {
+    const dataPoints = this.get("rawSalesData") || [];
     return dataPoints.sortBy("ts");
-  },
+  }),
 
   loadSalesData() {
     this.cleanup();

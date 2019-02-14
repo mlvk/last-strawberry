@@ -1,19 +1,17 @@
-import PO from "last-strawberry/tests/page-object";
-
-const {
+import {
+  create,
   clickable,
   fillable,
   visitable,
   text,
   hasClass,
-  collection
-} = PO;
+  collection } from "ember-cli-page-object";
 
-const page = PO.create({
+const page = create({
   visit: visitable("/vendors/:id/locations/:location_id")
 });
 
-const visitSchedulePO = PO.create({
+const visitSchedulePO = create({
   visitWindows: collection({
     itemScope: ".debug_sections_locations_visit-window"
   }),
@@ -22,7 +20,7 @@ const visitSchedulePO = PO.create({
   deleteVisitWindow: clickable(".deleteVisitWindow")
 });
 
-const visitDaysPO = PO.create({
+const visitDaysPO = create({
   dayOptions: collection({
     itemScope: ".debug_sections_locations_visit-schedule .debug_ui_label-checkbox",
 
@@ -33,7 +31,7 @@ const visitDaysPO = PO.create({
   })
 });
 
-const addressPO = PO.create({
+const addressPO = create({
   scope: ".debug_sections_locations_address-manager",
 
   fillSearchAddress: fillable("input"),

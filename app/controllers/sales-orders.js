@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { filterBy } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
 
@@ -13,37 +13,39 @@ export default Controller.extend({
   companyQuery: "",
   includedItems: "",
 
-  @computed("salesOrders.@each.{deliveryDate,isSalesOrder}", "deliveryDate")
-  filteredSalesOrders(salesOrders, deliveryDate) {
+  filteredSalesOrders: computed("salesOrders.@each.{deliveryDate,isSalesOrder}", "deliveryDate", function() {
+    const salesOrders = this.get("salesOrders");
+    const deliveryDate = this.get("deliveryDate");
     return salesOrders.filter(order => {
       const matchesDate = order.get("deliveryDate") === deliveryDate;
       return matchesDate && order.get("isSalesOrder");
     });
-  },
+  }),
 
-  @computed("locations.@each.{active,isCustomer}", "filteredSalesOrders.[]")
-  unfulfilledLocations(locations, salesOrders) {
+  unfulfilledLocations: computed("locations.@each.{active,isCustomer}", "filteredSalesOrders.[]", function() {
+    const locations = this.get("locations");
+    const salesOrders = this.get("filteredSalesOrders");
     const fulfilledLocations = salesOrders.map(o => o.get("location").content);
     const allLocations = locations
       .filter(l => l.get("active") && l.get("isCustomer"))
       .toArray();
 
     return _.difference(allLocations, fulfilledLocations);
-  },
+  }),
 
-  @computed("deliveryDate")
-  isOldDate(deliveryDate) {
+  isOldDate: computed("deliveryDate", function() {
+    const deliveryDate = this.get("deliveryDate");
     return moment(deliveryDate).isBefore(tomorrow);
-  },
+  }),
 
   filteredItems: filterBy("items", "isSold", true),
 
-  @computed("items.@each.{isSold,active}")
-  allItems(items) {
+  allItems: computed("items.@each.{isSold,active}", function() {
+    const items = this.get("items");
     return items
             .filter(item => item.get("isSold") && item.get("active"))
             .sortBy("name");
-  },
+  }),
 
   actions: {
     onRequestNewOrder() {

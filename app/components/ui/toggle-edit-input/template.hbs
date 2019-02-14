@@ -5,7 +5,7 @@
       onfocus=onfocus
       onblur=(action "onBlur")}}
 {{else}}
-  <span class="label" {{action 'toggleEditing'}}>
+  <span role="button" class="label" {{action "toggleEditing"}}>
     {{label}}
   </span>
 {{/if}}

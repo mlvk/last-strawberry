@@ -1,15 +1,15 @@
 import Component from '@ember/component';
 import { notEmpty, and } from '@ember/object/computed';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ["row"],
   currentSelectedRoutePlanTemplate: undefined,
 
-  @computed("routePlans.@each.{isValid}")
-  allPlansValid(routePlans = []){
+  allPlansValid: computed("routePlans.@each.{isValid}", function(){
+    const routePlans = this.get("routePlans") || [];
     return routePlans.every(rp => rp.get("isValid"));
-  },
+  }),
 
   hasRoutePlanTemplates:          notEmpty("routePlanBlueprints"),
   hasRoutePlans:                  notEmpty('routePlans'),

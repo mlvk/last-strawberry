@@ -3,66 +3,29 @@
     New Item for {{changeset.company.name}}
   </span>
 </header>
-
 <div class="body">
-  <input
-    type="text"
-    name="name"
-    class="name"
-    placeholder="Item name"
-    value="{{changeset.name}}"
-    oninput={{action "fieldChanged" "name"}}
-    onchange={{action "fieldChanged" "name"}}>
-
-<div class="row spaceBetween">
-  <input
-    type="text"
-    name="code"
-    class="code"
-    placeholder="Item code"
-    value="{{changeset.code}}"
-    oninput={{action "codeChanged"}}
-    onchange={{action "codeChanged"}}>
-
-  <input
-    type="text"
-    name="unit"
-    class="unit"
-    placeholder="Unit i.e. lb"
-    value="{{changeset.unitOfMeasure}}"
-    oninput={{action "fieldChanged" "unitOfMeasure"}}
-    onchange={{action "fieldChanged" "unitOfMeasure"}}>
-
-  <input
-    type="text"
-    name="price"
-    class="price"
-    placeholder="Price"
-    value="{{changeset.defaultPrice}}"
-    oninput={{action "fieldChanged" "defaultPrice"}}
-    onchange={{action "fieldChanged" "defaultPrice"}}>
+  <input type="text" name="name" class="name" placeholder="Item name" value={{changeset.name}}
+    oninput={{action "fieldChanged" "name"}} onchange={{action "fieldChanged" "name"}}>
+  <div class="row spaceBetween">
+    <input type="text" name="code" class="code" placeholder="Item code" value={{changeset.code}}
+      oninput={{action "codeChanged"}} onchange={{action "codeChanged"}}>
+    <input type="text" name="unit" class="unit" placeholder="Unit i.e. lb" value={{changeset.unitOfMeasure}}
+      oninput={{action "fieldChanged" "unitOfMeasure"}} onchange={{action "fieldChanged" "unitOfMeasure"}}>
+    <input type="text" name="price" class="price" placeholder="Price" value={{changeset.defaultPrice}}
+      oninput={{action "fieldChanged" "defaultPrice"}} onchange={{action "fieldChanged" "defaultPrice"}}>
+  </div>
+  <input type="text" name="description" class="description" placeholder="Item description"
+    value={{changeset.description}} oninput={{action "fieldChanged" "description"}}
+    onchange={{action "fieldChanged" "description"}}>
 </div>
-
-<input
-  type="text"
-  name="description"
-  class="description"
-  placeholder="Item description"
-  value="{{changeset.description}}"
-  oninput={{action "fieldChanged" "description"}}
-  onchange={{action "fieldChanged" "description"}}>
-</div>
-
 <div class="errorMessageContainer">
   {{#each changeset.errors as |error|}}
     <div class="row">{{error.key}}:{{error.validation}}</div>
   {{/each}}
-
   {{#if (not codeValidator.isValid)}}
     <div class="row">Another item is using that code</div>
   {{/if}}
 </div>
-
 <footer class="row right">
   {{ui/icon-button
     class="cancel"
@@ -74,7 +37,6 @@
     size=1.5
     padding=1
     click=cancel}}
-
   {{ui/icon-button
     label="Create item"
     class="submit"

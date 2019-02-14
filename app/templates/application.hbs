@@ -1,16 +1,16 @@
 <div class="col maxHeight">
   <div class="col">
     {{navs/main-nav
-      logout=(action 'logout')
-      login=(action 'login')
+      logout=(action "logout")
+      login=(action "login")
       name=userName
-      navigateToRoute=(route-action 'navigateToRoute')
+      navigateToRoute=(route-action "navigateToRoute")
       authenticated=session.isAuthenticated}}
     {{navs/nav-bar}}
   </div>
 
-  <div class='row stretch outerContainer'>
-    <div class='row stretch appContainer'>
+  <div class="row stretch outerContainer">
+    <div class="row stretch appContainer">
       {{outlet}}
     </div>
   </div>

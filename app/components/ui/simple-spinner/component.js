@@ -1,15 +1,16 @@
 import Component from '@ember/component';
-import { style } from 'last-strawberry/utils/styles';
+import { computed } from '@ember/object';
+import { buildStyles } from "last-strawberry/utils/styles";
 
 export default Component.extend({
   classNameBindings: ['enabled::disabled'],
   attributeBindings: ['componentStyles:style'],
 
-  @style('size')
-  componentStyles(size = 2) {
-    return {
-      'width': `${size}em`,
-      'height': `${size}em`
-    };
-  }
+  componentStyles: computed('size', function() {
+    const size = this.get('size') || 2;
+    return buildStyles({
+      width: `${size}em`,
+      height: `${size}em`
+    });
+  })
 });

@@ -3,7 +3,7 @@ import LocationHashable from 'last-strawberry/mixins/location-hashable';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 
 export default Model.extend(LocationHashable, {
   date:             attr('string'),
@@ -32,8 +32,9 @@ export default Model.extend(LocationHashable, {
   noRoutePlan:      not('hasRoutePlan'),
   isOpen:           or('noRoutePlan', 'routePlan.isDeleted'),
 
-  @computed('id', 'position')
-  key(id, position) {
+  key: computed('id', 'position', function() {
+    const id = this.get("id");
+    const position = this.get("position");
     return `${id}${position}`;
-  }
+  })
 });

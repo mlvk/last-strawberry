@@ -11,19 +11,19 @@
       value=model.unitPrice
       label=(currency model.unitPrice)
       update=(action (mut model.unitPrice))
-      onfocus=(action 'onFocus')
-      onblur=(action 'onBlurUnitPrice')}}
+      onfocus=(action "onFocus")
+      onblur=(action "onBlurUnitPrice")}}
 </div>
 
 {{one-way-input model.quantity
-    class='quantity'
-    onfocus=(action 'onFocus')
-    onblur=(action 'onBlur')
+    class="quantity"
+    onfocus=(action "onFocus")
+    onblur=(action "onBlur")
     update=(action (mut model.quantity))}}
 
 {{ui/icon-button
-  class='delete'
-  type='close'
+  class="delete"
+  type="close"
   flat=true
   color=colors.DARK_GREY
   padding=0.5

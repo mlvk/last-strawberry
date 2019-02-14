@@ -3,13 +3,12 @@
     {{title}}
   </span>
   {{ui/icon-button
-    class='cancel'
+    class="cancel"
     flat=true
     color=colors.DARK_GREY
-    type='close'
+    type="close"
     click=close}}
 </div>
-
 <div class="locationContainer">
   {{#power-select
       selected=currentItem
@@ -17,8 +16,8 @@
       placeholder=placeholder
       searchEnabled=true
       renderInPlace=true
-      searchField='label'
-      onchange=(action 'onItemSelected')
+      searchField="label"
+      onchange=(action "onItemSelected")
       as |location|}}
     {{location.label}}
   {{/power-select}}
